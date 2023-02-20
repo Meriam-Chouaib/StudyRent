@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: study-rent-prod
+    image: study-rent-prod
+    build:
+      context: .
+      target: production
