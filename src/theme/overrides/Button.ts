@@ -1,5 +1,5 @@
-import { FontFamily } from './../palette'
-import { Theme } from '@mui/material'
+import { FontFamily } from './../palette';
+import { Theme } from '@mui/material';
 export function Button(theme: Theme) {
   return {
     MuiButton: {
@@ -12,5 +12,5 @@ export function Button(theme: Theme) {
         },
       },
     },
-  }
+  };
 }

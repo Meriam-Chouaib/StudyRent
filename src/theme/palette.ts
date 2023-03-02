@@ -29,7 +29,7 @@ export const palette = {
     main: '#B5D2D9',
     dark: '#A4BCC1',
   },
-}
+};
 export const FontFamily = {
   Font: 'Poppins',
-}
+};

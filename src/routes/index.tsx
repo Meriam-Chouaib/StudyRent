@@ -35,16 +35,16 @@ export default function Router() {
 
     // Dashboard Routes
     {
-      path: 'dashboard',
+      path: PATHS.DASHBOARD.ROOT,
       element: (
         <AuthGuard>
           <DashboardLayout />
         </AuthGuard>
       ),
       children: [
-        { path: PATHS.ROOT, element: <Dashboard /> },
+        { path: PATHS.ALL, element: <Dashboard /> },
         { path: PATHS.DASHBOARD.STUDENT.LIST, element: <ListStudents /> },
-        { path: PATHS.DASHBOARD.STUDENT.LIST, element: <AddStudent /> },
+        { path: PATHS.DASHBOARD.STUDENT.ADD, element: <AddStudent /> },
       ],
     },
 

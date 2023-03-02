@@ -10,8 +10,8 @@ export const PATHS = {
   DASHBOARD: {
     ROOT: 'dashboard',
     STUDENT: {
-      LIST: '/student',
-      ADD: '/student/new',
+      LIST: 'student',
+      ADD: 'student/new',
     },
   },
   MAIN: {

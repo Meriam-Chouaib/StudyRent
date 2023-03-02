@@ -1,4 +1,4 @@
-import { Theme } from '@mui/material'
+import { Theme } from '@mui/material';
 export function TextField(theme: Theme) {
   return {
     MuiTextField: {
@@ -11,5 +11,5 @@ export function TextField(theme: Theme) {
         },
       },
     },
-  }
+  };
 }
