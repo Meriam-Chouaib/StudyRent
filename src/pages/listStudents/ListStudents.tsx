@@ -1,5 +1,5 @@
-import React from 'react'
+import React from 'react';
 
-export default function ListStudents() {
-  return <div>ListStudents</div>
+export function ListStudents() {
+  return <div>ListStudents</div>;
 }

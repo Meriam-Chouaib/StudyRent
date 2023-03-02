@@ -1,5 +1,3 @@
-function AddStudent() {
-  return <div>AddStudent</div>
+export function AddStudent() {
+  return <div>AddStudent</div>;
 }
-
-export default AddStudent

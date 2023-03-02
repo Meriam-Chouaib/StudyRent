@@ -1,15 +1,14 @@
-
-import { ThemeProvider } from '@mui/material'
-import { theme } from './theme'
+import { ThemeProvider, Typography } from '@mui/material';
+import { RouterProvider } from 'react-router-dom';
+import Router from './routes';
+import { theme } from './theme';
 
 function App() {
   return (
-    <div className='App'>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </div>
-  )
+    <>
+      <Typography variant="h1">bessmilleh</Typography>
+    </>
+  );
 }
 
-export default App
+export default App;

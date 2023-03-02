@@ -11,7 +11,7 @@ interface RoleBasedGuardProps {
   children: ReactNode;
 }
 
-export default function RoleBasedGuard({ accessibleRoles, children }: RoleBasedGuardProps) {
+export function RoleBasedGuard({ accessibleRoles, children }: RoleBasedGuardProps) {
   const currentRole = useCurrentRole();
 
   if (!accessibleRoles.includes(currentRole)) {

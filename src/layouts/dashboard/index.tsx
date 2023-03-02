@@ -3,7 +3,7 @@ import Footer from './footer/Footer';
 import Header from './header/Header';
 import SideBar from './sidebar/SideBar';
 
-export default function DashboardLayout() {
+export function DashboardLayout() {
   return (
     <>
       <Header />

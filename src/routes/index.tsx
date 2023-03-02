@@ -1,22 +1,18 @@
-import { Navigate, useRoutes } from 'react-router-dom'
-import GuestGuard from '../guards/GuestGuard'
-import AuthGuard from '../guards/AuthGuard'
-import SignIn from '../features/auth/signIn/SignIn'
-import DashboardLayout from '../layouts/dashboard'
+import { Navigate, useRoutes } from 'react-router-dom';
 
-import MainLayout from '../layouts/main'
-import SignUp from '../features/auth/signUp/SignUp'
-import { PATHS } from '../routes/paths'
-import ListStudents from '../pages/listStudents/ListStudents'
-import AddStudent from '../pages/addStudent/AddStudent'
-import Page500 from '../pages/page500/Page500'
-import NotFound from '../pages/notFoundPage/NotFound'
-import HomePage from '../pages/homePage/HomePage'
-import Dashboard from '../layouts/dashboard'
+import { AuthGuard, GuestGuard, RoleBasedGuard } from '../guards';
+
+import MainLayout from '../layouts/main';
+
+import { PATHS } from '../config/paths';
+import { SignIn, SignUp } from '../features';
+import { AboutusLayout, AuthLayout, PostsLayout, DashboardLayout } from '../layouts';
+
+import { NotFound, HomePage, ListStudents, Page500, AddStudent, Dashboard } from '../pages/index';
 export default function Router() {
   return useRoutes([
     {
-      path: PATHS.AUTH.root,
+      path: PATHS.AUTH.ROOT,
       children: [
         {
           path: PATHS.AUTH.SINGNIN,
@@ -46,27 +42,27 @@ export default function Router() {
         </AuthGuard>
       ),
       children: [
-        { path: '/', element: <Dashboard /> },
-        { path: '/student', element: <ListStudents /> }, //FeatureStudent
-        { path: '/student/new', element: <AddStudent /> },
+        { path: PATHS.ROOT, element: <Dashboard /> },
+        { path: PATHS.DASHBOARD.STUDENT.LIST, element: <ListStudents /> },
+        { path: PATHS.DASHBOARD.STUDENT.LIST, element: <AddStudent /> },
       ],
     },
 
     // Main Routes
     {
-      path: '*',
+      path: PATHS.ALL,
       element: <MainLayout />,
       children: [
-        { path: '500', element: <Page500 /> },
-        { path: '404', element: <NotFound /> },
-        { path: '*', element: <Navigate to='/404' replace /> },
+        { path: PATHS.MAIN.ERROR.P_500, element: <Page500 /> },
+        { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
+        { path: PATHS.ALL, element: <Navigate to="/404" replace /> },
       ],
     },
     {
-      path: '/',
+      path: PATHS.ROOT,
       element: <MainLayout />,
       children: [{ element: <HomePage />, index: true }],
     },
-    { path: '*', element: <Navigate to='/404' replace /> },
-  ])
+    { path: PATHS.ALL, element: <Navigate to="/404" replace /> },
+  ]);
 }
