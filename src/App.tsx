@@ -1,7 +1,6 @@
-import { ThemeProvider, Typography, Box } from '@mui/material';
-import { RouterProvider } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material';
 import Router from './routes';
-import { theme } from './theme';
+import theme from './theme';
 
 function App() {
   return (

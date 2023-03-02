@@ -1,6 +1,13 @@
-import { createTheme, palette, typography, Theme } from '@mui/system';
+import { createTheme } from '@mui/material/styles';
+import { componentsOverrides } from './overrides/override';
+import { palette } from './palette';
+import { typography } from './typography';
 
-export const theme: Theme = createTheme({
+const theme = createTheme({
   palette,
   typography,
 });
+
+theme.components = componentsOverrides(theme);
+
+export default theme;

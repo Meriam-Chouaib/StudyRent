@@ -1,35 +1,40 @@
-export const palette = {
+import { PaletteOptions } from '@mui/material/styles';
+import { COLORS } from '../config/colors';
+export const palette: PaletteOptions = {
   primary: {
-    //bleu
-    light: '#2D2968',
-    main: '#221E58',
-    dark: '#1A1749',
+    light: COLORS.PRIMARY.LIGHT,
+    main: COLORS.PRIMARY.MAIN,
+    dark: COLORS.PRIMARY.DARK,
   },
   secondary: {
-    //rose
-    light: '#F8E6E6',
-    main: '#F9D0D0',
-    dark: '#FEC6C6',
+    light: COLORS.SECONDARY.LIGHT,
+    main: COLORS.SECONDARY.MAIN,
+    dark: COLORS.SECONDARY.DARK,
   },
   error: {
-    //red
-    light: '#ef5350',
-    main: '#d32f2f',
-    dark: '#c62828',
+    light: COLORS.ERROR.LIGHT,
+    main: COLORS.ERROR.MAIN,
+    dark: COLORS.ERROR.DARK,
   },
   success: {
-    //green
-    light: '#A2DBA5',
-    main: '#46C461',
-    dark: '#008621',
+    light: COLORS.SUCCESS.LIGHT,
+    main: COLORS.SUCCESS.MAIN,
+    dark: COLORS.SUCCESS.DARK,
   },
   warning: {
-    //blue-ciel
-    light: '#CCE2E8',
-    main: '#B5D2D9',
-    dark: '#A4BCC1',
+    light: COLORS.WARNING.LIGHT,
+    main: COLORS.WARNING.MAIN,
+    dark: COLORS.WARNING.DARK,
   },
-};
-export const FontFamily = {
-  Font: 'Poppins',
+  grey: {
+    100: COLORS.GREY[100],
+    200: COLORS.GREY[200],
+    300: COLORS.GREY[300],
+    400: COLORS.GREY[400],
+    500: COLORS.GREY[500],
+    600: COLORS.GREY[600],
+    700: COLORS.GREY[700],
+    800: COLORS.GREY[800],
+    900: COLORS.GREY[900],
+  },
 };

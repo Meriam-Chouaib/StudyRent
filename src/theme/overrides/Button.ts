@@ -1,14 +1,14 @@
-import { FontFamily } from './../palette';
 import { Theme } from '@mui/material';
+import { FONT } from '../../config/font';
+
 export function Button(theme: Theme) {
   return {
     MuiButton: {
-      root: {
-        StylesOverrides: {
-          backgroundColor: theme.palette.secondary.main,
-          color: '#000000',
+      styleOverrides: {
+        root: {
           fontSize: '18px',
-          fontFamily: 'poppins',
+          fontFamily: FONT,
+          color: theme.palette.primary.main,
         },
       },
     },
