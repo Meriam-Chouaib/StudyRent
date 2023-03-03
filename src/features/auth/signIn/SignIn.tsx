@@ -14,11 +14,11 @@ export function SignIn() {
         <Button onClick={() => switchLanguage('fr')}>English</Button>
         <Button onClick={() => switchLanguage('en')}>Français</Button>
 
-        <Typography variant="h1">{t('SIGNIN.email_label')}</Typography>
-        <Typography variant="h1">{t('SIGNIN.title')}</Typography>
+        <Typography variant="h1">{t('signin.email_label')}</Typography>
+        <Typography variant="h1">{t('signin.title')}</Typography>
 
-        <CustomButton>{t('SIGNIN.connect_btn')}</CustomButton>
-        <CustomButton>{t('SIGNIN.create_account_btn')}</CustomButton>
+        <CustomButton>{t('signin.connect_btn')}</CustomButton>
+        <CustomButton>{t('signin.create_account_btn')}</CustomButton>
       </Stack>
     </Fragment>
   );

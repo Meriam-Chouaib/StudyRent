@@ -1,4 +1,4 @@
-export const SIGNIN = {
+export const signin = {
   title: `S'AUTHENTIFIER`,
 
   email_label: 'Email',
