@@ -1,5 +1,10 @@
-function SigninPage() {
-  return <div>SigninPage</div>;
-}
+import { SignIn, SocialMedia } from '../../features';
 
-export default SigninPage;
+export function SigninPage() {
+  return (
+    <>
+      <SignIn />
+      <SocialMedia />
+    </>
+  );
+}

@@ -1,4 +1,3 @@
-export * from './addStudent/AddStudent';
 export * from './homePage/HomePage';
 export * from './listStudents/ListStudents';
 export * from './notFoundPage/NotFound';

@@ -4,7 +4,6 @@ export function TextField(theme: Theme) {
     MuiTextField: {
       styleOverrides: {
         root: {
-          backgroundColor: theme.palette.secondary.main,
           color: '#000000',
           fontSize: '18px',
           fontFamily: 'poppins',

@@ -1,14 +1,15 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 
-import { AuthGuard, GuestGuard, RoleBasedGuard } from '../guards';
+import { AuthGuard, GuestGuard } from '../guards';
 
 import MainLayout from '../layouts/main';
 
 import { PATHS } from '../config/paths';
-import { SignIn, SignUp } from '../features';
-import { AboutusLayout, AuthLayout, PostsLayout, DashboardLayout } from '../layouts';
+import { SignUp } from '../features';
 
-import { NotFound, HomePage, ListStudents, Page500, AddStudent, Dashboard } from '../pages/index';
+import { DashboardLayout } from '../layouts';
+
+import { NotFound, HomePage, ListStudents, Page500, Dashboard, SigninPage } from '../pages';
 export default function Router() {
   return useRoutes([
     {
@@ -18,7 +19,7 @@ export default function Router() {
           path: PATHS.AUTH.SINGNIN,
           element: (
             <GuestGuard>
-              <SignIn />
+              <SigninPage />
             </GuestGuard>
           ),
         },
@@ -44,7 +45,7 @@ export default function Router() {
       children: [
         { path: PATHS.ALL, element: <Dashboard /> },
         { path: PATHS.DASHBOARD.STUDENT.LIST, element: <ListStudents /> },
-        { path: PATHS.DASHBOARD.STUDENT.ADD, element: <AddStudent /> },
+        // { path: PATHS.DASHBOARD.STUDENT.ADD, element: <AddStudent /> },
       ],
     },
 

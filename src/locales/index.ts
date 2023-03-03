@@ -1,6 +1,6 @@
 import i18n, { ResourceLanguage } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import { initReactI18next, Translation } from 'react-i18next';
+import { initReactI18next } from 'react-i18next';
 import { fr } from './fr';
 import { en } from './en';
 

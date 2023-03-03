@@ -1,25 +1,23 @@
-import { Button, Typography } from '@mui/material';
-import Stack from '@mui/material/Stack';
+import { TextField, Typography } from '@mui/material';
 import { Fragment } from 'react';
-import { Translation, useTranslation } from 'react-i18next';
-import { switchLanguage } from '../../../utils/helpers/i18n.changeLanguage';
-import { CustomButton } from './CustomButton';
+import { useTranslation } from 'react-i18next';
+import { CustomButton } from '../CustomButton';
+import { CustomStack } from '../CustomStack';
 
 export function SignIn() {
   const { t } = useTranslation();
 
   return (
-    <Fragment>
-      <Stack spacing={2}>
-        <Button onClick={() => switchLanguage('fr')}>English</Button>
-        <Button onClick={() => switchLanguage('en')}>Français</Button>
-
-        <Typography variant="h1">{t('signin.email_label')}</Typography>
-        <Typography variant="h1">{t('signin.title')}</Typography>
-
-        <CustomButton>{t('signin.connect_btn')}</CustomButton>
-        <CustomButton>{t('signin.create_account_btn')}</CustomButton>
-      </Stack>
-    </Fragment>
+    <>
+      <Fragment>
+        <CustomStack spacing={2}>
+          <Typography variant="h1">{t('signin.title')}</Typography>
+          <TextField variant="standard" placeholder={t('signin.email_label') as string} />
+          <TextField variant="standard" placeholder={t('signin.password_label') as string} />
+          <CustomButton>{t('signin.connect_btn')}</CustomButton>
+          <CustomButton>{t('signin.create_account_btn')}</CustomButton>
+        </CustomStack>
+      </Fragment>
+    </>
   );
 }
