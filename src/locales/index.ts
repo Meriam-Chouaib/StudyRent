@@ -1,8 +1,8 @@
 import i18n, { ResourceLanguage } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next, Translation } from 'react-i18next';
-import { English } from './fr';
-import { Frensh } from './en';
+import { fr } from './fr';
+import { en } from './en';
 
 type Resources = {
   en: ResourceLanguage;
@@ -11,10 +11,10 @@ type Resources = {
 
 const resources: Resources = {
   en: {
-    translation: English,
+    translation: en,
   },
   fr: {
-    translation: Frensh,
+    translation: fr,
   },
 };
 

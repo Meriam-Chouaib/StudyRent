@@ -1,5 +1,5 @@
 export const signin = {
-  title: `S'AUTHENTIFIER`,
+  title: `S'authentifier`,
 
   email_label: 'Email',
   password_label: 'Mot de passe',

@@ -1,4 +1,4 @@
-import { signin } from './signinEnglish';
-export const Frensh = {
+import { signin } from './signin';
+export const en = {
   signin: signin,
 };
