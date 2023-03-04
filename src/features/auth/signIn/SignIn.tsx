@@ -1,8 +1,8 @@
 import { TextField, Typography } from '@mui/material';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-import { CustomButton } from '../CustomButton';
-import { CustomStack } from '../CustomStack';
+import { CustomButton } from '../../../components/button/CustomButton.styles';
+import { CustomStack } from '../../../components/CustomStack';
 
 export function SignIn() {
   const { t } = useTranslation();

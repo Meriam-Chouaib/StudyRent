@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import theme from '../theme';
+import theme from '../../theme';
 export const CustomImageBottom = styled('img')({
   height: 100,
   Width: 80,

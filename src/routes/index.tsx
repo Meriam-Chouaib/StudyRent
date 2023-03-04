@@ -9,7 +9,7 @@ import { SignUp } from '../features';
 
 import { DashboardLayout } from '../layouts';
 
-import { NotFound, HomePage, ListStudents, Page500, Dashboard, SigninPage } from '../pages';
+import { NotFound, HomePage, Page500, Dashboard, SigninPage } from '../pages';
 export default function Router() {
   return useRoutes([
     {
@@ -42,11 +42,7 @@ export default function Router() {
           <DashboardLayout />
         </AuthGuard>
       ),
-      children: [
-        { path: PATHS.ALL, element: <Dashboard /> },
-        { path: PATHS.DASHBOARD.STUDENT.LIST, element: <ListStudents /> },
-        // { path: PATHS.DASHBOARD.STUDENT.ADD, element: <AddStudent /> },
-      ],
+      children: [{ path: PATHS.ALL, element: <Dashboard /> }],
     },
 
     // Main Routes
