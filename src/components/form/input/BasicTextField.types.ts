@@ -1,5 +1,6 @@
 export interface BasicTextFieldProps {
   placeholder: string;
-  type: string;
+  type?: string;
   id: string;
+  label?: string;
 }
