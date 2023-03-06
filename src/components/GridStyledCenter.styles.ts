@@ -1,7 +1,6 @@
 import { Grid, styled } from '@mui/material';
 export const GridStyledCenter = styled(Grid)(() => ({
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   justifyContent: 'center',
-  height: '100vh',
 }));

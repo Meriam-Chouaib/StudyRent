@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
 
 import theme from '../../theme';
-export const CustomImageTop = styled('img')({
-  height: 100,
-  Width: 80,
+export const ImgSocial = styled('img')({
+  height: 30,
+  Width: 30,
+  padding: '5px',
   [theme.breakpoints.down('sm')]: {
-    height: '7vh',
+    height: '5vh',
   },
 });

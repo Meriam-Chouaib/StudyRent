@@ -7,13 +7,14 @@ import MainLayout from '../layouts/main';
 import { PATHS } from '../config/paths';
 import { SignUp } from '../features';
 
-import { DashboardLayout } from '../layouts';
+import { AuthLayout, DashboardLayout } from '../layouts';
 
 import { NotFound, HomePage, Page500, Dashboard, SigninPage } from '../pages';
 export default function Router() {
   return useRoutes([
     {
       path: PATHS.AUTH.ROOT,
+      element: <AuthLayout />,
       children: [
         {
           path: PATHS.AUTH.SINGNIN,
