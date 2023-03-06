@@ -5,6 +5,6 @@ export const CustomImageTop = styled('img')({
   height: 100,
   Width: 80,
   [theme.breakpoints.down('sm')]: {
-    height: '7vh',
+    height: '8vh',
   },
 });

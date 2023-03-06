@@ -8,6 +8,6 @@ export const CustomImageBottom = styled('img')({
   bottom: '0',
   right: '0',
   [theme.breakpoints.down('sm')]: {
-    height: '20vh',
+    height: '8vh',
   },
 });

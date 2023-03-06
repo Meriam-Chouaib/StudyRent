@@ -1,4 +1,4 @@
 import { Stack, styled } from '@mui/material';
-export const CustomStack = styled(Stack)(() => ({
+export const CustomStackStyled = styled(Stack)(() => ({
   paddingInline: '20%',
 }));

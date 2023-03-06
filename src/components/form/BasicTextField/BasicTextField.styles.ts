@@ -5,6 +5,7 @@ export const BasicTextField = styled(TextField)(({ theme }) => ({
   color: theme.palette.primary.main,
   fontFamily: FONT,
   fontWeight: 'bold',
+  padding: '30px',
   '&:hover': {
     backgroundColor: theme.palette.secondary.light,
   },

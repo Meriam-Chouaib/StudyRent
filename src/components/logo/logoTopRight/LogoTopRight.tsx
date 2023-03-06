@@ -1,9 +1,7 @@
-import { Box } from '@mui/material';
-import { ImageProps } from '../../image/ImageProps.types';
+import { ImageProps } from '../../Image/ImageProps.types';
 import { StyledLogoTopRight } from './LogoTopRight.styles';
-import { BoxRightTop } from '../../BoxRightTop.styles';
-// eslint-disable-next-line react/prop-types
-export const LogoTopRight: React.FC<ImageProps> = ({ src, alt }) => {
+import { BoxRightTop } from '../../../components';
+export const LogoTopRight = ({ src, alt }: ImageProps) => {
   return (
     <BoxRightTop>
       <StyledLogoTopRight src={src} alt={alt} />

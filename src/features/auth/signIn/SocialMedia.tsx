@@ -5,7 +5,7 @@ import facebook from '../../../assets/images/facebook-bleu-marine.svg';
 import google from '../../../assets/images/google-bleu-marine.svg';
 import { BoxCenter } from '../../../components';
 import { useTranslation } from 'react-i18next';
-import { BoxSocialMedia } from '../../../components/BoxSocialMedia.styles';
+import { BoxSocialMedia } from '../../../components';
 
 export function SocialMedia() {
   const { t } = useTranslation();

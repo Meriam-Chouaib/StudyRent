@@ -1,5 +1,5 @@
-import { CustomImageTop } from '../components/image/CustomImageTop.styles';
-import { CustomImageBottom } from '../components/image/CustomImageBottom.styles';
+import { CustomImageTop } from '../components/Image/CustomImageTop.styles';
+import { CustomImageBottom } from '../components/Image/CustomImageBottom.styles';
 import imageTop from '../assets/images/Auth-motif-haut.svg';
 import { LogoTopRight } from '../components/logo/logoTopRight/LogoTopRight';
 import { Outlet } from 'react-router-dom';

@@ -1,16 +1,20 @@
 import { SignIn, SocialMedia } from '../../features';
-import { GridStyledCenter } from '../../components/GridStyledCenter.styles';
+import { GridCenter } from '../../components';
 import { Grid } from '@mui/material';
+import { Paper } from '../../components';
 
 export function SigninPage() {
   return (
     <>
-      <GridStyledCenter>
+      <SignIn />
+      <GridCenter>
         <Grid item xs={12} sm={8} md={6} lg={6} width={'60%'}>
-          <SignIn />
-          <SocialMedia />
+          <Paper>
+            <SignIn />
+            <SocialMedia />
+          </Paper>
         </Grid>
-      </GridStyledCenter>
+      </GridCenter>
     </>
   );
 }
