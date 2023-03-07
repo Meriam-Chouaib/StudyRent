@@ -1,11 +1,11 @@
 import { TextField } from '@mui/material';
 import { BasicTextFieldProps } from './BasicTextField.types';
-import { BoxCenter } from '../../../components';
+import { BoxCenterStyled } from '../../../components';
 
 export const BasicTextField = ({ placeholder, type, label }: BasicTextFieldProps) => {
   return (
     <>
-      <BoxCenter marginTop={2} marginBottom={2}>
+      <BoxCenterStyled marginTop={2} marginBottom={2}>
         <TextField
           variant="standard"
           label={label}
@@ -14,7 +14,7 @@ export const BasicTextField = ({ placeholder, type, label }: BasicTextFieldProps
           fullWidth
           required
         />
-      </BoxCenter>
+      </BoxCenterStyled>
     </>
   );
 };
