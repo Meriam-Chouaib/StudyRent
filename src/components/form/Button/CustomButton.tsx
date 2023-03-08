@@ -6,7 +6,7 @@ import { BoxCenterStyled } from '../../BoxCenter/BoxCenterStyled.styles';
 export default function CustomButton({ isLoading, children, onClick }: CustomButtonProps) {
   return (
     <BoxCenterStyled>
-      <CustomButtonStyle onClick={onClick}>
+      <CustomButtonStyle onClick={onClick} type="submit">
         {isLoading ? <ClipLoader color="#ffffff" size={20} /> : children}
       </CustomButtonStyle>
     </BoxCenterStyled>
