@@ -1,13 +1,9 @@
 import { Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { validationSchema, FormValues } from './ValidationSchema';
-import { HookForm } from '../../../components/hookform/HookForm';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { BasicTextField, BoxCenterStyled } from '../../../components';
+import { BasicTextField, BoxCenterStyled } from '../../../components/';
 import CustomButton from '../../../components/form/Button/CustomButton';
-import { Link } from 'react-router-dom';
 import { PATHS } from '../../../config/paths';
 
 export function SignIn() {
@@ -23,31 +19,54 @@ export function SignIn() {
     }
   }, [isLoading]);
 
+  const inputs: BasicTextFieldProps[] = [
+    { name: 'email', label: t('signin.email_label'), placeholder: t('signin.email_label') },
+    {
+      name: 'password',
+      label: t('signin.password_label'),
+      placeholder: t('signin.password_label'),
+    },
+  ];
+
+  const onSubmit = (data: FormValuesTypes) => console.log(data);
+
+  function handleSubmit(onSubmit: (data: FormValuesTypes) => void): () => void {
+    throw new Error('Function not implemented.');
+  }
+
   const methods = useForm({
     resolver: yupResolver(validationSchema),
   });
   return (
     <>
+      <HookForm inputs={inputs} validationSchema={ValidationSchema}>
+        <Form
+          onSubmit={handleSubmit(onSubmit)}
+          ValidationSchema={ValidationSchema}
+          inputs={inputs}
+        />
+      </HookForm>
+
       <Typography variant="h1">{t('signin.title')}</Typography>
 
-      <HookForm>
-        <BasicTextField
-          label={t('signin.email_label')}
-          placeholder={t('signin.email_label')}
-          name={t('signin.email_label')}
-        />
-        <BasicTextField
-          label={t('signin.password_label')}
-          placeholder={t('signin.password_label')}
-          name={t('signin.password_label')}
-        />
-        <CustomButton isLoading={false}>{t('signin.connect_btn')}</CustomButton>
-        <BoxCenterStyled>
-          <Link to={PATHS.AUTH.SIGNUP}>
-            <Typography variant="h6">{t('signin.create_account_btn')}</Typography>
+      <form>
+        <BasicTextField type="text" placeholder={t('signin.password_label') as string} />
+
+        <BasicTextField type="text" placeholder={t('signin.email_label') as string} />
+        <BoxCenterStyled sx={{ gap: 2 }}>
+          <Link href="www.google.com">
+            <Typography variant="h6">{t('signin.forgot_password_label')}</Typography>
+          </Link>
+
+          <CustomButton isLoading={isLoading} onClick={() => setIsLoading(true)}>
+            {t('signin.connect_btn')}
+          </CustomButton>
+
+          <Link href={PATHS.AUTH.SIGNUP}>
+            <Typography variant="h6"> {t('signin.create_account_btn')} </Typography>
           </Link>
         </BoxCenterStyled>
-      </HookForm>
+      </form>
     </>
   );
 }
