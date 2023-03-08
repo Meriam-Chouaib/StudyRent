@@ -1,6 +1,6 @@
-import { styled, TextField } from '@mui/material';
+import { Input, styled, TextField } from '@mui/material';
 import { FONT } from '../../../config/font';
-export const BasicTextField = styled(TextField)(({ theme }) => ({
+export const BasicTextField = styled(Input)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
   color: theme.palette.primary.main,
   fontFamily: FONT,

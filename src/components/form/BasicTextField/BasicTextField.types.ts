@@ -1,6 +1,6 @@
 export interface BasicTextFieldProps {
   placeholder: string;
   type?: string;
-
-  label?: string;
+  name: string;
+  label: string;
 }
