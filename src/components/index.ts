@@ -6,4 +6,3 @@ export * from './form/Button/CustomButton.styles';
 export * from './BoxCenter/BoxCenterStyled.styles';
 export * from './BoxRightTop/BoxRightTopStyled.styles';
 export * from './BoxSocialMedia/BoxSocialMediaStyled.styles';
-export * from './PaperStyled/PaperStyled.styles';

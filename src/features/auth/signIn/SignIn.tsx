@@ -1,9 +1,12 @@
-import { Typography, Link } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { BasicTextField, BoxCenterStyled } from '../../../components/';
-import CustomButton from '../../../components/form/Button/CustomButton';
-import { PATHS } from '../../../config/paths';
+import { Form } from '../../../components/form/Form/Form';
+import { ValidationSchema } from '../../../components/form/Form/ValidationSchema';
+
+import { BasicTextFieldProps } from '../../../components/form/BasicTextField/BasicTextField.types';
+import { FormValuesTypes } from '../../../components/form/Form/FormValues';
+import { HookForm } from '../../../components/hookform/HookForm';
 
 export function SignIn() {
   const { t } = useTranslation();
@@ -18,28 +21,32 @@ export function SignIn() {
     }
   }, [isLoading]);
 
+  const inputs: BasicTextFieldProps[] = [
+    { name: 'email', label: t('signin.email_label'), placeholder: t('signin.email_label') },
+    {
+      name: 'password',
+      label: t('signin.password_label'),
+      placeholder: t('signin.password_label'),
+    },
+  ];
+
+  const onSubmit = (data: FormValuesTypes) => console.log(data);
+
+  function handleSubmit(onSubmit: (data: FormValuesTypes) => void): () => void {
+    throw new Error('Function not implemented.');
+  }
+
   return (
     <>
+      <HookForm inputs={inputs} validationSchema={ValidationSchema}>
+        <Form
+          onSubmit={handleSubmit(onSubmit)}
+          ValidationSchema={ValidationSchema}
+          inputs={inputs}
+        />
+      </HookForm>
+
       <Typography variant="h1">{t('signin.title')}</Typography>
-
-      <form>
-        <BasicTextField type="text" placeholder={t('signin.password_label') as string} />
-
-        <BasicTextField type="text" placeholder={t('signin.email_label') as string} />
-        <BoxCenterStyled sx={{ gap: 2 }}>
-          <Link href="www.google.com">
-            <Typography variant="h6">{t('signin.forgot_password_label')}</Typography>
-          </Link>
-
-          <CustomButton isLoading={isLoading} onClick={() => setIsLoading(true)}>
-            {t('signin.connect_btn')}
-          </CustomButton>
-
-          <Link href={PATHS.AUTH.SIGNUP}>
-            <Typography variant="h6"> {t('signin.create_account_btn')} </Typography>
-          </Link>
-        </BoxCenterStyled>
-      </form>
     </>
   );
 }
