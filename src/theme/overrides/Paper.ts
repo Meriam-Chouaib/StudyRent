@@ -2,14 +2,14 @@ import { Theme } from '@mui/material';
 
 export function Paper(theme: Theme) {
   return {
-    MuiButton: {
+    MuiPaper: {
       styleOverrides: {
         root: {
-          width: '100%',
-          textAlign: 'center',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          width: '70%',
+
+          [theme.breakpoints.down('md')]: {
+            width: '90%',
+          },
         },
       },
     },

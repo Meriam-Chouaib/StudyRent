@@ -7,6 +7,7 @@ export const typography: TypographyOptions = {
     fontWeight: 'bold',
     color: '#221E58',
     fontFamily: FONT,
+    marginBottom: '70px',
   },
   h2: {
     fontSize: '20px',
