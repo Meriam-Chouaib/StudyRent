@@ -3,7 +3,7 @@ import { BasicTextFieldProps } from './BasicTextField.types';
 import { BoxCenterStyled } from '../../../components';
 import { Controller, useFormContext } from 'react-hook-form';
 
-export const BasicTextField = ({ placeholder, type, label, name }: BasicTextFieldProps) => {
+export const BasicTextField = ({ placeholder, type, label, name, value }: BasicTextFieldProps) => {
   const {
     register,
     control,
@@ -15,17 +15,16 @@ export const BasicTextField = ({ placeholder, type, label, name }: BasicTextFiel
       name={name}
       defaultValue=""
       render={({ field: { onChange, value }, fieldState: { error } }) => (
+        // render={({ field }) => (
         <>
           <BoxCenterStyled marginTop={2} marginBottom={2}>
             <TextField
               variant="standard"
               label={label}
               type={type}
-              value={value}
               placeholder={placeholder}
               fullWidth
               required
-              {...register(name)}
               onChange={onChange}
             />
             {errors && <span>{errors.root?.message}</span>}

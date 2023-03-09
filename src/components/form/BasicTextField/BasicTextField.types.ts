@@ -3,4 +3,5 @@ export interface BasicTextFieldProps {
   type?: string;
   name: string;
   label: string;
+  value?: unknown;
 }
