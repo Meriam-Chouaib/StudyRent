@@ -5,7 +5,7 @@ export const CustomButtonStyle = styled(Button)(({ theme }) => ({
   color: theme.palette.warning.main,
   fontFamily: FONT,
   fontSize: '12px',
-  width: '40%',
+  width: '100%',
   fontWeight: 'bold',
   '&:hover': {
     backgroundColor: theme.palette.primary.light,

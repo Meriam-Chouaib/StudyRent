@@ -1,16 +1,18 @@
 export const LoginModel = {
   fields: {
     email: {
-      label: 'Email',
+      label: 'Email address',
       name: 'email',
+      placeholder: 'Enter your email',
       requiredErrorMessage: 'Email required',
-      invaliErrorMessage: 'Email invalide',
+      invaliErrorMessage: 'Email invalid',
     },
     password: {
       label: 'Password',
       name: 'password',
+      placeholder: 'Enter your password',
       requiredErrorMessage: 'Password required',
-      invaliErrorMessage: 'Password invalide',
+      invaliErrorMessage: 'Password invalid',
     },
   },
   defaultValues: {
