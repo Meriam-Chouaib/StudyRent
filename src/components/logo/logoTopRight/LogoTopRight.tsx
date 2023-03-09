@@ -1,6 +1,6 @@
-import { ImageProps } from '../../Image/ImageProps.types';
 import { StyledLogoTopRight } from './LogoTopRight.styles';
 import { BoxRightTopStyled } from '../../../components';
+import { ImageProps } from '../../image/ImageProps.types';
 export const LogoTopRight = ({ src, alt }: ImageProps) => {
   return (
     <BoxRightTopStyled>
