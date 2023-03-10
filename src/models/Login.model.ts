@@ -1,18 +1,17 @@
 export const LoginModel = {
   fields: {
     email: {
-      label: 'Email address',
+      label: 'signin.email_label',
       name: 'email',
-      placeholder: 'Enter your email',
-      requiredErrorMessage: 'Email required',
-      invaliErrorMessage: 'Email invalid',
+      requiredErrorMessage: 'signin.email_required',
+      invaliErrorMessage: 'signin.email_invalid',
     },
     password: {
-      label: 'Password',
+      label: 'signin.password_label',
       name: 'password',
-      placeholder: 'Enter your password',
-      requiredErrorMessage: 'Password required',
-      invaliErrorMessage: 'Password invalid',
+      requiredErrorMessage: 'signin.required_password',
+      invaliErrorMessage: 'signin.invalid_password',
+      password_invalid_length: 'signin.password_invalid_length',
     },
   },
   defaultValues: {

@@ -1,10 +1,9 @@
-import * as Yup from 'yup';
 import { useState } from 'react';
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
-import { Stack, Typography } from '@mui/material';
+import { Stack, Typography, Alert } from '@mui/material';
 // components
 import { FormProvider, TextField } from '../../../components/hookform';
 import CustomButton from '../../../components/form/Button/CustomButton';
@@ -52,6 +51,7 @@ export default function LoginForm() {
       setError('password', { ...error, message: error.message });
     }
   };
+  console.log('from login form' + methods.formState.errors.email);
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
@@ -61,13 +61,31 @@ export default function LoginForm() {
         alignItems={'center'}
         justifyContent={'space-between'}
       >
-        <TextField name={fields.email.name} label={fields.email.label} />
+        {/* test to send the error to the textField but the problem in the type of error */}
+        {/* <BasicTextField
+          label="xxx"
+          name="email"
+          placeholder="dsdd"
+          error={methods.formState.errors.email}
+        ></BasicTextField> */}
+        {methods.formState.errors.email && (
+          <Alert severity="error"> {t(`${methods.formState.errors.email.message}`)}</Alert>
+        )}
+        {methods.formState.errors.password && (
+          <Alert severity="error">{t(`${methods.formState.errors.password.message}`)}</Alert>
+        )}
+        <TextField name={fields.email.name} label={t(fields.email.label)} />
         <BoxCenterStyled sx={{ position: 'relative', width: '100%', padding: '0px' }}>
-          <TextField name="password" label="Password" type={showPassword ? 'text' : 'password'} />{' '}
+          <TextField
+            name="password"
+            label={t(fields.password.label)}
+            type={showPassword ? 'text' : 'password'}
+          />{' '}
           <ButtonShowPassword onClick={show}>
             {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
           </ButtonShowPassword>
         </BoxCenterStyled>
+
         <CustomButton isLoading={isSubmitting}>{t('signin.connect_btn')}</CustomButton>
         <Link to={PATHS.AUTH.SIGNUP}>
           <Typography variant="h6">{t('signin.create_account_btn')}</Typography>

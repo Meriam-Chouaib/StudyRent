@@ -1,13 +1,16 @@
-import { TextField } from '@mui/material';
+import { TextField, Alert } from '@mui/material';
 import { BasicTextFieldProps } from './BasicTextField.types';
-import { BoxCenterStyled } from '../../../components';
-import { Controller, useFormContext } from 'react-hook-form';
 
-export const BasicTextField = ({ placeholder, label, name }: BasicTextFieldProps) => {
-  const {
-    register,
-    control,
-    formState: { errors },
-  } = useFormContext();
-  return <TextField name={name} placeholder={placeholder} label={label} variant="standard" />;
+import { useTranslation } from 'react-i18next';
+
+export const BasicTextField = ({ placeholder, label, name, error }: BasicTextFieldProps) => {
+  const { t } = useTranslation();
+  console.log('from basicc input' + error);
+
+  return (
+    <>
+      {error && <Alert severity="error"> {t(`${error.message}`)}</Alert>}
+      <TextField name={name} placeholder={placeholder} label={label} variant="standard" />;
+    </>
+  );
 };
