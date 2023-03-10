@@ -49,7 +49,6 @@ export default function LoginForm() {
       setError('password', { ...error, message: error.message });
     }
   };
-  console.log('from login form' + methods.formState.errors.email);
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>

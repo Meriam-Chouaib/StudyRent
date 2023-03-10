@@ -1,19 +1,16 @@
-export interface User {
-  id: number;
-  email: string;
-  password: string;
-}
-export interface LoginRequest {
+import { IUser } from '../types/IUser';
+
+export interface ILoginRequest {
   email: string;
   password: string;
 }
 
 export interface LoginResponse {
   token: string;
-  user: User;
+  user: IUser;
 }
 
-export interface RegisterRequest {
+export interface IRegisterRequest {
   name: string;
   email: string;
   password: string;
@@ -21,5 +18,5 @@ export interface RegisterRequest {
 
 export interface RegisterResponse {
   token: string;
-  user: User;
+  user: IUser;
 }

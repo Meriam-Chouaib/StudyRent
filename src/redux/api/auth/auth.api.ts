@@ -1,6 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { PATHS } from '../../../config/paths';
-import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from './auth.types';
+import { IUser } from '../types/IUser';
+import { ILoginRequest, LoginResponse, IRegisterRequest, RegisterResponse } from './auth.api.types';
+
+export interface userState {
+  user: IUser | null;
+}
 
 const apiUrl = 'http://localhost:8000/api/auth';
 
@@ -21,19 +26,23 @@ export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery,
   endpoints: (builder) => ({
-    login: builder.mutation<LoginResponse, LoginRequest>({
+    login: builder.mutation<LoginResponse, ILoginRequest>({
       query: (body) => ({
         url: PATHS.AUTH.SINGNIN,
         method: 'POST',
         body,
       }),
     }),
-    register: builder.mutation<RegisterResponse, RegisterRequest>({
-      query: (body) => ({
-        url: PATHS.AUTH.SIGNUP,
-        method: 'POST',
-        body,
-      }),
+    register: builder.mutation<RegisterResponse, IRegisterRequest>({
+      query(LoginRequest) {
+        console.log(LoginRequest);
+        return {
+          url: PATHS.AUTH.SINGNIN,
+          method: 'POST',
+          body: LoginRequest,
+          credentials: 'include',
+        };
+      },
     }),
   }),
 });
