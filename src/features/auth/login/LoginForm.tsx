@@ -69,7 +69,10 @@ export default function LoginForm() {
           error={methods.formState.errors.email}
         ></BasicTextField> */}
         {methods.formState.errors.email && (
-          <Alert severity="error"> {t(`${methods.formState.errors.email.message}`)}</Alert>
+          <>
+            <Alert severity="error"> {t(`${methods.formState.errors.email.message}`)}</Alert>
+            <Alert severity="error"> {t(fields.email.invaliErrorMessage)}</Alert>
+          </>
         )}
         {methods.formState.errors.password && (
           <Alert severity="error">{t(`${methods.formState.errors.password.message}`)}</Alert>
