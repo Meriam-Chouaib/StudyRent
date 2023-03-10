@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { validationSchema, FormValues } from './ValidationSchema';
+import { FormValues } from '../login/ValidationSchema';
 import { HookForm } from '../../../components/hookform/HookForm';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -23,9 +23,7 @@ export function SignIn() {
     }
   }, [isLoading]);
 
-  const methods = useForm({
-    resolver: yupResolver(validationSchema),
-  });
+  const methods = useForm({});
   return (
     <>
       <Typography variant="h1">{t('signin.title')}</Typography>

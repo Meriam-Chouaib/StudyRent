@@ -6,5 +6,4 @@ export interface FormProps {
   inputs: BasicTextFieldProps[];
 
   children?: ReactNode;
-  ValidationSchema?: Yup.ObjectSchema<any>;
 }
