@@ -4,11 +4,11 @@ export function TextField(theme: Theme) {
     MuiTextField: {
       styleOverrides: {
         root: {
-          color: theme.palette.secondary.light,
           fontSize: '18px',
           fontFamily: 'poppins',
-          borderBottom: 'solid 2px #434062',
+          borderBottom: 'solid 2px',
           width: '80%',
+          backgroundColor: 'white',
         },
       },
     },

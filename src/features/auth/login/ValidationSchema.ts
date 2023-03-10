@@ -5,7 +5,6 @@ export interface FormValues {
   email: string;
   password: string;
 }
-
 export const LoginSchema = Yup.object().shape({
   email: Yup.string()
     .email(fields.email.invaliErrorMessage)
@@ -15,4 +14,3 @@ export const LoginSchema = Yup.object().shape({
     .required(fields.password.requiredErrorMessage),
 });
 console.log('from validation', fields);
-// emai(Tr(fields.email.invalidErrorMessage))

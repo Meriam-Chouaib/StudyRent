@@ -1,11 +1,11 @@
 // form
 import { useFormContext, Controller } from 'react-hook-form';
 // @mui
-import { TextField } from '@mui/material';
-
+import { StandardTextFieldProps, TextField } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 // ----------------------------------------------------------------------
 
-interface TextFieldProps {
+interface TextFieldProps extends StandardTextFieldProps {
   name: string;
   label: string;
   type?: 'text' | 'password';
@@ -13,6 +13,7 @@ interface TextFieldProps {
 
 export default function RHFTextField({ name, label, ...other }: TextFieldProps) {
   const { control } = useFormContext();
+  const { t } = useTranslation();
 
   return (
     <Controller
@@ -26,7 +27,7 @@ export default function RHFTextField({ name, label, ...other }: TextFieldProps) 
           {...field}
           fullWidth
           error={!!error}
-          helperText={error?.message}
+          helperText={error && error.message && t(error?.message)}
           {...other}
         />
       )}
