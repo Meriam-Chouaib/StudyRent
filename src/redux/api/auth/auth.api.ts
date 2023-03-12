@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { PATHS } from '../../../config/paths';
-import { IUser } from '../types/IUser';
-import { ILoginRequest, LoginResponse, IRegisterRequest, RegisterResponse } from './auth.api.types';
+import { IUser } from '../user/user.types';
+import { ILoginRequest, LoginResponse } from './auth.api.types';
 
 export interface userState {
   user: IUser | null;
@@ -21,30 +21,22 @@ const baseQuery = fetchBaseQuery({
     return headers;
   },
 });
-
+// authApi contains all the endpoints we want to use in the authentication
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery,
+  // the mutation using for update,add and delete
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponse, ILoginRequest>({
+      // query : defines the request object that will be sent to the backend server when the endpoint is called
       query: (body) => ({
         url: PATHS.AUTH.SINGNIN,
         method: 'POST',
         body,
       }),
     }),
-    register: builder.mutation<RegisterResponse, IRegisterRequest>({
-      query(LoginRequest) {
-        console.log(LoginRequest);
-        return {
-          url: PATHS.AUTH.SINGNIN,
-          method: 'POST',
-          body: LoginRequest,
-          credentials: 'include',
-        };
-      },
-    }),
   }),
 });
-export const { useLoginMutation, useRegisterMutation } = authApi;
+// This hook returns an object with properties such as isLoading, isError, data, and error
+export const { useLoginMutation } = authApi;
 export default authApi;

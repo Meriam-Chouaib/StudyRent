@@ -1,4 +1,4 @@
-import { IUser } from '../types/IUser';
+import { IUser } from '../user/user.types';
 
 export interface ILoginRequest {
   email: string;

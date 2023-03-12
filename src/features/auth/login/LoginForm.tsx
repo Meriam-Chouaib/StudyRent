@@ -1,15 +1,15 @@
 import { useState } from 'react';
+import { useLoginMutation } from '../../../redux/api/auth/auth.api';
 // form
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-
 import { yupResolver } from '@hookform/resolvers/yup';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
 // @mui
 import { IconButton, InputAdornment, Stack, Typography } from '@mui/material';
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import CustomButton from '../../../components/form/Button/CustomButton';
 // components
 import { FormProvider, TextField } from '../../../components/hookform';
@@ -22,6 +22,8 @@ import { LoginSchema } from './ValidationSchema';
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const { fields, defaultValues } = LoginModel;
+  const [login] = useLoginMutation();
+
   const { t } = useTranslation();
 
   const methods = useForm({
@@ -38,8 +40,8 @@ export default function LoginForm() {
 
   const onSubmit = async (data: { email: string; password: string }) => {
     try {
-      // TODO - Call mutation to server here instead of console.log
-      console.log(data);
+      const result = await login(data);
+      console.log('result' + result);
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
