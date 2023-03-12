@@ -10,9 +10,12 @@ export const RegisterSchema = Yup.object().shape({
     .email(fields.email.invaliErrorMessage)
     .required(fields.email.requiredErrorMessage),
   username: Yup.string()
-    .matches(/^[A-Za-z]+$/, 'Username can only contain alphabetic characters')
+    .matches(/^[A-Za-z]+$/, fields.username.invaliErrorMessage)
     .required(fields.username.requiredErrorMessage),
   password: Yup.string()
-    .min(6, fields.password.password_invalid_length)
+    .min(6, fields.password.invaliErrorMessage)
     .required(fields.password.requiredErrorMessage),
+  passwordConfirm: Yup.string()
+    .oneOf([Yup.ref('password')], 'Passwords must match')
+    .required('Password confirmation is required'),
 });

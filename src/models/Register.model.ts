@@ -15,15 +15,15 @@ export const RegisterModel = {
     password: {
       label: 'signup.password_label',
       name: 'password',
-      requiredErrorMessage: 'signup.required_password',
-      invaliErrorMessage: 'signup.invalid_password',
+      requiredErrorMessage: 'signup.password_required',
+      invaliErrorMessage: 'signup.username_invalid',
       password_invalid_length: 'signup.password_invalid_length',
     },
     confirm_password: {
-      label: 'signup.confirm_password',
+      label: 'signup.password_confirm',
       name: 'password',
-      requiredErrorMessage: 'signup.required_password',
-      invaliErrorMessage: 'signup.invalid_password',
+      requiredErrorMessage: 'signup.password_required',
+      invaliErrorMessage: 'signup.username_invalid',
     },
   },
   defaultValues: {

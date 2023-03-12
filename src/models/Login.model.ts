@@ -9,8 +9,8 @@ export const LoginModel = {
     password: {
       label: 'signin.password_label',
       name: 'password',
-      requiredErrorMessage: 'signin.required_password',
-      invaliErrorMessage: 'signin.invalid_password',
+      requiredErrorMessage: 'signin.password_required',
+      invaliErrorMessage: 'signin.password_invalid',
       password_invalid_length: 'signin.password_invalid_length',
     },
   },
