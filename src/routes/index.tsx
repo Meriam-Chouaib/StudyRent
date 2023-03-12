@@ -5,11 +5,10 @@ import { AuthGuard, GuestGuard } from '../guards';
 import MainLayout from '../layouts/main';
 
 import { PATHS } from '../config/paths';
-import { SignUp } from '../features';
 
 import { AuthLayout, DashboardLayout } from '../layouts';
 
-import { NotFound, HomePage, Page500, Dashboard, SigninPage } from '../pages';
+import { NotFound, HomePage, Page500, Dashboard, SigninPage, SignupPage } from '../pages';
 export default function Router() {
   return useRoutes([
     {
@@ -28,7 +27,7 @@ export default function Router() {
           path: PATHS.AUTH.SIGNUP,
           element: (
             <GuestGuard>
-              <SignUp />
+              <SignupPage />
             </GuestGuard>
           ),
         },
