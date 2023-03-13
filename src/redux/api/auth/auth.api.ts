@@ -1,30 +1,18 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 import { PATHS } from '../../../config/paths';
-import { IUser } from '../user/user.types';
-import { ILoginRequest, LoginResponse } from './auth.api.types';
+import { baseQueryConfig } from '../../baseQueryConfig ';
+import { ILoginRequest, IRegisterRequest, LoginResponse, RegisterResponse } from './auth.api.types';
+import { decodeLoginResponse, decodeRegisterResponse } from './decoders';
 
-export interface userState {
-  user: IUser | null;
-}
-
-const apiUrl = 'http://localhost:8000/api/auth';
-
-const getToken = () => {
+export const getToken = () => {
   const token = 'YOUR_AUTH_TOKEN';
   return token ? `Bearer ${token}` : '';
 };
 
-const baseQuery = fetchBaseQuery({
-  baseUrl: apiUrl,
-  prepareHeaders: (headers) => {
-    headers.set('Authorization', getToken());
-    return headers;
-  },
-});
 // authApi contains all the endpoints we want to use in the authentication
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery,
+  baseQuery: baseQueryConfig,
   // the mutation using for update,add and delete
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponse, ILoginRequest>({
@@ -34,9 +22,19 @@ export const authApi = createApi({
         method: 'POST',
         body,
       }),
+      transformResponse: (response: LoginResponse) => decodeLoginResponse(response),
+    }),
+    register: builder.mutation<RegisterResponse, IRegisterRequest>({
+      query: (body) => ({
+        url: PATHS.AUTH.SIGNUP,
+        method: 'POST',
+        body,
+        credentials: 'include',
+      }),
+      transformResponse: (response: RegisterResponse) => decodeRegisterResponse(response),
     }),
   }),
 });
 // This hook returns an object with properties such as isLoading, isError, data, and error
-export const { useLoginMutation } = authApi;
+export const { useLoginMutation, useRegisterMutation } = authApi;
 export default authApi;

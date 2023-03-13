@@ -11,7 +11,7 @@ export interface LoginResponse {
 }
 
 export interface IRegisterRequest {
-  name: string;
+  username: string;
   email: string;
   password: string;
 }
@@ -19,4 +19,9 @@ export interface IRegisterRequest {
 export interface RegisterResponse {
   token: string;
   user: IUser;
+}
+export interface DecodedToken {
+  sub: string;
+  iat: number;
+  exp: number;
 }
