@@ -1,15 +1,23 @@
 import { userSlice } from './api/features/userSlice';
 import { userApi } from './api/user/user.api';
 import authApi from './api/auth/auth.api';
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
+export const setToken = (token: string) => {
+  localStorage.setItem('token', token);
+};
+
+export const getToken = (state: RootState) => {
+  return state.userState.token;
+};
+const rootReducer = combineReducers({
+  [authApi.reducerPath]: authApi.reducer,
+  [userApi.reducerPath]: userApi.reducer,
+  userState: userSlice.reducer,
+});
 const store = configureStore({
-  reducer: {
-    [authApi.reducerPath]: authApi.reducer,
-    [userApi.reducerPath]: userApi.reducer,
-    userState: userSlice.reducer,
-  },
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({}).concat([authApi.middleware, userApi.middleware]),
 });

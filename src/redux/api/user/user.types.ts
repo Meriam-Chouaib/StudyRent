@@ -4,3 +4,10 @@ export interface IUser {
   password: string;
   username?: string;
 }
+export interface userState {
+  user: IUser | null;
+  isLoggedIn: boolean;
+  isLoading: boolean;
+  error: string | null;
+  token?: string | null;
+}

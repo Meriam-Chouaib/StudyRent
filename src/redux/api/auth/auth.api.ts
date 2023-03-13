@@ -4,11 +4,6 @@ import { baseQueryConfig } from '../../baseQueryConfig ';
 import { ILoginRequest, IRegisterRequest, LoginResponse, RegisterResponse } from './auth.api.types';
 import { decodeLoginResponse, decodeRegisterResponse } from './decoders';
 
-export const getToken = () => {
-  const token = 'YOUR_AUTH_TOKEN';
-  return token ? `Bearer ${token}` : '';
-};
-
 // authApi contains all the endpoints we want to use in the authentication
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -32,6 +27,12 @@ export const authApi = createApi({
         credentials: 'include',
       }),
       transformResponse: (response: RegisterResponse) => decodeRegisterResponse(response),
+    }),
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: PATHS.AUTH.LOGOUT,
+        method: 'POST',
+      }),
     }),
   }),
 });

@@ -6,6 +6,7 @@ export const PATHS = {
     ROOT: 'auth',
     SINGNIN: 'signin',
     SIGNUP: 'signup',
+    LOGOUT: 'logout',
   },
   DASHBOARD: {
     ROOT: 'dashboard',
