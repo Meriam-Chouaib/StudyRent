@@ -14,6 +14,8 @@ export interface IRegisterRequest {
   username: string;
   email: string;
   password: string;
+  statut?: string;
+  role?: string;
 }
 
 export interface RegisterResponse {

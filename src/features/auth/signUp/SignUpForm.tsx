@@ -39,12 +39,20 @@ export default function SignUpForm() {
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
-
-  const onRegister = async ({ username, email, password }: IRegisterRequest) => {
-    const data = { email, username, password };
+  const onRegister = async ({ username, email, password, role, statut }: IRegisterRequest) => {
+    const data = { email, username, password, role, statut };
     try {
       console.log(data);
-      const result = await register(data);
+      data.statut = 'OFFLINE';
+      data.role = 'STUDENT';
+      const result = await register(data)
+        .unwrap()
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       console.log(result);
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
