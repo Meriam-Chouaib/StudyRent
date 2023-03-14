@@ -1,7 +1,8 @@
-import { setToken } from './../../store';
+import { setToken } from '../../../utils/generate.token';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { authApi } from '../auth/auth.api';
 import { IUser, userState } from '../user/user.types';
+import { keccak256 } from 'js-sha3';
 
 const initialState: userState = {
   user: null,
@@ -50,10 +51,12 @@ export const userSlice = createSlice({
       .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
         const data = action.payload;
         const { token, user } = data;
+
         state.user = user;
         state.isLoggedIn = true;
-        state.token = token;
-        setToken(token);
+        const hashedToken = keccak256(token);
+        state.token = hashedToken;
+        setToken(hashedToken);
       })
       .addMatcher(authApi.endpoints.logout.matchPending, (state) => {
         state.user = null;

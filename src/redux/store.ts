@@ -4,13 +4,6 @@ import authApi from './api/auth/auth.api';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
-export const setToken = (token: string) => {
-  localStorage.setItem('token', token);
-};
-
-export const getToken = (state: RootState) => {
-  return state.userState.token;
-};
 const rootReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
