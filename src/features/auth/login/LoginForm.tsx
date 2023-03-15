@@ -10,7 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { IconButton, InputAdornment, Stack, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import CustomButton from '../../../components/form/Button/CustomButton';
+import { CustomButton } from '../../../components';
 // components
 import { FormProvider, TextField } from '../../../components/hookform';
 import { PATHS } from '../../../config/paths';

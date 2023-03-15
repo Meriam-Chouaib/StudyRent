@@ -11,3 +11,8 @@ export * from './translationStyled/TranslationStyled';
 export * from './BoxCenter/BoxCenterSpaceBetween.styles';
 export * from './LinkItem/LinkItem';
 export * from './toolbar/Toolbar.styles';
+export * from './image/CustomImageBackHeader.styles';
+export * from './logo/logoTopRight/LogoTopRight';
+export * from './image/CustomImageBottom.styles';
+export * from './form/Button/CustomButton';
+export * from './CardStyled/CardStyled.style';
