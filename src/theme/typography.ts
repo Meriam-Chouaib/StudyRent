@@ -18,11 +18,12 @@ export const typography: TypographyOptions = {
   h6: {
     fontSize: '12px',
     textAlign: 'center',
-    // color:'palette.primary.main',
+
     fontWeight: 'bold',
     color: COLORS.PRIMARY.DARK,
     fontFamily: FONT,
   },
+  h4: { fontFamily: FONT, fontSize: '35px', letterSpacing: '2px' },
   h3: {
     fontSize: '18px',
     fontWeight: '600',

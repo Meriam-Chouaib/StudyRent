@@ -10,7 +10,7 @@ import { CustomImageBottom } from '../components';
 export function AuthLayout() {
   return (
     <>
-      {/* <LogoTopRight src={logoDark} alt="logo studyrent" /> */}
+      <LogoTopRight src={logoDark} alt="logo studyrent" />
       <CustomImageTop src={imageTop} alt="" />
       <Outlet />
       <CustomImageBottom src={imageBottom} alt="" />

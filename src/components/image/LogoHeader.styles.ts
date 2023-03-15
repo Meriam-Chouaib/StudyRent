@@ -11,6 +11,6 @@ export const LogoHeader = styled('img')({
   height: 60,
   Width: 70,
   [theme.breakpoints.down('sm')]: {
-    height: '8vh',
+    height: '4rem',
   },
 });

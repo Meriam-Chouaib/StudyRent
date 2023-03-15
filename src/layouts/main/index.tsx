@@ -6,6 +6,7 @@ import { Box } from '@mui/material';
 import { CustomImageBackHeader } from '../../components';
 // images
 import decoTopLeft from '../../assets/images/deco_top_left_rose.svg';
+import { Outlet } from 'react-router-dom';
 export default function MainLayout() {
   return (
     <>
@@ -13,6 +14,7 @@ export default function MainLayout() {
         <CustomImageBackHeader src={decoTopLeft} alt="" />
         <Header isLogged={false} username="Leila" />
         here the rest of the content
+        <Outlet />
         <Footer />
       </Box>
     </>

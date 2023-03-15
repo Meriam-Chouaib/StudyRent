@@ -27,7 +27,7 @@ export const Header = ({ isLogged, username }: headerProps) => {
           </Box>
           <BoxCenterSpaceBetween sx={{ width: '65%' }}>
             <BoxCenterStyled sx={{ flexDirection: 'row' }}>
-              <LinkItem name={t('header.link_home')} path={PATHS.HOME} />
+              <LinkItem name={t('header.link_home')} path={PATHS.MAIN.HOME} />
               <LinkItem name={t('header.link_about')} path={PATHS.ABOUT} />
               <LinkItem name={t('header.link_posts')} path={PATHS.POSTS} />
               <LinkItem name={t('header.link_contact')} path={PATHS.CONTACT} />
@@ -36,7 +36,7 @@ export const Header = ({ isLogged, username }: headerProps) => {
               <Typography>{username}</Typography>
             ) : (
               <Box>
-                <StyledLink to={PATHS.AUTH.SINGNIN}>
+                <StyledLink to={`${PATHS.AUTH.ROOT}/${PATHS.AUTH.SINGNIN}`}>
                   <Typography variant="h3">{t('header.link_signin')}</Typography>
                 </StyledLink>
               </Box>
