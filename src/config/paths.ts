@@ -1,6 +1,9 @@
 export const PATHS = {
   ROOT: '/',
   HOME: '/home',
+  ABOUT: '/about',
+  CONTACT: '/contact',
+  POSTS: '/posts',
   ALL: '*',
   AUTH: {
     ROOT: 'auth',

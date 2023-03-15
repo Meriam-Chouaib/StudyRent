@@ -6,3 +6,8 @@ export * from './form/Button/CustomButton.styles';
 export * from './BoxCenter/BoxCenterStyled.styles';
 export * from './BoxRightTop/BoxRightTopStyled.styles';
 export * from './BoxSocialMedia/BoxSocialMediaStyled.styles';
+export * from './image/LogoHeader.styles';
+export * from './translationStyled/TranslationStyled';
+export * from './BoxCenter/BoxCenterSpaceBetween.styles';
+export * from './LinkItem/LinkItem';
+export * from './toolbar/Toolbar.styles';
