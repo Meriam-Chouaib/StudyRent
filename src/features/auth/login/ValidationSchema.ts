@@ -13,4 +13,3 @@ export const LoginSchema = Yup.object().shape({
     .min(6, fields.password.password_invalid_length)
     .required(fields.password.requiredErrorMessage),
 });
-console.log('from validation', fields);

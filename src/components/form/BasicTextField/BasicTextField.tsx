@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 
 export const BasicTextField = ({ placeholder, label, name, error }: BasicTextFieldProps) => {
   const { t } = useTranslation();
-  console.log('from basicc input' + error);
 
   return (
     <>

@@ -6,7 +6,7 @@ export function TextField(theme: Theme) {
         root: {
           fontSize: '18px',
           fontFamily: 'poppins',
-          borderBottom: 'solid 2px',
+          // borderBottom: 'solid 2px',
           width: '80%',
           backgroundColor: 'white',
         },

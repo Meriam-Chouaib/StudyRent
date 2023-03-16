@@ -1,41 +1,41 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 import { PATHS } from '../../../config/paths';
-import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from './auth.types';
+import { baseQueryConfig } from '../../baseQueryConfig ';
+import { ILoginRequest, IRegisterRequest, LoginResponse, RegisterResponse } from './auth.api.types';
+import { decodeLoginResponse, decodeRegisterResponse } from './decoders';
 
-const apiUrl = 'http://localhost:8000/api/auth';
-
-const getToken = () => {
-  const token = 'YOUR_AUTH_TOKEN';
-  return token ? `Bearer ${token}` : '';
-};
-
-const baseQuery = fetchBaseQuery({
-  baseUrl: apiUrl,
-  prepareHeaders: (headers) => {
-    headers.set('Authorization', getToken());
-    return headers;
-  },
-});
-
+// authApi contains all the endpoints we want to use in the authentication
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery,
+  baseQuery: baseQueryConfig,
+  // the mutation using for update,add and delete
   endpoints: (builder) => ({
-    login: builder.mutation<LoginResponse, LoginRequest>({
+    login: builder.mutation<LoginResponse, ILoginRequest>({
+      // query : defines the request object that will be sent to the backend server when the endpoint is called
       query: (body) => ({
         url: PATHS.AUTH.SINGNIN,
         method: 'POST',
         body,
       }),
+      transformResponse: (response: LoginResponse) => decodeLoginResponse(response),
     }),
-    register: builder.mutation<RegisterResponse, RegisterRequest>({
+    register: builder.mutation<RegisterResponse, IRegisterRequest>({
       query: (body) => ({
         url: PATHS.AUTH.SIGNUP,
         method: 'POST',
         body,
+        credentials: 'include',
+      }),
+      transformResponse: (response: RegisterResponse) => decodeRegisterResponse(response),
+    }),
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: PATHS.AUTH.LOGOUT,
+        method: 'POST',
       }),
     }),
   }),
 });
+// This hook returns an object with properties such as isLoading, isError, data, and error
 export const { useLoginMutation, useRegisterMutation } = authApi;
 export default authApi;

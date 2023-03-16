@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLoginMutation } from '../../../redux/api/auth/auth.api';
+import { useRegisterMutation } from '../../../redux/api/auth/auth.api';
 // form
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -14,20 +14,22 @@ import CustomButton from '../../../components/form/Button/CustomButton';
 // components
 import { FormProvider, TextField } from '../../../components/hookform';
 import { PATHS } from '../../../config/paths';
-import { LoginModel } from '../../../models/Login.model';
-import { LoginSchema } from './ValidationSchema';
+import { RegisterModel } from '../../../models/Register.model';
+import { RegisterSchema } from './ValidationSchema';
+import { IRegisterRequest } from '../../../redux/api/auth/auth.api.types';
 
 // ----------------------------------------------------------------------
 
-export default function LoginForm() {
+export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const { fields, defaultValues } = LoginModel;
-  const [login] = useLoginMutation();
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { fields, defaultValues } = RegisterModel;
+  const [register] = useRegisterMutation();
 
   const { t } = useTranslation();
 
   const methods = useForm({
-    resolver: yupResolver(LoginSchema),
+    resolver: yupResolver(RegisterSchema),
     defaultValues,
   });
 
@@ -38,10 +40,12 @@ export default function LoginForm() {
     formState: { isSubmitting },
   } = methods;
 
-  const onSubmit = async (data: { email: string; password: string }) => {
+  const onRegister = async ({ username, email, password }: IRegisterRequest) => {
+    const data = { email, username, password };
     try {
-      const result = await login(data);
-      console.log('result' + result);
+      console.log(data);
+      const result = await register(data);
+      console.log(result);
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -53,7 +57,7 @@ export default function LoginForm() {
   };
 
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+    <FormProvider methods={methods} onSubmit={handleSubmit(onRegister)}>
       <Stack
         spacing={3}
         sx={{ width: '100%' }}
@@ -61,6 +65,7 @@ export default function LoginForm() {
         justifyContent={'space-between'}
       >
         <TextField name={fields.email.name} type={'text'} label={t(fields.email.label)} />
+        <TextField name={fields.username.name} type={'text'} label={t(fields.username.label)} />
         <TextField
           type={!showPassword ? 'password' : 'text'}
           name={fields.password.name}
@@ -79,10 +84,28 @@ export default function LoginForm() {
             ),
           }}
         />
+        <TextField
+          type={!showConfirmPassword ? 'password' : 'text'}
+          name={fields.confirm_password.name}
+          label={t(fields.confirm_password.label)}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  edge="end"
+                >
+                  {showConfirmPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
 
-        <CustomButton isLoading={isSubmitting}>{t('signin.connect_btn')}</CustomButton>
-        <Link to={PATHS.AUTH.SIGNUP}>
-          <Typography variant="h6">{t('signin.create_account_btn')}</Typography>
+        <CustomButton isLoading={isSubmitting}>{t('signup.confirm_btn')}</CustomButton>
+        <Link to={PATHS.AUTH.SINGNIN}>
+          <Typography variant="h6">{t('signup.back_btn')}</Typography>
         </Link>
       </Stack>
     </FormProvider>

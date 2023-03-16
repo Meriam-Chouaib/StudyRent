@@ -1,22 +1,28 @@
-export const signin = {
-  title: 'SIGN IN',
+export const signup = {
+  title: `Créer un compte`,
 
   // email
   email_label: 'Email',
   email_required: 'Email required',
   email_invalid: 'Email invalid',
 
-  // password
+  // username
+  username_label: 'Username',
+  username_required: 'Username is required',
+  username_invalid: 'Username is invalid',
+
+  // pasword
   password_invalid: 'Password invalid',
-  password_label: 'Passwordff',
+  password_label: 'Password',
   password_required: 'Password required',
   password_forgot_label: 'Forgot your password?',
   password_invalid_length: 'Password must be at least 6 characters',
+  password_confirm: 'Confirm pasword',
 
   // link
   connect_with_txt: 'Or connect with',
+  back_btn: 'Back to login',
 
   // btns
-  connect_btn: 'CONNECT',
-  create_account_btn: 'CREATE AN ACCOUNT',
+  confirm_btn: 'CONFIRM',
 };
