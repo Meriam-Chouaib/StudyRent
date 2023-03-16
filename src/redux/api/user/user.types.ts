@@ -3,6 +3,8 @@ export interface IUser {
   email: string;
   password: string;
   username?: string;
+  statut?: string;
+  role?: string;
 }
 export interface userState {
   user: IUser | null;

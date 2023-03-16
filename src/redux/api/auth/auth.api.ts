@@ -8,24 +8,25 @@ import { decodeLoginResponse, decodeRegisterResponse } from './decoders';
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: baseQueryConfig,
+  tagTypes: ['AUTH'],
   // the mutation using for update,add and delete
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponse, ILoginRequest>({
       // query : defines the request object that will be sent to the backend server when the endpoint is called
-      query: (body) => ({
+      query: (LoginRequest) => ({
         url: PATHS.AUTH.SINGNIN,
         method: 'POST',
-        body,
+        body: LoginRequest,
       }),
       transformResponse: (response: LoginResponse) => decodeLoginResponse(response),
     }),
     register: builder.mutation<RegisterResponse, IRegisterRequest>({
-      query: (body) => ({
+      query: (RegisterRequest) => ({
         url: PATHS.AUTH.SIGNUP,
         method: 'POST',
-        body,
-        credentials: 'include',
+        body: RegisterRequest,
       }),
+      invalidatesTags: ['AUTH'],
       transformResponse: (response: RegisterResponse) => decodeRegisterResponse(response),
     }),
     logout: builder.mutation<void, void>({

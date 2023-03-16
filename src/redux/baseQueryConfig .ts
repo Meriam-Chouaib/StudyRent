@@ -4,7 +4,8 @@ import { getToken } from '../utils/generate.token';
 const BASE_URL = process.env.REACT_APP_API_ENDPOINT;
 
 export const baseQueryConfig = fetchBaseQuery({
-  baseUrl: BASE_URL,
+  baseUrl: `${BASE_URL}/auth`,
+
   prepareHeaders: (headers: Headers) => {
     const token = getToken();
     if (token) {
