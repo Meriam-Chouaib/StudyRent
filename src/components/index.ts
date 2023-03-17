@@ -16,3 +16,6 @@ export * from './logo/logoTopRight/LogoTopRight';
 export * from './image/CustomImageBottom.styles';
 export * from './form/Button/CustomButton';
 export * from './CardStyled/CardStyled.style';
+export * from './BoxPosts/BoxPosts';
+export * from './CardPost/CardPost';
+export * from './ButtonWithIcon/ButtonWithIcon';

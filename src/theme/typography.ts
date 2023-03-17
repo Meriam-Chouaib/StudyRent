@@ -15,6 +15,19 @@ export const typography: TypographyOptions = {
     color: 'blue',
     fontFamily: FONT,
   },
+  h3: {
+    fontSize: '18px',
+    fontWeight: '600',
+    color: COLORS.PRIMARY.DARK,
+    fontFamily: FONT,
+  },
+  h4: { fontFamily: FONT, fontSize: '35px', letterSpacing: '2px' },
+  h5: {
+    fontSize: '14px',
+    fontWeight: '700',
+    color: COLORS.PRIMARY.DARK,
+    paddingRight: '1rem',
+  },
   h6: {
     fontSize: '12px',
     textAlign: 'center',
@@ -23,11 +36,10 @@ export const typography: TypographyOptions = {
     color: COLORS.PRIMARY.DARK,
     fontFamily: FONT,
   },
-  h4: { fontFamily: FONT, fontSize: '35px', letterSpacing: '2px' },
-  h3: {
+  subtitle1: {
     fontSize: '18px',
-    fontWeight: '600',
+    fontWeight: '700',
+    textAlign: 'center',
     color: COLORS.PRIMARY.DARK,
-    fontFamily: FONT,
   },
 };

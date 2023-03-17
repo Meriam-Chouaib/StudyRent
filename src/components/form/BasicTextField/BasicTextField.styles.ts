@@ -1,4 +1,4 @@
-import { Input, styled, TextField } from '@mui/material';
+import { Input, styled } from '@mui/material';
 import { FONT } from '../../../config/font';
 export const BasicTextField = styled(Input)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
@@ -9,5 +9,5 @@ export const BasicTextField = styled(Input)(({ theme }) => ({
   '&:hover': {
     backgroundColor: theme.palette.secondary.light,
   },
-  borderBottom: 'solid 3px #221E58',
+  borderBottom: `solid 3px ${theme.palette.primary.main}`,
 }));

@@ -25,7 +25,7 @@ export const COLORS = {
     LIGHT: '#A2DBA5',
   },
   GREY: {
-    100: '#f5f5f5',
+    100: '#efefef99',
     200: '#eeeeee',
     300: '#e0e0e0',
     400: '#bdbdbd',
