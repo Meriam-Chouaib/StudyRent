@@ -19,7 +19,7 @@ export const PATHS = {
     },
   },
   MAIN: {
-    HOME: 'home',
+    HOME: '',
     ERROR: {
       P_500: '500',
       P_404: '404',

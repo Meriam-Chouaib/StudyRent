@@ -3,5 +3,5 @@ export const BoxCenterStyled = styled(Box)(() => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  padding: '8px',
+  padding: '10px 0px',
 }));

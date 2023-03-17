@@ -1,5 +1,6 @@
+import { ButtonProps } from '@mui/material';
 import { ReactNode } from 'react';
-export interface CustomButtonProps {
+export interface CustomButtonProps extends ButtonProps {
   isLoading?: boolean;
   children?: ReactNode;
   onClick?: () => void;
