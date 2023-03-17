@@ -50,6 +50,7 @@ export default function Router() {
       path: PATHS.ALL,
       element: <MainLayout />,
       children: [
+        { path: PATHS.MAIN.HOME, element: <HomePage /> },
         { path: PATHS.MAIN.ERROR.P_500, element: <Page500 /> },
         { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
         { path: PATHS.ALL, element: <Navigate to="/404" replace /> },

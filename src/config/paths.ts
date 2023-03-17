@@ -1,6 +1,9 @@
 export const PATHS = {
   ROOT: '/',
-  HOME: '/home',
+
+  ABOUT: 'about',
+  CONTACT: 'contact',
+  POSTS: 'posts',
   ALL: '*',
   AUTH: {
     ROOT: 'auth',
@@ -16,6 +19,7 @@ export const PATHS = {
     },
   },
   MAIN: {
+    HOME: 'home',
     ERROR: {
       P_500: '500',
       P_404: '404',

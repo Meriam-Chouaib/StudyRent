@@ -1,7 +1,8 @@
-import { GridStyledCenter } from '../../features/auth/signIn/SigninButton/signIn.styles';
-import { CardStyled } from '../../components/CardStyled/CardStyled.style';
-import { SignupForm } from '../../features/auth/signUp';
-
+// features
+import { GridStyledCenter } from '../../features';
+import { SignupForm } from '../../features';
+// comments
+import { CardStyled } from '../../components';
 export function SignupPage() {
   return (
     <>

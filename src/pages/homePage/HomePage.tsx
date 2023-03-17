@@ -1,3 +1,12 @@
+import { Container } from '@mui/material';
+import { GetStarted } from '../../features';
+
 export function HomePage() {
-  return <div>HomePage</div>;
+  return (
+    <>
+      <Container>
+        <GetStarted />
+      </Container>
+    </>
+  );
 }
