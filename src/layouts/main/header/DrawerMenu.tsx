@@ -1,5 +1,4 @@
 // mui
-import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -26,7 +25,6 @@ export const DrawerPart = () => {
 
   return (
     <>
-      <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <IconButton

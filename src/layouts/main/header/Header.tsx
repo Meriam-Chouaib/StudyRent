@@ -15,7 +15,7 @@ import {
 // image
 import logo from '../../../assets/images/logo-bleu-roi.svg';
 // Mui
-import { Box, Container, CssBaseline } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
 // translation
 import { useTranslation } from 'react-i18next';
@@ -26,7 +26,6 @@ export const Header = ({ isLogged, username }: headerProps) => {
   return (
     <AppBarStyled position="static">
       <Container>
-        <CssBaseline />
         <ToolbarStyled>
           <Box>
             <LogoHeader src={logo} />
