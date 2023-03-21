@@ -10,7 +10,6 @@ export const BoxCenterGetStarted = styled(Box)(() => ({
   position: 'relative',
 
   [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column',
-    justifyContent: 'center',
+    display: 'none',
   },
 }));
