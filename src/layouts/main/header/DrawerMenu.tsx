@@ -26,7 +26,6 @@ export const DrawerPart = () => {
 
   return (
     <>
-      <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <IconButton
