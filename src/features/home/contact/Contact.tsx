@@ -6,7 +6,7 @@ import { ContactForm } from './ContactForm';
 
 export const Contact = () => {
   return (
-    <BoxCenterSpaceBetween>
+    <BoxCenterSpaceBetween marginY={2}>
       <Box sx={{ width: '50%' }}>
         <ContactForm />
       </Box>

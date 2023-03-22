@@ -25,4 +25,10 @@ export const PATHS = {
       P_404: '404',
     },
   },
+  SOCIAL_MEDIA: {
+    FB: 'https://www.facebook.com/',
+    INSTAGRAM: 'https://www.instagram.com/',
+    GOOGLE: 'https://www.google.fr/',
+    TWITTER: 'https://twitter.com/',
+  },
 };

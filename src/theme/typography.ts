@@ -1,4 +1,5 @@
 import { TypographyOptions } from '@mui/material/styles/createTypography';
+
 import { COLORS } from '../config/colors';
 import { FONT } from '../config/font';
 export const typography: TypographyOptions = {
@@ -41,5 +42,20 @@ export const typography: TypographyOptions = {
     fontWeight: '700',
     textAlign: 'center',
     color: COLORS.PRIMARY.DARK,
+  },
+  subtitle2: {
+    fontSize: '18px',
+    fontWeight: '700',
+    textAlign: 'start',
+    letterSpacing: '2px',
+    padding: '1rem 0',
+    color: COLORS.WARNING.MAIN,
+  },
+  body1: {
+    fontSize: '14px',
+    fontWeight: '500',
+    textAlign: 'start',
+    color: COLORS.WARNING.MAIN,
+    letterSpacing: '2px',
   },
 };
