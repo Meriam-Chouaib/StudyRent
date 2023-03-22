@@ -81,7 +81,8 @@ export default function LoginForm() {
         />
 
         <CustomButton isLoading={isSubmitting}>{t('signin.connect_btn')}</CustomButton>
-        <Link to={PATHS.AUTH.SIGNUP}>
+
+        <Link to={`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.SIGNUP}`}>
           <Typography variant="h6">{t('signin.create_account_btn')}</Typography>
         </Link>
       </Stack>
