@@ -45,15 +45,14 @@ export default function SignUpForm() {
       console.log(data);
       data.statut = 'OFFLINE';
       data.role = 'STUDENT';
-      const result = await register(data)
+      await register(data)
         .unwrap()
         .then((res) => {
-          console.log(res);
+          console.log('resss' + res);
         })
         .catch((err) => {
           console.log(err);
         });
-      console.log(result);
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {

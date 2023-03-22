@@ -40,8 +40,14 @@ export default function LoginForm() {
 
   const onSubmit = async (data: { email: string; password: string }) => {
     try {
-      const result = await login(data).unwrap();
-      console.log('result' + result);
+      await login(data)
+        .unwrap()
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
