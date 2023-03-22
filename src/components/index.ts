@@ -19,3 +19,6 @@ export * from './CardStyled/CardStyled.style';
 export * from './BoxPosts/BoxPosts';
 export * from './CardPost/CardPost';
 export * from './ButtonWithIcon/ButtonWithIcon';
+export * from './LinkItem/Link.styles';
+export * from './LinkItem/LinkIcon';
+export * from './logo/logoFooter/LogoFooter';

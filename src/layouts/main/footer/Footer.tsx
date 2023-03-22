@@ -1,15 +1,23 @@
 import { Box, Typography, Container } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { BoxCenterSpaceBetween, BoxCenterStyled, CustomImageBottom } from '../../../components';
-import { LogoFooter } from '../../../components/logo/logoFooter/LogoFooter';
-import { PATHS } from '../../../config/paths';
+// components
+import {
+  BoxCenterSpaceBetween,
+  BoxCenterStyled,
+  CustomImageBottom,
+  LogoFooter,
+  StyledLinkFooter,
+  LinkIcon,
+} from '../../../components';
+
+// images
 import icon_fb from '../../../assets/images/facebook-bleu-clair.svg';
 import icon_instagram from '../../../assets/images/instagram-bleu-clair.svg';
 import icon_twitter from '../../../assets/images/twitter-bleu-clair.svg';
 import icon_google from '../../../assets/images/google-bleu-clair.svg';
 import decoFooter from '../../../assets/images/footer_deco_back.svg';
 import theme from '../../../theme';
-import { ImgMedia, StyledLinkFooter } from './footer.styles';
+import { PATHS } from '../../../config/paths';
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -32,19 +40,11 @@ export default function Footer() {
               </BoxCenterStyled>
             </Box>
           </BoxCenterSpaceBetween>
-          <Box>
-            <StyledLinkFooter to={PATHS.SOCIAL_MEDIA.FB}>
-              <ImgMedia src={icon_fb} />
-            </StyledLinkFooter>
-            <StyledLinkFooter to={PATHS.SOCIAL_MEDIA.INSTAGRAM}>
-              <ImgMedia src={icon_instagram} />
-            </StyledLinkFooter>
-            <StyledLinkFooter to={PATHS.SOCIAL_MEDIA.TWITTER}>
-              <ImgMedia src={icon_twitter} />
-            </StyledLinkFooter>
-            <StyledLinkFooter to={PATHS.SOCIAL_MEDIA.GOOGLE}>
-              <ImgMedia src={icon_google} />
-            </StyledLinkFooter>
+          <Box marginY={2}>
+            <LinkIcon link={PATHS.SOCIAL_MEDIA.FB} img={icon_fb} />
+            <LinkIcon link={PATHS.SOCIAL_MEDIA.INSTAGRAM} img={icon_instagram} />
+            <LinkIcon link={PATHS.SOCIAL_MEDIA.TWITTER} img={icon_twitter} />
+            <LinkIcon link={PATHS.SOCIAL_MEDIA.GOOGLE} img={icon_google} />
           </Box>
         </BoxCenterStyled>
       </Container>
