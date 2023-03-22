@@ -112,7 +112,8 @@ export default function SignUpForm() {
         />
 
         <CustomButton isLoading={isSubmitting}>{t('signup.confirm_btn')}</CustomButton>
-        <Link to={PATHS.AUTH.SINGNIN}>
+
+        <Link to={`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.SINGNIN}`}>
           <Typography variant="h6">{t('signup.back_btn')}</Typography>
         </Link>
       </Stack>
