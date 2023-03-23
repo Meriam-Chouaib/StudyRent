@@ -1,7 +1,6 @@
 import { Container } from '@mui/material';
-import { GetStarted } from '../../features';
+import { GetStarted, Posts } from '../../features';
 import { Contact } from '../../features/home/contact/Contact';
-import { Posts } from '../../features/home/posts/Posts';
 
 export function HomePage() {
   return (
