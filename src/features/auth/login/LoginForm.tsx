@@ -40,8 +40,14 @@ export default function LoginForm() {
 
   const onSubmit = async (data: { email: string; password: string }) => {
     try {
-      const result = await login(data).unwrap();
-      console.log('result' + result);
+      await login(data)
+        .unwrap()
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -81,7 +87,8 @@ export default function LoginForm() {
         />
 
         <CustomButton isLoading={isSubmitting}>{t('signin.connect_btn')}</CustomButton>
-        <Link to={PATHS.AUTH.SIGNUP}>
+
+        <Link to={`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.SIGNUP}`}>
           <Typography variant="h6">{t('signin.create_account_btn')}</Typography>
         </Link>
       </Stack>
