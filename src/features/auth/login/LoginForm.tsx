@@ -16,6 +16,7 @@ import { FormProvider, TextField } from '../../../components/hookform';
 import { PATHS } from '../../../config/paths';
 import { LoginModel } from '../../../models/Login.model';
 import { LoginSchema } from './ValidationSchema';
+import { ILoginRequest } from '../../../redux/api/auth/auth.api.types';
 
 // ----------------------------------------------------------------------
 
@@ -38,7 +39,8 @@ export default function LoginForm() {
     formState: { isSubmitting },
   } = methods;
 
-  const onSubmit = async (data: { email: string; password: string }) => {
+  const onSubmit = async ({ email, password }: ILoginRequest) => {
+    const data = { email, password };
     try {
       await login(data)
         .unwrap()

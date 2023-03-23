@@ -14,6 +14,12 @@ export const signup = {
   password_required: 'Mot de pass est obligatoire',
   password_confirm: 'Confirmer le mot de passe',
 
+  // role
+  role_required: 'Le role est obligatoire',
+  role_label: 'Role',
+  role_student: 'Étudiant',
+  role_owner: 'Propriétaire',
+
   // username
   username_label: `Nom d'utilisateur`,
   username_required: `Nom d'utilisateur est obligatoire`,

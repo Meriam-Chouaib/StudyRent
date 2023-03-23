@@ -54,9 +54,9 @@ export const userSlice = createSlice({
 
         state.user = user;
         state.isLoggedIn = true;
-        const hashedToken = keccak256(token);
-        state.token = hashedToken;
-        setToken(hashedToken);
+        // const hashedToken = keccak256(token);
+        state.token = token;
+        setToken(token);
       })
       .addMatcher(authApi.endpoints.logout.matchPending, (state) => {
         state.user = null;

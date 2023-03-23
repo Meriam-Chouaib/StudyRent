@@ -19,7 +19,7 @@ export interface IRegisterRequest {
 }
 
 export interface RegisterResponse {
-  token: string;
+  //   token: string;
   user: IUser;
 }
 export interface DecodedToken {
