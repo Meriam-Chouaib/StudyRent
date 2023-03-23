@@ -17,6 +17,7 @@ import { PATHS } from '../../../config/paths';
 import { RegisterModel } from '../../../models/Register.model';
 import { RegisterSchema } from './ValidationSchema';
 import { IRegisterRequest } from '../../../redux/api/auth/auth.api.types';
+import { SelectField } from '../../../components/selectField/SelectField';
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +33,7 @@ export default function SignUpForm() {
     resolver: yupResolver(RegisterSchema),
     defaultValues,
   });
+  const Roles: string[] = ['STUDENT', 'OWNER'];
 
   const {
     reset,
@@ -43,12 +45,11 @@ export default function SignUpForm() {
     const data = { email, username, password, role, statut };
     try {
       console.log(data);
-      data.statut = 'OFFLINE';
-      data.role = 'STUDENT';
+
       await register(data)
         .unwrap()
         .then((res) => {
-          console.log('resss' + res);
+          console.log(JSON.stringify(res));
         })
         .catch((err) => {
           console.log(err);
@@ -109,7 +110,14 @@ export default function SignUpForm() {
             ),
           }}
         />
-
+        <SelectField
+          variant="standard"
+          id={'role'}
+          label={'Role'}
+          placeholder={'Role'}
+          name={fields.role.name}
+          options={Roles}
+        />
         <CustomButton isLoading={isSubmitting}>{t('signup.confirm_btn')}</CustomButton>
 
         <Link to={`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.SINGNIN}`}>

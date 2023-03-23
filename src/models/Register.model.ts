@@ -30,11 +30,15 @@ export const RegisterModel = {
       name: 'role',
       requiredErrorMessage: 'signup.role_required',
     },
+    statut: {
+      name: 'statut',
+    },
   },
   defaultValues: {
     email: '',
     password: '',
     username: '',
     role: '',
+    statut: 'OFFLINE',
   },
 };
