@@ -25,10 +25,20 @@ export const RegisterModel = {
       requiredErrorMessage: 'signup.password_required',
       invaliErrorMessage: 'signup.username_invalid',
     },
+    role: {
+      label: 'signup.role_label',
+      name: 'role',
+      requiredErrorMessage: 'signup.role_required',
+    },
+    statut: {
+      name: 'statut',
+    },
   },
   defaultValues: {
     email: '',
     password: '',
     username: '',
+    role: '',
+    statut: 'OFFLINE',
   },
 };

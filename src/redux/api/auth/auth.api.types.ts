@@ -6,8 +6,12 @@ export interface ILoginRequest {
 }
 
 export interface LoginResponse {
-  token: string;
-  user: IUser;
+  status?: number;
+  data: {
+    token: string;
+    user: IUser;
+  };
+  message: string;
 }
 
 export interface IRegisterRequest {
@@ -19,8 +23,12 @@ export interface IRegisterRequest {
 }
 
 export interface RegisterResponse {
-  token: string;
-  user: IUser;
+  status?: number;
+  data: {
+    token: string;
+    user: IUser;
+  };
+  message: string;
 }
 export interface DecodedToken {
   sub: string;

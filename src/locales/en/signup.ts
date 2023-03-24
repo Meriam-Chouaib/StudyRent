@@ -19,6 +19,11 @@ export const signup = {
   password_invalid_length: 'Password must be at least 6 characters',
   password_confirm: 'Confirm pasword',
 
+  // role
+  role_required: 'role is required',
+  role_label: 'Role',
+  role_student: 'Student',
+  role_owner: 'Owner',
   // link
   connect_with_txt: 'Or connect with',
   back_btn: 'Back to login',

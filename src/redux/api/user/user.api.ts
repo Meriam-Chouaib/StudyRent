@@ -1,6 +1,5 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryConfig } from '../../baseQueryConfig ';
-import { setUser } from '../features/userSlice';
 import { IUser } from './user.types';
 
 export const userApi = createApi({
@@ -20,7 +19,6 @@ export const userApi = createApi({
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          dispatch(setUser(data));
         } catch (error) {
           console.log(error);
         }

@@ -1,4 +1,4 @@
-import { userSlice } from './api/features/userSlice';
+import { userSlice } from './api/slices/userSlice';
 import { userApi } from './api/user/user.api';
 import authApi from './api/auth/auth.api';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
