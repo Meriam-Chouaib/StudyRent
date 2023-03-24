@@ -49,14 +49,25 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
-        const data = action.payload;
-        const { token, user } = data;
+        const response = action.payload;
+        const { data, message, status } = response;
 
-        state.user = user;
+        state.user = data.user;
         state.isLoggedIn = true;
-        // const hashedToken = keccak256(token);
-        state.token = token;
-        setToken(token);
+        const hashedToken = keccak256(data.token);
+        state.token = hashedToken;
+        setToken(hashedToken);
+      })
+      .addMatcher(authApi.endpoints.register.matchFulfilled, (state, action) => {
+        const response = action.payload;
+        const { data, message, status } = response;
+
+        console.log('user from data: ', data.user, 'token from data:', data.token);
+        state.user = data.user;
+        state.isLoggedIn = true;
+        const hashedToken = keccak256(data.token);
+        state.token = hashedToken;
+        setToken(hashedToken);
       })
       .addMatcher(authApi.endpoints.logout.matchPending, (state) => {
         state.user = null;

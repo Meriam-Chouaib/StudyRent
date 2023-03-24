@@ -1,9 +1,14 @@
-import { useState } from 'react';
-import { useRegisterMutation } from '../../../redux/api/auth/auth.api';
-// form
-import { useForm } from 'react-hook-form';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+// redux
+import { useRegisterMutation } from '../../../redux/api/auth/auth.api';
+
+// hookform
+import { useForm } from 'react-hook-form';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 
 // @mui
@@ -16,7 +21,7 @@ import { FormProvider, TextField } from '../../../components/hookform';
 import { PATHS } from '../../../config/paths';
 import { RegisterModel } from '../../../models/Register.model';
 import { RegisterSchema } from './ValidationSchema';
-import { IRegisterRequest } from '../../../redux/api/auth/auth.api.types';
+import { IRegisterRequest, RegisterResponse } from '../../../redux/api/auth/auth.api.types';
 import { SelectField } from '../../../components/selectField/SelectField';
 
 // ----------------------------------------------------------------------
@@ -28,6 +33,7 @@ export default function SignUpForm() {
   const [register] = useRegisterMutation();
 
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const methods = useForm({
     resolver: yupResolver(RegisterSchema),
@@ -44,12 +50,13 @@ export default function SignUpForm() {
   const onRegister = async ({ username, email, password, role, statut }: IRegisterRequest) => {
     const data = { email, username, password, role, statut };
     try {
-      console.log(data);
-
       await register(data)
         .unwrap()
         .then((res) => {
-          console.log(JSON.stringify(res));
+          console.log(res);
+          if (res.status === 200) {
+            navigate('/');
+          }
         })
         .catch((err) => {
           console.log(err);

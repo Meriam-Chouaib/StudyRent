@@ -3,7 +3,7 @@ import { useLoginMutation } from '../../../redux/api/auth/auth.api';
 // form
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 // @mui
@@ -26,7 +26,7 @@ export default function LoginForm() {
   const [login] = useLoginMutation();
 
   const { t } = useTranslation();
-
+  const navigate = useNavigate();
   const methods = useForm({
     resolver: yupResolver(LoginSchema),
     defaultValues,
@@ -46,6 +46,9 @@ export default function LoginForm() {
         .unwrap()
         .then((res) => {
           console.log(res);
+          //   if (res.status === 200) {
+          //     navigate('/');
+          //   }
         })
         .catch((err) => {
           console.log(err);
