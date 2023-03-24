@@ -46,9 +46,9 @@ export default function LoginForm() {
         .unwrap()
         .then((res) => {
           console.log(res);
-          //   if (res.status === 200) {
-          //     navigate('/');
-          //   }
+          if (res.status === 200) {
+            navigate('/');
+          }
         })
         .catch((err) => {
           console.log(err);
