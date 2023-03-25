@@ -5,6 +5,7 @@ export interface IUser {
   username?: string;
   statut?: string;
   role?: string;
+  isLogged?: boolean;
 }
 export interface userState {
   user: IUser | null;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -21,8 +21,9 @@ import { FormProvider, TextField } from '../../../components/hookform';
 import { PATHS } from '../../../config/paths';
 import { RegisterModel } from '../../../models/Register.model';
 import { RegisterSchema } from './ValidationSchema';
-import { IRegisterRequest, RegisterResponse } from '../../../redux/api/auth/auth.api.types';
+import { IRegisterRequest } from '../../../redux/api/auth/auth.api.types';
 import { SelectField } from '../../../components/selectField/SelectField';
+import { CONSTANTS } from '../../../config/constants';
 
 // ----------------------------------------------------------------------
 
@@ -53,15 +54,10 @@ export default function SignUpForm() {
       await register(data)
         .unwrap()
         .then((res) => {
-          console.log(res);
-          if (res.status === 200) {
-            navigate('/');
+          if (res.status === CONSTANTS.OK) {
+            navigate(PATHS.ROOT);
           }
-        })
-        .catch((err) => {
-          console.log(err);
         });
-
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error(error);

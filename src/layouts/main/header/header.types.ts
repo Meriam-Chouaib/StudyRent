@@ -1,4 +1,4 @@
 export type headerProps = {
-  isLogged: boolean;
+  isLogged?: boolean;
   username?: string;
 };
