@@ -15,13 +15,21 @@ import {
 // image
 import logo from '../../../assets/images/logo-bleu-roi.svg';
 // Mui
-import { Box, Container } from '@mui/material';
+import { Box, Button, Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+
 // translation
 import { useTranslation } from 'react-i18next';
+import { clearLocalStorage } from '../../../utils/localstorage/clearLoalStorage';
 
 export const Header = ({ isLogged, username }: headerProps) => {
   const { t } = useTranslation();
+
+  const handleSubmit = () => {
+    clearLocalStorage();
+    window.location.reload();
+  };
 
   return (
     <AppBarStyled position="static">
@@ -40,7 +48,12 @@ export const Header = ({ isLogged, username }: headerProps) => {
                 <LinkItem name={t('header.link_contact')} path={PATHS.CONTACT} />
               </BoxCenterStyled>
               {isLogged ? (
-                <Typography>{username}</Typography>
+                <>
+                  <Typography>{username}</Typography>
+                  <Button onClick={handleSubmit}>
+                    <ExitToAppIcon />
+                  </Button>
+                </>
               ) : (
                 <Box>
                   <StyledLink to={`${PATHS.AUTH.ROOT}/${PATHS.AUTH.SINGNIN}`}>

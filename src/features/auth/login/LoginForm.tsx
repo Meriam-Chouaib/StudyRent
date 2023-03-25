@@ -19,6 +19,7 @@ import { LoginModel } from '../../../models/Login.model';
 import { LoginSchema } from './ValidationSchema';
 import { ILoginRequest } from '../../../redux/api/auth/auth.api.types';
 import { CONSTANTS } from '../../../config/constants';
+import { persistData } from '../../../utils/localstorage/localStorage.utils';
 
 // ----------------------------------------------------------------------
 
@@ -48,6 +49,7 @@ export default function LoginForm() {
         .unwrap()
         .then((res) => {
           console.log(res);
+
           if (res.status === CONSTANTS.OK) {
             navigate(PATHS.ROOT);
           }
