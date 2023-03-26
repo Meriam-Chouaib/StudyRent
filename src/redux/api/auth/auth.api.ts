@@ -38,5 +38,5 @@ export const authApi = createApi({
   }),
 });
 // This hook returns an object with properties such as isLoading, isError, data, and error
-export const { useLoginMutation, useRegisterMutation } = authApi;
+export const { useLoginMutation, useRegisterMutation, useLogoutMutation } = authApi;
 export default authApi;

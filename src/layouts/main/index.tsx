@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import Footer from './footer/Footer';
 import { Header } from './header/Header';
 // mui
@@ -8,16 +7,15 @@ import { CustomImageBackHeader } from '../../components';
 // images
 import decoTopLeft from '../../assets/images/deco_top_left_rose.svg';
 import { Outlet } from 'react-router-dom';
-import { RootState } from '../../redux/store';
+import { getPersistData } from '../../utils/localstorage/localStorage.utils';
 export default function MainLayout() {
-  const userState = useSelector((state: RootState) => state.userState);
+  const user = getPersistData('user', true);
 
   return (
     <>
       <Box sx={{ position: 'relative' }}>
         <CustomImageBackHeader src={decoTopLeft} alt="" />
-        <Header isLogged={userState.isLoggedIn} username={userState.user?.username} />
-        here the rest of the content
+        <Header isLogged={user?.isLogged} username={user?.username} />
         <Outlet />
         <Footer />
       </Box>

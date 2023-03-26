@@ -22,3 +22,4 @@ export * from './ButtonWithIcon/ButtonWithIcon';
 export * from './LinkItem/Link.styles';
 export * from './LinkItem/LinkIcon';
 export * from './logo/logoFooter/LogoFooter';
+export * from './BoxCenter/BoxCenter.styles';

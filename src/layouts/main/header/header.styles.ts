@@ -3,14 +3,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import { COLORS } from '../../../config/colors';
 import theme from '../../../theme';
 
-export const BackLeftBack = styled('img')({
-  height: 100,
-  Width: 80,
-  [theme.breakpoints.down('sm')]: {
-    height: '8vh',
-  },
-});
-
 export const AppBarStyled = styled(AppBar)(() => ({
   backgroundColor: 'white',
   boxShadow: 'none',
@@ -23,21 +15,16 @@ export const StyledLink = styled(RouterLink)`
   color: ${COLORS.PRIMARY.DARK};
 `;
 
-export const CustomImageTop = styled('img')({
-  height: 100,
-  Width: 80,
-  [theme.breakpoints.down('sm')]: {
-    height: '8vh',
-  },
-});
-
+// Box
 export const BoxDrawer = styled(Box)({
   position: 'fixed',
-  top: '3%',
-  right: '0%',
+
   display: 'none',
+
   [theme.breakpoints.down('sm')]: {
     display: 'block',
+    top: '3%',
+    right: '0%',
   },
 });
 export const BoxDisplayWeb = styled(Box)({
@@ -45,4 +32,36 @@ export const BoxDisplayWeb = styled(Box)({
   [theme.breakpoints.down('sm')]: {
     display: 'none',
   },
+});
+export const IconUserStatus = styled(Box)({
+  position: 'absolute',
+  top: 0,
+  right: 0,
+  color: 'transparent',
+  backgroundColor: 'green',
+  height: '10px',
+  width: '9px',
+  border: '1px solid white',
+  borderRadius: '20px',
+});
+// imgs
+export const BackLeftBack = styled('img')({
+  height: 100,
+  Width: 80,
+  [theme.breakpoints.down('sm')]: {
+    height: '8vh',
+  },
+});
+export const CustomImageTop = styled('img')({
+  height: 100,
+  Width: 80,
+  [theme.breakpoints.down('sm')]: {
+    height: '8vh',
+  },
+});
+export const ImgProfile = styled('img')({
+  height: 33,
+  Width: '33px',
+  borderRadius: 27,
+  [theme.breakpoints.down('sm')]: {},
 });

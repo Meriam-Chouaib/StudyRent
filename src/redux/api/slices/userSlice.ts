@@ -2,6 +2,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { authApi } from '../auth/auth.api';
 import { IUser, userState } from '../user/user.types';
 import { keccak256 } from 'js-sha3';
+import { persistData } from '../../../utils/localstorage/localStorage.utils';
+import { clearLocalStorage } from '../../../utils/localstorage/clearLoalStorage';
 
 const initialState: userState = {
   user: null,
@@ -21,7 +23,9 @@ export const userSlice = createSlice({
       state.isLoading = false;
       state.error = null;
     },
-    logout: () => initialState,
+    logout: () => {
+      clearLocalStorage();
+    },
 
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
@@ -47,28 +51,31 @@ export const userSlice = createSlice({
         state.isLoggedIn = true;
         const hashedToken = keccak256(data.token);
         state.token = hashedToken;
+        persistData('user', data.user);
+        persistData('token', data.token);
       })
       .addMatcher(authApi.endpoints.register.matchFulfilled, (state, action) => {
         const response = action.payload;
         const { data } = response;
 
-        console.log('user from data: ', data.user, 'token from data:', data.token);
         state.user = data.user;
         state.isLoggedIn = true;
         const hashedToken = keccak256(data.token);
         state.token = hashedToken;
+        persistData('user', data.user);
+        persistData('token', data.token);
       })
       .addMatcher(authApi.endpoints.logout.matchPending, (state) => {
         state.user = null;
         state.isLoggedIn = false;
         state.token = '';
-        localStorage.removeItem('token');
+        clearLocalStorage();
       })
       .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
         state.user = null;
         state.isLoggedIn = false;
         state.token = '';
-        localStorage.removeItem('token');
+        clearLocalStorage();
       });
   },
 });
