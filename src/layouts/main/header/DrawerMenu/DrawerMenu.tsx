@@ -5,8 +5,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-import { LinkItem } from '../../../components';
-import { PATHS } from '../../../config/paths';
+import { LinkItem } from '../../../../components';
+import { PATHS } from '../../../../config/paths';
 import { useTranslation } from 'react-i18next';
 import { AppBar, DrawerHeader, ListStyled } from './DrawerMenu.styles';
 import { useState } from 'react';
