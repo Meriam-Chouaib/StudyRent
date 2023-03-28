@@ -38,10 +38,10 @@ export const IconUserStatus = styled(Box)({
   top: 0,
   right: 0,
   color: 'transparent',
-  backgroundColor: 'green',
+
   height: '10px',
   width: '9px',
-  border: '1px solid white',
+  border: '2px solid white',
   borderRadius: '20px',
 });
 // imgs
