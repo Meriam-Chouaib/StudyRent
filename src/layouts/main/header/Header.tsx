@@ -32,7 +32,7 @@ import { useTranslation } from 'react-i18next';
 import { clearLocalStorage } from '../../../utils/localstorage/clearLoalStorage';
 import { UserLogged } from './UserLoggedIn/UserLogged';
 
-export const Header = ({ isLogged, username }: headerProps) => {
+export const Header = ({ isLogged, username, status }: headerProps) => {
   const { t } = useTranslation();
 
   return (
@@ -55,7 +55,7 @@ export const Header = ({ isLogged, username }: headerProps) => {
           </BoxDisplayWeb>
           {isLogged ? (
             <>
-              <UserLogged img={imgProfile} username={username} />
+              <UserLogged img={imgProfile} username={username} status={status} />
             </>
           ) : (
             <Box>

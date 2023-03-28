@@ -5,7 +5,7 @@ import { IconUserStatus, ImgProfile } from '../header.styles';
 import { UserLoggedProps } from './UserLogged.types';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
-export const UserLogged = ({ username, img, isLogged }: UserLoggedProps) => {
+export const UserLogged = ({ username, img, status }: UserLoggedProps) => {
   const handleSubmit = () => {
     clearLocalStorage();
     window.location.reload();
@@ -18,7 +18,7 @@ export const UserLogged = ({ username, img, isLogged }: UserLoggedProps) => {
           {username}
         </Typography>
         <ImgProfile width={33} src={img} alt={'ProfileImg'} />
-        {isLogged ? (
+        {status == 'ONLINE' ? (
           <IconUserStatus sx={{ backgroundColor: 'green' }}></IconUserStatus>
         ) : (
           <IconUserStatus sx={{ backgroundColor: 'red' }}></IconUserStatus>

@@ -15,7 +15,7 @@ export default function MainLayout() {
     <>
       <Box sx={{ position: 'relative' }}>
         <CustomImageBackHeader src={decoTopLeft} alt="" />
-        <Header isLogged={user?.isLogged} username={user?.username} />
+        <Header isLogged={user?.isLogged} username={user?.username} status={user?.status} />
         <Outlet />
         <Footer />
       </Box>
