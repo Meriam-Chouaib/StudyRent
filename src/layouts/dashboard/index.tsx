@@ -17,7 +17,7 @@ export function DashboardLayout() {
           <SideBar items={ItemsOwner} />
         </Grid>
         <Grid item xs={10} p={2}>
-          <Box sx={{ justifyContent: 'end' }}>
+          <Box sx={{ justifyContent: 'end', display: 'flex' }}>
             <Header img={imgProfile} status={user?.status} username={user?.username} />
           </Box>
 
