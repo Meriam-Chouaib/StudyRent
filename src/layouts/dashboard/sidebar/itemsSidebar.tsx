@@ -1,7 +1,10 @@
 import { Home, Chat, Favorite } from '@material-ui/icons';
 import theme from '../../../theme';
 import { ItemSideBarProps } from '../../../components/ItemSideBar/ItemSideBar.types';
-const Items = () => {};
+import { useTranslation } from 'react-i18next';
+const Items = () => {
+  const { t } = useTranslation();
+};
 
 const ItemsOwner: ItemSideBarProps[] = [
   {

@@ -1,3 +1,4 @@
+import { sidebar } from './sidebar';
 import { header } from './header';
 import { signin } from './signin';
 import { signup } from './signup';
@@ -9,4 +10,5 @@ export const fr = {
   header: header,
   home: home,
   footer: footer,
+  sidebar: sidebar,
 };
