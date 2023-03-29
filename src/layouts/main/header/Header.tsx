@@ -9,6 +9,8 @@ import {
 import { headerProps } from './header.types';
 import { PATHS } from '../../../config/paths';
 import { DrawerPart } from './DrawerMenu/DrawerMenu';
+import imgProfile from '../../../assets/images/imgProfile.jpg';
+
 // components
 import {
   LogoHeader,
@@ -22,7 +24,6 @@ import {
 
 // image
 import logo from '../../../assets/images/logo-bleu-roi.svg';
-import imgProfile from '../../../assets/images/imgProfile.jpg';
 // Mui
 import { Box, Button, Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
