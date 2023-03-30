@@ -21,7 +21,7 @@ export const RegisterModel = {
     },
     confirm_password: {
       label: 'signup.password_confirm',
-      name: 'password',
+      name: 'confirm_password',
       requiredErrorMessage: 'signup.password_required',
       invaliErrorMessage: 'signup.username_invalid',
     },
