@@ -1,9 +1,9 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query';
 import { getToken } from '../utils/generate.token';
 
-const BASE_URL = process.env.REACT_APP_API_ENDPOINT;
+export const BASE_URL = process.env.REACT_APP_API_ENDPOINT;
 
-export const baseQueryConfig = fetchBaseQuery({
+export const baseQueryConfigAuth = fetchBaseQuery({
   baseUrl: `${BASE_URL}/auth`,
 
   prepareHeaders: (headers: Headers) => {
@@ -14,4 +14,7 @@ export const baseQueryConfig = fetchBaseQuery({
 
     return headers;
   },
+});
+export const baseQueryConfig = fetchBaseQuery({
+  baseUrl: `${BASE_URL}`,
 });

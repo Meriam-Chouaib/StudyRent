@@ -6,7 +6,7 @@ import { CardContent, CardMedia, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { InfoCard } from './InfoCard';
 import { useTranslation } from 'react-i18next';
-
+import { ReactComponent as Not_found_img } from '../../assets/images/empty_item.svg';
 export const CardPost = ({ title, price, city, img }: CardPostProps) => {
   const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
@@ -24,7 +24,12 @@ export const CardPost = ({ title, price, city, img }: CardPostProps) => {
         onMouseLeave={handleMouseLeave}
         sx={{ position: 'relative' }}
       >
-        <CardMedia sx={{ height: 140 }} image={img} title="green iguana" />
+        {img ? (
+          <CardMedia sx={{ height: 140 }} image={img} title="green iguana" />
+        ) : (
+          <Not_found_img height={140} />
+        )}
+
         <CardContent>
           <Typography gutterBottom variant="subtitle1" component="div">
             {title}

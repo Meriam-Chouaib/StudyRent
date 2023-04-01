@@ -1,13 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { PATHS } from '../../../config/paths';
-import { baseQueryConfig } from '../../baseQueryConfig ';
+import { baseQueryConfigAuth } from '../../baseQueryConfig ';
 import { ILoginRequest, IRegisterRequest, LoginResponse, RegisterResponse } from './auth.api.types';
 import { decodeLoginResponse, decodeRegisterResponse } from './decoders';
 
 // authApi contains all the endpoints we want to use in the authentication
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: baseQueryConfig,
+  baseQuery: baseQueryConfigAuth,
   tagTypes: ['AUTH'],
   // the mutation using for update,add and delete
   endpoints: (builder) => ({
