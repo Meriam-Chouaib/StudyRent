@@ -12,7 +12,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 // @mui
-import { IconButton, InputAdornment, Stack, Typography } from '@mui/material';
+import { Alert, IconButton, InputAdornment, Stack, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { CustomButton } from '../../../components';
@@ -30,6 +30,8 @@ import { CONSTANTS } from '../../../config/constants';
 export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [problem, setProblem] = useState('');
+
   const { fields, defaultValues } = RegisterModel;
   const [register] = useRegisterMutation();
 
@@ -57,6 +59,10 @@ export default function SignUpForm() {
           if (res.status === CONSTANTS.OK) {
             navigate(PATHS.ROOT);
           }
+        })
+        .catch((err) => {
+          console.log(err);
+          setProblem(err.data.message);
         });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -75,6 +81,8 @@ export default function SignUpForm() {
         alignItems={'center'}
         justifyContent={'space-between'}
       >
+        {problem && <Alert severity="error">{problem}</Alert>}
+
         <TextField name={fields.email.name} type={'text'} label={t(fields.email.label)} />
         <TextField name={fields.username.name} type={'text'} label={t(fields.username.label)} />
         <TextField
