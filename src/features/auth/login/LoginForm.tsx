@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 // @mui
-import { IconButton, InputAdornment, Stack, Typography } from '@mui/material';
+import { IconButton, InputAdornment, Stack, Typography, Alert } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
@@ -25,8 +25,9 @@ import { persistData } from '../../../utils/localstorage/localStorage.utils';
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [problem, setProblem] = useState('');
   const { fields, defaultValues } = LoginModel;
-  const [login] = useLoginMutation();
+  const [login, { error }] = useLoginMutation();
 
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ export default function LoginForm() {
 
   const onSubmit = async ({ email, password }: ILoginRequest) => {
     const data = { email, password };
+
     try {
       await login(data)
         .unwrap()
@@ -56,6 +58,8 @@ export default function LoginForm() {
         })
         .catch((err) => {
           console.log(err);
+          const msg = t('signin.bad_credentials');
+          setProblem(msg);
         });
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -75,6 +79,8 @@ export default function LoginForm() {
         alignItems={'center'}
         justifyContent={'space-between'}
       >
+        {problem && <Alert severity="error">{problem}</Alert>}
+
         <TextField name={fields.email.name} type={'text'} label={t(fields.email.label)} />
         <TextField
           type={!showPassword ? 'password' : 'text'}

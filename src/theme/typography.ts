@@ -9,7 +9,8 @@ export const typography: TypographyOptions = {
     fontWeight: 'bold',
     color: COLORS.PRIMARY.DARK,
     fontFamily: FONT,
-    marginBottom: '70px',
+    marginBottom: '2rem',
+    letterSpacing: '2px',
   },
   h2: {
     fontSize: '20px',

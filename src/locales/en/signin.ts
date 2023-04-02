@@ -19,4 +19,5 @@ export const signin = {
   // btns
   connect_btn: 'CONNECT',
   create_account_btn: 'CREATE AN ACCOUNT',
+  bad_credentials: 'Bad crendentials!',
 };

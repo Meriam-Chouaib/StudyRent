@@ -22,7 +22,7 @@ import { PATHS } from '../../../config/paths';
 export default function Footer() {
   const { t } = useTranslation();
   return (
-    <Box sx={{ backgroundColor: `${theme.palette.primary.main}` }}>
+    <Box sx={{ backgroundColor: `${theme.palette.primary.main}`, position: 'relative' }}>
       <Container>
         <BoxCenterStyled>
           <LogoFooter />
