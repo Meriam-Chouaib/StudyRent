@@ -12,6 +12,7 @@ import {
 
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import theme from '../../theme';
 import { SelectFieldProps } from './SelectField.type';
 export const SelectField = (props: SelectFieldProps & SelectProps & InputProps) => {
   const { id, label, name, options } = props;
@@ -24,14 +25,13 @@ export const SelectField = (props: SelectFieldProps & SelectProps & InputProps) 
       render={({ field, fieldState: { error } }) => (
         <Stack>
           <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel htmlFor={id}>{label}</InputLabel>
+            <InputLabel htmlFor={id} color={'primary'}>
+              {<span style={{ color: `${theme.palette.primary.dark}` }}>{label}</span>}
+            </InputLabel>
             <Select {...field} id={id} displayEmpty error={!!error}>
-              <MenuItem disabled value="">
-                {label}
-              </MenuItem>
               {options.map((option: any) => (
-                <MenuItem key={option} value={option}>
-                  {option}
+                <MenuItem key={option} value={option} color={'primary'}>
+                  {<span style={{ color: `${theme.palette.primary.dark}` }}>{option}</span>}
                 </MenuItem>
               ))}
             </Select>
