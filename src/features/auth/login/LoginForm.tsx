@@ -45,6 +45,7 @@ export default function LoginForm() {
 
   const onSubmit = async ({ email, password }: ILoginRequest) => {
     const data = { email, password };
+
     try {
       await login(data)
         .unwrap()
@@ -57,7 +58,8 @@ export default function LoginForm() {
         })
         .catch((err) => {
           console.log(err);
-          setProblem(err.data.message);
+          const msg = t('signin.bad_credentials');
+          setProblem(msg);
         });
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

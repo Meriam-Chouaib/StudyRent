@@ -34,7 +34,7 @@ export default function SignUpForm() {
 
   const { fields, defaultValues } = RegisterModel;
   const [register, { error }] = useRegisterMutation();
-
+  let msg: string;
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -62,6 +62,7 @@ export default function SignUpForm() {
         })
         .catch((err) => {
           console.log(err);
+
           setProblem(err.data.message);
         });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
