@@ -10,6 +10,7 @@ export const typography: TypographyOptions = {
     color: COLORS.PRIMARY.DARK,
     fontFamily: FONT,
     marginBottom: '2rem',
+    letterSpacing: '2px',
   },
   h2: {
     fontSize: '20px',

@@ -1,5 +1,5 @@
 export const signup = {
-  title: `S'authentifier`,
+  title: `S'inscrire`,
 
   // email
   email_label: 'Email',

@@ -16,14 +16,14 @@ export const RegisterModel = {
       label: 'signup.password_label',
       name: 'password',
       requiredErrorMessage: 'signup.password_required',
-      invaliErrorMessage: 'signup.username_invalid',
+      invaliErrorMessage: 'signup.password_invalid',
       password_invalid_length: 'signup.password_invalid_length',
     },
     confirm_password: {
       label: 'signup.password_confirm',
       name: 'confirm_password',
       requiredErrorMessage: 'signup.password_required',
-      invaliErrorMessage: 'signup.username_invalid',
+      invaliErrorMessage: 'signup.password_invalid',
     },
     role: {
       label: 'signup.role_label',

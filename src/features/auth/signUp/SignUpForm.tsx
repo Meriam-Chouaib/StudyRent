@@ -33,7 +33,7 @@ export default function SignUpForm() {
   const [problem, setProblem] = useState('');
 
   const { fields, defaultValues } = RegisterModel;
-  const [register] = useRegisterMutation();
+  const [register, { error }] = useRegisterMutation();
 
   const { t } = useTranslation();
   const navigate = useNavigate();
