@@ -12,9 +12,9 @@ import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArro
 import { useGetPostsQuery } from '../../../redux/api/post/post.api';
 import { PostsProps } from './Posts.types';
 import { Post } from '../../../redux/api/post/post.types';
+import { Typography } from '@mui/material';
 export const Posts = ({ page, rowsPerPage, filter }: PostsProps) => {
-  const { data, isLoading, isError } = useGetPostsQuery({ page, rowsPerPage, filter });
-  console.log(data);
+  const { data, isLoading, isError, error } = useGetPostsQuery({ page, rowsPerPage, filter });
 
   const { t } = useTranslation();
 

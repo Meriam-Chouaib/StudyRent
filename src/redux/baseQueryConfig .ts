@@ -1,8 +1,6 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query';
 import { getToken } from '../utils/generate.token';
-
-export const BASE_URL = process.env.REACT_APP_API_ENDPOINT;
-
+import { BASE_URL } from '../config/config';
 export const baseQueryConfigAuth = fetchBaseQuery({
   baseUrl: `${BASE_URL}/auth`,
 

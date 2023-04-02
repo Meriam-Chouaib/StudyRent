@@ -7,7 +7,7 @@ export function HomePage() {
     <>
       <Container>
         <GetStarted />
-        <Posts page={2} rowsPerPage={9} />
+        <Posts page={3} rowsPerPage={9} />
         <Contact />
       </Container>
     </>
