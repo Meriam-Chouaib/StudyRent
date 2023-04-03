@@ -6,8 +6,12 @@ export const ItemStyled = styled(Box)((bgColor) => ({
   justifyContent: 'space-between',
   display: 'flex',
   alignItems: 'center',
-  padding: '1rem 4px',
+
   '&:hover': {
     backgroundColor: `${theme.palette.warning.light}`,
+  },
+  [theme.breakpoints.down('sm')]: {
+    justifyContent: 'center',
+    padding: '0.5rem 0px',
   },
 }));

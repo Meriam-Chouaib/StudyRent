@@ -61,7 +61,10 @@ export const CustomImageTop = styled('img')({
 });
 export const ImgProfile = styled('img')({
   height: 33,
-  Width: '33px',
+  Width: '33 px',
   borderRadius: 27,
-  [theme.breakpoints.down('sm')]: {},
+  [theme.breakpoints.down('sm')]: {
+    height: 25,
+    Width: 'auto !important',
+  },
 });

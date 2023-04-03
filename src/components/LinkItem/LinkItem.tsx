@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Txt_link } from '../../layouts/dashboard/sidebar/SideBar.styles';
 import { StyledLink } from '../../layouts/main/header/header.styles';
 
 type LinkItemProps = {
@@ -9,7 +9,7 @@ type LinkItemProps = {
 export const LinkItem = ({ path, name }: LinkItemProps) => {
   return (
     <StyledLink to={path}>
-      <Typography variant="h3"> {name}</Typography>
+      <Txt_link> {name}</Txt_link>
     </StyledLink>
   );
 };
