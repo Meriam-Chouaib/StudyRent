@@ -3,6 +3,7 @@ import { useFormContext, Controller } from 'react-hook-form';
 // @mui
 import { StandardTextFieldProps, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import theme from '../../theme';
 // ----------------------------------------------------------------------
 
 interface TextFieldProps extends StandardTextFieldProps {
@@ -22,7 +23,7 @@ export default function RHFTextField({ name, label, ...other }: TextFieldProps) 
       render={({ field, fieldState: { error } }) => (
         <TextField
           variant="standard"
-          label={label}
+          label={<span style={{ color: `${theme.palette.primary.dark}` }}>{label}</span>}
           type={other.type}
           {...field}
           fullWidth

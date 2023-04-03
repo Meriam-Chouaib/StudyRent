@@ -14,8 +14,10 @@ export const signin = {
   password_invalid: 'Password invalid',
   password_invalid_length: 'Mot de pass minimum 6 caractéres',
 
-  password_required: 'Password required',
+  password_required: 'Password Mot de pass obligatoire',
   username_label: 'Nom d"utilisateur',
   username_required: 'Nom d"utilisateur est obligatoire',
   username_invalid: 'Nom d"utilisateur est invalide',
+
+  bad_credentials: 'Identifiants invalides!',
 };

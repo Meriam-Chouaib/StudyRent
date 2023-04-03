@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 // images
 import imageBottom from '../assets/images/Auth-motif-bas.svg';
@@ -10,10 +11,14 @@ import { CustomImageBottom } from '../components';
 export function AuthLayout() {
   return (
     <>
-      <LogoTopRight src={logoDark} alt="logo studyrent" />
-      <CustomImageTop src={imageTop} alt="" />
-      <Outlet />
-      <CustomImageBottom src={imageBottom} alt="" />
+      <Box position={'relative'} height={'100vh'}>
+        <Box>
+          <LogoTopRight src={logoDark} alt="logo studyrent" />
+          <CustomImageTop src={imageTop} alt="" />
+        </Box>
+        <Outlet />
+        <CustomImageBottom src={imageBottom} alt="" />
+      </Box>
     </>
   );
 }
