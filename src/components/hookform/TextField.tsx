@@ -23,7 +23,9 @@ export default function RHFTextField({ name, label, ...other }: TextFieldProps) 
       render={({ field, fieldState: { error } }) => (
         <TextField
           variant="standard"
-          label={<span style={{ color: `${theme.palette.primary.dark}` }}>{label}</span>}
+          label={
+            <span style={{ color: `${theme.palette.primary.dark}`, fontWeight: 600 }}>{label}</span>
+          }
           type={other.type}
           {...field}
           fullWidth

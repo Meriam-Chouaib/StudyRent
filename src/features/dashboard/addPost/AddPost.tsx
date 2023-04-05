@@ -60,6 +60,7 @@ export const AddPost = () => {
 
         <TextField name={fields.price.name} type={'text'} label={t(fields.price.label)} />
         <TextField name={fields.surface.name} type={'text'} label={t(fields.surface.label)} />
+        <ImageInput onSelectImages={handleSelectImages} />
 
         <Box sx={{ display: 'flex' }}>
           <SelectField
@@ -78,15 +79,12 @@ export const AddPost = () => {
             options={[0, 1, 2, 3, 4]}
           />
         </Box>
-        <Box sx={{ display: 'block' }}>
-          <ImageInput onSelectImages={handleSelectImages} />
-          <ImageInput onSelectImages={handleSelectImages} />
-        </Box>
+
         <Box sx={{ display: 'flex' }}>
           <TextField
-            name={fields.code_postal.name}
+            name={fields.postal_code.name}
             type={'text'}
-            label={t(fields.code_postal.label)}
+            label={t(fields.postal_code.label)}
           />
 
           <SelectField
@@ -95,7 +93,7 @@ export const AddPost = () => {
             label={t(fields.city.label)}
             placeholder={t(fields.city.label)}
             name={fields.city.name}
-            options={['0', '1', '2', '3', '4']}
+            options={['Monastir', 'Sousse', 'Zaghouan', 'Mahdia', 'Hammemet']}
           />
           <SelectField
             variant="standard"
@@ -103,7 +101,7 @@ export const AddPost = () => {
             label={t(fields.state.label)}
             placeholder={t(fields.state.label)}
             name={fields.state.name}
-            options={[0, 1, 2, 3, 4]}
+            options={['Monastir', 'Sousse', 'Zaghouan', 'Mahdia', 'Hammemet']}
           />
         </Box>
         <CustomButton isLoading={isSubmitting}>{t('postForm.add_post')}</CustomButton>

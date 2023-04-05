@@ -5,3 +5,6 @@ export function decodPosts(result: Result): Post[] {
 
   return result.data;
 }
+export function decodAddPost(response: Post): Post {
+  return { ...response };
+}

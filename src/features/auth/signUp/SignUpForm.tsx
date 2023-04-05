@@ -62,8 +62,12 @@ export default function SignUpForm() {
         })
         .catch((err) => {
           console.log(err);
-
-          setProblem(err.data.message);
+          if (err.data) {
+            setProblem(err.data.message);
+          }
+          if (err.data.data) {
+            setProblem(err.data.data[0].message);
+          }
         });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {

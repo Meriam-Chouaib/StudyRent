@@ -57,9 +57,9 @@ export const PostModel = {
       name: 'nb_rooms',
       requiredErrorMessage: 'postForm.number_rooms_required',
     },
-    code_postal: {
+    postal_code: {
       label: 'postForm.code_post_label',
-      name: 'code_postal',
+      name: 'postal_code',
       requiredErrorMessage: 'postForm.code_post_required',
       invaliErrorMessage: 'postForm.code_post_invalid',
     },

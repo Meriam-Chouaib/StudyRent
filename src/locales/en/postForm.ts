@@ -50,13 +50,13 @@ export const postForm = {
   code_post_required: 'postal code is required',
   code_post_invalid: 'postal code is invalid',
 
-  state_label: 'City',
-  state_required: 'City is required',
-  state_invalid: 'City is invalid',
+  state_label: 'State',
+  state_required: 'State is required',
+  state_invalid: 'State is invalid',
 
-  city_label: 'Ville',
-  city_required: 'Ville est obligatoire',
-  city_invalid: 'Ville est invalide',
+  city_label: 'City',
+  city_required: 'City is required',
+  city_invalid: 'City is invalid',
 
   add_post: 'Add post',
 };

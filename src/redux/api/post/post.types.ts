@@ -18,6 +18,19 @@ export interface Post {
   state: string;
   country: string;
   isLocated: boolean;
+  postal_code: number;
+}
+export interface IPostRequest {
+  title: string;
+  description: string;
+  price: number;
+  surface: number;
+  nbRoommate: number;
+  nbRooms: number;
+  postal_code: number;
+  city: string;
+  state: string;
+  files: Files[];
 }
 export interface Files {
   id: number;
