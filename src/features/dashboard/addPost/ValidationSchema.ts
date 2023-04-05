@@ -30,5 +30,5 @@ export const PostSchema = Yup.object().shape({
   [nb_roommate.name]: Yup.number().required(nb_roommate.requiredErrorMessage),
   [nb_rooms.name]: Yup.number().required(nb_rooms.requiredErrorMessage),
   [colocation.name]: Yup.number().required(colocation.requiredErrorMessage),
-  [files.name]: Yup.string().required(files.requiredErrorMessage),
+  [files.name]: Yup.mixed().optional(),
 });

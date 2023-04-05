@@ -7,11 +7,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 // @mui
 import { Stack, Alert, Box } from '@mui/material';
-
 import { CustomButton } from '../../../components';
 // components
 import { FormProvider, TextField } from '../../../components/hookform';
-
 import { PostModel } from '../../../models/Post.model';
 import { PostSchema } from './ValidationSchema';
 
@@ -19,13 +17,14 @@ import { SelectField } from '../../../components/selectField/SelectField';
 import ImageInput from '../../../components/hookform/InputFile';
 import { Files, IPostRequest } from '../../../redux/api/post/post.types';
 import { useAddPostMutation } from '../../../redux/api/post/post.api';
+import { getPersistData } from '../../../utils';
 
 // ----------------------------------------------------------------------
 
 export const AddPost = () => {
   const [problem, setProblem] = useState('');
   const [selectedImages, setSelectedImages] = useState<Files[]>([]);
-
+  const user = getPersistData('user', true);
   const { fields, defaultValues } = PostModel;
   const [addPost] = useAddPostMutation();
   const { t } = useTranslation();
@@ -64,6 +63,7 @@ export const AddPost = () => {
       postal_code,
       city,
       state,
+      posterId: user.id,
     };
     try {
       console.log('data', data);

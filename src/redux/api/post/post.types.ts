@@ -1,4 +1,3 @@
-import { number } from 'yup';
 import { IUser } from '../user/user.types';
 
 export interface Post {
@@ -32,6 +31,7 @@ export interface IPostRequest {
   city: string;
   state: string;
   files?: Files[];
+  posterId: number;
 }
 export interface PostResponse {
   post: Post;

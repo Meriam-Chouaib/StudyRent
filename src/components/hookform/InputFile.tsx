@@ -30,7 +30,12 @@ export default function ImageInput(props: ImageInputProps) {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <Input type="file" inputProps={{ multiple: true }} onChange={handleSelectImages} />
+      <Input
+        type="file"
+        inputProps={{ multiple: true }}
+        onChange={handleSelectImages}
+        error={true}
+      />
       {selectedImages.length > 0 && (
         <Grid container spacing={2} sx={{ mt: 2 }}>
           {selectedImages.map((image) => (

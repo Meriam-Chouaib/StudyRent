@@ -26,7 +26,7 @@ export const postApi = createApi({
     }),
     addPost: builder.mutation<PostResponse, IPostRequest>({
       query: (PostRequest) => ({
-        url: PATHS.DASHBOARD.POST.ADD,
+        url: 'posts/create',
         method: 'POST',
         body: PostRequest,
       }),

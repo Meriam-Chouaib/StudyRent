@@ -75,6 +75,9 @@ export const PostModel = {
       requiredErrorMessage: 'postForm.city_required',
       invaliErrorMessage: 'postForm.city_invalid',
     },
+    posterId: {
+      name: 'posterId',
+    },
   },
   defaultValues: {
     title: '',
@@ -88,5 +91,6 @@ export const PostModel = {
     postal_code: 0,
     city: '',
     state: '',
+    posterId: 0,
   },
 };
