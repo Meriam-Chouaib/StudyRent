@@ -13,7 +13,7 @@ import { useGetPostsQuery } from '../../../redux/api/post/post.api';
 import { PostsProps } from './Posts.types';
 import { Post } from '../../../redux/api/post/post.types';
 import { Typography } from '@mui/material';
-export const Posts = ({ page, rowsPerPage, filter }: PostsProps) => {
+export const Posts = ({ page, rowsPerPage, filter, color }: PostsProps) => {
   const { data, isLoading, isError, error } = useGetPostsQuery({ page, rowsPerPage, filter });
 
   const { t } = useTranslation();
@@ -23,7 +23,7 @@ export const Posts = ({ page, rowsPerPage, filter }: PostsProps) => {
       {isLoading ? (
         <ClipLoader color="#ffffff" size={20} />
       ) : (
-        <CustomBoxPosts>
+        <CustomBoxPosts bgcolor={color}>
           <BoxPosts>
             {data?.map((post: Post) => (
               <CardPost
