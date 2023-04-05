@@ -15,11 +15,11 @@ export const PATHS = {
     ROOT: 'dashboard',
     STUDENT: {
       LIST: 'students',
-      ADD: 'students/new',
+      ADD: 'students/create',
     },
     POST: {
       LIST: 'posts',
-      ADD: 'posts/new',
+      ADD: 'posts/create',
     },
   },
   MAIN: {
