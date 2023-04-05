@@ -8,7 +8,16 @@ import { PATHS } from '../config/paths';
 
 import { AuthLayout, DashboardLayout } from '../layouts';
 
-import { NotFound, HomePage, Page500, Dashboard, SigninPage, SignupPage } from '../pages';
+import {
+  NotFound,
+  HomePage,
+  Page500,
+  Dashboard,
+  SigninPage,
+  SignupPage,
+  AddPostPage,
+} from '../pages';
+import { ListPostsPage } from '../pages/dashboard/listPostsPage/ListPostsPage';
 export default function Router() {
   return useRoutes([
     {
@@ -42,7 +51,11 @@ export default function Router() {
           <DashboardLayout />
         </AuthGuard>
       ),
-      children: [{ path: PATHS.ALL, element: <Dashboard /> }],
+      children: [
+        { path: PATHS.ALL, element: <Dashboard /> },
+        { path: PATHS.DASHBOARD.POST.ADD, element: <AddPostPage /> },
+        { path: PATHS.DASHBOARD.POST.LIST, element: <ListPostsPage /> },
+      ],
     },
 
     // Main Routes

@@ -4,3 +4,4 @@ export * from './page500/Page500';
 export * from './signinPage/SigninPage';
 export * from './signupPage/SignupPage';
 export * from './dashboard/Dashboard';
+export * from './dashboard/addPostPage/AddPostPage';

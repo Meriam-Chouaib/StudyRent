@@ -1,3 +1,4 @@
+import { postForm } from './postForm';
 import { sidebar } from './sidebar';
 import { header } from './header';
 import { signin } from './signin';
@@ -11,4 +12,5 @@ export const fr = {
   home: home,
   footer: footer,
   sidebar: sidebar,
+  postForm: postForm,
 };

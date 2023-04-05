@@ -9,15 +9,34 @@ export interface Post {
   likes: number;
   poster: IUser;
   files: Files[];
-  nbRooms: number;
+  nb_rooms: number;
   surface: number;
   price: number;
-  nbRoommate: number;
+  nb_roommate: number;
   region: string;
   city: string;
   state: string;
   country: string;
   isLocated: boolean;
+  postal_code: number;
+}
+export interface IPostRequest {
+  title: string;
+  description: string;
+  price: number;
+  surface: number;
+  nb_roommate: number;
+  nb_rooms: number;
+  postal_code: number;
+  city: string;
+  state: string;
+  files?: Files[];
+  posterId: number;
+}
+export interface PostResponse {
+  post: Post;
+  status?: number;
+  message?: string;
 }
 export interface Files {
   id: number;
@@ -31,4 +50,9 @@ export interface params {
 }
 export interface Result {
   data: Post[];
+}
+export interface PostState {
+  post: Post | null;
+  isLoading: boolean;
+  error?: string | null;
 }

@@ -12,7 +12,7 @@ export const BoxItemsSidebar = styled(Box)(() => ({
 }));
 export const BoxSidebar = styled(Box)(() => ({
   position: 'relative',
-  height: '89vh',
+  height: '100%',
   backgroundColor: `${theme.palette.warning.main}`,
   width: '11rem',
   [theme.breakpoints.down('sm')]: {

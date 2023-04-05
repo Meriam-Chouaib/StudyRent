@@ -1,13 +1,13 @@
 import { baseQueryConfig } from './../../baseQueryConfig ';
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { Post, params, Result } from './post.types';
+import { Post, params, Result, IPostRequest, PostResponse } from './post.types';
 import { PATHS } from '../../../config/paths';
 import { Filter } from '../../../features/home/posts/Posts.types';
-import { decodPosts } from './decoder';
+import { decodAddPost, decodPosts } from './decoder';
 export const postApi = createApi({
   reducerPath: 'posts',
   baseQuery: baseQueryConfig,
-  tagTypes: ['Post'],
+  tagTypes: ['POSTS'],
   endpoints: (builder) => ({
     getPosts: builder.query<
       Post[],
@@ -24,6 +24,15 @@ export const postApi = createApi({
         return decodPosts(result);
       },
     }),
+    addPost: builder.mutation<PostResponse, IPostRequest>({
+      query: (PostRequest) => ({
+        url: PATHS.DASHBOARD.POST.ADD,
+        method: 'POST',
+        body: PostRequest,
+      }),
+      invalidatesTags: ['POSTS'],
+      transformResponse: (response: PostResponse) => decodAddPost(response),
+    }),
   }),
 });
-export const { useGetPostsQuery } = postApi;
+export const { useGetPostsQuery, useAddPostMutation } = postApi;
