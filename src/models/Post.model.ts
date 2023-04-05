@@ -24,7 +24,7 @@ export const PostModel = {
       name: 'colocation',
       requiredErrorMessage: 'postForm.colocation_required',
     },
-    images: {
+    files: {
       label: 'postForm.images_rooms_label',
       name: 'images',
       requiredErrorMessage: 'postForm.images_rooms_required',
@@ -82,8 +82,11 @@ export const PostModel = {
     price: 0,
     colocation: 0,
     surface: 0,
-    images: [],
-    videos: [],
-    address: '',
+    files: [],
+    nb_roommate: 0,
+    nb_rooms: 0,
+    postal_code: 0,
+    city: '',
+    state: '',
   },
 };

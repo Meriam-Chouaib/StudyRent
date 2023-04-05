@@ -6,23 +6,20 @@ const {
   description,
   price,
   surface,
-
   city,
   state,
   postal_code,
   nb_roommate,
   nb_rooms,
   colocation,
-  images,
+  files,
 } = fields;
 
 export const PostSchema = Yup.object().shape({
   [surface.name]: Yup.number()
     .min(70, surface.invaliErrorMessage)
     .required(surface.requiredErrorMessage),
-  [city.name]: Yup.string()
-    .oneOf(['Monastir', 'Sousse', 'Zaghouan', 'Mahdia', 'Hammemet'], city.requiredErrorMessage)
-    .required(city.requiredErrorMessage),
+  [city.name]: Yup.string().required(city.requiredErrorMessage),
   [state.name]: Yup.string().min(3, city.invaliErrorMessage).required(city.requiredErrorMessage),
   [title.name]: Yup.string().required(title.requiredErrorMessage).min(6, title.invaliErrorMessage),
   [description.name]: Yup.string()
@@ -33,5 +30,5 @@ export const PostSchema = Yup.object().shape({
   [nb_roommate.name]: Yup.number().required(nb_roommate.requiredErrorMessage),
   [nb_rooms.name]: Yup.number().required(nb_rooms.requiredErrorMessage),
   [colocation.name]: Yup.number().required(colocation.requiredErrorMessage),
-  [images.name]: Yup.string().required(images.requiredErrorMessage),
+  [files.name]: Yup.string().required(files.requiredErrorMessage),
 });

@@ -1,3 +1,4 @@
+import { number } from 'yup';
 import { IUser } from '../user/user.types';
 
 export interface Post {
@@ -9,10 +10,10 @@ export interface Post {
   likes: number;
   poster: IUser;
   files: Files[];
-  nbRooms: number;
+  nb_rooms: number;
   surface: number;
   price: number;
-  nbRoommate: number;
+  nb_roommate: number;
   region: string;
   city: string;
   state: string;
@@ -25,12 +26,17 @@ export interface IPostRequest {
   description: string;
   price: number;
   surface: number;
-  nbRoommate: number;
-  nbRooms: number;
+  nb_roommate: number;
+  nb_rooms: number;
   postal_code: number;
   city: string;
   state: string;
-  files: Files[];
+  files?: Files[];
+}
+export interface PostResponse {
+  post: Post;
+  status?: number;
+  message?: string;
 }
 export interface Files {
   id: number;
@@ -44,4 +50,9 @@ export interface params {
 }
 export interface Result {
   data: Post[];
+}
+export interface PostState {
+  post: Post | null;
+  isLoading: boolean;
+  error?: string | null;
 }

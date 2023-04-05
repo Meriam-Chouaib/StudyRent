@@ -4,21 +4,23 @@ import { Image } from './InputFile.styles';
 interface ImageInputProps {
   onSelectImages: (images: File[]) => void;
 }
-
+interface IFile {
+  filename: string;
+}
 export default function ImageInput(props: ImageInputProps) {
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
-
+  const [files, setFiles] = useState<IFile[]>([]);
   const handleSelectImages = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      // const images: File[] = images.push(Array.from(event.target.files));
-      const img = Array.from(event.target.files)[0];
+      files.push({ filename: Array.from(event.target.files)[0]?.name });
+      if (files) console.log(files);
 
-      selectedImages.push(img);
       setSelectedImages(selectedImages);
-      console.log(selectedImages);
       event.target.value = '';
+      return { files: files };
     } else {
-      setSelectedImages([]);
+      // setSelectedImages([]);
+      setFiles([]);
     }
   };
 

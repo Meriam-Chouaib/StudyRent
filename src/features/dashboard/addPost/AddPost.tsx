@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 // form
 import { useForm } from 'react-hook-form';
@@ -7,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { Stack, Alert, Box } from '@mui/material';
 
-import { BoxCenterSpaceBetween, CustomButton } from '../../../components';
+import { CustomButton } from '../../../components';
 // components
 import { FormProvider, TextField } from '../../../components/hookform';
 
@@ -16,17 +17,18 @@ import { PostSchema } from './ValidationSchema';
 
 import { SelectField } from '../../../components/selectField/SelectField';
 import ImageInput from '../../../components/hookform/InputFile';
+import { Files, IPostRequest } from '../../../redux/api/post/post.types';
+import { useAddPostMutation } from '../../../redux/api/post/post.api';
 
 // ----------------------------------------------------------------------
 
 export const AddPost = () => {
   const [problem, setProblem] = useState('');
-  const [selectedImages, setSelectedImages] = useState<File[]>([]);
+  const [selectedImages, setSelectedImages] = useState<Files[]>([]);
 
   const { fields, defaultValues } = PostModel;
-
+  const [addPost] = useAddPostMutation();
   const { t } = useTranslation();
-
   const methods = useForm({
     resolver: yupResolver(PostSchema),
     defaultValues,
@@ -38,11 +40,61 @@ export const AddPost = () => {
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
-  const handleSelectImages = (images: File[]) => {
-    setSelectedImages(images);
+
+  const onSubmit = async ({
+    title,
+    description,
+    price,
+    surface,
+    files,
+    nb_roommate,
+    nb_rooms,
+    postal_code,
+    city,
+    state,
+  }: IPostRequest) => {
+    const data = {
+      title,
+      description,
+      price,
+      surface,
+      files,
+      nb_roommate,
+      nb_rooms,
+      postal_code,
+      city,
+      state,
+    };
+    try {
+      console.log('data', data);
+      await addPost(data)
+        .unwrap()
+        .then((res) => {
+          console.log('data', data);
+          console.log('res', res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error: any) {
+      console.log(error);
+      console.error(error);
+      reset();
+      setError('title', { ...error, message: error.message });
+      setError('description', { ...error, message: error.message });
+      setError('price', { ...error, message: error.message });
+      setError('surface', { ...error, message: error.message });
+      setError('files', { ...error, message: error.message });
+      setError('nb_rooms', { ...error, message: error.message });
+      setError('postal_code', { ...error, message: error.message });
+      setError('city', { ...error, message: error.message });
+      setError('description', { ...error, message: error.message });
+    }
+
+    if (files) setSelectedImages(files);
   };
 
-  const onSubmit = async () => {
+  const handleSelectImages = async () => {
     console.log(selectedImages);
   };
 

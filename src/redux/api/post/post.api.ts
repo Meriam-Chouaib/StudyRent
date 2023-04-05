@@ -1,6 +1,6 @@
 import { baseQueryConfig } from './../../baseQueryConfig ';
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { Post, params, Result, IPostRequest } from './post.types';
+import { Post, params, Result, IPostRequest, PostResponse } from './post.types';
 import { PATHS } from '../../../config/paths';
 import { Filter } from '../../../features/home/posts/Posts.types';
 import { decodAddPost, decodPosts } from './decoder';
@@ -24,15 +24,15 @@ export const postApi = createApi({
         return decodPosts(result);
       },
     }),
-    addPost: builder.mutation<Post, IPostRequest>({
+    addPost: builder.mutation<PostResponse, IPostRequest>({
       query: (PostRequest) => ({
         url: PATHS.DASHBOARD.POST.ADD,
         method: 'POST',
         body: PostRequest,
       }),
       invalidatesTags: ['POSTS'],
-      transformResponse: (response: Post) => decodAddPost(response),
+      transformResponse: (response: PostResponse) => decodAddPost(response),
     }),
   }),
 });
-export const { useGetPostsQuery } = postApi;
+export const { useGetPostsQuery, useAddPostMutation } = postApi;
