@@ -13,8 +13,18 @@ import { useGetPostsQuery } from '../../../redux/api/post/post.api';
 import { PostsProps } from './Posts.types';
 import { Post } from '../../../redux/api/post/post.types';
 import { Typography } from '@mui/material';
-export const Posts = ({ page, rowsPerPage, filter, color }: PostsProps) => {
+import { getPersistData } from '../../../utils';
+export const Posts = ({
+  page,
+  rowsPerPage,
+  filter,
+  color,
+  padding,
+  margin,
+  withButton,
+}: PostsProps) => {
   const { data, isLoading, isError, error } = useGetPostsQuery({ page, rowsPerPage, filter });
+  const user = getPersistData('user', true);
 
   const { t } = useTranslation();
 
@@ -23,7 +33,7 @@ export const Posts = ({ page, rowsPerPage, filter, color }: PostsProps) => {
       {isLoading ? (
         <ClipLoader color="#ffffff" size={20} />
       ) : (
-        <CustomBoxPosts bgcolor={color}>
+        <CustomBoxPosts bgcolor={color} margin={margin} padding={padding}>
           <BoxPosts>
             {data?.map((post: Post) => (
               <CardPost
@@ -31,14 +41,18 @@ export const Posts = ({ page, rowsPerPage, filter, color }: PostsProps) => {
                 img={post.files[0]?.filename || ''}
                 city={post.city}
                 price={post.price}
+                isPoster={post.posterId == user.id ? true : false}
+                // isPoster={post.posterId == user.id }
                 key={post.id}
               />
             ))}
           </BoxPosts>
-          <ButtonWithIcon
-            icon={<KeyboardDoubleArrowRightIcon />}
-            txt={t('home.posts_btn') as string}
-          />
+          {withButton && (
+            <ButtonWithIcon
+              icon={<KeyboardDoubleArrowRightIcon />}
+              txt={t('home.posts_btn') as string}
+            />
+          )}
         </CustomBoxPosts>
       )}
     </>

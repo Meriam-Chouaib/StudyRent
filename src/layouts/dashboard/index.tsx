@@ -13,10 +13,10 @@ export function DashboardLayout() {
   return (
     <>
       <Grid container sx={{ position: 'relative' }}>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <SideBar items={ItemsOwner} />
         </Grid>
-        <Grid item xs={9} p={2}>
+        <Grid item xs={10} p={2}>
           <Box sx={{ justifyContent: 'end', display: 'flex' }}>
             <Header img={imgProfile} status={user?.status} username={user?.username} />
           </Box>

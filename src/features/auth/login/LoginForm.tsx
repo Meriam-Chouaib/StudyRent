@@ -20,6 +20,7 @@ import { LoginSchema } from './ValidationSchema';
 import { ILoginRequest } from '../../../redux/api/auth/auth.api.types';
 import { CONSTANTS } from '../../../config/constants';
 import { persistData } from '../../../utils/localstorage/localStorage.utils';
+import theme from '../../../theme';
 
 // ----------------------------------------------------------------------
 
@@ -101,7 +102,13 @@ export default function LoginForm() {
           }}
         />
 
-        <CustomButton isLoading={isSubmitting}>{t('signin.connect_btn')}</CustomButton>
+        <CustomButton
+          isLoading={isSubmitting}
+          colorBack={theme.palette.primary.dark}
+          colorText={theme.palette.warning.dark}
+        >
+          {t('signin.connect_btn')}
+        </CustomButton>
 
         <Link to={`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.SIGNUP}`}>
           <Typography variant="h6">{t('signin.create_account_btn')}</Typography>

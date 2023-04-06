@@ -39,8 +39,8 @@ export const IconUserStatus = styled(Box)({
   right: 0,
   color: 'transparent',
 
-  height: '10px',
-  width: '9px',
+  height: '11px',
+  width: '11px',
   border: '2px solid white',
   borderRadius: '20px',
 });

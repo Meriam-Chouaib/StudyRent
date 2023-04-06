@@ -3,7 +3,9 @@ import { COLORS } from '../../config/colors';
 
 export const CardPostStyled = styled(Card)(() => ({
   borderRadius: '0px 0px 5rem 0px',
-  boxShadow: `1px 1px 3px 1px ${COLORS.GREY[600]}`,
+
+  boxShadow: `1px 1px 8px -2px ${COLORS.GREY[800]}`,
+
   width: '18rem',
 }));
 export const BoxHoverEye = styled(Box)(() => ({

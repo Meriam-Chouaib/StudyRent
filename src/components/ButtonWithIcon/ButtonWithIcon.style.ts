@@ -16,6 +16,7 @@ export const ButtonIconStyled = styled(Button)(() => ({
   display: 'flex',
   width: 'fit-content',
   margin: '38px 0px 0px 0',
+  boxShadow: `1px 1px 8px -2.5px ${theme.palette.grey[700]}`,
   '&:hover': {
     backgroundColor: theme.palette.warning.light,
   },

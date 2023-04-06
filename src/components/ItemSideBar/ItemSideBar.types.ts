@@ -6,4 +6,5 @@ export interface ItemSideBarProps {
   bgColor?: string;
   isActive?: boolean;
   path: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
