@@ -9,18 +9,17 @@ interface IFile {
 }
 export default function ImageInput(props: ImageInputProps) {
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
-  const [files, setFiles] = useState<IFile[]>([]);
+  // const [files, setFiles] = useState<IFile[]>([]);
   const handleSelectImages = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      files.push({ filename: Array.from(event.target.files)[0]?.name });
-      if (files) console.log(files);
+      console.log(event.target.files);
 
-      setSelectedImages(selectedImages);
-      event.target.value = '';
-      return { files: files };
-    } else {
-      // setSelectedImages([]);
-      setFiles([]);
+      //   files.push({ filename: Array.from(event.target.files)[0]?.name });
+      //   if (files) console.log(files);
+
+      //   setSelectedImages(selectedImages);
+      //   event.target.value = '';
+      //   return { files: files };
     }
   };
 

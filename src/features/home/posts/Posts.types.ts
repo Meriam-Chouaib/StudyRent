@@ -6,6 +6,7 @@ export interface PostsProps {
   padding?: string;
   margin?: string;
   withButton?: boolean;
+  withPagination?: boolean;
 }
 export interface Filter {
   arg: string;

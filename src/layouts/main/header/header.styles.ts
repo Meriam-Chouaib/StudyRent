@@ -1,6 +1,6 @@
+import { COLORS } from './../../../config/colors';
 import { AppBar, Box, styled } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { COLORS } from '../../../config/colors';
 import theme from '../../../theme';
 
 export const AppBarStyled = styled(AppBar)(() => ({
@@ -12,7 +12,7 @@ export const StyledLink = styled(RouterLink)`
   padding-inline: 9px;
   width: max-content;
   font-weight: 500;
-  color: ${COLORS.PRIMARY.DARK};
+  color: ${(props) => props.color};
 `;
 
 // Box

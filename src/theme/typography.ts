@@ -20,7 +20,7 @@ export const typography: TypographyOptions = {
   h3: {
     fontSize: '18px',
     fontWeight: '600',
-    color: COLORS.PRIMARY.DARK,
+    // color: COLORS.PRIMARY.DARK,
     fontFamily: FONT,
   },
   h4: { fontFamily: FONT, fontSize: '35px', letterSpacing: '2px' },

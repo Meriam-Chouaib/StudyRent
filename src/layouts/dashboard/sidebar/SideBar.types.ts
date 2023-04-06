@@ -2,4 +2,5 @@ import { ItemSideBarProps } from '../../../components/ItemSideBar/ItemSideBar.ty
 
 export interface SideBarProps {
   items: ItemSideBarProps[];
+  activePath: string;
 }

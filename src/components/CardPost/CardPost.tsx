@@ -19,6 +19,7 @@ export const CardPost = ({ title, price, city, img, isPoster }: CardPostProps) =
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
+  console.log(isPoster);
   return (
     <>
       <CardPostStyled

@@ -66,7 +66,9 @@ export const AddPost = () => {
       posterId: user.id,
     };
     try {
-      console.log('data', data);
+      // console.log('data', data);
+      // const data = new FormData();
+      // data.append("files",)
       await addPost(data)
         .unwrap()
         .then((res) => {

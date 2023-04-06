@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ClipLoader } from 'react-spinners';
 import { CustomBoxPosts } from './Posts.styles';
 // components
-import { BoxPosts } from '../../../components';
+import { BoxCenter, BoxPosts } from '../../../components';
 import { CardPost } from '../../../components';
 import { ButtonWithIcon } from '../../../components';
 // mui
@@ -12,7 +12,7 @@ import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArro
 import { useGetPostsQuery } from '../../../redux/api/post/post.api';
 import { PostsProps } from './Posts.types';
 import { Post } from '../../../redux/api/post/post.types';
-import { Typography } from '@mui/material';
+import { Pagination, Typography } from '@mui/material';
 import { getPersistData } from '../../../utils';
 export const Posts = ({
   page,
@@ -22,6 +22,7 @@ export const Posts = ({
   padding,
   margin,
   withButton,
+  withPagination,
 }: PostsProps) => {
   const { data, isLoading, isError, error } = useGetPostsQuery({ page, rowsPerPage, filter });
   const user = getPersistData('user', true);
@@ -52,6 +53,12 @@ export const Posts = ({
               icon={<KeyboardDoubleArrowRightIcon />}
               txt={t('home.posts_btn') as string}
             />
+          )}
+
+          {withPagination && (
+            <BoxCenter paddingY={3}>
+              <Pagination count={10} color="primary" />
+            </BoxCenter>
           )}
         </CustomBoxPosts>
       )}
