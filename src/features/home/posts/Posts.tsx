@@ -26,7 +26,7 @@ export const Posts = ({
 }: PostsProps) => {
   const { data, isLoading, isError, error } = useGetPostsQuery({ page, rowsPerPage, filter });
   const user = getPersistData('user', true);
-
+  console.log(data);
   const { t } = useTranslation();
 
   return (

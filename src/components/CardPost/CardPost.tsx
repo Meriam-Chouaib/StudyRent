@@ -10,7 +10,7 @@ import { ReactComponent as Not_found_img } from '../../assets/images/empty_item.
 import { STATIC_URL } from '../../config/config';
 import { getPersistData } from '../../utils';
 import { BoxEditDelete } from './BoxEditDelete/BoxEditDelete';
-export const CardPost = ({ title, price, city, img, isPoster }: CardPostProps) => {
+export const CardPost = ({ title, price, city, img, isPoster, idPost }: CardPostProps) => {
   const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
   const handleHover = () => {
@@ -19,6 +19,12 @@ export const CardPost = ({ title, price, city, img, isPoster }: CardPostProps) =
 
   const handleMouseLeave = () => {
     setIsHovered(false);
+  };
+  const handleDelete = (id: number) => {
+    console.log('handleDelete', id);
+  };
+  const handleEdit = (id: number) => {
+    console.log('handleEdit', id);
   };
   console.log(isPoster);
   return (
@@ -31,16 +37,12 @@ export const CardPost = ({ title, price, city, img, isPoster }: CardPostProps) =
         {img ? (
           <>
             <CardMedia sx={{ height: 140 }} image={`${STATIC_URL}/${img}`} title="green iguana" />
-            {isPoster && (
-              <BoxEditDelete
-                handleDelete={function (): void {
-                  throw new Error('Function not implemented.');
-                }}
-                handleEdit={function (): void {
-                  throw new Error('Function not implemented.');
-                }}
-              />
-            )}
+            {/* {isPoster && ( */}
+            <BoxEditDelete
+              handleDelete={() => handleDelete(idPost)}
+              handleEdit={() => handleEdit(idPost)}
+            />
+            {/* )} */}
           </>
         ) : (
           <Not_found_img height={140} />
