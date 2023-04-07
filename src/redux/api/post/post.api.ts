@@ -24,7 +24,7 @@ export const postApi = createApi({
         return decodPosts(result);
       },
     }),
-    addPost: builder.mutation<PostResponse, IPostRequest>({
+    addPost: builder.mutation<PostResponse, FormData>({
       query: (PostRequest) => ({
         url: PATHS.DASHBOARD.POST.ADD,
         method: 'POST',

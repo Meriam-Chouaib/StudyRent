@@ -18,13 +18,16 @@ import ImageInput from '../../../components/hookform/InputFile';
 import { Files, IPostRequest } from '../../../redux/api/post/post.types';
 import { useAddPostMutation } from '../../../redux/api/post/post.api';
 import { getPersistData } from '../../../utils';
+import theme from '../../../theme';
+import { IUser } from '../../../redux/api/user/user.types';
+import InputStandard from '../../../components/hookform/InputStandard';
 
 // ----------------------------------------------------------------------
 
 export const AddPost = () => {
   const [problem, setProblem] = useState('');
-  const [selectedImages, setSelectedImages] = useState<Files[]>([]);
-  const user = getPersistData('user', true);
+  const [selectedImages, setSelectedImages] = useState<File[]>([]);
+  const user: IUser = getPersistData('user', true);
   const { fields, defaultValues } = PostModel;
   const [addPost] = useAddPostMutation();
   const { t } = useTranslation();
@@ -52,7 +55,7 @@ export const AddPost = () => {
     city,
     state,
   }: IPostRequest) => {
-    const data = {
+    const dataPost = {
       title,
       description,
       price,
@@ -66,9 +69,25 @@ export const AddPost = () => {
       posterId: user.id,
     };
     try {
-      // console.log('data', data);
-      // const data = new FormData();
-      // data.append("files",)
+      console.log('data', dataPost);
+      const data = new FormData();
+      //   const imageBlobs: Blob[] = [];
+      //   selectedImages.forEach((file) => {
+      //     const blob = new Blob([file], { type: file.type });
+      //     imageBlobs.push(blob);
+      //   });
+      //   imageBlobs.forEach((blob, index) => {
+      //     data.append(`files`, blob, selectedImages[index].name);
+      //   });
+      // console.log(imageBlobs);
+      console.log(selectedImages);
+
+      data.append('post', JSON.stringify(dataPost));
+      selectedImages.forEach((file) => {
+        data.append('files', file, file.name);
+      });
+      console.log(data);
+
       await addPost(data)
         .unwrap()
         .then((res) => {
@@ -115,7 +134,7 @@ export const AddPost = () => {
         <TextField name={fields.price.name} type={'text'} label={t(fields.price.label)} />
         <TextField name={fields.surface.name} type={'text'} label={t(fields.surface.label)} />
         <ImageInput onSelectImages={handleSelectImages} />
-
+        {/* <InputStandard name={'files'} label={'files'} type={'file'} /> */}
         <Box sx={{ display: 'flex' }}>
           <SelectField
             id={'nb_roommate'}
@@ -137,7 +156,7 @@ export const AddPost = () => {
         <Box sx={{ display: 'flex' }}>
           <TextField
             name={fields.postal_code.name}
-            type={'text'}
+            type={'number'}
             label={t(fields.postal_code.label)}
           />
 
@@ -158,7 +177,13 @@ export const AddPost = () => {
             options={['Monastir', 'Sousse', 'Zaghouan', 'Mahdia', 'Hammemet']}
           />
         </Box>
-        <CustomButton isLoading={isSubmitting}>{t('postForm.add_post')}</CustomButton>
+        <CustomButton
+          isLoading={isSubmitting}
+          colorBack={`${theme.palette.primary.main}`}
+          colorText={`${theme.palette.warning.main}`}
+        >
+          {t('postForm.add_post')}
+        </CustomButton>
       </Stack>
     </FormProvider>
   );

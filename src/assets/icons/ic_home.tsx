@@ -9,7 +9,7 @@ export default function IconHome({ isActive }: CustomIconProps) {
   const { palette } = useTheme();
   return (
     <svg
-      fill={isActive ? COLORS.PRIMARY.MAIN : COLORS.WARNING.MAIN}
+      fill={isActive ? COLORS.WARNING.MAIN : COLORS.PRIMARY.MAIN}
       version="1.1"
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"

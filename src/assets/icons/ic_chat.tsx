@@ -9,7 +9,7 @@ export default function IconChat({ isActive }: CustomIconProps) {
   const { palette } = useTheme();
   return (
     <svg
-      fill={isActive ? COLORS.PRIMARY.MAIN : COLORS.WARNING.MAIN}
+      fill={isActive ? COLORS.WARNING.MAIN : COLORS.PRIMARY.MAIN}
       height="30px"
       width="30px"
       version="1.1"

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Input, Grid, Box } from '@mui/material';
 import { Image } from './InputFile.styles';
+import { TextField } from '.';
+import InputStandard from './InputStandard';
 interface ImageInputProps {
   onSelectImages: (images: File[]) => void;
 }
@@ -9,17 +11,9 @@ interface IFile {
 }
 export default function ImageInput(props: ImageInputProps) {
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
-  // const [files, setFiles] = useState<IFile[]>([]);
   const handleSelectImages = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       console.log(event.target.files);
-
-      //   files.push({ filename: Array.from(event.target.files)[0]?.name });
-      //   if (files) console.log(files);
-
-      //   setSelectedImages(selectedImages);
-      //   event.target.value = '';
-      //   return { files: files };
     }
   };
 
@@ -29,12 +23,20 @@ export default function ImageInput(props: ImageInputProps) {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <Input
+      {/* <Input
         type="file"
         inputProps={{ multiple: true }}
         onChange={handleSelectImages}
         error={true}
-      />
+      /> */}
+      {/* <TextField
+        inputProps={{ multiple: true }}
+        onChange={handleSelectImages}
+        name={'files'}
+        label={'files'}
+        type={'file'}
+      /> */}
+      <InputStandard name={'files'} label={'files'} type="file" />
       {selectedImages.length > 0 && (
         <Grid container spacing={2} sx={{ mt: 2 }}>
           {selectedImages.map((image) => (

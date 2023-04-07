@@ -10,7 +10,7 @@ export default function useGetIcons(activePath: string) {
       icon: (
         <IconChat isActive={activePath === `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.CHAT}`} />
       ),
-      path: PATHS.DASHBOARD.POST.LIST,
+      path: PATHS.DASHBOARD.CHAT,
     },
     {
       txt: 'dashboardSidebar.posts',
@@ -20,7 +20,7 @@ export default function useGetIcons(activePath: string) {
         />
       ),
       // icon: <Icon icon={Home} color="primary" isActive={false} />,
-      path: PATHS.DASHBOARD.STUDENT.LIST,
+      path: PATHS.DASHBOARD.POST.LIST,
     },
   ];
 }

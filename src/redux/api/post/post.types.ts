@@ -8,7 +8,7 @@ export interface Post {
   posterId: number;
   likes: number;
   poster: IUser;
-  files: Files[];
+  files: File[];
   nb_rooms: number;
   surface: number;
   price: number;
@@ -30,7 +30,7 @@ export interface IPostRequest {
   postal_code: number;
   city: string;
   state: string;
-  files?: Files[];
+  files?: File[];
   posterId: number;
 }
 export interface PostResponse {
