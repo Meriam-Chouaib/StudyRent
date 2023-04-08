@@ -31,7 +31,7 @@ export const ListPostsPage = () => {
       </BoxLeft>
 
       <Posts
-        page={3}
+        page={2}
         rowsPerPage={9}
         color={'transparent'}
         padding="0"

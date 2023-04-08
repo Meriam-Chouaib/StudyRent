@@ -10,7 +10,7 @@ export function HomePage() {
         <GetStarted />
 
         <Posts
-          page={3}
+          page={2}
           rowsPerPage={9}
           color={COLORS.PRIMARY.DARK}
           padding="4rem 5rem"

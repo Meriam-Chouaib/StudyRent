@@ -1,4 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useFormContext, Controller } from 'react-hook-form';
+// @mui
+import { Input, InputProps } from '@mui/material';
+
+/** */
 import { useState } from 'react';
 // form
 import { useForm } from 'react-hook-form';
@@ -14,7 +19,7 @@ import { PostModel } from '../../../models/Post.model';
 import { PostSchema } from './ValidationSchema';
 
 import { SelectField } from '../../../components/selectField/SelectField';
-import ImageInput from '../../../components/hookform/InputFile';
+import ImageInput from '../../../components/hookform/BoxInputFile';
 import { Files, IPostRequest } from '../../../redux/api/post/post.types';
 import { useAddPostMutation } from '../../../redux/api/post/post.api';
 import { getPersistData } from '../../../utils';
@@ -26,7 +31,7 @@ import InputStandard from '../../../components/hookform/InputStandard';
 
 export const AddPost = () => {
   const [problem, setProblem] = useState('');
-  const [selectedImages, setSelectedImages] = useState<File[]>([]);
+  const [selectedImages, setSelectedImages] = useState<any>([]);
   const user: IUser = getPersistData('user', true);
   const { fields, defaultValues } = PostModel;
   const [addPost] = useAddPostMutation();
@@ -37,6 +42,7 @@ export const AddPost = () => {
   });
 
   const {
+    control,
     reset,
     setError,
     handleSubmit,
@@ -71,21 +77,12 @@ export const AddPost = () => {
     try {
       console.log('data', dataPost);
       const data = new FormData();
-      //   const imageBlobs: Blob[] = [];
-      //   selectedImages.forEach((file) => {
-      //     const blob = new Blob([file], { type: file.type });
-      //     imageBlobs.push(blob);
-      //   });
-      //   imageBlobs.forEach((blob, index) => {
-      //     data.append(`files`, blob, selectedImages[index].name);
-      //   });
-      // console.log(imageBlobs);
-      console.log(selectedImages);
 
       data.append('post', JSON.stringify(dataPost));
-      selectedImages.forEach((file) => {
-        data.append('files', file, file.name);
-      });
+      data.append('files', dataPost.files[0]);
+      //   selectedImages.forEach((file) => {
+      //     data.append('files', file, file.name);
+      //   });
       console.log(data);
 
       await addPost(data)
@@ -111,11 +108,12 @@ export const AddPost = () => {
       setError('city', { ...error, message: error.message });
       setError('description', { ...error, message: error.message });
     }
-
-    if (files) setSelectedImages(files);
   };
 
-  const handleSelectImages = async () => {
+  const handleSelectImages = (event: any) => {
+    console.log(selectedImages);
+    selectedImages.push(event?.target?.files[0]);
+    setSelectedImages(selectedImages);
     console.log(selectedImages);
   };
 
@@ -134,7 +132,6 @@ export const AddPost = () => {
         <TextField name={fields.price.name} type={'text'} label={t(fields.price.label)} />
         <TextField name={fields.surface.name} type={'text'} label={t(fields.surface.label)} />
         <ImageInput onSelectImages={handleSelectImages} />
-        {/* <InputStandard name={'files'} label={'files'} type={'file'} /> */}
         <Box sx={{ display: 'flex' }}>
           <SelectField
             id={'nb_roommate'}

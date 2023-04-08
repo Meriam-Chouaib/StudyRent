@@ -2,9 +2,8 @@
 // form
 import { useFormContext, Controller } from 'react-hook-form';
 // @mui
-import { Input, InputProps, StandardTextFieldProps, TextField } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import theme from '../../theme';
+import { Input, InputProps } from '@mui/material';
+
 // ----------------------------------------------------------------------
 
 interface InputStandardProps extends InputProps {
@@ -13,30 +12,35 @@ interface InputStandardProps extends InputProps {
   type?: 'text' | 'password' | 'file' | 'number';
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   inputProps?: any;
+  value?: any;
+  multiple?: boolean;
 }
 
-export default function InputStandard({ name, type, ...other }: InputStandardProps) {
+export default function InputStandard({
+  name,
+  type,
+  onChange,
+  multiple,
+  ...other
+}: InputStandardProps) {
   const { control, register } = useFormContext();
-  const { t } = useTranslation();
-  const handleSelectImages = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      console.log(event.target.files);
-    }
-  };
+
   return (
     <Controller
       name={name}
       control={control}
-      render={({ field, fieldState: { error } }) => (
+      render={({ field: { value, ...field }, fieldState: { error } }) => (
         <Input
           type={type}
           {...field}
           fullWidth
-          onChange={handleSelectImages}
+          value={value?.fileName}
+          // onChange={onChange}
           error={!!error}
           //  helperText={error && error.message && t(error?.message)}
           {...other}
-          // {...register(name)}
+          {...register(name)}
+          inputProps={{ multiple }}
         />
       )}
     />

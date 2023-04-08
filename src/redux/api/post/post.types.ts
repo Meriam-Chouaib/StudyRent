@@ -30,7 +30,7 @@ export interface IPostRequest {
   postal_code: number;
   city: string;
   state: string;
-  files?: File[];
+  files: File[];
   posterId: number;
 }
 export interface PostResponse {
