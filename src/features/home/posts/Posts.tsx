@@ -44,7 +44,7 @@ export const Posts = ({
                 price={post.price}
                 isPoster={post.posterId == user.id}
                 key={post.id}
-                idPost={post.posterId}
+                idPost={post.id}
               />
             ))}
           </BoxPosts>

@@ -33,6 +33,13 @@ export const postApi = createApi({
       invalidatesTags: ['POSTS'],
       transformResponse: (response: PostResponse) => decodAddPost(response),
     }),
+    deletePost: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `${PATHS.POSTS}/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['POSTS'],
+    }),
   }),
 });
-export const { useGetPostsQuery, useAddPostMutation } = postApi;
+export const { useGetPostsQuery, useAddPostMutation, useDeletePostMutation } = postApi;

@@ -10,18 +10,22 @@ import { ReactComponent as Not_found_img } from '../../assets/images/empty_item.
 import { STATIC_URL } from '../../config/config';
 import { getPersistData } from '../../utils';
 import { BoxEditDelete } from './BoxEditDelete/BoxEditDelete';
+import { useDeletePostMutation } from '../../redux/api/post/post.api';
 export const CardPost = ({ title, price, city, img, isPoster, idPost }: CardPostProps) => {
   const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
   const handleHover = () => {
     setIsHovered(true);
   };
-
+  const [deletePost] = useDeletePostMutation();
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
   const handleDelete = (id: number) => {
-    console.log('handleDelete', id);
+    if (window.confirm(t('dashboardListPosts.delete_confirm') as string)) {
+      console.log('handleDelete', id);
+      deletePost(id);
+    }
   };
   const handleEdit = (id: number) => {
     console.log('handleEdit', id);

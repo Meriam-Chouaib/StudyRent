@@ -15,6 +15,10 @@ export const postSlice = createSlice({
       state.isLoading = false;
       state.error = null;
     },
+    deletePost: (state) => {
+      state.isLoading = true;
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -31,6 +35,19 @@ export const postSlice = createSlice({
         state.error = null;
       })
       .addMatcher(postApi.endpoints.addPost.matchRejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action?.error?.message;
+      })
+      .addMatcher(postApi.endpoints.deletePost.matchFulfilled, (state) => {
+        state.post = null;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addMatcher(postApi.endpoints.deletePost.matchPending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addMatcher(postApi.endpoints.deletePost.matchRejected, (state, action) => {
         state.isLoading = false;
         state.error = action?.error?.message;
       });
