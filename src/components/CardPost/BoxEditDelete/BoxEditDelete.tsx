@@ -8,11 +8,11 @@ export const BoxEditDelete = ({ handleDelete, handleEdit }: BoxEditDeleteProps) 
   return (
     <>
       <BoxEditDeleteStyled>
-        <BoxIcon>
-          <IconEdit onClick={handleEdit} isActive={false}></IconEdit>
+        <BoxIcon handleSubmit={handleEdit}>
+          <IconEdit isActive={false}></IconEdit>
         </BoxIcon>
-        <BoxIcon>
-          <IconDelete onClick={handleDelete} isActive={false}></IconDelete>
+        <BoxIcon handleSubmit={handleDelete}>
+          <IconDelete isActive={false}></IconDelete>
         </BoxIcon>
       </BoxEditDeleteStyled>
     </>

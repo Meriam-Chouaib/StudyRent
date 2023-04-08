@@ -39,12 +39,12 @@ export const Posts = ({
             {data?.map((post: Post) => (
               <CardPost
                 title={post.title}
-                img={post.files[0]?.filename || ''}
+                img={post.files[0]?.name || ''}
                 city={post.city}
                 price={post.price}
-                isPoster={post.posterId == user.id ? true : false}
-                // isPoster={post.posterId == user.id }
+                isPoster={post.posterId == user.id}
                 key={post.id}
+                idPost={post.posterId}
               />
             ))}
           </BoxPosts>

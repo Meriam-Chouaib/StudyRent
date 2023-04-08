@@ -10,7 +10,13 @@ export const BoxEditDeleteStyled = styled(Box)(() => ({
 export const BoxIconStyled = styled(Box)(() => ({
   backgroundColor: theme.palette.primary.main,
   padding: '3px',
-  borderRadius: '2rem',
-  height: '27px',
+
   marginRight: '1rem',
+  borderRadius: '4rem',
+  width: '2rem',
+  display: 'flex',
+  height: '2rem',
+
+  justifyContent: 'center',
+  alignItems: 'center',
 }));

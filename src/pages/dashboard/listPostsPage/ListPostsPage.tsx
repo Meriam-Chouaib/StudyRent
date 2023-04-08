@@ -4,7 +4,7 @@ import { Posts } from '../../../features';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Box } from '@mui/material';
 import { SelectField } from '../../../components/selectField/SelectField';
-import { StyledLink } from '../../../layouts/main/header/header.styles';
+
 import { PATHS } from '../../../config/paths';
 import { Link } from 'react-router-dom';
 
@@ -12,15 +12,15 @@ export const ListPostsPage = () => {
   const { t } = useTranslation();
   return (
     <>
-      <Box>
-        {/* <SelectField
+      {/* <Box>
+        <SelectField
           id={'filtre'}
           label={t('dashboardListPosts.sort')}
           placeholder={''}
           name={'filtre'}
           options={[t('dashboardListPosts.croissant'), t('dashboardListPosts.descending')]}
-        /> */}
-      </Box>
+        />
+      </Box> */}
       <BoxLeft>
         <Link to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.ADD}`}>
           <ButtonWithIcon
@@ -31,7 +31,7 @@ export const ListPostsPage = () => {
       </BoxLeft>
 
       <Posts
-        page={3}
+        page={2}
         rowsPerPage={9}
         color={'transparent'}
         padding="0"

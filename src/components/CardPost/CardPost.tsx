@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BoxHoverEye, CardPostStyled } from './CardPost.style';
 import { CardPostProps } from './CardPost.type';
 // mui
-import { CardContent, CardMedia, Typography } from '@mui/material';
+import { Box, CardContent, CardMedia, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { InfoCard } from './InfoCard';
 import { useTranslation } from 'react-i18next';
@@ -26,41 +26,45 @@ export const CardPost = ({ title, price, city, img, isPoster, idPost }: CardPost
   const handleEdit = (id: number) => {
     console.log('handleEdit', id);
   };
-  console.log(isPoster);
+
   return (
     <>
       <CardPostStyled
         onMouseEnter={handleHover}
         onMouseLeave={handleMouseLeave}
-        sx={{ position: 'relative' }}
+        // sx={{ position: 'relative' }}
       >
         {img ? (
           <>
-            <CardMedia sx={{ height: 140 }} image={`${STATIC_URL}/${img}`} title="green iguana" />
+            <Box sx={{ position: 'relative' }}>
+              <CardMedia sx={{ height: 140 }} image={`${STATIC_URL}/${img}`} title="green iguana" />
+              {isHovered && (
+                <BoxHoverEye>
+                  <VisibilityIcon color="primary" fontSize="large" />
+                </BoxHoverEye>
+              )}
+            </Box>
             {/* {isPoster && ( */}
-            <BoxEditDelete
-              handleDelete={() => handleDelete(idPost)}
-              handleEdit={() => handleEdit(idPost)}
-            />
+
             {/* )} */}
           </>
         ) : (
           <Not_found_img height={140} />
         )}
+        <>
+          <BoxEditDelete
+            handleDelete={() => handleDelete(idPost)}
+            handleEdit={() => handleEdit(idPost)}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="subtitle1" component="div">
+              {title}
+            </Typography>
+            <InfoCard label={t('home.card_txt_city') as string} txt={city} />
 
-        <CardContent>
-          <Typography gutterBottom variant="subtitle1" component="div">
-            {title}
-          </Typography>
-          <InfoCard label={t('home.card_txt_city') as string} txt={city} />
-
-          {isHovered && (
-            <BoxHoverEye>
-              <VisibilityIcon color="primary" fontSize="large" />
-            </BoxHoverEye>
-          )}
-          <InfoCard label={t('home.card_txt_price') as string} txt={price.toString() + 'DT'} />
-        </CardContent>
+            <InfoCard label={t('home.card_txt_price') as string} txt={price.toString() + 'DT'} />
+          </CardContent>
+        </>
       </CardPostStyled>
     </>
   );
