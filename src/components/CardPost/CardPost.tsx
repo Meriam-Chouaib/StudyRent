@@ -49,7 +49,7 @@ export const CardPost = ({ title, price, city, img, isPoster, idPost }: CardPost
             {/* )} */}
           </>
         ) : (
-          <Not_found_img height={140} />
+          <Not_found_img height={140} width={'100%'} />
         )}
         <>
           <BoxEditDelete
