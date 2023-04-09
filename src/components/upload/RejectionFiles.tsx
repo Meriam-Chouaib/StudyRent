@@ -2,15 +2,17 @@
 import { Box, Paper, Typography } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 // utils
+import { JSXElementConstructor, Key, ReactElement, ReactFragment, ReactPortal } from 'react';
 import { fData } from '../../utils/formatNumber';
 
 // ----------------------------------------------------------------------
 
-RejectionFiles.propTypes = {
-  fileRejections: PropTypes.array,
-};
+interface RejectionFilesProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  fileRejections: any[];
+}
 
-export default function RejectionFiles({ fileRejections }) {
+export default function RejectionFiles({ fileRejections }: RejectionFilesProps) {
   return (
     <Paper
       variant="outlined"
@@ -31,11 +33,25 @@ export default function RejectionFiles({ fileRejections }) {
               {path} - {fData(size)}
             </Typography>
 
-            {errors.map((error) => (
-              <Typography key={error.code} variant="caption" component="p">
-                - {error.message}
-              </Typography>
-            ))}
+            {errors.map(
+              (error: {
+                code: Key | null | undefined;
+                message:
+                  | string
+                  | number
+                  | boolean
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  | ReactElement<any, string | JSXElementConstructor<any>>
+                  | ReactFragment
+                  | ReactPortal
+                  | null
+                  | undefined;
+              }) => (
+                <Typography key={error.code} variant="caption" component="p">
+                  - {error.message}
+                </Typography>
+              ),
+            )}
           </Box>
         );
       })}

@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import { Box } from '@mui/material';
 import { SxProps, styled } from '@mui/material/styles';
 //
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import BlockContent from './BlockContent';
 import MultiFilePreview from './MultiFilePreview';
 import RejectionFiles from './RejectionFiles';
@@ -25,25 +25,33 @@ interface UploadMultiFileProps {
   error: boolean;
   showPreview: boolean;
   files: [];
-  onRemove: () => void;
+  onDrop?: (files: File[]) => void;
+  onRemove: (file: File) => void;
   onRemoveAll: () => void;
   helperText: ReactNode;
-  sx: SxProps;
+  accept?: string;
+  sx?: SxProps;
 }
 
 export default function UploadMultiFile({
   error,
-  showPreview = false,
+  showPreview,
   files,
   onRemove,
   onRemoveAll,
   helperText,
+  accept,
+  onDrop,
   sx,
   ...other
 }: UploadMultiFileProps) {
   const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
-    ...other,
+    onDrop,
   });
+  useEffect(() => {
+    const inputprops = getInputProps();
+    console.log('inputprops', inputprops);
+  }, [getInputProps]);
 
   return (
     <Box sx={{ width: '100%', ...sx }}>
@@ -59,7 +67,6 @@ export default function UploadMultiFile({
         }}
       >
         <input {...getInputProps()} />
-
         <BlockContent />
       </DropZoneStyle>
 

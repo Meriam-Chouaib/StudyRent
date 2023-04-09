@@ -1,19 +1,16 @@
-import { fakeData } from './fakeData';
 import { useTranslation } from 'react-i18next';
 import { ClipLoader } from 'react-spinners';
 import { CustomBoxPosts } from './Posts.styles';
 // components
-import { BoxCenter, BoxPosts } from '../../../components';
-import { CardPost } from '../../../components';
-import { ButtonWithIcon } from '../../../components';
+import { BoxCenter, BoxPosts, ButtonWithIcon, CardPost } from '../../../components';
 // mui
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 
+import { Pagination } from '@mui/material';
 import { useGetPostsQuery } from '../../../redux/api/post/post.api';
-import { PostsProps } from './Posts.types';
 import { Post } from '../../../redux/api/post/post.types';
-import { Pagination, Typography } from '@mui/material';
 import { getPersistData } from '../../../utils';
+import { PostsProps } from './Posts.types';
 export const Posts = ({
   page,
   rowsPerPage,
@@ -39,7 +36,7 @@ export const Posts = ({
             {data?.map((post: Post) => (
               <CardPost
                 title={post.title}
-                img={post.files[0]?.name || ''}
+                img={post.images[0].name || ''}
                 city={post.city}
                 price={post.price}
                 isPoster={post.posterId == user.id ? true : false}

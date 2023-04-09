@@ -1,13 +1,14 @@
 // @mui
 import { Box, SxProps } from '@mui/material';
 import { Effect, LazyLoadImage } from 'react-lazy-load-image-component';
-import BackgroundIllustration from '../../assets/images/illustrations/illustration_background.svg';
+import BackgroundIllustration from '../../assets/illustration_background.svg';
 // ----------------------------------------------------------------------
 
 interface ImageProps {
   alt?: string;
   src?: string;
   disabledEffect: boolean;
+  children?: React.ReactNode;
   effect: Effect;
   ratio: '4/3' | '3/4' | '6/4' | '4/6' | '16/9' | '9/16' | '21/9' | '9/21' | '1/1';
   sx?: SxProps;
@@ -17,6 +18,7 @@ export default function Image({
   ratio,
   disabledEffect = false,
   effect = 'blur',
+  src,
   sx,
   ...other
 }: ImageProps) {
@@ -49,6 +51,8 @@ export default function Image({
           effect={disabledEffect ? 'black-and-white' : effect}
           placeholderSrc={BackgroundIllustration}
           sx={{ width: 1, height: 1, objectFit: 'cover' }}
+          src={src}
+          {...other}
         />
       </Box>
     );
@@ -69,8 +73,10 @@ export default function Image({
         component={LazyLoadImage}
         wrapperClassName="wrapper"
         effect={disabledEffect ? undefined : effect}
-        placeholderSrc="https://zone-assets-api.vercel.app/assets/img_placeholder.svg"
+        placeholderSrc={BackgroundIllustration}
         sx={{ width: 1, height: 1, objectFit: 'cover' }}
+        src={src}
+        {...other}
       />
     </Box>
   );

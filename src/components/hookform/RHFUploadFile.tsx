@@ -9,9 +9,24 @@ import { UploadMultiFile } from '../upload';
 
 interface RHFUploadMultiFileProps {
   name: string;
+  showPreview: boolean;
+  accept?: string;
+  maxSize?: number;
+  onDrop?: (files: File[]) => void;
+  onRemove: (file: File) => void;
+  onRemoveAll: () => void;
 }
 
-export function RHFUploadMultiFile({ name, ...other }: RHFUploadMultiFileProps) {
+export function RHFUploadMultiFile({
+  name,
+  accept,
+  maxSize,
+  onDrop,
+  onRemove,
+  onRemoveAll,
+  showPreview,
+  ...other
+}: RHFUploadMultiFileProps) {
   const { control } = useFormContext();
 
   return (
@@ -23,7 +38,11 @@ export function RHFUploadMultiFile({ name, ...other }: RHFUploadMultiFileProps) 
 
         return (
           <UploadMultiFile
-            accept="image/*"
+            showPreview={showPreview}
+            onRemove={onRemove}
+            onRemoveAll={onRemoveAll}
+            onDrop={onDrop}
+            accept={accept}
             files={field.value}
             error={checkError}
             helperText={

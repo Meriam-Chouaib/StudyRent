@@ -1,4 +1,4 @@
-import { AnimatePresence, m } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import isString from 'lodash/isString';
 // @mui
 import { Button, IconButton, List, ListItem, ListItemText, Stack } from '@mui/material';
@@ -31,102 +31,104 @@ const getFileData = (file: any) => {
 // ----------------------------------------------------------------------
 
 interface MultiFilePreviewProps {
-  files: [];
+  files: File[];
   showPreview: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onRemove: (file: any) => void;
+  onRemove: (file: File) => void;
   onRemoveAll: () => void;
 }
 
 export default function MultiFilePreview({
-  showPreview = false,
+  showPreview,
   files,
   onRemove,
   onRemoveAll,
 }: MultiFilePreviewProps) {
-  const hasFile = files.length > 0;
+  const hasFile = files && files.length > 0;
 
   return (
     <>
       <List disablePadding sx={{ ...(hasFile && { my: 3 }) }}>
         <AnimatePresence>
-          {files.map((file) => {
-            const { key, name, size, preview } = getFileData(file);
+          {files &&
+            files.map((file) => {
+              const { key, name, size, preview } = getFileData(file);
 
-            if (showPreview) {
+              if (showPreview) {
+                return (
+                  <ListItem
+                    key={key}
+                    component={motion.div}
+                    {...varFade().inRight}
+                    sx={{
+                      p: 0,
+                      m: 0.5,
+                      width: 80,
+                      height: 80,
+                      borderRadius: 1.25,
+                      overflow: 'hidden',
+                      position: 'relative',
+                      display: 'inline-flex',
+                      border: (theme) => `solid 1px ${theme.palette.divider}`,
+                    }}
+                  >
+                    <Image
+                      alt="preview"
+                      src={isString(file) ? file : preview}
+                      ratio="1/1"
+                      disabledEffect={false}
+                      effect={'blur'}
+                    />
+                    <IconButton
+                      size="small"
+                      onClick={() => onRemove(file)}
+                      sx={{
+                        top: 6,
+                        p: '2px',
+                        right: 6,
+                        position: 'absolute',
+                        color: 'common.white',
+                        bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72),
+                        '&:hover': {
+                          bgcolor: (theme) => alpha(theme.palette.grey[900], 0.48),
+                        },
+                      }}
+                    >
+                      <CloseIllustration />
+                    </IconButton>
+                  </ListItem>
+                );
+              }
+
               return (
                 <ListItem
                   key={key}
-                  component={m.div}
+                  component={motion.div}
                   {...varFade().inRight}
                   sx={{
-                    p: 0,
-                    m: 0.5,
-                    width: 80,
-                    height: 80,
-                    borderRadius: 1.25,
-                    overflow: 'hidden',
-                    position: 'relative',
-                    display: 'inline-flex',
+                    my: 1,
+                    px: 2,
+                    py: 0.75,
+                    borderRadius: 0.75,
                     border: (theme) => `solid 1px ${theme.palette.divider}`,
                   }}
                 >
-                  <Image
-                    alt="preview"
-                    src={isString(file) ? file : preview}
-                    ratio="1/1"
-                    disabledEffect={false}
-                    effect={'blur'}
+                  <FileIllustration
+                    sx={{ width: 28, height: 28, color: 'text.secondary', mr: 2 }}
                   />
-                  <IconButton
-                    size="small"
-                    onClick={() => onRemove(file)}
-                    sx={{
-                      top: 6,
-                      p: '2px',
-                      right: 6,
-                      position: 'absolute',
-                      color: 'common.white',
-                      bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72),
-                      '&:hover': {
-                        bgcolor: (theme) => alpha(theme.palette.grey[900], 0.48),
-                      },
-                    }}
-                  >
+
+                  <ListItemText
+                    primary={isString(file) ? file : name}
+                    secondary={isString(file) ? '' : fData(size || 0)}
+                    primaryTypographyProps={{ variant: 'subtitle2' }}
+                    secondaryTypographyProps={{ variant: 'caption' }}
+                  />
+
+                  <IconButton edge="end" size="small" onClick={() => onRemove(file)}>
                     <CloseIllustration />
                   </IconButton>
                 </ListItem>
               );
-            }
-
-            return (
-              <ListItem
-                key={key}
-                component={m.div}
-                {...varFade().inRight}
-                sx={{
-                  my: 1,
-                  px: 2,
-                  py: 0.75,
-                  borderRadius: 0.75,
-                  border: (theme) => `solid 1px ${theme.palette.divider}`,
-                }}
-              >
-                <FileIllustration sx={{ width: 28, height: 28, color: 'text.secondary', mr: 2 }} />
-
-                <ListItemText
-                  primary={isString(file) ? file : name}
-                  secondary={isString(file) ? '' : fData(size || 0)}
-                  primaryTypographyProps={{ variant: 'subtitle2' }}
-                  secondaryTypographyProps={{ variant: 'caption' }}
-                />
-
-                <IconButton edge="end" size="small" onClick={() => onRemove(file)}>
-                  <CloseIllustration />
-                </IconButton>
-              </ListItem>
-            );
-          })}
+            })}
         </AnimatePresence>
       </List>
 
@@ -134,9 +136,6 @@ export default function MultiFilePreview({
         <Stack direction="row" justifyContent="flex-end" spacing={1.5}>
           <Button color="inherit" size="small" onClick={onRemoveAll}>
             Remove all
-          </Button>
-          <Button size="small" variant="contained">
-            Upload files
           </Button>
         </Stack>
       )}

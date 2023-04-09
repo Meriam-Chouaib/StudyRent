@@ -1,31 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useFormContext, Controller } from 'react-hook-form';
 // @mui
-import { Input, InputProps } from '@mui/material';
 
 /** */
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 // form
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { yupResolver } from '@hookform/resolvers/yup';
 
 // @mui
-import { Stack, Alert, Box } from '@mui/material';
+import { Alert, Box, Stack } from '@mui/material';
 import { CustomButton } from '../../../components';
 // components
 import { FormProvider, TextField } from '../../../components/hookform';
 import { PostModel } from '../../../models/Post.model';
 import { PostSchema } from './ValidationSchema';
 
+import { RHFUploadMultiFile } from '../../../components/hookform/RHFUploadFile';
 import { SelectField } from '../../../components/selectField/SelectField';
-import ImageInput from '../../../components/hookform/BoxInputFile';
-import { Files, IPostRequest } from '../../../redux/api/post/post.types';
 import { useAddPostMutation } from '../../../redux/api/post/post.api';
-import { getPersistData } from '../../../utils';
-import theme from '../../../theme';
+import { IPostRequest } from '../../../redux/api/post/post.types';
 import { IUser } from '../../../redux/api/user/user.types';
-import InputStandard from '../../../components/hookform/InputStandard';
+import theme from '../../../theme';
+import { getPersistData } from '../../../utils';
 
 // ----------------------------------------------------------------------
 
@@ -45,16 +42,20 @@ export const AddPost = () => {
     control,
     reset,
     setError,
+    setValue,
+    watch,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
+
+  const values = watch();
 
   const onSubmit = async ({
     title,
     description,
     price,
     surface,
-    files,
+    images,
     nb_roommate,
     nb_rooms,
     postal_code,
@@ -66,7 +67,7 @@ export const AddPost = () => {
       description,
       price,
       surface,
-      files,
+      images,
       nb_roommate,
       nb_rooms,
       postal_code,
@@ -79,11 +80,9 @@ export const AddPost = () => {
       const data = new FormData();
 
       data.append('post', JSON.stringify(dataPost));
-      data.append('files', dataPost.files[0]);
-      //   selectedImages.forEach((file) => {
-      //     data.append('files', file, file.name);
-      //   });
-      console.log(data);
+      values.images.forEach((file: any) => {
+        data.append('files', file, file.name);
+      });
 
       await addPost(data)
         .unwrap()
@@ -102,7 +101,7 @@ export const AddPost = () => {
       setError('description', { ...error, message: error.message });
       setError('price', { ...error, message: error.message });
       setError('surface', { ...error, message: error.message });
-      setError('files', { ...error, message: error.message });
+      setError('images', { ...error, message: error.message });
       setError('nb_rooms', { ...error, message: error.message });
       setError('postal_code', { ...error, message: error.message });
       setError('city', { ...error, message: error.message });
@@ -116,6 +115,32 @@ export const AddPost = () => {
     setSelectedImages(selectedImages);
     console.log(selectedImages);
   };
+
+  // ---------------------------------***----------------------------------//
+
+  const handleDrop = useCallback(
+    (acceptedFiles: any) =>
+      setValue(
+        'images',
+        acceptedFiles.map((file: File) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          }),
+        ),
+      ),
+    [setValue],
+  );
+
+  const handleRemoveAll = () => {
+    setValue('images', []);
+  };
+
+  const handleRemove = (file: any) => {
+    const filteredItems = values.images?.filter((_file) => _file !== file);
+    setValue('images', filteredItems);
+  };
+
+  // ---------------------------------***----------------------------------//
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
@@ -131,7 +156,15 @@ export const AddPost = () => {
 
         <TextField name={fields.price.name} type={'text'} label={t(fields.price.label)} />
         <TextField name={fields.surface.name} type={'text'} label={t(fields.surface.label)} />
-        <ImageInput onSelectImages={handleSelectImages} />
+        <RHFUploadMultiFile
+          name={fields.files.name}
+          showPreview={true}
+          accept="image/*"
+          maxSize={3145728645684684}
+          onDrop={handleDrop}
+          onRemove={handleRemove}
+          onRemoveAll={handleRemoveAll}
+        />
         <Box sx={{ display: 'flex' }}>
           <SelectField
             id={'nb_roommate'}

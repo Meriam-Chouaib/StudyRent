@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Box, Grid } from '@mui/material';
 import React, { useState } from 'react';
-import { Input, Grid, Box } from '@mui/material';
 import { Image } from './InputFile.styles';
-import { TextField } from '.';
 import InputStandard from './InputStandard';
 interface ImageInputProps {
   onSelectImages: (images: any) => void;

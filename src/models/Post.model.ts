@@ -85,7 +85,7 @@ export const PostModel = {
     price: 0,
     colocation: 0,
     surface: 0,
-    files: [],
+    images: [],
     nb_roommate: 0,
     nb_rooms: 0,
     postal_code: 0,
