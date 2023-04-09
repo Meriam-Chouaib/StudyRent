@@ -76,12 +76,11 @@ export const AddPost = () => {
       posterId: user.id,
     };
     try {
-      console.log('data', dataPost);
       const data = new FormData();
 
-      data.append('post', JSON.stringify(dataPost));
+      data.append('post', JSON.stringify(values));
       values.images.forEach((file: any) => {
-        data.append('files', file, file.name);
+        data.append('files', file);
       });
 
       await addPost(data)
