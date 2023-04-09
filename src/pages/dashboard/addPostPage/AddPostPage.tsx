@@ -10,7 +10,7 @@ export const AddPostPage = () => {
     <BoxCenter>
       <BoxStyled>
         <Typography variant="h1">{t('postForm.title')}</Typography>
-        <AddPost />
+        <AddPost isEdit={false} />
       </BoxStyled>
     </BoxCenter>
   );

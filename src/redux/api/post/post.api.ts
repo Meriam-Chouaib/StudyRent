@@ -15,7 +15,6 @@ export const postApi = createApi({
     >({
       query(params) {
         return {
-          // url: `${PATHS.POSTS}`,
           url: `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`,
         };
       },
@@ -40,6 +39,16 @@ export const postApi = createApi({
       }),
       invalidatesTags: ['POSTS'],
     }),
+    editPost: builder.mutation<PostResponse, { id: string; post: Post }>({
+      query: ({ id, post }) => ({
+        url: `${PATHS.DASHBOARD.POST.EDIT}/${id}`,
+        method: 'PATCH',
+        body: post,
+      }),
+      invalidatesTags: ['POSTS'],
+      transformResponse: (response: PostResponse) => decodAddPost(response),
+    }),
   }),
 });
-export const { useGetPostsQuery, useAddPostMutation, useDeletePostMutation } = postApi;
+export const { useGetPostsQuery, useAddPostMutation, useDeletePostMutation, useEditPostMutation } =
+  postApi;

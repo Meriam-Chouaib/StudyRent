@@ -24,7 +24,7 @@ import InputStandard from '../../../components/hookform/InputStandard';
 
 // ----------------------------------------------------------------------
 
-export const AddPost = () => {
+export const AddPost = ({ isEdit }: { isEdit: boolean }) => {
   const [problem, setProblem] = useState('');
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const user: IUser = getPersistData('user', true);
@@ -71,15 +71,7 @@ export const AddPost = () => {
     try {
       console.log('data', dataPost);
       const data = new FormData();
-      //   const imageBlobs: Blob[] = [];
-      //   selectedImages.forEach((file) => {
-      //     const blob = new Blob([file], { type: file.type });
-      //     imageBlobs.push(blob);
-      //   });
-      //   imageBlobs.forEach((blob, index) => {
-      //     data.append(`files`, blob, selectedImages[index].name);
-      //   });
-      // console.log(imageBlobs);
+
       console.log(selectedImages);
 
       data.append('post', JSON.stringify(dataPost));
@@ -182,7 +174,7 @@ export const AddPost = () => {
           colorBack={`${theme.palette.primary.main}`}
           colorText={`${theme.palette.warning.main}`}
         >
-          {t('postForm.add_post')}
+          {isEdit ? t('postForm.edit_post') : t('postForm.add_post')}
         </CustomButton>
       </Stack>
     </FormProvider>

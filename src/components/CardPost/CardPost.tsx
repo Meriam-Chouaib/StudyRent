@@ -1,43 +1,60 @@
+// react
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+// components
 import { BoxHoverEye, CardPostStyled } from './CardPost.style';
 import { CardPostProps } from './CardPost.type';
+import { BoxEditDelete } from './BoxEditDelete/BoxEditDelete';
+import { InfoCard } from './InfoCard';
+
 // mui
 import { Box, CardContent, CardMedia, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { InfoCard } from './InfoCard';
-import { useTranslation } from 'react-i18next';
+import Modal from '@material-ui/core/Modal';
+
 import { ReactComponent as Not_found_img } from '../../assets/images/empty_item.svg';
 import { STATIC_URL } from '../../config/config';
-import { getPersistData } from '../../utils';
-import { BoxEditDelete } from './BoxEditDelete/BoxEditDelete';
+// feature
+import { AddPost } from '../../features';
+
+// mutation
 import { useDeletePostMutation } from '../../redux/api/post/post.api';
+import { BoxModal } from '../BoxCenter/BoxModal.styles';
+
 export const CardPost = ({ title, price, city, img, isPoster, idPost }: CardPostProps) => {
-  const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // translation
+  const { t } = useTranslation();
+  // hover card
   const handleHover = () => {
     setIsHovered(true);
   };
-  const [deletePost] = useDeletePostMutation();
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
+
+  // delete post
+  const [deletePost] = useDeletePostMutation();
   const handleDelete = (id: number) => {
     if (window.confirm(t('dashboardListPosts.delete_confirm') as string)) {
-      console.log('handleDelete', id);
       deletePost(id);
     }
   };
+
+  // edit post
   const handleEdit = (id: number) => {
     console.log('handleEdit', id);
+    setIsModalOpen(true);
   };
-
+  const handleClose = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
-      <CardPostStyled
-        onMouseEnter={handleHover}
-        onMouseLeave={handleMouseLeave}
-        // sx={{ position: 'relative' }}
-      >
+      <CardPostStyled onMouseEnter={handleHover} onMouseLeave={handleMouseLeave}>
         {img ? (
           <>
             <Box sx={{ position: 'relative' }}>
@@ -60,6 +77,19 @@ export const CardPost = ({ title, price, city, img, isPoster, idPost }: CardPost
             handleDelete={() => handleDelete(idPost)}
             handleEdit={() => handleEdit(idPost)}
           />
+          {isModalOpen && (
+            <Modal
+              open={isModalOpen}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <BoxModal>
+                <AddPost isEdit={true} />
+              </BoxModal>
+            </Modal>
+          )}
+
           <CardContent>
             <Typography gutterBottom variant="subtitle1" component="div">
               {title}
