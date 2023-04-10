@@ -10,6 +10,7 @@ import CloseIllustration from '../../assets/illustration_close';
 import FileIllustration from '../../assets/illustration_file';
 import { varFade } from '../animate/fade';
 import Image from '../image/Image';
+import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 
@@ -44,7 +45,7 @@ export default function MultiFilePreview({
   onRemoveAll,
 }: MultiFilePreviewProps) {
   const hasFile = files && files.length > 0;
-
+  const { t } = useTranslation();
   return (
     <>
       <List disablePadding sx={{ ...(hasFile && { my: 3 }) }}>
@@ -135,7 +136,7 @@ export default function MultiFilePreview({
       {hasFile && (
         <Stack direction="row" justifyContent="flex-end" spacing={1.5}>
           <Button color="inherit" size="small" onClick={onRemoveAll}>
-            Remove all
+            {t('dashboardAddPost.remove')}
           </Button>
         </Stack>
       )}
