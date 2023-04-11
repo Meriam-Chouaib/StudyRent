@@ -6,26 +6,30 @@ import { BoxCenter, BoxPosts, ButtonWithIcon, CardPost } from '../../../componen
 // mui
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 
-import { Box, Pagination } from '@mui/material';
+import { Pagination } from '@mui/material';
+import { useEffect } from 'react';
+import usePaginator from '../../../hooks/usePaginator';
 import { useGetPostsQuery } from '../../../redux/api/post/post.api';
-import { Post } from '../../../redux/api/post/post.types';
+import { Image, Post } from '../../../redux/api/post/post.types';
 import { getPersistData } from '../../../utils';
 import { PostsProps } from './Posts.types';
-import { config } from 'yargs';
-export const Posts = ({
-  page,
-  rowsPerPage,
-  filter,
-  color,
-  padding,
-  margin,
-  withButton,
-  withPagination,
-}: PostsProps) => {
-  const { data, isLoading, isError, error } = useGetPostsQuery({ page, rowsPerPage, filter });
+import { initialPostsPaginator } from './posts.constants';
+
+export const Posts = ({ color, padding, margin, withButton, withPagination }: PostsProps) => {
+  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator(initialPostsPaginator);
+
+  const { data, isLoading, isError, error } = useGetPostsQuery(paginator);
   const user = getPersistData('user', true);
 
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   const { t } = useTranslation();
+
+  const getDefaultImagePath = (images?: Image[]) => {
+    return images?.length ? `${images[0].fileName}` : '';
+  };
 
   return (
     <>
@@ -39,8 +43,7 @@ export const Posts = ({
             {data?.map((post: Post) => (
               <CardPost
                 title={post.title}
-                // img={post.images[0].filename || ''}
-                img={`${process.env.STATIC_URL}/assets/uploads/${post.images[0].fileName}`}
+                img={getDefaultImagePath(post.images)}
                 city={post.city}
                 price={post.price}
                 isPoster={post.posterId == user.id ? true : false}
@@ -55,6 +58,9 @@ export const Posts = ({
               txt={t('home.posts_btn') as string}
             />
           )}
+          <BoxCenter paddingY={3}>
+            <Pagination count={10} color="primary" onChange={(_e, page) => onChangePage(page)} />
+          </BoxCenter>
 
           {withPagination && (
             <BoxCenter paddingY={3}>

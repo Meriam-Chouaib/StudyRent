@@ -1,7 +1,7 @@
-import { ListPostsResponse, Post, Image, PostResponse, Result } from './post.types';
+import { Image, Post, PostResponse, PostResponseData } from './post.types';
 
-export function decodPosts(result: ListPostsResponse[]): Post[] {
-  const decoded: Post[] = result.map((res) => {
+export function decodePosts(result: PostResponseData): Post[] {
+  const decoded: Post[] = result.data.map((res) => {
     const decodedPost: Post = {
       ...res,
       images: res.files?.map((fileRes) => {

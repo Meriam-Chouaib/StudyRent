@@ -49,21 +49,21 @@ export interface params {
   rowsPerPage: number;
   filter: string;
 }
-export interface Result {
-  data: ServerPost[];
-}
+
 export interface PostState {
   post: Post | null;
   isLoading: boolean;
   error?: string | null;
 }
 
-export interface ServerPost extends Post {
-  files: File[];
+// List posts response
+export interface PostResponseData {
+  status: number;
+  data: PostData[];
+  message: string;
 }
 
-//************************* */
-export interface ListPostsResponse {
+export interface PostData {
   id: number;
   datePost: string;
   title: string;
@@ -78,10 +78,10 @@ export interface ListPostsResponse {
   state: string;
   isLocated: boolean;
   postal_code: string;
-  files?: FileResult[];
+  files: FileData[];
 }
 
-export interface FileResult {
+export interface FileData {
   id: number;
   filename: string;
   path: string;
