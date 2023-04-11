@@ -18,10 +18,10 @@ export function DashboardLayout() {
   return (
     <>
       <Grid container sx={{ position: 'relative' }}>
-        <Grid item xs={3}>
+        <Grid item xs={3} md={2}>
           <SideBar items={icons} activePath={activePath} />
         </Grid>
-        <Grid item xs={9} p={2}>
+        <Grid item xs={9} md={10} p={2}>
           <Header img={imgProfile} status={user?.status} username={user?.username} />
 
           <Outlet />

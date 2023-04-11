@@ -6,11 +6,12 @@ import { BoxCenter, BoxPosts, ButtonWithIcon, CardPost } from '../../../componen
 // mui
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 
-import { Pagination } from '@mui/material';
+import { Box, Pagination } from '@mui/material';
 import { useGetPostsQuery } from '../../../redux/api/post/post.api';
 import { Post } from '../../../redux/api/post/post.types';
 import { getPersistData } from '../../../utils';
 import { PostsProps } from './Posts.types';
+import { config } from 'yargs';
 export const Posts = ({
   page,
   rowsPerPage,
@@ -29,7 +30,9 @@ export const Posts = ({
   return (
     <>
       {isLoading ? (
-        <ClipLoader color="#ffffff" size={20} />
+        <BoxCenter width={'100%'} height={'100vh'}>
+          <ClipLoader color="primary" size={100} />
+        </BoxCenter>
       ) : (
         <CustomBoxPosts bgcolor={color} margin={margin} padding={padding}>
           <BoxPosts>
@@ -37,7 +40,7 @@ export const Posts = ({
               <CardPost
                 title={post.title}
                 // img={post.images[0].filename || ''}
-                img={''}
+                img={`${process.env.STATIC_URL}/assets/uploads/${post.images[0].fileName}`}
                 city={post.city}
                 price={post.price}
                 isPoster={post.posterId == user.id ? true : false}

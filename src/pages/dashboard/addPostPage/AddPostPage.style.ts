@@ -16,6 +16,7 @@ export const BoxStyled = styled(Box)(() => ({
   },
 }));
 export const CustomTypography = styled(Typography)(({ theme }) => ({
+  paddingTop: '1.5rem',
   [theme.breakpoints.down('sm')]: {
     fontSize: '24px',
   },

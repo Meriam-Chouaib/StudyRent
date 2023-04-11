@@ -20,9 +20,9 @@ export const UserLogged = ({ username, img, status }: UserLoggedProps) => {
 
         <ImgProfile width={33} src={img} alt={'ProfileImg'} />
         {status == 'ONLINE' ? (
-          <IconUserStatus sx={{ backgroundColor: 'green' }}></IconUserStatus>
-        ) : (
           <IconUserStatus sx={{ backgroundColor: 'red' }}></IconUserStatus>
+        ) : (
+          <IconUserStatus sx={{ backgroundColor: 'green' }}></IconUserStatus>
         )}
       </BoxCenter>
       <Button onClick={handleSubmit}>

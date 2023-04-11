@@ -1,6 +1,14 @@
 import { baseQueryConfig } from './../../baseQueryConfig ';
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { Post, params, Result, IPostRequest, PostResponse } from './post.types';
+import {
+  Post,
+  params,
+  Result,
+  IPostRequest,
+  PostResponse,
+  ServerPost,
+  ListPostsResponse,
+} from './post.types';
 import { PATHS } from '../../../config/paths';
 import { Filter } from '../../../features/home/posts/Posts.types';
 import { decodAddPost, decodPosts } from './decoder';
@@ -10,7 +18,7 @@ export const postApi = createApi({
   tagTypes: ['POSTS'],
   endpoints: (builder) => ({
     getPosts: builder.query<
-      Post[],
+      ServerPost[],
       { page: number; rowsPerPage: number; filter: Filter | undefined }
     >({
       query(params) {
@@ -19,7 +27,7 @@ export const postApi = createApi({
           url: `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`,
         };
       },
-      transformResponse: (result: Result) => {
+      transformResponse: (result: ListPostsResponse[]): Post[] => {
         console.log(result);
         return decodPosts(result);
       },

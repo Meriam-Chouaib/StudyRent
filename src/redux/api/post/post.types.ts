@@ -1,5 +1,8 @@
 import { IUser } from '../user/user.types';
 
+export interface Image {
+  fileName: string;
+}
 export interface Post {
   id: number;
   datePost: Date;
@@ -7,16 +10,14 @@ export interface Post {
   description: string;
   posterId: number;
   likes: number;
-  poster: IUser;
-  images: File[];
+  poster?: IUser;
+  images?: Image[];
   nb_rooms: number;
   surface: number;
   price: number;
   nb_roommate: number;
-  region: string;
   city: string;
   state: string;
-  country: string;
   isLocated: boolean;
   postal_code: number;
 }
@@ -49,10 +50,40 @@ export interface params {
   filter: string;
 }
 export interface Result {
-  data: Post[];
+  data: ServerPost[];
 }
 export interface PostState {
   post: Post | null;
   isLoading: boolean;
   error?: string | null;
+}
+
+export interface ServerPost extends Post {
+  files: File[];
+}
+
+//************************* */
+export interface ListPostsResponse {
+  id: number;
+  datePost: string;
+  title: string;
+  description: string;
+  posterId: number;
+  likes: number;
+  nb_rooms: number;
+  surface: number;
+  price: string;
+  nb_roommate: number;
+  city: string;
+  state: string;
+  isLocated: boolean;
+  postal_code: string;
+  files?: FileResult[];
+}
+
+export interface FileResult {
+  id: number;
+  filename: string;
+  path: string;
+  postId: number;
 }
