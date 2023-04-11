@@ -55,6 +55,7 @@ export default function Router() {
         { path: PATHS.ALL, element: <Dashboard /> },
         { path: PATHS.DASHBOARD.POST.ADD, element: <AddPostPage /> },
         { path: PATHS.DASHBOARD.POST.LIST, element: <ListPostsPage /> },
+        { path: 'test', element: <HomePage /> },
       ],
     },
 

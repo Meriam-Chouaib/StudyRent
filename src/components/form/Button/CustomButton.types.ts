@@ -4,4 +4,6 @@ export interface CustomButtonProps extends ButtonProps {
   isLoading?: boolean;
   children?: ReactNode;
   onClick?: () => void;
+  colorBack?: string;
+  colorText?: string;
 }

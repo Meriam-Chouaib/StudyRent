@@ -5,6 +5,9 @@ import { signin } from './signin';
 import { signup } from './signup';
 import { home } from './home';
 import { footer } from './footer';
+import { dashboardListPosts } from './dashboardListPosts';
+import { dashboardSidebar } from './dashboardSidebar';
+import { dashboardAddPost } from './dashboardAddPost';
 export const fr = {
   signin: signin,
   signup: signup,
@@ -13,4 +16,7 @@ export const fr = {
   footer: footer,
   sidebar: sidebar,
   postForm: postForm,
+  dashboardListPosts: dashboardListPosts,
+  dashboardSidebar: dashboardSidebar,
+  dashboardAddPost: dashboardAddPost,
 };

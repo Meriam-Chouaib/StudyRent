@@ -1,9 +1,22 @@
-import { Post, PostResponse, Result } from './post.types';
+import { Image, Post, PostResponse, PostResponseData } from './post.types';
 
-export function decodPosts(result: Result): Post[] {
-  console.log('decoder', result.data);
-
-  return result.data;
+export function decodePosts(result: PostResponseData): Post[] {
+  const decoded: Post[] = result.data.map((res) => {
+    const decodedPost: Post = {
+      ...res,
+      images: res.files?.map((fileRes) => {
+        const decodedFileRes: Image = {
+          fileName: fileRes.filename,
+        };
+        return decodedFileRes;
+      }),
+      datePost: new Date(res.datePost),
+      price: Number.parseInt(res.price),
+      postal_code: Number.parseInt(res.postal_code),
+    };
+    return decodedPost;
+  });
+  return decoded;
 }
 export function decodAddPost(response: PostResponse): PostResponse {
   return { ...response };

@@ -1,28 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Box, Grid } from '@mui/material';
 import React, { useState } from 'react';
-import { Input, Grid, Box } from '@mui/material';
 import { Image } from './InputFile.styles';
+import InputStandard from './InputStandard';
 interface ImageInputProps {
-  onSelectImages: (images: File[]) => void;
+  onSelectImages: (images: any) => void;
 }
-interface IFile {
-  filename: string;
-}
+
 export default function ImageInput(props: ImageInputProps) {
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
-  const [files, setFiles] = useState<IFile[]>([]);
-  const handleSelectImages = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      files.push({ filename: Array.from(event.target.files)[0]?.name });
-      if (files) console.log(files);
-
-      setSelectedImages(selectedImages);
-      event.target.value = '';
-      return { files: files };
-    } else {
-      // setSelectedImages([]);
-      setFiles([]);
-    }
-  };
 
   React.useEffect(() => {
     props.onSelectImages(selectedImages);
@@ -30,11 +16,12 @@ export default function ImageInput(props: ImageInputProps) {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <Input
+      <InputStandard
+        name={'files'}
+        label={'files'}
         type="file"
-        inputProps={{ multiple: true }}
-        onChange={handleSelectImages}
-        error={true}
+        onChange={props.onSelectImages}
+        multiple={true}
       />
       {selectedImages.length > 0 && (
         <Grid container spacing={2} sx={{ mt: 2 }}>

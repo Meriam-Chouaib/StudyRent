@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // form
 import { useFormContext, Controller } from 'react-hook-form';
 // @mui
@@ -9,11 +10,13 @@ import theme from '../../theme';
 interface TextFieldProps extends StandardTextFieldProps {
   name: string;
   label: string;
-  type?: 'text' | 'password';
+  type?: 'text' | 'password' | 'file' | 'number';
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  inputProps?: any;
 }
 
 export default function RHFTextField({ name, label, ...other }: TextFieldProps) {
-  const { control } = useFormContext();
+  const { control, register } = useFormContext();
   const { t } = useTranslation();
 
   return (
@@ -32,6 +35,7 @@ export default function RHFTextField({ name, label, ...other }: TextFieldProps) 
           error={!!error}
           helperText={error && error.message && t(error?.message)}
           {...other}
+          {...register(name)}
         />
       )}
     />

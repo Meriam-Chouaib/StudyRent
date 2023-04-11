@@ -21,6 +21,7 @@ export const PATHS = {
       LIST: 'posts',
       ADD: 'posts/create',
     },
+    CHAT: 'chat',
   },
   MAIN: {
     HOME: '',

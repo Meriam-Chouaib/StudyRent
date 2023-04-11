@@ -18,6 +18,7 @@ import icon_google from '../../../assets/images/google-bleu-clair.svg';
 import decoFooter from '../../../assets/images/footer_deco_back.svg';
 import theme from '../../../theme';
 import { PATHS } from '../../../config/paths';
+import { BoxHistory, BoxMenu } from './footer.styles';
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -27,17 +28,17 @@ export default function Footer() {
         <BoxCenterStyled>
           <LogoFooter />
           <BoxCenterSpaceBetween>
-            <Box sx={{ width: '34%' }}>
+            <BoxHistory>
               <Typography variant="subtitle2">{t('footer.title_histoy')}</Typography>
               <Typography variant="body1">{t('footer.txt_history')}</Typography>
-            </Box>
+            </BoxHistory>
             <Box>
-              <BoxCenterStyled sx={{ gap: '1rem' }}>
+              <BoxMenu>
                 <StyledLinkFooter to={PATHS.MAIN.HOME}>{t('header.link_home')}</StyledLinkFooter>
                 <StyledLinkFooter to={PATHS.ABOUT}>{t('header.link_about')}</StyledLinkFooter>
                 <StyledLinkFooter to={PATHS.POSTS}>{t('header.link_posts')}</StyledLinkFooter>
                 <StyledLinkFooter to={PATHS.CONTACT}>{t('header.link_contact')}</StyledLinkFooter>
-              </BoxCenterStyled>
+              </BoxMenu>
             </Box>
           </BoxCenterSpaceBetween>
           <Box marginY={2}>

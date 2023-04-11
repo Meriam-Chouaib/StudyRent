@@ -6,6 +6,8 @@ export interface CardPostProps extends CardProps {
   city: string;
   img: string;
   isHovered?: boolean;
+
+  isPoster?: boolean;
 }
 export interface ItemProps {
   label: string;

@@ -5,6 +5,9 @@ import { home } from './home';
 import { footer } from './footer';
 import { sidebar } from './sidebar';
 import { postForm } from './postForm';
+import { dashboardListPosts } from './dashboardListPosts';
+import { dashboardSidebar } from './dashboardSidebar';
+import { dashboardAddPost } from './dashboardAddPost';
 
 export const en = {
   signin: signin,
@@ -14,4 +17,7 @@ export const en = {
   footer: footer,
   sidebar: sidebar,
   postForm: postForm,
+  dashboardListPosts: dashboardListPosts,
+  dashboardSidebar: dashboardSidebar,
+  dashboardAddPost: dashboardAddPost,
 };

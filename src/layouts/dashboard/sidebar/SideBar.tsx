@@ -7,20 +7,27 @@ import logoDark from '../../../assets/images/logo-bleu-roi.svg';
 import { LogoHeader } from '../../../components';
 import { ImageSideBack } from '../../../components/image/ImageSideBack.styles';
 import ImgBack from '../../../assets/images/ImgBackSideBar.svg';
-export default function SideBar({ items }: SideBarProps) {
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { PATHS } from '../../../config/paths';
+export default function SideBar({ items, activePath }: SideBarProps) {
+  // const [isActive, setIsActive] = useState(false);
+
+  const { t } = useTranslation();
   return (
     <BoxSidebar>
       <BoxItemsSidebar>
         <>
           <LogoHeader sx={{ height: '50px' }} src={logoDark} alt={'logo'} />
           <Box sx={{ marginTop: '5rem' }}>
-            {items.map((item) => (
+            {items.map((item, index) => (
               <ItemSideBar
                 icon={item.icon}
-                txt={item.txt}
+                txt={t(item.txt)}
                 key={item.txt}
                 path={item.path}
-                isActive={item.isActive}
+                isActive={activePath === `/${PATHS.DASHBOARD.ROOT}/${item.path}`}
                 bgColor={`${theme.palette.warning.main}`}
               />
             ))}

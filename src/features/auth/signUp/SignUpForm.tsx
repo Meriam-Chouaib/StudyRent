@@ -24,6 +24,7 @@ import { RegisterSchema } from './ValidationSchema';
 import { IRegisterRequest } from '../../../redux/api/auth/auth.api.types';
 import { SelectField } from '../../../components/selectField/SelectField';
 import { CONSTANTS } from '../../../config/constants';
+import theme from '../../../theme';
 
 // ----------------------------------------------------------------------
 
@@ -134,7 +135,13 @@ export default function SignUpForm() {
           name={fields.role.name}
           options={Roles}
         />
-        <CustomButton isLoading={isSubmitting}>{t('signup.confirm_btn')}</CustomButton>
+        <CustomButton
+          isLoading={isSubmitting}
+          colorBack={theme.palette.primary.dark}
+          colorText={theme.palette.warning.dark}
+        >
+          {t('signup.confirm_btn')}
+        </CustomButton>
 
         <Link to={`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.SINGNIN}`}>
           <Typography variant="h6">{t('signup.back_btn')}</Typography>
