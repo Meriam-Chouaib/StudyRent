@@ -25,8 +25,8 @@ export const SelectField = (props: SelectFieldProps & SelectProps & InputProps) 
       name={name}
       render={({ field, fieldState: { error } }) => {
         return (
-          <Stack>
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <Stack width={'100%'}>
+            <FormControl variant="standard" sx={{ m: 1 }}>
               <InputLabel htmlFor={id} color={'primary'}>
                 {
                   <span style={{ color: `${theme.palette.primary.dark}`, fontWeight: 600 }}>
@@ -34,7 +34,7 @@ export const SelectField = (props: SelectFieldProps & SelectProps & InputProps) 
                   </span>
                 }
               </InputLabel>
-              <Select {...field} id={id} displayEmpty error={!!error}>
+              <Select {...field} id={id} displayEmpty error={!!error} fullWidth>
                 {options.map((option: any) => (
                   <MenuItem key={option} value={option} color={'primary'}>
                     {<span style={{ color: `${theme.palette.primary.dark}` }}>{option}</span>}

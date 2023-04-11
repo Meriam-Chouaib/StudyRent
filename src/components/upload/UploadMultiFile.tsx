@@ -12,11 +12,12 @@ import RejectionFiles from './RejectionFiles';
 
 const DropZoneStyle = styled('div')(({ theme }) => ({
   outline: 'none',
-  padding: theme.spacing(5, 1),
+  padding: theme.spacing(2, 1),
   borderRadius: theme.shape.borderRadius,
   backgroundColor: theme.palette.background.paper,
   border: `1px dashed ${theme.palette.grey[500]}`,
   '&:hover': { opacity: 0.72, cursor: 'pointer' },
+  [theme.breakpoints.down('md')]: {},
 }));
 
 // ----------------------------------------------------------------------
@@ -54,7 +55,7 @@ export default function UploadMultiFile({
   }, [getInputProps]);
 
   return (
-    <Box sx={{ width: '100%', ...sx }}>
+    <Box sx={{ width: '84%', ...sx }}>
       <DropZoneStyle
         {...getRootProps()}
         sx={{

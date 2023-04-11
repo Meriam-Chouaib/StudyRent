@@ -36,7 +36,8 @@ export const Posts = ({
             {data?.map((post: Post) => (
               <CardPost
                 title={post.title}
-                img={post.images[0].name || ''}
+                // img={post.images[0].filename || ''}
+                img={''}
                 city={post.city}
                 price={post.price}
                 isPoster={post.posterId == user.id ? true : false}

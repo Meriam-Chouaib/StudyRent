@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 
 // @mui
 import { Alert, Box, Stack } from '@mui/material';
-import { CustomButton } from '../../../components';
+import { BoxSpaceBetween, CustomButton } from '../../../components';
 // components
 import { FormProvider, TextField } from '../../../components/hookform';
 import { PostModel } from '../../../models/Post.model';
@@ -82,6 +82,9 @@ export const AddPost = () => {
       values.images.forEach((file: any) => {
         data.append('files', file);
       });
+      console.log('values', values);
+      console.log('files from formData', data.get('files'));
+      console.log('post from formdata', data.get('post'));
 
       await addPost(data)
         .unwrap()
@@ -143,7 +146,7 @@ export const AddPost = () => {
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={3} alignItems={'center'} justifyContent={'space-between'}>
+      <Stack spacing={3} alignItems={'center'} justifyContent={'space-between'} width={'90'}>
         {problem && <Alert severity="error">{problem}</Alert>}
 
         <TextField name={fields.title.name} type={'text'} label={t(fields.title.label)} />
@@ -164,15 +167,17 @@ export const AddPost = () => {
           onRemove={handleRemove}
           onRemoveAll={handleRemoveAll}
         />
-        <Box sx={{ display: 'flex' }}>
+        <BoxSpaceBetween>
           <SelectField
             id={'nb_roommate'}
+            type={'text'}
             label={t(fields.nb_roommate.label)}
             placeholder={t(fields.nb_roommate.label)}
             name={fields.nb_roommate.name}
             options={[0, 1, 2, 3, 4]}
           />
           <SelectField
+            fullWidth
             variant="standard"
             id={'nb_rooms'}
             label={t(fields.nb_rooms.label)}
@@ -180,15 +185,9 @@ export const AddPost = () => {
             name={fields.nb_rooms.name}
             options={[0, 1, 2, 3, 4]}
           />
-        </Box>
+        </BoxSpaceBetween>
 
-        <Box sx={{ display: 'flex' }}>
-          <TextField
-            name={fields.postal_code.name}
-            type={'number'}
-            label={t(fields.postal_code.label)}
-          />
-
+        <BoxSpaceBetween>
           <SelectField
             variant="standard"
             id={'city'}
@@ -205,7 +204,13 @@ export const AddPost = () => {
             name={fields.state.name}
             options={['Monastir', 'Sousse', 'Zaghouan', 'Mahdia', 'Hammemet']}
           />
-        </Box>
+        </BoxSpaceBetween>
+        <TextField
+          name={fields.postal_code.name}
+          type={'text'}
+          label={t(fields.postal_code.label)}
+        />
+
         <CustomButton
           isLoading={isSubmitting}
           colorBack={`${theme.palette.primary.main}`}
