@@ -19,11 +19,11 @@ export const PostModel = {
       requiredErrorMessage: 'postForm.price_required',
       invaliErrorMessage: 'postForm.price_invalid',
     },
-    colocation: {
-      label: 'postForm.colocation_label',
-      name: 'colocation',
-      requiredErrorMessage: 'postForm.colocation_required',
-    },
+    // colocation: {
+    //   label: 'postForm.colocation_label',
+    //   name: 'colocation',
+    //   requiredErrorMessage: 'postForm.colocation_required',
+    // },
     files: {
       label: 'postForm.images_rooms_label',
       name: 'images',
@@ -85,7 +85,7 @@ export const PostModel = {
     price: 0,
     colocation: 0,
     surface: 0,
-    files: [],
+    images: [],
     nb_roommate: 0,
     nb_rooms: 0,
     postal_code: 0,

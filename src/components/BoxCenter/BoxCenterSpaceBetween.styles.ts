@@ -9,3 +9,8 @@ export const BoxCenterSpaceBetween = styled(Box)(() => ({
     justifyContent: 'center',
   },
 }));
+export const BoxSpaceBetween = styled(Box)(() => ({
+  display: 'flex',
+  width: '84%',
+  justifyContent: 'space-between',
+}));

@@ -1,7 +1,7 @@
-import { Container, Box } from '@mui/material';
+import { Container } from '@mui/material';
+import { COLORS } from '../../config/colors';
 import { GetStarted, Posts } from '../../features';
 import { Contact } from '../../features/home/contact/Contact';
-import { COLORS } from '../../config/colors';
 
 export function HomePage() {
   return (
@@ -10,8 +10,8 @@ export function HomePage() {
         <GetStarted />
 
         <Posts
-          page={3}
-          rowsPerPage={9}
+          page={1}
+          rowsPerPage={6}
           color={COLORS.PRIMARY.DARK}
           padding="4rem 5rem"
           margin="2rem 0"

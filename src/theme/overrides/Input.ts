@@ -1,4 +1,4 @@
-export function Grid() {
+export function Input() {
   return {
     MuiInput: {
       root: {},

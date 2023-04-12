@@ -3,15 +3,15 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 // components
+import { BoxEditDelete } from './BoxEditDelete/BoxEditDelete';
 import { BoxHoverEye, CardPostStyled } from './CardPost.style';
 import { CardPostProps } from './CardPost.type';
-import { BoxEditDelete } from './BoxEditDelete/BoxEditDelete';
 import { InfoCard } from './InfoCard';
 
 // mui
-import { Box, CardContent, CardMedia, Typography } from '@mui/material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import Modal from '@material-ui/core/Modal';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { Box, CardContent, CardMedia, Typography } from '@mui/material';
 
 import { ReactComponent as Not_found_img } from '../../assets/images/empty_item.svg';
 import { STATIC_URL } from '../../config/config';
@@ -22,6 +22,7 @@ import { AddPost } from '../../features';
 import { useDeletePostMutation } from '../../redux/api/post/post.api';
 import { BoxModal } from '../BoxCenter/BoxModal.styles';
 
+import { BoxCenter } from '../BoxCenter/BoxCenter.styles';
 export const CardPost = ({ title, price, city, img, isPoster, idPost }: CardPostProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -70,7 +71,9 @@ export const CardPost = ({ title, price, city, img, isPoster, idPost }: CardPost
             {/* )} */}
           </>
         ) : (
-          <Not_found_img height={140} width={'100%'} />
+          <BoxCenter>
+            <Not_found_img height={130} width={'100%'} />
+          </BoxCenter>
         )}
         <>
           <BoxEditDelete
