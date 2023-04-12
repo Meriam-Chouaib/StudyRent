@@ -1,4 +1,4 @@
-import { Box, styled } from '@mui/material';
+import { Box, Button, styled } from '@mui/material';
 import theme from '../../../theme';
 export const BoxEditDeleteStyled = styled(Box)(() => ({
   backgroundColor: theme.palette.warning.main,
@@ -19,4 +19,8 @@ export const BoxIconStyled = styled(Box)(() => ({
 
   justifyContent: 'center',
   alignItems: 'center',
+}));
+export const ButtonConfirm = styled(Button)(() => ({
+  fontSize: '14px',
+  fontWeight: 700,
 }));

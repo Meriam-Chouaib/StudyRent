@@ -3,7 +3,7 @@ import { BoxIconStyled } from './BoxEditDelete.styles';
 import { ButtonIcon } from '../../Icon/Icon.styles';
 interface BoxIconProps {
   children: ReactNode;
-  handleSubmit: () => void;
+  handleSubmit?: () => void;
 }
 export const BoxIcon = ({ children, handleSubmit }: BoxIconProps) => {
   return (

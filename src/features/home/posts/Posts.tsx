@@ -5,7 +5,6 @@ import { CustomBoxPosts } from './Posts.styles';
 import { BoxCenter, BoxPosts, ButtonWithIcon, CardPost } from '../../../components';
 // mui
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
-
 import { Pagination } from '@mui/material';
 import usePaginator from '../../../hooks/usePaginator';
 import { useGetPostsQuery } from '../../../redux/api/post/post.api';
@@ -44,6 +43,7 @@ export const Posts = ({ color, padding, margin, withButton, withPagination }: Po
                 isPoster={post.posterId == user.id}
                 key={post.id}
                 idPost={post.id}
+                PosterId={post.posterId}
               />
             ))}
           </BoxPosts>
@@ -53,13 +53,10 @@ export const Posts = ({ color, padding, margin, withButton, withPagination }: Po
               txt={t('home.posts_btn') as string}
             />
           )}
-          <BoxCenter paddingY={3}>
-            <Pagination count={10} color="primary" onChange={(_e, page) => onChangePage(page)} />
-          </BoxCenter>
 
           {withPagination && (
             <BoxCenter paddingY={3}>
-              <Pagination count={10} color="primary" />
+              <Pagination count={10} color="primary" onChange={(_e, page) => onChangePage(page)} />
             </BoxCenter>
           )}
         </CustomBoxPosts>

@@ -8,6 +8,7 @@ export interface CardPostProps extends CardProps {
   isHovered?: boolean;
   idPost: number;
   isPoster?: boolean;
+  PosterId?: number;
 }
 export interface ItemProps {
   label: string;

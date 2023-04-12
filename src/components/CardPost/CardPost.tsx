@@ -21,11 +21,22 @@ import { AddPost } from '../../features';
 // mutation
 import { useDeletePostMutation } from '../../redux/api/post/post.api';
 import { BoxModal } from '../BoxCenter/BoxModal.styles';
-
+// style
 import { BoxCenter } from '../BoxCenter/BoxCenter.styles';
-export const CardPost = ({ title, price, city, img, isPoster, idPost }: CardPostProps) => {
+
+export const CardPost = ({
+  title,
+  price,
+  city,
+  img,
+  isPoster,
+  idPost,
+  PosterId,
+}: CardPostProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log('7777777777777777', isPoster);
+  console.log('8888888888888888', PosterId);
 
   // translation
   const { t } = useTranslation();
@@ -53,6 +64,7 @@ export const CardPost = ({ title, price, city, img, isPoster, idPost }: CardPost
   const handleClose = () => {
     setIsModalOpen(false);
   };
+
   return (
     <>
       <CardPostStyled onMouseEnter={handleHover} onMouseLeave={handleMouseLeave}>
@@ -79,7 +91,9 @@ export const CardPost = ({ title, price, city, img, isPoster, idPost }: CardPost
           <BoxEditDelete
             handleDelete={() => handleDelete(idPost)}
             handleEdit={() => handleEdit(idPost)}
+            idPost={idPost}
           />
+
           {isModalOpen && (
             <Modal
               open={isModalOpen}
@@ -92,7 +106,6 @@ export const CardPost = ({ title, price, city, img, isPoster, idPost }: CardPost
               </BoxModal>
             </Modal>
           )}
-
           <CardContent>
             <Typography gutterBottom variant="subtitle1" component="div">
               {title}
