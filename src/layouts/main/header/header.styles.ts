@@ -38,6 +38,7 @@ export const IconUserStatus = styled(Box)({
   top: 0,
   right: 0,
   color: 'transparent',
+  objectFit: 'contain',
 
   height: '11px',
   width: '11px',
@@ -63,6 +64,7 @@ export const ImgProfile = styled('img')({
   height: 33,
   Width: '33 px',
   borderRadius: 27,
+  objectFit: 'contain',
   [theme.breakpoints.down('sm')]: {
     height: 25,
     Width: 'auto !important',

@@ -1,6 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Post, PostState } from '../post/post.types';
 import { postApi } from '../post/post.api';
+import { getPersistData } from '../../../utils';
+import { getToken } from '../../../utils/generate.token';
 const initialState: PostState = {
   post: null,
   isLoading: false,
@@ -12,6 +14,8 @@ export const postSlice = createSlice({
   reducers: {
     addPost: (state, action: PayloadAction<Post>) => {
       state.post = action.payload;
+
+      state.post.posterId = getPersistData('user', true).id;
       state.isLoading = false;
       state.error = null;
     },
@@ -27,9 +31,11 @@ export const postSlice = createSlice({
       .addMatcher(postApi.endpoints.addPost.matchFulfilled, (state, action) => {
         const response = action.payload;
         const { post, message, status } = response;
+
         state.post = post;
         state.isLoading = false;
         state.error = null;
+        console.log('rrrhhhrrr', getToken());
       })
       .addMatcher(postApi.endpoints.addPost.matchPending, (state) => {
         state.post = null;

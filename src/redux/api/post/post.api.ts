@@ -1,10 +1,11 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { PATHS } from '../../../config/paths';
-import { baseQueryConfig } from './../../baseQueryConfig ';
+import { authorizeWithToken, baseQueryConfig } from './../../baseQueryConfig ';
 import { decodAddPost, decodePosts } from './decoder';
 import { Post, PostResponse, PostResponseData } from './post.types';
 export const postApi = createApi({
   reducerPath: 'posts',
+  // baseQuery: authorizeWithToken,
   baseQuery: baseQueryConfig,
   tagTypes: ['POSTS'],
   endpoints: (builder) => ({

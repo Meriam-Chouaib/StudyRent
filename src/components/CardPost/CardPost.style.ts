@@ -9,7 +9,7 @@ export const CardPostStyled = styled(Card)(() => ({
   width: '18rem',
   [theme.breakpoints.down('sm')]: {
     width: '13rem',
-    height: '14rem',
+    height: '15rem',
   },
 }));
 export const BoxHoverEye = styled(Box)(() => ({

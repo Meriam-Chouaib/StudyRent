@@ -32,11 +32,10 @@ export const CardPost = ({
   isPoster,
   idPost,
   PosterId,
+  isHomePage,
 }: CardPostProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log('7777777777777777', isPoster);
-  console.log('8888888888888888', PosterId);
 
   // translation
   const { t } = useTranslation();
@@ -58,7 +57,6 @@ export const CardPost = ({
 
   // edit post
   const handleEdit = (id: number) => {
-    console.log('handleEdit', id);
     setIsModalOpen(true);
   };
   const handleClose = () => {
@@ -88,24 +86,28 @@ export const CardPost = ({
           </BoxCenter>
         )}
         <>
-          <BoxEditDelete
-            handleDelete={() => handleDelete(idPost)}
-            handleEdit={() => handleEdit(idPost)}
-            idPost={idPost}
-          />
-
-          {isModalOpen && (
-            <Modal
-              open={isModalOpen}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <BoxModal>
-                <AddPost isEdit={true} />
-              </BoxModal>
-            </Modal>
+          {!isHomePage && (
+            <>
+              <BoxEditDelete
+                handleDelete={() => handleDelete(idPost)}
+                handleEdit={() => handleEdit(idPost)}
+                idPost={idPost}
+              />
+              {isModalOpen && (
+                <Modal
+                  open={isModalOpen}
+                  onClose={handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <BoxModal>
+                    <AddPost isEdit={true} />
+                  </BoxModal>
+                </Modal>
+              )}
+            </>
           )}
+
           <CardContent>
             <Typography gutterBottom variant="subtitle1" component="div">
               {title}

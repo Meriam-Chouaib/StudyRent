@@ -16,6 +16,7 @@ export function HomePage() {
           padding="4rem 5rem"
           margin="2rem 0"
           withButton={true}
+          isHomePage={true}
         />
 
         <Contact />

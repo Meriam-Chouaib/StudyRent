@@ -9,6 +9,7 @@ export interface CardPostProps extends CardProps {
   idPost: number;
   isPoster?: boolean;
   PosterId?: number;
+  isHomePage?: boolean;
 }
 export interface ItemProps {
   label: string;

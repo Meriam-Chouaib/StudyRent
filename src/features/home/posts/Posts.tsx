@@ -13,7 +13,14 @@ import { getPersistData } from '../../../utils';
 import { PostsProps } from './Posts.types';
 import { initialPostsPaginator } from './posts.constants';
 
-export const Posts = ({ color, padding, margin, withButton, withPagination }: PostsProps) => {
+export const Posts = ({
+  color,
+  padding,
+  margin,
+  withButton,
+  withPagination,
+  isHomePage,
+}: PostsProps) => {
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator(initialPostsPaginator);
 
   const { data, isLoading, isError, error } = useGetPostsQuery(paginator);
@@ -40,10 +47,11 @@ export const Posts = ({ color, padding, margin, withButton, withPagination }: Po
                 img={getDefaultImagePath(post.images)}
                 city={post.city}
                 price={post.price}
-                isPoster={post.posterId == user.id}
+                //    isPoster={post.posterId === user?.id}
                 key={post.id}
                 idPost={post.id}
                 PosterId={post.posterId}
+                isHomePage={isHomePage}
               />
             ))}
           </BoxPosts>
