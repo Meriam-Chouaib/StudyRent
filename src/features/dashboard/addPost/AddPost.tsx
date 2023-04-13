@@ -82,7 +82,8 @@ export const AddPost = () => {
       values.images.forEach((file: any) => {
         data.append('files', file);
       });
-
+      console.log('files from formData', data.get('files'));
+      console.log('post from formdata', data.get('post'));
       await addPost(data)
         .unwrap()
         .then((res) => {
