@@ -92,14 +92,10 @@ export const AddPost = ({ isEdit }: { isEdit: boolean }) => {
       values.images.forEach((file: any) => {
         data.append('files', file);
       });
-      console.log('values', values);
-      console.log('files from formData', data.get('files'));
-      console.log('post from formdata', data.get('post'));
 
       await addPost(data)
         .unwrap()
         .then((res) => {
-          console.log('data', data);
           console.log('res', res);
         })
         .catch((err) => {
@@ -122,10 +118,8 @@ export const AddPost = ({ isEdit }: { isEdit: boolean }) => {
   };
 
   const handleSelectImages = (event: any) => {
-    console.log(selectedImages);
     selectedImages.push(event?.target?.files[0]);
     setSelectedImages(selectedImages);
-    console.log(selectedImages);
   };
 
   // ---------------------------------***----------------------------------//
