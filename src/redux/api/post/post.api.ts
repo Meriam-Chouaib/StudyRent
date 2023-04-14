@@ -1,12 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { PATHS } from '../../../config/paths';
-import { authorizeWithToken, baseQueryConfig } from './../../baseQueryConfig ';
-import { decodAddPost, decodePosts } from './decoder';
-import { Post, PostResponse, PostResponseData } from './post.types';
+import { authorizeWithToken } from './../../baseQueryConfig ';
+import { decodAddPost, decodePost, decodePosts } from './decoder';
+import { Post, PostResponse, PostResponseData, SinglePostResponseData } from './post.types';
 export const postApi = createApi({
   reducerPath: 'posts',
-  // baseQuery: authorizeWithToken,
-  baseQuery: baseQueryConfig,
+  baseQuery: authorizeWithToken,
+
   tagTypes: ['POSTS'],
   endpoints: (builder) => ({
     getPosts: builder.query({
@@ -17,6 +17,16 @@ export const postApi = createApi({
       },
       transformResponse: (result: PostResponseData): Post[] => {
         return decodePosts(result);
+      },
+    }),
+    getPost: builder.query({
+      query(id) {
+        return {
+          url: `${PATHS.POSTS}/${id}`,
+        };
+      },
+      transformResponse: (result: SinglePostResponseData): Post => {
+        return decodePost(result);
       },
     }),
     addPost: builder.mutation<PostResponse, FormData>({
@@ -46,5 +56,10 @@ export const postApi = createApi({
     }),
   }),
 });
-export const { useGetPostsQuery, useAddPostMutation, useDeletePostMutation, useEditPostMutation } =
-  postApi;
+export const {
+  useGetPostsQuery,
+  useAddPostMutation,
+  useDeletePostMutation,
+  useEditPostMutation,
+  useGetPostQuery,
+} = postApi;

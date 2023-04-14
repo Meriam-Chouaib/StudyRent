@@ -83,7 +83,7 @@ export const PostModel = {
     title: '',
     description: '',
     price: 0,
-    colocation: 0,
+    // colocation: 0,
     surface: 0,
     images: [],
     nb_roommate: 0,
@@ -92,5 +92,8 @@ export const PostModel = {
     city: '',
     state: '',
     posterId: 0,
+    likes: 0,
+
+    isLocated: false,
   },
 };

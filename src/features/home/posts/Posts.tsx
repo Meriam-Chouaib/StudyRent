@@ -12,6 +12,7 @@ import { Image, Post } from '../../../redux/api/post/post.types';
 import { getPersistData } from '../../../utils';
 import { PostsProps } from './Posts.types';
 import { initialPostsPaginator } from './posts.constants';
+import { LoaderBox } from '../../../components/Loader/LoaderBox';
 
 export const Posts = ({
   color,
@@ -25,6 +26,7 @@ export const Posts = ({
 
   const { data, isLoading, isError, error } = useGetPostsQuery(paginator);
   const user = getPersistData('user', true);
+  console.log(data);
 
   const { t } = useTranslation();
 
@@ -35,9 +37,7 @@ export const Posts = ({
   return (
     <>
       {isLoading ? (
-        <BoxCenter width={'100%'} height={'100vh'}>
-          <ClipLoader color="primary" size={100} />
-        </BoxCenter>
+        <LoaderBox />
       ) : (
         <CustomBoxPosts bgcolor={color} margin={margin} padding={padding}>
           <BoxPosts>

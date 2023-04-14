@@ -1,4 +1,4 @@
-import { Image, Post, PostResponse, PostResponseData } from './post.types';
+import { Image, Post, PostResponse, PostResponseData, SinglePostResponseData } from './post.types';
 
 export function decodePosts(result: PostResponseData): Post[] {
   const decoded: Post[] = result.data.map((res) => {
@@ -20,4 +20,19 @@ export function decodePosts(result: PostResponseData): Post[] {
 }
 export function decodAddPost(response: PostResponse): PostResponse {
   return { ...response };
+}
+export function decodePost(response: SinglePostResponseData): Post {
+  const decodedPost: Post = {
+    ...response.data,
+    images: response.data.files?.map((fileRes) => {
+      const decodedFileRes: Image = {
+        fileName: fileRes.filename,
+      };
+      return decodedFileRes;
+    }),
+    datePost: new Date(response.data.datePost),
+    price: Number.parseInt(response.data.price),
+    postal_code: Number.parseInt(response.data.postal_code),
+  };
+  return decodedPost;
 }

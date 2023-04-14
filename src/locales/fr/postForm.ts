@@ -62,4 +62,5 @@ export const postForm = {
 
   add_post: 'Ajout annonce',
   edit_post: 'Confirmer',
+  edit_post_title: 'Modifier annonce',
 };

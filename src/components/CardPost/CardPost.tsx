@@ -57,7 +57,7 @@ export const CardPost = ({
 
   // edit post
   const handleEdit = (id: number) => {
-    setIsModalOpen(true);
+    console.log('edit post', id);
   };
   const handleClose = () => {
     setIsModalOpen(false);
@@ -93,18 +93,6 @@ export const CardPost = ({
                 handleEdit={() => handleEdit(idPost)}
                 idPost={idPost}
               />
-              {isModalOpen && (
-                <Modal
-                  open={isModalOpen}
-                  onClose={handleClose}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <BoxModal>
-                    <AddPost isEdit={true} />
-                  </BoxModal>
-                </Modal>
-              )}
             </>
           )}
 

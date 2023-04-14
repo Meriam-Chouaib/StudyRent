@@ -5,10 +5,10 @@ export interface Image {
 }
 export interface Post {
   id: number;
-  datePost: Date;
+  datePost?: Date;
   title: string;
   description: string;
-  posterId: number;
+  posterId?: number;
   likes: number;
   poster?: IUser;
   images?: Image[];
@@ -60,6 +60,11 @@ export interface PostState {
 export interface PostResponseData {
   status: number;
   data: PostData[];
+  message: string;
+}
+export interface SinglePostResponseData {
+  status: number;
+  data: PostData;
   message: string;
 }
 

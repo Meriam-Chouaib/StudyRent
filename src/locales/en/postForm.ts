@@ -61,4 +61,5 @@ export const postForm = {
 
   add_post: 'Add post',
   edit_post: 'Confirm',
+  edit_post_title: 'Update post',
 };
