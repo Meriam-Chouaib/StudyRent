@@ -2,7 +2,7 @@
 // @mui
 
 /** */
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 // form
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -18,19 +18,30 @@ import { PostSchema } from './ValidationSchema';
 
 import { RHFUploadMultiFile } from '../../../components/hookform/RHFUploadFile';
 import { SelectField } from '../../../components/selectField/SelectField';
-import { useAddPostMutation } from '../../../redux/api/post/post.api';
-import { IPostRequest } from '../../../redux/api/post/post.types';
+import { useAddPostMutation, useGetPostQuery } from '../../../redux/api/post/post.api';
+import { IPostRequest, Post } from '../../../redux/api/post/post.types';
 import { IUser } from '../../../redux/api/user/user.types';
 import theme from '../../../theme';
 import { getPersistData } from '../../../utils';
+import { useParams } from 'react-router-dom';
+import { LoaderBox } from '../../../components/Loader/LoaderBox';
 
 // ----------------------------------------------------------------------
+interface AddPostProps {
+  btn_txt: string;
+  isEdit?: boolean;
+}
+export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
+  const { fields, defaultValues } = PostModel;
 
-export const AddPost = ({ isEdit }: { isEdit: boolean }) => {
   const [problem, setProblem] = useState('');
   const [selectedImages, setSelectedImages] = useState<any>([]);
   const user: IUser = getPersistData('user', true);
-  const { fields, defaultValues } = PostModel;
+
+  // -------------- get the post information----------
+
+  const { id } = useParams();
+
   const [addPost] = useAddPostMutation();
   const { t } = useTranslation();
   const methods = useForm({
@@ -41,6 +52,7 @@ export const AddPost = ({ isEdit }: { isEdit: boolean }) => {
   const {
     control,
     reset,
+
     setError,
     setValue,
     watch,
@@ -75,23 +87,17 @@ export const AddPost = ({ isEdit }: { isEdit: boolean }) => {
       state,
       posterId: user.id,
     };
+
     try {
       const data = new FormData();
-      //   const imageBlobs: Blob[] = [];
-      //   selectedImages.forEach((file) => {
-      //     const blob = new Blob([file], { type: file.type });
-      //     imageBlobs.push(blob);
-      //   });
-      //   imageBlobs.forEach((blob, index) => {
-      //     data.append(`files`, blob, selectedImages[index].name);
-      //   });
-      // console.log(imageBlobs);
+
       console.log(selectedImages);
 
       data.append('post', JSON.stringify(values));
       values.images.forEach((file: any) => {
         data.append('files', file);
       });
+      console.log(values);
 
       await addPost(data)
         .unwrap()
@@ -117,11 +123,6 @@ export const AddPost = ({ isEdit }: { isEdit: boolean }) => {
     }
   };
 
-  const handleSelectImages = (event: any) => {
-    selectedImages.push(event?.target?.files[0]);
-    setSelectedImages(selectedImages);
-  };
-
   // ---------------------------------***----------------------------------//
 
   const handleDrop = useCallback(
@@ -145,84 +146,109 @@ export const AddPost = ({ isEdit }: { isEdit: boolean }) => {
     const filteredItems = values.images?.filter((_file) => _file !== file);
     setValue('images', filteredItems);
   };
+  const { data, isLoading, isError } = useGetPostQuery(id);
 
+  useEffect(() => {
+    if (data) {
+      setTimeout(() => {
+        reset({
+          title: data.title,
+          description: data.description,
+          price: data.price,
+          surface: data.surface,
+          nb_roommate: data.nb_roommate,
+          nb_rooms: data.nb_rooms,
+          city: data.city,
+          state: data.state,
+          postal_code: data.postal_code,
+          // images: data?.images,
+        });
+      }, 2000);
+    }
+  }, [data, reset]);
   // ---------------------------------***----------------------------------//
 
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={3} alignItems={'center'} justifyContent={'space-between'} width={'90'}>
-        {problem && <Alert severity="error">{problem}</Alert>}
+    <>
+      {isLoading ? (
+        <LoaderBox />
+      ) : (
+        <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+          <Stack spacing={3} alignItems={'center'} justifyContent={'space-between'} width={'90'}>
+            {problem && <Alert severity="error">{problem}</Alert>}
 
-        <TextField name={fields.title.name} type={'text'} label={t(fields.title.label)} />
-        <TextField
-          name={fields.description.name}
-          type={'text'}
-          label={t(fields.description.label)}
-        />
+            <TextField name={fields.title.name} type={'text'} label={t(fields.title.label)} />
+            <TextField
+              name={fields.description.name}
+              type={'text'}
+              label={t(fields.description.label)}
+            />
 
-        <TextField name={fields.price.name} type={'text'} label={t(fields.price.label)} />
-        <TextField name={fields.surface.name} type={'text'} label={t(fields.surface.label)} />
-        <RHFUploadMultiFile
-          name={fields.files.name}
-          showPreview={true}
-          accept="image/*"
-          maxSize={3145728645684684}
-          onDrop={handleDrop}
-          onRemove={handleRemove}
-          onRemoveAll={handleRemoveAll}
-        />
-        <BoxSpaceBetween>
-          <SelectField
-            id={'nb_roommate'}
-            type={'text'}
-            label={t(fields.nb_roommate.label)}
-            placeholder={t(fields.nb_roommate.label)}
-            name={fields.nb_roommate.name}
-            options={[0, 1, 2, 3, 4]}
-          />
-          <SelectField
-            fullWidth
-            variant="standard"
-            id={'nb_rooms'}
-            label={t(fields.nb_rooms.label)}
-            placeholder={t(fields.nb_rooms.label)}
-            name={fields.nb_rooms.name}
-            options={[0, 1, 2, 3, 4]}
-          />
-        </BoxSpaceBetween>
+            <TextField name={fields.price.name} type={'text'} label={t(fields.price.label)} />
+            <TextField name={fields.surface.name} type={'text'} label={t(fields.surface.label)} />
+            <RHFUploadMultiFile
+              name={fields.files.name}
+              showPreview={true}
+              accept="image/*"
+              maxSize={3145728645684684}
+              onDrop={handleDrop}
+              onRemove={handleRemove}
+              onRemoveAll={handleRemoveAll}
+            />
+            <BoxSpaceBetween>
+              <SelectField
+                id={'nb_roommate'}
+                type={'text'}
+                label={t(fields.nb_roommate.label)}
+                placeholder={t(fields.nb_roommate.label)}
+                name={fields.nb_roommate.name}
+                options={[0, 1, 2, 3, 4]}
+              />
+              <SelectField
+                fullWidth
+                variant="standard"
+                id={'nb_rooms'}
+                label={t(fields.nb_rooms.label)}
+                placeholder={t(fields.nb_rooms.label)}
+                name={fields.nb_rooms.name}
+                options={[0, 1, 2, 3, 4]}
+              />
+            </BoxSpaceBetween>
 
-        <BoxSpaceBetween>
-          <SelectField
-            variant="standard"
-            id={'city'}
-            label={t(fields.city.label)}
-            placeholder={t(fields.city.label)}
-            name={fields.city.name}
-            options={['Monastir', 'Sousse', 'Zaghouan', 'Mahdia', 'Hammemet']}
-          />
-          <SelectField
-            variant="standard"
-            id={'state'}
-            label={t(fields.state.label)}
-            placeholder={t(fields.state.label)}
-            name={fields.state.name}
-            options={['Monastir', 'Sousse', 'Zaghouan', 'Mahdia', 'Hammemet']}
-          />
-        </BoxSpaceBetween>
-        <TextField
-          name={fields.postal_code.name}
-          type={'text'}
-          label={t(fields.postal_code.label)}
-        />
+            <BoxSpaceBetween>
+              <SelectField
+                variant="standard"
+                id={'city'}
+                label={t(fields.city.label)}
+                placeholder={t(fields.city.label)}
+                name={fields.city.name}
+                options={['Monastir', 'Sousse', 'Zaghouan', 'Mahdia', 'Hammemet']}
+              />
+              <SelectField
+                variant="standard"
+                id={'state'}
+                label={t(fields.state.label)}
+                placeholder={t(fields.state.label)}
+                name={fields.state.name}
+                options={['Monastir', 'Sousse', 'Zaghouan', 'Mahdia', 'Hammemet']}
+              />
+            </BoxSpaceBetween>
+            <TextField
+              name={fields.postal_code.name}
+              type={'text'}
+              label={t(fields.postal_code.label)}
+            />
 
-        <CustomButton
-          isLoading={isSubmitting}
-          colorBack={`${theme.palette.primary.main}`}
-          colorText={`${theme.palette.warning.main}`}
-        >
-          {isEdit ? t('postForm.edit_post') : t('postForm.add_post')}
-        </CustomButton>
-      </Stack>
-    </FormProvider>
+            <CustomButton
+              isLoading={isSubmitting}
+              colorBack={`${theme.palette.primary.main}`}
+              colorText={`${theme.palette.warning.main}`}
+            >
+              {btn_txt}
+            </CustomButton>
+          </Stack>
+        </FormProvider>
+      )}
+    </>
   );
 };
