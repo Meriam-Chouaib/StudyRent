@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { PATHS } from '../../../config/paths';
 import { authorizeWithToken } from './../../baseQueryConfig ';
-import { decodAddPost, decodePost, decodePosts } from './decoder';
+import { decodAddPost, decodeEditPost, decodePost, decodePosts } from './decoder';
 import { Post, PostResponse, PostResponseData, SinglePostResponseData } from './post.types';
 export const postApi = createApi({
   reducerPath: 'posts',
@@ -45,14 +45,14 @@ export const postApi = createApi({
       }),
       invalidatesTags: ['POSTS'],
     }),
-    editPost: builder.mutation<PostResponse, { id: string; post: Post }>({
+    editPost: builder.mutation<PostResponse, { id: number; post: FormData }>({
       query: ({ id, post }) => ({
-        url: `${PATHS.DASHBOARD.POST.EDIT}/${id}`,
+        url: `${PATHS.DASHBOARD.POST.LIST}/${id}`,
         method: 'PATCH',
         body: post,
       }),
       invalidatesTags: ['POSTS'],
-      transformResponse: (response: PostResponse) => decodAddPost(response),
+      transformResponse: (response: SinglePostResponseData) => decodeEditPost(response),
     }),
   }),
 });

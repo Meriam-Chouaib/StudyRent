@@ -15,6 +15,7 @@ interface RHFUploadMultiFileProps {
   onDrop?: (files: File[]) => void;
   onRemove: (file: File) => void;
   onRemoveAll: () => void;
+  isEdit?: boolean;
 }
 
 export function RHFUploadMultiFile({
@@ -25,6 +26,7 @@ export function RHFUploadMultiFile({
   onRemove,
   onRemoveAll,
   showPreview,
+  isEdit,
   ...other
 }: RHFUploadMultiFileProps) {
   const { control } = useFormContext();
@@ -45,6 +47,7 @@ export function RHFUploadMultiFile({
             accept={accept}
             files={field.value}
             error={checkError}
+            isEdit={isEdit}
             helperText={
               checkError && (
                 <FormHelperText error sx={{ px: 2 }}>

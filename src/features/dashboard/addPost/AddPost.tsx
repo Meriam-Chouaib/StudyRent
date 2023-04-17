@@ -18,7 +18,11 @@ import { PostSchema } from './ValidationSchema';
 
 import { RHFUploadMultiFile } from '../../../components/hookform/RHFUploadFile';
 import { SelectField } from '../../../components/selectField/SelectField';
-import { useAddPostMutation, useGetPostQuery } from '../../../redux/api/post/post.api';
+import {
+  useAddPostMutation,
+  useEditPostMutation,
+  useGetPostQuery,
+} from '../../../redux/api/post/post.api';
 import { IPostRequest, Post } from '../../../redux/api/post/post.types';
 import { IUser } from '../../../redux/api/user/user.types';
 import theme from '../../../theme';
@@ -43,6 +47,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
   const { id } = useParams();
 
   const [addPost] = useAddPostMutation();
+  const [editPost] = useEditPostMutation();
   const { t } = useTranslation();
   const methods = useForm({
     resolver: yupResolver(PostSchema),
@@ -60,6 +65,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     formState: { isSubmitting },
   } = methods;
 
+  // const values = watch();
   const values = watch();
 
   const onSubmit = async ({
@@ -97,16 +103,34 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
       values.images.forEach((file: any) => {
         data.append('files', file);
       });
-      console.log(values);
 
-      await addPost(data)
-        .unwrap()
-        .then((res) => {
-          console.log('res', res);
+      if (!isEdit) {
+        await addPost(data)
+          .unwrap()
+          .then((res) => {
+            console.log('res', res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        // await editPost(Number(id), data)
+        console.log('files', data.get('files'));
+        console.log('post', data.get('post'));
+
+        await editPost({
+          id: Number(id),
+          post: data,
+          //  files: data?.get('files') as unknown as File[],
         })
-        .catch((err) => {
-          console.log(err);
-        });
+          .unwrap()
+          .then((res) => {
+            console.log('res', res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     } catch (error: any) {
       console.log(error);
       console.error(error);
@@ -147,6 +171,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     setValue('images', filteredItems);
   };
   const { data, isLoading, isError } = useGetPostQuery(id);
+  console.log('get Post by id', data);
 
   useEffect(() => {
     if (data) {
@@ -161,7 +186,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           city: data.city,
           state: data.state,
           postal_code: data.postal_code,
-          // images: data?.images,
+          images: data.images,
         });
       }, 2000);
     }
@@ -194,6 +219,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
               onDrop={handleDrop}
               onRemove={handleRemove}
               onRemoveAll={handleRemoveAll}
+              isEdit={isEdit}
             />
             <BoxSpaceBetween>
               <SelectField

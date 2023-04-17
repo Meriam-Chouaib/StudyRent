@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { ClipLoader } from 'react-spinners';
 import { CustomBoxPosts } from './Posts.styles';
 // components
 import { BoxCenter, BoxPosts, ButtonWithIcon, CardPost } from '../../../components';
@@ -8,7 +7,7 @@ import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArro
 import { Pagination } from '@mui/material';
 import usePaginator from '../../../hooks/usePaginator';
 import { useGetPostsQuery } from '../../../redux/api/post/post.api';
-import { Image, Post } from '../../../redux/api/post/post.types';
+import { Post } from '../../../redux/api/post/post.types';
 import { getPersistData } from '../../../utils';
 import { PostsProps } from './Posts.types';
 import { initialPostsPaginator } from './posts.constants';
@@ -30,8 +29,8 @@ export const Posts = ({
 
   const { t } = useTranslation();
 
-  const getDefaultImagePath = (images?: Image[]) => {
-    return images?.length ? `${images[0].fileName}` : '';
+  const getDefaultImagePath = (images?: File[]) => {
+    return images?.length ? `${images[0].name}` : '';
   };
 
   return (

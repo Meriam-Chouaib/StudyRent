@@ -11,7 +11,7 @@ export interface Post {
   posterId?: number;
   likes: number;
   poster?: IUser;
-  images?: Image[];
+  images?: File[];
   nb_rooms: number;
   surface: number;
   price: number;
@@ -70,7 +70,7 @@ export interface SinglePostResponseData {
 
 export interface PostData {
   id: number;
-  datePost: string;
+  datePost: Date;
   title: string;
   description: string;
   posterId: number;
