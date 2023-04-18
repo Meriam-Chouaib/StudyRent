@@ -70,3 +70,14 @@ export const ImgProfile = styled('img')({
     Width: 'auto !important',
   },
 });
+export const BoxSelectItemStyled = styled(Box)({
+  zIndex: 11,
+  position: 'absolute',
+  top: '100%',
+  right: 0,
+  mt: '0.5rem',
+  p: '0.5rem',
+  backgroundColor: 'white',
+  borderRadius: 'default',
+  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+});

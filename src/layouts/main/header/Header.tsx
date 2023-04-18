@@ -32,16 +32,21 @@ import Typography from '@mui/material/Typography';
 import { useTranslation } from 'react-i18next';
 import { clearLocalStorage } from '../../../utils/localstorage/clearLoalStorage';
 import { UserLogged } from './UserLoggedIn/UserLogged';
-
+import { useNavigate, Link } from 'react-router-dom';
 export const Header = ({ isLogged, username, status }: headerProps) => {
   const { t } = useTranslation();
-
+  const navigate = useNavigate();
+  const backToHome = () => {
+    navigate(PATHS.ROOT);
+  };
   return (
     <AppBarStyled position="static">
       <Container>
         <ToolbarStyled>
           <Box>
-            <LogoHeader src={logo} />
+            <Link to={PATHS.MAIN.HOME}>
+              <LogoHeader src={logo} onClick={backToHome} />
+            </Link>
           </Box>
 
           <BoxDisplayWeb>
