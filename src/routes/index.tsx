@@ -19,6 +19,7 @@ import {
 } from '../pages';
 import { ListPostsPage } from '../pages/dashboard/listPostsPage/ListPostsPage';
 import { useTranslation } from 'react-i18next';
+import { ListPostsPageStudent } from '../pages/listPostsPage/ListPostsPageStudent';
 export default function Router() {
   const { t } = useTranslation();
   return useRoutes([
@@ -71,6 +72,7 @@ export default function Router() {
       element: <MainLayout />,
       children: [
         { path: PATHS.MAIN.HOME, element: <HomePage /> },
+        { path: PATHS.POSTS, element: <ListPostsPageStudent /> },
         { path: PATHS.MAIN.ERROR.P_500, element: <Page500 /> },
         { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
         { path: PATHS.ALL, element: <Navigate to="/404" replace /> },

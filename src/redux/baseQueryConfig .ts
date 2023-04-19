@@ -9,3 +9,6 @@ export const authorizeWithToken = fetchBaseQuery({
     return setTokenToHeaders(headers);
   },
 });
+export const baseQueryConfig = fetchBaseQuery({
+  baseUrl: `${BASE_URL}`,
+});
