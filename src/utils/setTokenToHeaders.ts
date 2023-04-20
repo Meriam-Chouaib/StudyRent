@@ -1,13 +1,13 @@
 import { getToken } from './generate.token';
+import { getPersistData } from './localstorage/localStorage.utils';
 
 export const setTokenToHeaders = (headers: Headers) => {
   const token = getToken();
-  console.log('888888888888', token);
 
   if (token) {
-    headers.set('Authorization', `Bearer ${token}`);
+    const decoded = getPersistData('token', false);
+    headers.set('Authorization', `Bearer ${decoded}`);
   }
-  console.log('headers after setting oken ', headers);
 
   return headers;
 };

@@ -8,6 +8,7 @@ import { postForm } from './postForm';
 import { dashboardListPosts } from './dashboardListPosts';
 import { dashboardSidebar } from './dashboardSidebar';
 import { dashboardAddPost } from './dashboardAddPost';
+import { listPostsMain } from './listPostsMain';
 
 export const en = {
   signin: signin,
@@ -20,4 +21,5 @@ export const en = {
   dashboardListPosts: dashboardListPosts,
   dashboardSidebar: dashboardSidebar,
   dashboardAddPost: dashboardAddPost,
+  listPostsMain: listPostsMain,
 };

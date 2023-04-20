@@ -20,8 +20,12 @@ export const Posts = ({
   withButton,
   withPagination,
   isHomePage,
+  rowsPerPage,
 }: PostsProps) => {
-  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator(initialPostsPaginator);
+  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
+    ...initialPostsPaginator,
+    rowsPerPage: rowsPerPage,
+  });
 
   const { data, isLoading, isError, error } = useGetPostsQuery(paginator);
   const user = getPersistData('user', true);
