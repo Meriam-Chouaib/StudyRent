@@ -11,8 +11,12 @@ export const CustumImage = styled('img')({
 });
 export const BoxFlesh = styled(Box)({
   position: 'absolute',
-  top: ' -22px',
-  right: '28%',
-  [theme.breakpoints.down('md')]: {},
-  [theme.breakpoints.down('sm')]: {},
+  top: ' 0%',
+  right: '23%',
+  [theme.breakpoints.down('md')]: {
+    right: '12%',
+  },
+  [theme.breakpoints.down('sm')]: {
+    display: 'none',
+  },
 });

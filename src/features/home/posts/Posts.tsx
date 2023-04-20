@@ -66,7 +66,7 @@ export const Posts = ({
           )}
 
           {withPagination && (
-            <BoxCenter paddingY={3}>
+            <BoxCenter paddingTop={3}>
               <Pagination count={10} color="primary" onChange={(_e, page) => onChangePage(page)} />
             </BoxCenter>
           )}

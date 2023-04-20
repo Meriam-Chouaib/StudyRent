@@ -10,7 +10,7 @@ export const ListPostsPageStudent = () => {
   return (
     <BoxCenter>
       <Container>
-        <BoxCenter margin={'0 auto'}>
+        <BoxCenter margin={'0 auto'} padding={' 3.3rem 0 0'}>
           <Filtre />
         </BoxCenter>
         <BoxCenter>

@@ -9,6 +9,6 @@ export const CustomBoxPosts = styled(Box)(() => ({
     backgroundColor: COLORS.PRIMARY.MAIN,
   },
   [theme.breakpoints.down('md')]: {
-    margin: '5rem 0',
+    margin: '3rem 0',
   },
 }));
