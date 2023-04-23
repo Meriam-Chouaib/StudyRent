@@ -31,6 +31,7 @@ export const CardPost = ({
   img,
   isPoster,
   idPost,
+
   PosterId,
   isHomePage,
 }: CardPostProps) => {
@@ -76,9 +77,6 @@ export const CardPost = ({
                 </BoxHoverEye>
               )}
             </Box>
-            {/* {isPoster && ( */}
-
-            {/* )} */}
           </>
         ) : (
           <BoxCenter>
@@ -86,15 +84,12 @@ export const CardPost = ({
           </BoxCenter>
         )}
         <>
-          {!isHomePage && (
-            <>
-              <BoxEditDelete
-                handleDelete={() => handleDelete(idPost)}
-                handleEdit={() => handleEdit(idPost)}
-                idPost={idPost}
-              />
-            </>
-          )}
+          <BoxEditDelete
+            handleDelete={() => handleDelete(idPost)}
+            handleEdit={() => handleEdit(idPost)}
+            idPost={idPost}
+            isPoster={isPoster}
+          />
 
           <CardContent>
             <Typography gutterBottom variant="subtitle1" component="div">

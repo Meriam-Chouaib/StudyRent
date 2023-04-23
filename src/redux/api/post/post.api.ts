@@ -13,7 +13,6 @@ export const postApi = createApi({
     baseUrl: `${BASE_URL}/`,
     prepareHeaders(headers) {
       setTokenToHeaders(headers);
-      console.log('heaaaaaderrsss', headers.get('Authorization'));
     },
   }),
 
@@ -23,6 +22,16 @@ export const postApi = createApi({
       query(params) {
         return {
           url: `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`,
+        };
+      },
+      transformResponse: (result: PostResponseData): Post[] => {
+        return decodePosts(result);
+      },
+    }),
+    getPostsByOwner: builder.query({
+      query(params) {
+        return {
+          url: `${PATHS.POSTS}/${PATHS.DASHBOARD.POST.POSTS_BY_OWNER}?page=${params.page}&rowsPerPage=${params.rowsPerPage}&idOwner=${params.idUser}`,
         };
       },
       transformResponse: (result: PostResponseData): Post[] => {
@@ -69,6 +78,7 @@ export const postApi = createApi({
 export const {
   useGetPostsQuery,
   useAddPostMutation,
+  useGetPostsByOwnerQuery,
   useDeletePostMutation,
   useEditPostMutation,
   useGetPostQuery,

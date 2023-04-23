@@ -21,6 +21,7 @@ export const PATHS = {
       LIST: 'posts',
       ADD: 'posts/create',
       EDIT: 'posts/:id',
+      POSTS_BY_OWNER: 'postsByOwner',
     },
     CHAT: 'chat',
   },

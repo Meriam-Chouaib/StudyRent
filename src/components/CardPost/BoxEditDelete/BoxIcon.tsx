@@ -4,11 +4,12 @@ import { ButtonIcon } from '../../Icon/Icon.styles';
 interface BoxIconProps {
   children: ReactNode;
   handleSubmit?: () => void;
+  color: string;
 }
-export const BoxIcon = ({ children, handleSubmit }: BoxIconProps) => {
+export const BoxIcon = ({ children, handleSubmit, color }: BoxIconProps) => {
   return (
     <>
-      <BoxIconStyled>
+      <BoxIconStyled sx={{ backgroundColor: `${color}` }}>
         <ButtonIcon onClick={handleSubmit}>{children}</ButtonIcon>
       </BoxIconStyled>
     </>

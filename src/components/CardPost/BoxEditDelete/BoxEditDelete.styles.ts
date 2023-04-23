@@ -7,8 +7,8 @@ export const BoxEditDeleteStyled = styled(Box)(() => ({
   justifyContent: 'center',
   padding: '6px 0px',
 }));
-export const BoxIconStyled = styled(Box)(() => ({
-  backgroundColor: theme.palette.primary.main,
+export const BoxIconStyled = styled(Box)((color) => ({
+  //  backgroundColor: theme.palette.primary.main,
   padding: '3px',
 
   marginRight: '1rem',

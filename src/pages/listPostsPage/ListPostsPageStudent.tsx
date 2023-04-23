@@ -5,8 +5,16 @@ import { Filtre } from './Filtre/Filtre';
 import { Container } from '@mui/material';
 import { COLORS } from '../../config/colors';
 import { GoToMap } from '../../features/GoToMap/GoToMap';
+import usePaginator from '../../hooks/usePaginator';
+import { useGetPostsQuery } from '../../redux/api/post/post.api';
+import { initialPostsPaginator } from '../../features/home/posts/posts.constants';
 
 export const ListPostsPageStudent = () => {
+  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
+    ...initialPostsPaginator,
+    rowsPerPage: 9,
+  });
+  const { data, isLoading, isError, error } = useGetPostsQuery(paginator);
   return (
     <BoxCenter>
       <Container>
@@ -22,6 +30,9 @@ export const ListPostsPageStudent = () => {
             margin="2rem 0 0 0"
             withButton={false}
             withPagination={true}
+            dataPosts={data}
+            isLoading={isLoading}
+            onChangePage={onChangePage}
           />
         </BoxCenter>
         <GoToMap />
