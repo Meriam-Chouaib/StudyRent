@@ -13,6 +13,7 @@ export interface CardPostProps extends CardProps {
   isDashboard?: boolean;
 }
 export interface ItemProps {
-  label: string;
+  children?: React.ReactNode;
+  label?: string;
   txt: string;
 }

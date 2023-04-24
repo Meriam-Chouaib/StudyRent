@@ -18,6 +18,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import { COLORS } from '../../../config/colors';
+import { BoxIconLink } from '../../BoxIconLink/BoxIconLink';
 
 export const BoxEditDelete = ({ handleEdit, idPost, isPoster }: BoxEditDeleteProps) => {
   const [open, setOpen] = React.useState(false);
@@ -64,24 +65,20 @@ export const BoxEditDelete = ({ handleEdit, idPost, isPoster }: BoxEditDeletePro
           </>
         ) : (
           <>
-            <BoxIcon handleSubmit={handleEdit} color={`transparent`}>
-              <Link
-                to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}/${idPost}`}
-                style={{ display: 'flex' }}
-              >
-                <ChatBubbleOutlineIcon color={'primary'}></ChatBubbleOutlineIcon>
-              </Link>
-            </BoxIcon>
-            <BoxIcon handleSubmit={handleEdit} color={`transparent`}>
-              <Link to={``} style={{ display: 'flex' }}>
-                <ThumbUpOffAltIcon color={'primary'}></ThumbUpOffAltIcon>
-              </Link>
-            </BoxIcon>
-            <BoxIcon handleSubmit={handleEdit} color={`transparent`}>
-              <Link to={``} style={{ display: 'flex' }}>
-                <FavoriteBorderIcon color={'primary'}></FavoriteBorderIcon>
-              </Link>
-            </BoxIcon>
+            <BoxIconLink
+              handleSubmit={handleEdit}
+              color={`transparent`}
+              path={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}/${idPost}`}
+            >
+              <ChatBubbleOutlineIcon color={'primary'}></ChatBubbleOutlineIcon>
+            </BoxIconLink>
+            <BoxIconLink
+              handleSubmit={handleEdit}
+              color={`transparent`}
+              path={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}/${idPost}`}
+            >
+              <FavoriteBorderIcon color={'primary'}></FavoriteBorderIcon>
+            </BoxIconLink>
           </>
         )}
       </BoxEditDeleteStyled>

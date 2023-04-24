@@ -12,6 +12,8 @@ import { InfoCard } from './InfoCard';
 import Modal from '@material-ui/core/Modal';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box, CardContent, CardMedia, Typography } from '@mui/material';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 import { ReactComponent as Not_found_img } from '../../assets/images/empty_item.svg';
 import { STATIC_URL } from '../../config/config';
@@ -95,9 +97,12 @@ export const CardPost = ({
             <Typography gutterBottom variant="subtitle1" component="div">
               {title}
             </Typography>
-            <InfoCard label={t('home.card_txt_city') as string} txt={city} />
 
-            <InfoCard label={t('home.card_txt_price') as string} txt={price.toString() + 'DT'} />
+            <InfoCard txt={city}> {<LocationOnIcon color={`primary`} />}</InfoCard>
+
+            <InfoCard txt={price.toString() + 'DT'}>
+              {<AttachMoneyIcon color={`primary`} />}
+            </InfoCard>
           </CardContent>
         </>
       </CardPostStyled>

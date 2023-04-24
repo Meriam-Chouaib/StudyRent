@@ -27,8 +27,10 @@ import { IPostRequest, Post } from '../../../redux/api/post/post.types';
 import { IUser } from '../../../redux/api/user/user.types';
 import theme from '../../../theme';
 import { getPersistData } from '../../../utils';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { LoaderBox } from '../../../components/Loader/LoaderBox';
+import { PATHS } from '../../../config/paths';
+import { CONSTANTS } from '../../../config/constants';
 
 // ----------------------------------------------------------------------
 interface AddPostProps {
@@ -40,6 +42,8 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
   const { id } = useParams();
 
   const [problem, setProblem] = useState('');
+  const navigate = useNavigate();
+
   const [selectedImages, setSelectedImages] = useState<any>([]);
   const user: IUser = getPersistData('user', true);
 
@@ -108,6 +112,9 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           .unwrap()
           .then((res) => {
             console.log('res', res);
+            //    if (res.status === CONSTANTS.OK) {
+            navigate(``);
+            //    }
           })
           .catch((err) => {
             console.log(err);
@@ -125,6 +132,8 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           .unwrap()
           .then((res) => {
             console.log('res', res);
+
+            navigate(`${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
           })
           .catch((err) => {
             console.log(err);
