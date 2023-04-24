@@ -7,6 +7,7 @@ export interface PostsProps {
   margin?: string;
   withButton?: boolean;
   withPagination?: boolean;
+  isHomePage?: boolean;
 }
 export interface Filter {
   arg: string;

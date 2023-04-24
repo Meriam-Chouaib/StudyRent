@@ -20,6 +20,7 @@ export const PATHS = {
     POST: {
       LIST: 'posts',
       ADD: 'posts/create',
+      EDIT: 'posts/:id',
     },
     CHAT: 'chat',
   },

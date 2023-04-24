@@ -1,5 +1,6 @@
 export const postForm = {
   title: 'Add post',
+  title_edit: 'Edit post',
 
   title_label: 'Title',
   title_required: 'Title is required',
@@ -59,4 +60,6 @@ export const postForm = {
   city_invalid: 'City is invalid',
 
   add_post: 'Add post',
+  edit_post: 'Confirm',
+  edit_post_title: 'Update post',
 };

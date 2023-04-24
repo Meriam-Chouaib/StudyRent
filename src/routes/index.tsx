@@ -18,7 +18,9 @@ import {
   AddPostPage,
 } from '../pages';
 import { ListPostsPage } from '../pages/dashboard/listPostsPage/ListPostsPage';
+import { useTranslation } from 'react-i18next';
 export default function Router() {
+  const { t } = useTranslation();
   return useRoutes([
     {
       path: PATHS.AUTH.ROOT,
@@ -53,7 +55,11 @@ export default function Router() {
       ),
       children: [
         { path: PATHS.ALL, element: <Dashboard /> },
-        { path: PATHS.DASHBOARD.POST.ADD, element: <AddPostPage /> },
+        { path: PATHS.DASHBOARD.POST.ADD, element: <AddPostPage title={t('postForm.title')} /> },
+        {
+          path: PATHS.DASHBOARD.POST.EDIT,
+          element: <AddPostPage title={t('postForm.edit_post_title')} isEdit={true} />,
+        },
         { path: PATHS.DASHBOARD.POST.LIST, element: <ListPostsPage /> },
         { path: 'test', element: <HomePage /> },
       ],
