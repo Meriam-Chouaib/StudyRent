@@ -27,7 +27,7 @@ import { IPostRequest, Post } from '../../../redux/api/post/post.types';
 import { IUser } from '../../../redux/api/user/user.types';
 import theme from '../../../theme';
 import { getPersistData } from '../../../utils';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, redirect } from 'react-router-dom';
 import { LoaderBox } from '../../../components/Loader/LoaderBox';
 import { PATHS } from '../../../config/paths';
 import { CONSTANTS } from '../../../config/constants';
@@ -107,33 +107,34 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
         data.append('files', file);
       });
 
+      // ___________________________________ *** Add post *** ____________________________________________
+
       if (!isEdit) {
         await addPost(data)
           .unwrap()
           .then((res) => {
             console.log('res', res);
-            //    if (res.status === CONSTANTS.OK) {
-            navigate(``);
-            //    }
+
+            navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
           })
           .catch((err) => {
             console.log(err);
           });
       } else {
-        // await editPost(Number(id), data)
+        // ___________________________________ *** Edit post *** ____________________________________________
+
         console.log('files', data.get('files'));
         console.log('post', data.get('post'));
 
         await editPost({
           id: Number(id),
           post: data,
-          //  files: data?.get('files') as unknown as File[],
         })
           .unwrap()
           .then((res) => {
             console.log('res', res);
 
-            navigate(`${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
+            navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
           })
           .catch((err) => {
             console.log(err);

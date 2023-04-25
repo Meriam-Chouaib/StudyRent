@@ -1,4 +1,7 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
+import { NotFound } from '../pages';
+import { useNavigate } from 'react-router-dom';
+import { PATHS } from '../config/paths';
 
 const useCurrentRole = () => {
   // Logic here to get current user role
@@ -13,15 +16,16 @@ interface RoleBasedGuardProps {
 
 export function RoleBasedGuard({ accessibleRoles, children }: RoleBasedGuardProps) {
   const currentRole = useCurrentRole();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!accessibleRoles.includes(currentRole)) {
+      return navigate('/404');
+    }
+  }, []);
   if (!accessibleRoles.includes(currentRole)) {
-    return (
-      <>
-        {/* here you should add ui component for this error*/}
-        <p>You do not have permission to access this page</p>
-      </>
-    );
+    navigate(`/${PATHS.MAIN.ERROR.P_404}`, { replace: true });
   }
 
-  return <>{children}</>;
+  return <>{accessibleRoles.includes(currentRole) && children}</>;
 }

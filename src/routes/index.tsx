@@ -1,6 +1,6 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 
-import { AuthGuard, GuestGuard } from '../guards';
+import { AuthGuard, GuestGuard, RoleBasedGuard } from '../guards';
 
 import MainLayout from '../layouts/main';
 
@@ -20,8 +20,12 @@ import {
 import { ListPostsPage } from '../pages/dashboard/listPostsPage/ListPostsPage';
 import { useTranslation } from 'react-i18next';
 import { ListPostsPageStudent } from '../pages/listPostsPage/ListPostsPageStudent';
+import { getPersistData } from '../utils';
+import { IUser } from '../redux/api/user/user.types';
 export default function Router() {
   const { t } = useTranslation();
+  const user: IUser = getPersistData('user', true);
+
   return useRoutes([
     {
       path: PATHS.AUTH.ROOT,
@@ -51,7 +55,9 @@ export default function Router() {
       path: PATHS.DASHBOARD.ROOT,
       element: (
         <AuthGuard>
-          <DashboardLayout />
+          <RoleBasedGuard accessibleRoles={['ADMIN', 'OWNER']}>
+            <DashboardLayout />
+          </RoleBasedGuard>
         </AuthGuard>
       ),
       children: [

@@ -10,6 +10,9 @@ import { ItemSelect } from './ItemSelect';
 import { BoxSelectItemStyled } from '../header.styles';
 import { PATHS } from '../../../../config/paths';
 import { useNavigate } from 'react-router-dom';
+import { getPersistData } from '../../../../utils';
+import { IUser } from '../../../../redux/api/user/user.types';
+const user: IUser = getPersistData('user', true);
 
 type SelectIconProps = {
   onLogout: () => void;
@@ -58,11 +61,13 @@ export const SelectIcon = ({ onLogout, onProfile }: SelectIconProps) => {
             onClick={handleProfile}
             txt={t('header.profile') as string}
           />
-          <ItemSelect
-            icon={<DashboardIcon />}
-            onClick={handleDashboard}
-            txt={t('header.dashboard') as string}
-          />
+          {user.role != 'STUDENT' && (
+            <ItemSelect
+              icon={<DashboardIcon />}
+              onClick={handleDashboard}
+              txt={t('header.dashboard') as string}
+            />
+          )}
           <ItemSelect
             icon={<ExitToAppIcon />}
             onClick={handleLogout}
