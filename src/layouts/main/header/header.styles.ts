@@ -20,7 +20,9 @@ export const BoxDrawer = styled(Box)({
   position: 'fixed',
 
   display: 'none',
-
+  [theme.breakpoints.down(715)]: {
+    display: 'block',
+  },
   [theme.breakpoints.down('sm')]: {
     display: 'block',
     top: '3%',
@@ -29,6 +31,9 @@ export const BoxDrawer = styled(Box)({
 });
 export const BoxDisplayWeb = styled(Box)({
   display: 'block',
+  [theme.breakpoints.down(715)]: {
+    display: 'none',
+  },
   [theme.breakpoints.down('sm')]: {
     display: 'none',
   },
@@ -80,4 +85,12 @@ export const BoxSelectItemStyled = styled(Box)({
   backgroundColor: 'white',
   borderRadius: 'default',
   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+});
+export const BoxStyled = styled(Box)({
+  [theme.breakpoints.down(715)]: {
+    width: '35%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
 });

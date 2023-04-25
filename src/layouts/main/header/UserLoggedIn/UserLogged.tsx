@@ -9,6 +9,7 @@ import { HeaderDashboard } from '../../../dashboard/header/Header.styles';
 import { SelectIcon } from './SelectIcon';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '../../../../config/paths';
+import { COLORS } from '../../../../config/colors';
 
 export const UserLogged = ({ username, img, status }: UserLoggedProps) => {
   const navigate = useNavigate();
@@ -28,7 +29,9 @@ export const UserLogged = ({ username, img, status }: UserLoggedProps) => {
   return (
     <HeaderDashboard>
       <BoxCenter sx={{ position: 'relative' }}>
-        <Txt_link style={{ marginRight: '1rem' }}>{username}</Txt_link>
+        <Txt_link style={{ marginRight: '1rem' }} color={`${COLORS.PRIMARY.MAIN}`}>
+          {username}
+        </Txt_link>
 
         <ImgProfile width={33} src={img} alt={'ProfileImg'} />
         {status == 'ONLINE' ? (

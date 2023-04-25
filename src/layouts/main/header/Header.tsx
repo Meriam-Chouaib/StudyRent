@@ -5,6 +5,7 @@ import {
   StyledLink,
   ImgProfile,
   IconUserStatus,
+  BoxStyled,
 } from './header.styles';
 import { headerProps } from './header.types';
 import { PATHS } from '../../../config/paths';
@@ -70,10 +71,12 @@ export const Header = ({ isLogged, username, status }: headerProps) => {
               </StyledLink>
             </Box>
           )}
-          <TranslationStyled />
-          <BoxDrawer>
-            <DrawerPart />
-          </BoxDrawer>
+          <BoxStyled>
+            <TranslationStyled />
+            <BoxDrawer>
+              <DrawerPart />
+            </BoxDrawer>
+          </BoxStyled>
         </ToolbarStyled>
       </Container>
     </AppBarStyled>
