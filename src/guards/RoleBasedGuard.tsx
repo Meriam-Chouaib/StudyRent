@@ -2,11 +2,15 @@ import { ReactNode, useEffect } from 'react';
 import { NotFound } from '../pages';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '../config/paths';
+import { getPersistData } from '../utils';
+import { IUser } from '../redux/api/user/user.types';
 
 const useCurrentRole = () => {
   // Logic here to get current user role
-  const role = 'admin';
-  return role;
+  const user: IUser = getPersistData('user', true);
+  console.log(user.role);
+
+  return user.role;
 };
 
 interface RoleBasedGuardProps {

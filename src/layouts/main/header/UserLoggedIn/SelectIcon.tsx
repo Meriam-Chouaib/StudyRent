@@ -41,7 +41,7 @@ export const SelectIcon = ({ onLogout, onProfile }: SelectIconProps) => {
     onProfile();
   };
   const handleDashboard = () => {
-    navigate(`${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
+    navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
     handleClose();
   };
   const { t } = useTranslation();

@@ -4,7 +4,7 @@ export interface IUser {
   password: string;
   username?: string;
   statut?: string;
-  role?: string;
+  role: string;
   isLogged?: boolean;
 }
 export interface userState {
