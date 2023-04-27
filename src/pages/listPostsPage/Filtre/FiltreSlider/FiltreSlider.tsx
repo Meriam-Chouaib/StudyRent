@@ -1,19 +1,18 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { Typography } from '@mui/material';
 import { BoxSpaceBetweenCenter } from '../../../../components';
+
 interface FilterSliderProps {
   label: string;
   interval: number[];
+  onChange: (interval: number[], value: number | number[], activeThumb: number) => void;
 }
 function valuetext(value: number) {
   return `${value}°C`;
 }
-
 const minDistance = 10;
-
-export default function FilterSlider({ label, interval }: FilterSliderProps) {
+export default function FilterSlider({ label, interval, onChange }: FilterSliderProps) {
   const [value1, setValue1] = React.useState<number[]>(interval);
 
   const handleChange1 = (event: Event, newValue: number | number[], activeThumb: number) => {
@@ -26,6 +25,8 @@ export default function FilterSlider({ label, interval }: FilterSliderProps) {
     } else {
       setValue1([value1[0], Math.max(newValue[1], value1[0] + minDistance)]);
     }
+
+    onChange(value1, newValue, activeThumb);
   };
 
   return (
