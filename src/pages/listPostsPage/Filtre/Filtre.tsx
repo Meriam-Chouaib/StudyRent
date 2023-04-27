@@ -1,53 +1,56 @@
 import { useTranslation } from 'react-i18next';
 import { BoxCenter } from '../../../components';
-import FiltreSelect from './FiltreSlider/FiltreSlider';
+import FilterSlider from './FiltreSlider/FiltreSlider';
 import SelectTextFields from '../../../components/SelectInput/SelectInput';
 import { Grid } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import HomeIcon from '@mui/icons-material/Home';
 import { cities_data, nb_rooms_data } from '../../../features/home/posts/fakeData';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useDebounce } from '../../../hooks/useDebounce';
 
 export const Filtre = () => {
   const { t } = useTranslation();
   const [price, setPrice] = useState([500, 1200]);
   const [city, setCity] = useState('');
-  const [nbRooms, setNbRooms] = useState('');
+  const [nb_rooms, setNbRooms] = useState('');
   const [surface, setSurface] = useState([80, 1000]);
 
-  const handlePriceChange = (value: number[]) => {
-    setPrice(value);
+  const handleCityChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setCity(event.target.value as string);
+    debouncedRequest();
   };
 
-  const handleCityChange = (value: string) => {
-    setCity(value);
+  const handleNbRoomsChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setNbRooms(event.target.value as string);
+    debouncedRequest();
   };
 
-  const handleNbRoomsChange = (value: string) => {
-    setNbRooms(value);
-  };
+  function handlePriceChange(interval: number[]) {
+    setPrice(interval);
+    debouncedRequest();
+  }
 
-  const handleSurfaceChange = (value: number[]) => {
-    setSurface(value);
-  };
+  const debouncedRequest = useDebounce(() => {
+    console.log('get the values of the filter', price, city, nb_rooms, surface);
+    // send request to the backend with the filtered values
+  }, 1000);
 
-  useEffect(() => {
-    console.log('Filter valueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeees price', price);
-    console.log('Filter valueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeees city', city);
-    console.log('Filter valueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeees nbRooms', nbRooms);
-    console.log('Filter valueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeees surface', surface);
-
-    // fetchData();
-  }, [price, city, nbRooms, surface]);
+  function handleSurfaceChange(interval: number[]) {
+    setSurface(interval);
+    debouncedRequest();
+  }
 
   return (
     <BoxCenter sx={{ flex: 1 }}>
       <Grid container spacing={2} alignItems="center" rowGap={2} width={'80%'}>
         <Grid item xs={12} sm={6} md={3}>
-          <FiltreSelect
+          <FilterSlider
             label={t('listPostsMain.price')}
-            interval={[500, 1200]}
-            // onIntervalChange={handlePriceChange}
+            // TODO get the min price, max price from the back
+
+            interval={[25, 100]}
+            onChange={handlePriceChange}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={2} paddingLeft={'3rem !important'}>
@@ -67,10 +70,11 @@ export const Filtre = () => {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <FiltreSelect
+          <FilterSlider
             label={t('listPostsMain.surface')}
-            interval={[80, 1000]}
-            //  onChange={handleSurfaceChange}
+            // TODO get the min surface, max surface from the back
+            interval={[80, 100]}
+            onChange={handleSurfaceChange}
           />
         </Grid>
       </Grid>
