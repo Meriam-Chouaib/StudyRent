@@ -8,6 +8,7 @@ import { GoToMap } from '../../features/GoToMap/GoToMap';
 import usePaginator from '../../hooks/usePaginator';
 import { useGetPostsQuery } from '../../redux/api/post/post.api';
 import { initialPostsPaginator } from '../../features/home/posts/posts.constants';
+import { BoxCenterFilter } from './ListPostsPageStudent.style';
 
 export const ListPostsPageStudent = () => {
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
@@ -18,9 +19,9 @@ export const ListPostsPageStudent = () => {
   return (
     <BoxCenter>
       <Container>
-        <BoxCenter margin={'0 auto'} padding={' 3.3rem 0 0'}>
+        <BoxCenterFilter>
           <Filtre />
-        </BoxCenter>
+        </BoxCenterFilter>
         <BoxCenter>
           <Posts
             page={1}

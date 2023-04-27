@@ -15,7 +15,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert, IconButton, InputAdornment, Stack, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { CustomButton } from '../../../components';
+import { CustomButton, BoxCenter } from '../../../components';
 // components
 import { FormProvider, TextField } from '../../../components/hookform';
 import { PATHS } from '../../../config/paths';
@@ -127,14 +127,16 @@ export default function SignUpForm() {
             ),
           }}
         />
-        <SelectField
-          variant="standard"
-          id={'role'}
-          label={'Role'}
-          placeholder={'Role'}
-          name={fields.role.name}
-          options={Roles}
-        />
+        <BoxCenter sx={{ width: '80%' }}>
+          <SelectField
+            variant="standard"
+            id={'role'}
+            label={'Role'}
+            placeholder={'Role'}
+            name={fields.role.name}
+            options={Roles}
+          />
+        </BoxCenter>
         <CustomButton
           isLoading={isSubmitting}
           colorBack={theme.palette.primary.dark}

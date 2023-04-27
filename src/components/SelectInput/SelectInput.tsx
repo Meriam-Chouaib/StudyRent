@@ -7,14 +7,24 @@ import SvgIcon from '@mui/material/SvgIcon';
 import { Typography } from '@mui/material';
 import { BoxSpaceBetweenCenter } from '../BoxCenter/BoxCenterSpaceBetween.styles';
 import FormControl from '@mui/material/FormControl';
+import { useState } from 'react';
 
 interface SelectTextFieldsProps {
   data: any;
   txt?: string;
   label?: string;
   icon?: any;
+  onChange?: (value: any) => void;
 }
-export default function SelectTextFields({ data, label, txt, icon }: SelectTextFieldsProps) {
+export default function SelectTextFields({
+  data,
+  label,
+  txt,
+  icon,
+  onChange,
+}: SelectTextFieldsProps) {
+  const [value, setValue] = useState('');
+
   return (
     <BoxSpaceBetweenCenter width={label ? 'auto' : 'max-content'}>
       <FormControl variant="standard">
@@ -24,8 +34,10 @@ export default function SelectTextFields({ data, label, txt, icon }: SelectTextF
           defaultValue=""
           disableUnderline={true} // Add this prop
           displayEmpty={true}
+          onChange={onChange}
           renderValue={(value) => {
             console.log(value);
+
             return (
               <Box sx={{ display: 'flex', gap: 1 }}>
                 <SvgIcon color="primary">{icon}</SvgIcon>

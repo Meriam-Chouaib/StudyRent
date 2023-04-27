@@ -133,6 +133,9 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           .unwrap()
           .then((res) => {
             console.log('res', res);
+            console.log('reeeeeeeeeeeeeeeeeeeeeeesss');
+            // TODO update files "keep all files and the delete files from edit dosent work the file always still"
+            // TODO redirect after edit dosent work
 
             navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
           })
@@ -143,6 +146,8 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     } catch (error: any) {
       console.log(error);
       console.error(error);
+      // TODO confirmation pour les champs (code postale, files,nb_rooms,nb_roommates )
+
       reset();
       setError('title', { ...error, message: error.message });
       setError('description', { ...error, message: error.message });
