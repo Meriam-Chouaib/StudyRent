@@ -4,11 +4,14 @@ import theme from '../../../theme';
 
 export const CustomBoxPosts = styled(Box)(() => ({
   borderRadius: '3rem',
-
+  justifyContent: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
   '&hover': {
     backgroundColor: COLORS.PRIMARY.MAIN,
   },
   [theme.breakpoints.down('md')]: {
-    margin: '5rem 0',
+    margin: '3rem 0',
   },
 }));

@@ -7,9 +7,17 @@ import { SelectField } from '../../../components/selectField/SelectField';
 
 import { PATHS } from '../../../config/paths';
 import { Link } from 'react-router-dom';
+import { initialPostsPaginator } from '../../../features/home/posts/posts.constants';
+import usePaginator from '../../../hooks/usePaginator';
+import { useGetPostsByOwnerQuery } from '../../../redux/api/post/post.api';
 
 export const ListPostsPage = () => {
   const { t } = useTranslation();
+  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
+    ...initialPostsPaginator,
+    rowsPerPage: 9,
+  });
+  const { isError, isLoading, data, error } = useGetPostsByOwnerQuery(paginator);
   return (
     <>
       {/* <Box>
@@ -38,6 +46,10 @@ export const ListPostsPage = () => {
         margin="2rem 0"
         withButton={false}
         withPagination={true}
+        dataPosts={data}
+        isHomePage={false}
+        isLoading={isLoading}
+        onChangePage={onChangePage}
       />
     </>
   );

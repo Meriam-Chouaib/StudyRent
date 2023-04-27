@@ -6,12 +6,14 @@ import { BoxCenter, BoxPosts, ButtonWithIcon, CardPost } from '../../../componen
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { Pagination } from '@mui/material';
 import usePaginator from '../../../hooks/usePaginator';
-import { useGetPostsQuery } from '../../../redux/api/post/post.api';
+import { useGetPostsByOwnerQuery, useGetPostsQuery } from '../../../redux/api/post/post.api';
 import { Post } from '../../../redux/api/post/post.types';
 import { getPersistData } from '../../../utils';
 import { PostsProps } from './Posts.types';
 import { initialPostsPaginator } from './posts.constants';
 import { LoaderBox } from '../../../components/Loader/LoaderBox';
+import { Link } from 'react-router-dom';
+import { PATHS } from '../../../config/paths';
 
 export const Posts = ({
   color,
@@ -20,12 +22,13 @@ export const Posts = ({
   withButton,
   withPagination,
   isHomePage,
+  rowsPerPage,
+  dataPosts,
+  isLoading,
+  onChangePage,
+  isDashboard,
 }: PostsProps) => {
-  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator(initialPostsPaginator);
-
-  const { data, isLoading, isError, error } = useGetPostsQuery(paginator);
   const user = getPersistData('user', true);
-  console.log(data);
 
   const { t } = useTranslation();
 
@@ -40,13 +43,13 @@ export const Posts = ({
       ) : (
         <CustomBoxPosts bgcolor={color} margin={margin} padding={padding}>
           <BoxPosts>
-            {data?.map((post: Post) => (
+            {dataPosts?.map((post: Post) => (
               <CardPost
                 title={post.title}
                 img={getDefaultImagePath(post.images)}
                 city={post.city}
                 price={post.price}
-                //    isPoster={post.posterId === user?.id}
+                isPoster={post.posterId === user?.id}
                 key={post.id}
                 idPost={post.id}
                 PosterId={post.posterId}
@@ -55,14 +58,16 @@ export const Posts = ({
             ))}
           </BoxPosts>
           {withButton && (
-            <ButtonWithIcon
-              icon={<KeyboardDoubleArrowRightIcon />}
-              txt={t('home.posts_btn') as string}
-            />
+            <Link to={`${PATHS.POSTS}`}>
+              <ButtonWithIcon
+                icon={<KeyboardDoubleArrowRightIcon />}
+                txt={t('home.posts_btn') as string}
+              />
+            </Link>
           )}
 
           {withPagination && (
-            <BoxCenter paddingY={3}>
+            <BoxCenter paddingTop={3}>
               <Pagination count={10} color="primary" onChange={(_e, page) => onChangePage(page)} />
             </BoxCenter>
           )}

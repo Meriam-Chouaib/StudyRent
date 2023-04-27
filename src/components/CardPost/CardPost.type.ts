@@ -10,8 +10,10 @@ export interface CardPostProps extends CardProps {
   isPoster?: boolean;
   PosterId?: number;
   isHomePage?: boolean;
+  isDashboard?: boolean;
 }
 export interface ItemProps {
-  label: string;
+  children?: React.ReactNode;
+  label?: string;
   txt: string;
 }

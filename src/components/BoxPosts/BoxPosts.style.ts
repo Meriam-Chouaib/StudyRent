@@ -5,6 +5,7 @@ export const BoxPostsSyled = styled(Box)(() => ({
   gridTemplateColumns: '1fr 1fr 1fr',
   alignItems: 'center',
   gap: '2rem',
+  padding: '2rem 0',
 
   [theme.breakpoints.down('md')]: {
     gridTemplateColumns: '1fr 1fr ',

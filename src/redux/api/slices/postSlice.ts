@@ -35,7 +35,6 @@ export const postSlice = createSlice({
         state.post = post;
         state.isLoading = false;
         state.error = null;
-        console.log('rrrhhhrrr', getToken());
       })
       .addMatcher(postApi.endpoints.addPost.matchPending, (state) => {
         state.post = null;

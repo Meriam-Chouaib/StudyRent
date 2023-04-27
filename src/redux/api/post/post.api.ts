@@ -1,11 +1,20 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { PATHS } from '../../../config/paths';
-import { authorizeWithToken } from './../../baseQueryConfig ';
+import { authorizeWithToken, baseQueryConfig } from './../../baseQueryConfig ';
+
 import { decodAddPost, decodeEditPost, decodePost, decodePosts } from './decoder';
 import { Post, PostResponse, PostResponseData, SinglePostResponseData } from './post.types';
+import { BASE_URL } from '../../../config/config';
+import { setTokenToHeaders } from '../../../utils/setTokenToHeaders';
+
 export const postApi = createApi({
   reducerPath: 'posts',
-  baseQuery: authorizeWithToken,
+  baseQuery: fetchBaseQuery({
+    baseUrl: `${BASE_URL}/`,
+    prepareHeaders(headers) {
+      setTokenToHeaders(headers);
+    },
+  }),
 
   tagTypes: ['POSTS'],
   endpoints: (builder) => ({
@@ -13,6 +22,16 @@ export const postApi = createApi({
       query(params) {
         return {
           url: `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`,
+        };
+      },
+      transformResponse: (result: PostResponseData): Post[] => {
+        return decodePosts(result);
+      },
+    }),
+    getPostsByOwner: builder.query({
+      query(params) {
+        return {
+          url: `${PATHS.POSTS}/${PATHS.DASHBOARD.POST.POSTS_BY_OWNER}?page=${params.page}&rowsPerPage=${params.rowsPerPage}&idOwner=${params.idUser}`,
         };
       },
       transformResponse: (result: PostResponseData): Post[] => {
@@ -59,6 +78,7 @@ export const postApi = createApi({
 export const {
   useGetPostsQuery,
   useAddPostMutation,
+  useGetPostsByOwnerQuery,
   useDeletePostMutation,
   useEditPostMutation,
   useGetPostQuery,

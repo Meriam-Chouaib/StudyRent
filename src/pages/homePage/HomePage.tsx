@@ -2,8 +2,17 @@ import { Container } from '@mui/material';
 import { COLORS } from '../../config/colors';
 import { GetStarted, Posts } from '../../features';
 import { Contact } from '../../features/home/contact/Contact';
+import { initialPostsPaginator } from '../../features/home/posts/posts.constants';
+import usePaginator from '../../hooks/usePaginator';
+import { useGetPostsQuery } from '../../redux/api/post/post.api';
 
 export function HomePage() {
+  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
+    ...initialPostsPaginator,
+    rowsPerPage: 6,
+  });
+  const { data, isLoading, isError, error } = useGetPostsQuery(paginator);
+
   return (
     <>
       <Container>
@@ -17,6 +26,9 @@ export function HomePage() {
           margin="2rem 0"
           withButton={true}
           isHomePage={true}
+          dataPosts={data}
+          isLoading={isLoading}
+          onChangePage={onChangePage}
         />
 
         <Contact />
