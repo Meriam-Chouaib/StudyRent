@@ -49,8 +49,7 @@ export const userSlice = createSlice({
 
         state.user = data.user;
         state.isLoggedIn = true;
-        const hashedToken = keccak256(data.token);
-        state.token = hashedToken;
+        state.token = data.token;
         persistData('user', data.user);
         persistData('token', data.token);
       })
@@ -60,8 +59,7 @@ export const userSlice = createSlice({
 
         state.user = data.user;
         state.isLoggedIn = true;
-        const hashedToken = keccak256(data.token);
-        state.token = hashedToken;
+        state.token = data.token;
         persistData('user', data.user);
         persistData('token', data.token);
       })

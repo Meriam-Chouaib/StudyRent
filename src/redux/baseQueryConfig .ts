@@ -1,16 +1,12 @@
+import { setTokenToHeaders } from './../utils/setTokenToHeaders';
 import { fetchBaseQuery } from '@reduxjs/toolkit/query';
-import { getToken } from '../utils/generate.token';
 import { BASE_URL } from '../config/config';
-export const baseQueryConfigAuth = fetchBaseQuery({
+export const authorizeWithToken = fetchBaseQuery({
   baseUrl: `${BASE_URL}/auth`,
-
   prepareHeaders: (headers: Headers) => {
-    const token = getToken();
-    if (token) {
-      headers.set('Authorization', `Bearer ${token}`);
-    }
+    console.log('headers from base query config', headers);
 
-    return headers;
+    return setTokenToHeaders(headers);
   },
 });
 export const baseQueryConfig = fetchBaseQuery({

@@ -6,10 +6,14 @@ export interface CardPostProps extends CardProps {
   city: string;
   img: string;
   isHovered?: boolean;
-
+  idPost: number;
   isPoster?: boolean;
+  PosterId?: number;
+  isHomePage?: boolean;
+  isDashboard?: boolean;
 }
 export interface ItemProps {
-  label: string;
+  children?: React.ReactNode;
+  label?: string;
   txt: string;
 }

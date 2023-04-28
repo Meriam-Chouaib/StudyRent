@@ -20,6 +20,8 @@ export const PATHS = {
     POST: {
       LIST: 'posts',
       ADD: 'posts/create',
+      EDIT: 'posts/:id',
+      POSTS_BY_OWNER: 'postsByOwner',
     },
     CHAT: 'chat',
   },

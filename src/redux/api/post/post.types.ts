@@ -5,13 +5,13 @@ export interface Image {
 }
 export interface Post {
   id: number;
-  datePost: Date;
+  datePost?: Date;
   title: string;
   description: string;
-  posterId: number;
+  posterId?: number;
   likes: number;
   poster?: IUser;
-  images?: Image[];
+  images?: File[];
   nb_rooms: number;
   surface: number;
   price: number;
@@ -62,10 +62,15 @@ export interface PostResponseData {
   data: PostData[];
   message: string;
 }
+export interface SinglePostResponseData {
+  status: number;
+  data: PostData;
+  message: string;
+}
 
 export interface PostData {
   id: number;
-  datePost: string;
+  datePost: Date;
   title: string;
   description: string;
   posterId: number;

@@ -26,13 +26,13 @@ export const DrawerPart = () => {
   return (
     <>
       <AppBar position="fixed" open={open}>
-        <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Toolbar sx={{ display: 'flex', justifyContent: 'center', minHeight: 'auto' }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            sx={{ mr: 2, minHeight: 'auto', margin: 0, ...(open && { display: 'none' }) }}
           >
             <MenuIcon color="primary" />
           </IconButton>

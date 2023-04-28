@@ -44,3 +44,39 @@ export const fakeData = [
     price: 4500,
   },
 ];
+export const nb_rooms_data = [
+  {
+    value: 1,
+    label: '1',
+  },
+  {
+    value: 2,
+    label: '2',
+  },
+  {
+    value: 3,
+    label: '3',
+  },
+  {
+    value: 4,
+    label: '4',
+  },
+];
+export const cities_data = [
+  {
+    value: 'sousse',
+    label: 'sousse',
+  },
+  {
+    value: 'monastir',
+    label: 'monastir',
+  },
+  {
+    value: 'mahdia',
+    label: 'mahdia',
+  },
+  {
+    value: 'sfax',
+    label: 'sfax',
+  },
+];

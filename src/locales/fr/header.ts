@@ -4,4 +4,7 @@ export const header = {
   link_posts: 'Annonces',
   link_contact: 'Contact',
   link_signin: 'Connecter',
+  profile: 'Profile',
+  exit: 'Exit',
+  dashboard: 'Dashboard',
 };

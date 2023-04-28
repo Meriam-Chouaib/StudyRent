@@ -20,7 +20,9 @@ export const BoxSidebar = styled(Box)(() => ({
   },
 }));
 export const Txt_link = styled('h3')({
+  color: `${COLORS.PRIMARY.MAIN}`,
+  paddingRight: '1rem',
   [theme.breakpoints.down('sm')]: {
-    fontSize: '10px',
+    fontSize: '12px',
   },
 });

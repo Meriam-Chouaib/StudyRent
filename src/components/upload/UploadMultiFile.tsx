@@ -32,6 +32,7 @@ interface UploadMultiFileProps {
   helperText: ReactNode;
   accept?: string;
   sx?: SxProps;
+  isEdit?: boolean;
 }
 
 export default function UploadMultiFile({
@@ -44,6 +45,7 @@ export default function UploadMultiFile({
   accept,
   onDrop,
   sx,
+  isEdit,
   ...other
 }: UploadMultiFileProps) {
   const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
@@ -78,6 +80,7 @@ export default function UploadMultiFile({
         showPreview={showPreview}
         onRemove={onRemove}
         onRemoveAll={onRemoveAll}
+        isEdit={isEdit}
       />
 
       {helperText && helperText}

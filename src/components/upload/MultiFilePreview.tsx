@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AnimatePresence, motion } from 'framer-motion';
 import isString from 'lodash/isString';
 // @mui
@@ -11,6 +12,7 @@ import FileIllustration from '../../assets/illustration_file';
 import { varFade } from '../animate/fade';
 import Image from '../image/Image';
 import { useTranslation } from 'react-i18next';
+import { STATIC_URL } from '../../config/config';
 
 // ----------------------------------------------------------------------
 
@@ -36,6 +38,7 @@ interface MultiFilePreviewProps {
   showPreview: boolean;
   onRemove: (file: File) => void;
   onRemoveAll: () => void;
+  isEdit?: boolean;
 }
 
 export default function MultiFilePreview({
@@ -43,21 +46,29 @@ export default function MultiFilePreview({
   files,
   onRemove,
   onRemoveAll,
+  isEdit,
 }: MultiFilePreviewProps) {
   const hasFile = files && files.length > 0;
   const { t } = useTranslation();
+  function getImageSrc(file: File, preview: any): any {
+    if (isEdit) {
+      return `${STATIC_URL}/${file.name}`;
+    } else {
+      return isString(file) ? `${STATIC_URL}/${file.name}` : preview;
+    }
+  }
   return (
     <>
       <List disablePadding sx={{ ...(hasFile && { my: 3 }) }}>
         <AnimatePresence>
           {files &&
-            files.map((file) => {
+            files.map((file, index) => {
               const { key, name, size, preview } = getFileData(file);
 
               if (showPreview) {
                 return (
                   <ListItem
-                    key={key}
+                    key={index}
                     component={motion.div}
                     {...varFade().inRight}
                     sx={{
@@ -74,11 +85,12 @@ export default function MultiFilePreview({
                   >
                     <Image
                       alt="preview"
-                      src={isString(file) ? file : preview}
+                      src={getImageSrc(file, preview)}
                       ratio="1/1"
                       disabledEffect={false}
                       effect={'blur'}
                     />
+
                     <IconButton
                       size="small"
                       onClick={() => onRemove(file)}
