@@ -6,40 +6,20 @@ import { Grid } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import HomeIcon from '@mui/icons-material/Home';
 import { cities_data, nb_rooms_data } from '../../../features/home/posts/fakeData';
-import { useState } from 'react';
-import { useDebounce } from '../../../hooks/useDebounce';
 
-export const Filtre = () => {
+interface FilterProps {
+  handleCityChange: (event: React.ChangeEvent<{ value: unknown }>) => void;
+  handleNbRoomsChange: (event: React.ChangeEvent<{ value: unknown }>) => void;
+  handlePriceChange: (interval: number[]) => void;
+  handleSurfaceChange: (interval: number[]) => void;
+}
+export const Filter = ({
+  handleCityChange,
+  handleNbRoomsChange,
+  handlePriceChange,
+  handleSurfaceChange,
+}: FilterProps) => {
   const { t } = useTranslation();
-  const [price, setPrice] = useState([500, 1200]);
-  const [city, setCity] = useState('');
-  const [nb_rooms, setNbRooms] = useState('');
-  const [surface, setSurface] = useState([80, 1000]);
-
-  const handleCityChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setCity(event.target.value as string);
-    debouncedRequest();
-  };
-
-  const handleNbRoomsChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setNbRooms(event.target.value as string);
-    debouncedRequest();
-  };
-
-  function handlePriceChange(interval: number[]) {
-    setPrice(interval);
-    debouncedRequest();
-  }
-
-  const debouncedRequest = useDebounce(() => {
-    console.log('get the values of the filter', price, city, nb_rooms, surface);
-    // send request to the backend with the filtered values
-  }, 1000);
-
-  function handleSurfaceChange(interval: number[]) {
-    setSurface(interval);
-    debouncedRequest();
-  }
 
   return (
     <BoxCenter sx={{ flex: 1 }}>
@@ -49,7 +29,7 @@ export const Filtre = () => {
             label={t('listPostsMain.price')}
             // TODO get the min price, max price from the back
 
-            interval={[25, 100]}
+            interval={[300, 10000]}
             onChange={handlePriceChange}
           />
         </Grid>
@@ -73,7 +53,7 @@ export const Filtre = () => {
           <FilterSlider
             label={t('listPostsMain.surface')}
             // TODO get the min surface, max surface from the back
-            interval={[80, 100]}
+            interval={[80, 1000]}
             onChange={handleSurfaceChange}
           />
         </Grid>
