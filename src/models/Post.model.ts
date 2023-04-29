@@ -47,11 +47,13 @@ export const PostModel = {
       label: 'postForm.number_roommate_label',
       name: 'nb_roommate',
       requiredErrorMessage: 'postForm.number_roommate_required',
+      invaliErrorMessage: 'postForm.number_roommate_required',
     },
     nb_rooms: {
       label: 'postForm.number_rooms_label',
       name: 'nb_rooms',
       requiredErrorMessage: 'postForm.number_rooms_required',
+      invaliErrorMessage: 'postForm.number_rooms_required',
     },
     postal_code: {
       label: 'postForm.code_post_label',
@@ -82,13 +84,10 @@ export const PostModel = {
 
     surface: 0,
     images: [] as File[],
-    nb_roommate: 0,
-    nb_rooms: 0,
-    postal_code: 0,
+
     city: '',
     state: '',
     posterId: 0,
-    likes: 0,
 
     isLocated: false,
   },

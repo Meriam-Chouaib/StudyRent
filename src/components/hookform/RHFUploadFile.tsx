@@ -4,6 +4,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { FormHelperText } from '@mui/material';
 // type
 import { UploadMultiFile } from '../upload';
+import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 
@@ -30,7 +31,7 @@ export function RHFUploadMultiFile({
   ...other
 }: RHFUploadMultiFileProps) {
   const { control } = useFormContext();
-
+  const { t } = useTranslation();
   return (
     <Controller
       name={name}
@@ -49,9 +50,9 @@ export function RHFUploadMultiFile({
             error={checkError}
             isEdit={isEdit}
             helperText={
-              checkError && (
+              error && (
                 <FormHelperText error sx={{ px: 2 }}>
-                  {error?.message}
+                  {error.message && t(`${error?.message}`)}
                 </FormHelperText>
               )
             }
