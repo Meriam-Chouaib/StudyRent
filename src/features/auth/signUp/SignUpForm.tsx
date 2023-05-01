@@ -1,4 +1,6 @@
-import { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +17,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert, IconButton, InputAdornment, Stack, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { CustomButton, BoxCenter } from '../../../components';
+import { CustomButton, BoxCenter, Toast } from '../../../components';
 // components
 import { FormProvider, TextField } from '../../../components/hookform';
 import { PATHS } from '../../../config/paths';
@@ -32,10 +34,10 @@ export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [problem, setProblem] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const { fields, defaultValues } = RegisterModel;
-  const [register, { error }] = useRegisterMutation();
-  let msg: string;
+  const [register, { error, isSuccess }] = useRegisterMutation();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -58,19 +60,14 @@ export default function SignUpForm() {
         .unwrap()
         .then((res) => {
           if (res.status === CONSTANTS.OK) {
-            navigate(PATHS.ROOT);
+            setSuccessMessage('register successfully');
           }
         })
         .catch((err) => {
-          console.log(err);
           if (err.data) {
             setProblem(err.data.message);
           }
-          if (err.data.data) {
-            setProblem(err.data.data[0].message);
-          }
         });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error(error);
       reset();
@@ -78,7 +75,14 @@ export default function SignUpForm() {
       setError('password', { ...error, message: error.message });
     }
   };
-
+  useEffect(() => {
+    if (successMessage) {
+      setTimeout(() => {
+        setSuccessMessage('');
+        navigate(PATHS.ROOT);
+      }, 2000);
+    }
+  }, [successMessage]);
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onRegister)}>
       <Stack
@@ -87,7 +91,8 @@ export default function SignUpForm() {
         alignItems={'center'}
         justifyContent={'space-between'}
       >
-        {problem && <Alert severity="error">{problem}</Alert>}
+        {error && <Toast type={'error'} text={t(`signup.check_fields`)} />}
+        {isSuccess && <Toast type={'success'} text={'register successfully'} close={1000} />}
 
         <TextField name={fields.email.name} type={'text'} label={t(fields.email.label)} />
         <TextField name={fields.username.name} type={'text'} label={t(fields.username.label)} />

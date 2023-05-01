@@ -1,5 +1,6 @@
 export const signup = {
-  title: `Créer un compte`,
+  title: `Sign up`,
+  check_fields: 'Check your fields',
 
   // email
   email_label: 'Email',

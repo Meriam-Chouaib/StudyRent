@@ -1,6 +1,6 @@
 export const signup = {
   title: `S'inscrire`,
-
+  check_fields: 'Vérifier les champs',
   // email
   email_label: 'Email',
   email_required: 'Email est obligatoire',
