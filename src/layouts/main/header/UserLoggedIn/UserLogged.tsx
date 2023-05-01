@@ -10,6 +10,7 @@ import { SelectIcon } from './SelectIcon';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '../../../../config/paths';
 import { COLORS } from '../../../../config/colors';
+import theme from '../../../../theme';
 
 export const UserLogged = ({ username, img, status }: UserLoggedProps) => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ export const UserLogged = ({ username, img, status }: UserLoggedProps) => {
   return (
     <HeaderDashboard>
       <BoxCenter sx={{ position: 'relative' }}>
-        <Txt_link style={{ marginRight: '1rem' }} color={`${COLORS.PRIMARY.MAIN}`}>
+        <Txt_link style={{ marginRight: '1rem' }} sx={{ color: theme.palette.primary.main }}>
           {username}
         </Txt_link>
 
