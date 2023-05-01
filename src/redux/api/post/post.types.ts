@@ -54,6 +54,7 @@ export interface PostState {
   post: Post | null;
   isLoading: boolean;
   error?: string | null;
+  isSuccess?: boolean;
 }
 
 // List posts response

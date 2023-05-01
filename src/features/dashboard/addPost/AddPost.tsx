@@ -9,8 +9,8 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 // @mui
-import { Alert, Stack } from '@mui/material';
-import { BoxSpaceBetween, CustomButton } from '../../../components';
+import { Stack } from '@mui/material';
+import { BoxSpaceBetween, CustomButton, Toast } from '../../../components';
 // components
 import { FormProvider, TextField } from '../../../components/hookform';
 import { PostModel } from '../../../models/Post.model';
@@ -36,19 +36,21 @@ interface AddPostProps {
   isEdit?: boolean;
 }
 export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
+  const navigate = useNavigate();
   const { fields, defaultValues } = PostModel;
   const { id } = useParams();
-
+  // states
   const [problem, setProblem] = useState('');
-  const navigate = useNavigate();
-
   const [selectedImages, setSelectedImages] = useState<any>([]);
+  const [successMessage, setSuccessMessage] = useState('');
+
   const user: IUser = getPersistData('user', true);
 
   // -------------- get the post information----------
 
-  const [addPost] = useAddPostMutation();
-  const [editPost] = useEditPostMutation();
+  const [addPost, { isSuccess: addSuccess, error: addError }] = useAddPostMutation();
+  const [editPost, { isSuccess: editSuccess, error: editError }] = useEditPostMutation();
+
   const { t } = useTranslation();
   const methods = useForm<IPostRequest>({
     resolver: yupResolver(PostSchema),
@@ -126,7 +128,9 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           .then((res) => {
             console.log('res', res);
 
-            navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
+            setSuccessMessage(`${t('dashboardAddPost.success_msg')}`);
+
+            //    navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
           })
           .catch((err) => {
             console.log(err);
@@ -142,11 +146,12 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           .unwrap()
           .then((res) => {
             console.log('res', res);
+            setSuccessMessage(`${t('dashboardAddPost.success_msg')}`);
 
             // TODO update files "keep all files and the delete files from edit dosent work the file always still"
             // TODO redirect after edit dosent work
 
-            navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
+            // navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
           })
           .catch((err) => {
             console.log(err);
@@ -204,9 +209,18 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     const filteredItems = values.images?.filter((_file) => _file !== file);
     setValue('images', filteredItems);
   };
-
+  useEffect(() => {
+    if (successMessage) {
+      setTimeout(() => {
+        isEdit
+          ? setSuccessMessage(`${t('dashboardAddPost.success_msg_edit')}`)
+          : setSuccessMessage(`${t('dashboardAddPost.success_msg')}`);
+        navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
+      }, 2000);
+    }
+  }, [successMessage]);
   if (isEdit) {
-    const { data, isLoading, isError } = useGetPostQuery(id);
+    const { data } = useGetPostQuery(id);
     console.log('get Post by id', data);
 
     useEffect(() => {
@@ -235,7 +249,10 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     <>
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3} alignItems={'center'} justifyContent={'space-between'} width={'90'}>
-          {problem && <Alert severity="error">{problem}</Alert>}
+          {addError && <Toast type={'error'} text={problem} />}
+          {editError && <Toast type={'error'} text={problem} />}
+          {addSuccess && <Toast type={'success'} text={t('dashboardAddPost.success_msg')} />}
+          {editSuccess && <Toast type={'success'} text={t('dashboardAddPost.success_msg_edit')} />}
 
           <TextField name={fields.title.name} type={'text'} label={t(fields.title.label)} />
           <TextField

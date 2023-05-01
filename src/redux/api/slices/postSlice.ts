@@ -7,6 +7,7 @@ const initialState: PostState = {
   post: null,
   isLoading: false,
   error: null,
+  isSuccess: false,
 };
 export const postSlice = createSlice({
   name: 'post',
@@ -31,6 +32,7 @@ export const postSlice = createSlice({
       .addMatcher(postApi.endpoints.addPost.matchFulfilled, (state, action) => {
         const response = action.payload;
         const { post, message, status } = response;
+        state.isSuccess = true;
 
         state.post = post;
         state.isLoading = false;
@@ -39,11 +41,13 @@ export const postSlice = createSlice({
       .addMatcher(postApi.endpoints.addPost.matchPending, (state) => {
         state.post = null;
         state.isLoading = true;
+
         state.error = null;
       })
       .addMatcher(postApi.endpoints.addPost.matchRejected, (state, action) => {
         state.isLoading = false;
         state.error = action?.error?.message;
+        state.isSuccess = false;
       })
 
       // -------------- Delete post ---------------------
@@ -70,6 +74,7 @@ export const postSlice = createSlice({
         state.post = post;
         state.isLoading = false;
         state.error = null;
+        state.isSuccess = true;
       })
       .addMatcher(postApi.endpoints.editPost.matchPending, (state) => {
         state.isLoading = true;
