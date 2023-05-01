@@ -129,8 +129,6 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
             console.log('res', res);
 
             setSuccessMessage(`${t('dashboardAddPost.success_msg')}`);
-
-            //    navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
           })
           .catch((err) => {
             console.log(err);
@@ -150,8 +148,6 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
 
             // TODO update files "keep all files and the delete files from edit dosent work the file always still"
             // TODO redirect after edit dosent work
-
-            // navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
           })
           .catch((err) => {
             console.log(err);
@@ -249,8 +245,8 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     <>
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3} alignItems={'center'} justifyContent={'space-between'} width={'90'}>
-          {addError && <Toast type={'error'} text={problem} />}
-          {editError && <Toast type={'error'} text={problem} />}
+          {addError && <Toast type={'error'} text={t(`signup.check_fields`)} />}
+          {editError && <Toast type={'error'} text={t(`signup.check_fields`)} />}
           {addSuccess && <Toast type={'success'} text={t('dashboardAddPost.success_msg')} />}
           {editSuccess && <Toast type={'success'} text={t('dashboardAddPost.success_msg_edit')} />}
 

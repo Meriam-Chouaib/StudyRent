@@ -92,7 +92,7 @@ export default function SignUpForm() {
         justifyContent={'space-between'}
       >
         {error && <Toast type={'error'} text={t(`signup.check_fields`)} />}
-        {isSuccess && <Toast type={'success'} text={'register successfully'} close={1000} />}
+        {isSuccess && <Toast type={'success'} text={t(`signup.success_message`)} close={1000} />}
 
         <TextField name={fields.email.name} type={'text'} label={t(fields.email.label)} />
         <TextField name={fields.username.name} type={'text'} label={t(fields.username.label)} />
