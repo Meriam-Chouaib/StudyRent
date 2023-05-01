@@ -24,3 +24,4 @@ export * from './LinkItem/LinkIcon';
 export * from './logo/logoFooter/LogoFooter';
 export * from './BoxCenter/BoxCenter.styles';
 export * from './BoxLeft/BoxLeft.style';
+export * from './Toast/Toast';
