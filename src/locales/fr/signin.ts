@@ -1,5 +1,6 @@
 export const signin = {
   title: `S'authentifier`,
+  check_fields: 'Vérifier vos informations svp!',
 
   email_label: 'Email',
   password_label: 'Mot de passe',

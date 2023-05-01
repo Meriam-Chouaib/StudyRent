@@ -11,9 +11,9 @@ import { IconButton, InputAdornment, Stack, Typography, Alert } from '@mui/mater
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-import { CustomButton } from '../../../components';
 // components
 import { FormProvider, TextField } from '../../../components/hookform';
+import { CustomButton, Toast } from '../../../components';
 import { PATHS } from '../../../config/paths';
 import { LoginModel } from '../../../models/Login.model';
 import { LoginSchema } from './ValidationSchema';
@@ -80,7 +80,7 @@ export default function LoginForm() {
         alignItems={'center'}
         justifyContent={'space-between'}
       >
-        {problem && <Alert severity="error">{problem}</Alert>}
+        {error && <Toast type={'error'} text={t(`signin.check_fields`)} />}
 
         <TextField name={fields.email.name} type={'text'} label={t(fields.email.label)} />
         <TextField
