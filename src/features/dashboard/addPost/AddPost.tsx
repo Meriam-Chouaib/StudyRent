@@ -23,14 +23,12 @@ import {
   useEditPostMutation,
   useGetPostQuery,
 } from '../../../redux/api/post/post.api';
-import { IPostRequest, Post } from '../../../redux/api/post/post.types';
+import { IPostRequest } from '../../../redux/api/post/post.types';
 import { IUser } from '../../../redux/api/user/user.types';
 import theme from '../../../theme';
 import { getPersistData } from '../../../utils';
-import { useNavigate, useParams, redirect } from 'react-router-dom';
-import { LoaderBox } from '../../../components/Loader/LoaderBox';
+import { useNavigate, useParams } from 'react-router-dom';
 import { PATHS } from '../../../config/paths';
-import { CONSTANTS } from '../../../config/constants';
 
 // ----------------------------------------------------------------------
 interface AddPostProps {
@@ -52,7 +50,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
   const [addPost] = useAddPostMutation();
   const [editPost] = useEditPostMutation();
   const { t } = useTranslation();
-  const methods = useForm({
+  const methods = useForm<IPostRequest>({
     resolver: yupResolver(PostSchema),
     defaultValues,
   });
@@ -60,7 +58,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
   const {
     control,
     reset,
-
+    getValues,
     setError,
     setValue,
     watch,
@@ -68,7 +66,6 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     formState: { isSubmitting },
   } = methods;
 
-  // const values = watch();
   const values = watch();
 
   const onSubmit = async ({
@@ -101,11 +98,25 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
       const data = new FormData();
 
       console.log(selectedImages);
-
-      data.append('post', JSON.stringify(values));
-      values.images.forEach((file: any) => {
+      values?.images?.forEach((file: any) => {
         data.append('files', file);
       });
+      const valuesWithoutImages = {
+        title: values.title,
+        description: values.description,
+        price: values.price,
+
+        surface: values.surface,
+
+        nb_roommate: values.nb_roommate,
+        nb_rooms: values.nb_rooms,
+        postal_code: values.postal_code,
+        city: values.city,
+      };
+      data.append('post', JSON.stringify(valuesWithoutImages));
+
+      console.log('filssssssssssssses999999999999', data.get('files'));
+      console.log('postssssssssssssssssss99999999999', data.get('post'));
 
       // ___________________________________ *** Add post *** ____________________________________________
 
@@ -119,12 +130,10 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           })
           .catch((err) => {
             console.log(err);
+            setProblem(`${t('postForm.check_fiels')}`);
           });
       } else {
         // ___________________________________ *** Edit post *** ____________________________________________
-
-        console.log('files', data.get('files'));
-        console.log('post', data.get('post'));
 
         await editPost({
           id: Number(id),
@@ -133,7 +142,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           .unwrap()
           .then((res) => {
             console.log('res', res);
-            console.log('reeeeeeeeeeeeeeeeeeeeeeesss');
+
             // TODO update files "keep all files and the delete files from edit dosent work the file always still"
             // TODO redirect after edit dosent work
 
@@ -141,12 +150,13 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           })
           .catch((err) => {
             console.log(err);
+
+            setProblem(`${t('postForm.check_fiels')}`);
           });
       }
     } catch (error: any) {
       console.log(error);
       console.error(error);
-      // TODO confirmation pour les champs (code postale, files,nb_rooms,nb_roommates )
 
       reset();
       setError('title', { ...error, message: error.message });
@@ -167,12 +177,22 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     (acceptedFiles: any) =>
       setValue(
         'images',
-        acceptedFiles.map((file: File) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          }),
-        ),
+        isEdit
+          ? [
+              ...getValues().images,
+              acceptedFiles.map((file: File) => {
+                Object.assign(file, {
+                  preview: URL.createObjectURL(file),
+                });
+              }),
+            ]
+          : acceptedFiles.map((file: File) =>
+              Object.assign(file, {
+                preview: URL.createObjectURL(file),
+              }),
+            ),
       ),
+
     [setValue],
   );
 
@@ -213,9 +233,6 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
 
   return (
     <>
-      {/* {isLoading ? (
-        <LoaderBox />
-      ) : ( */}
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3} alignItems={'center'} justifyContent={'space-between'} width={'90'}>
           {problem && <Alert severity="error">{problem}</Alert>}
@@ -247,6 +264,8 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
               placeholder={t(fields.nb_roommate.label)}
               name={fields.nb_roommate.name}
               options={[0, 1, 2, 3, 4]}
+              error={true}
+              aria-errormessage="errooor"
             />
             <SelectField
               fullWidth
@@ -268,6 +287,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
               name={fields.city.name}
               options={['Monastir', 'Sousse', 'Zaghouan', 'Mahdia', 'Hammemet']}
             />
+
             <SelectField
               variant="standard"
               id={'state'}
@@ -292,7 +312,6 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           </CustomButton>
         </Stack>
       </FormProvider>
-      {/* )} */}
     </>
   );
 };

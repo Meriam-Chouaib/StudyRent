@@ -1,5 +1,6 @@
 export const postForm = {
   title: 'Ajout annonce',
+  check_fiels: 'Vérifier les champs',
 
   title_label: 'Titre',
   title_required: 'Le titre est obligatoire',

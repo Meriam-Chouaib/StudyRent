@@ -10,14 +10,24 @@ import { Link } from 'react-router-dom';
 import { initialPostsPaginator } from '../../../features/home/posts/posts.constants';
 import usePaginator from '../../../hooks/usePaginator';
 import { useGetPostsByOwnerQuery } from '../../../redux/api/post/post.api';
+import { refreshPage } from '../../../utils/refreshPage';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const ListPostsPage = () => {
+  const navigate = useNavigate();
+
   const { t } = useTranslation();
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
     ...initialPostsPaginator,
     rowsPerPage: 9,
   });
   const { isError, isLoading, data, error } = useGetPostsByOwnerQuery(paginator);
+  useEffect(() => {
+    return () => {
+      navigate(0);
+    };
+  }, []);
   return (
     <>
       {/* <Box>

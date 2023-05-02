@@ -1,7 +1,7 @@
 export const postForm = {
   title: 'Add post',
   title_edit: 'Edit post',
-
+  check_fiels: 'Check your fields',
   title_label: 'Title',
   title_required: 'Title is required',
   title_invalid: 'Title is invalid',
