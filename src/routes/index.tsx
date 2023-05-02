@@ -22,6 +22,7 @@ import { useTranslation } from 'react-i18next';
 import { ListPostsPageStudent } from '../pages/listPostsPage/ListPostsPageStudent';
 import { getPersistData } from '../utils';
 import { IUser } from '../redux/api/user/user.types';
+import { ChatPage } from '../pages/dashboard/chatPage/ChatPage';
 export default function Router() {
   const { t } = useTranslation();
   const user: IUser = getPersistData('user', true);
@@ -68,7 +69,7 @@ export default function Router() {
           element: <AddPostPage title={t('postForm.edit_post_title')} isEdit={true} />,
         },
         { path: PATHS.DASHBOARD.POST.LIST, element: <ListPostsPage /> },
-        { path: 'test', element: <HomePage /> },
+        { path: PATHS.DASHBOARD.CHAT, element: <ChatPage /> },
       ],
     },
 
