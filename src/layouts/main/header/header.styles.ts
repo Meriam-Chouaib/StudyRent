@@ -94,3 +94,9 @@ export const BoxStyled = styled(Box)({
     alignItems: 'center',
   },
 });
+export const BoxMenuSelect = styled(Box)({
+  position: 'relative',
+  '&:hover': {
+    cursor: 'pointer',
+  },
+});

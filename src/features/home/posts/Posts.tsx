@@ -58,7 +58,7 @@ export const Posts = ({
             ))}
           </BoxPosts>
           {withButton && (
-            <Link to={`${PATHS.POSTS}`}>
+            <Link to={`${PATHS.POSTS}`} style={{ textDecoration: 'none' }}>
               <ButtonWithIcon
                 icon={<KeyboardDoubleArrowRightIcon />}
                 txt={t('home.posts_btn') as string}

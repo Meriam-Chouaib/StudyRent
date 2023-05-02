@@ -35,6 +35,7 @@ export default function SignUpForm() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [problem, setProblem] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [showToast, setShowToast] = useState<boolean>(false);
 
   const { fields, defaultValues } = RegisterModel;
   const [register, { error, isSuccess }] = useRegisterMutation();
@@ -55,32 +56,42 @@ export default function SignUpForm() {
   } = methods;
   const onRegister = async ({ username, email, password, role, statut }: IRegisterRequest) => {
     const data = { email, username, password, role, statut };
-    try {
-      await register(data)
-        .unwrap()
-        .then((res) => {
-          if (res.status === CONSTANTS.OK) {
-            setSuccessMessage('register successfully');
+    // try {
+    await register(data)
+      .unwrap()
+      .then((res) => {
+        setSuccessMessage('register successfully');
+        setShowToast(true);
+      })
+      .catch((error) => {
+        if (error.data.message) {
+          if (error.status === 409) {
+            setProblem(error.data.message);
+          } else {
+            setProblem(error.data.data[0].message);
           }
-        })
-        .catch((err) => {
-          if (err.data) {
-            setProblem(err.data.message);
-          }
-        });
-    } catch (error: any) {
-      console.error(error);
-      reset();
-      setError('email', { ...error, message: error.message });
-      setError('password', { ...error, message: error.message });
-    }
+        }
+      });
+    // } catch (error: any) {
+    //   if (error.status === 409) {
+    //     setProblem(error.data.message);
+    //   } else {
+    //     setProblem(error.data.data[0].message);
+    //   }
+    //   console.error(error);
+    //   reset();
+
+    //   // setProblem(error.data.message);
+    //   setError('email', { ...error, message: error.message });
+    //   setError('password', { ...error, message: error.message });
+    // }
   };
   useEffect(() => {
-    if (successMessage) {
+    if (successMessage && successMessage !== '') {
       setTimeout(() => {
         setSuccessMessage('');
         navigate(PATHS.ROOT);
-      }, 2000);
+      }, 100);
     }
   }, [successMessage]);
   return (
@@ -91,8 +102,8 @@ export default function SignUpForm() {
         alignItems={'center'}
         justifyContent={'space-between'}
       >
-        {error && <Toast type={'error'} text={t(`signup.check_fields`)} />}
-        {isSuccess && <Toast type={'success'} text={t(`signup.success_message`)} close={1000} />}
+        {error && <Toast type={'error'} text={t(problem)} />}
+        {isSuccess && <Toast type={'success'} text={t(`signup.success_message`)} close={100} />}
 
         <TextField name={fields.email.name} type={'text'} label={t(fields.email.label)} />
         <TextField name={fields.username.name} type={'text'} label={t(fields.username.label)} />

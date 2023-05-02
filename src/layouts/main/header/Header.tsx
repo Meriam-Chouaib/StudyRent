@@ -67,7 +67,7 @@ export const Header = ({ isLogged, username, status }: headerProps) => {
           ) : (
             <Box>
               <StyledLink to={`${PATHS.AUTH.ROOT}/${PATHS.AUTH.SINGNIN}`}>
-                <Typography variant="h3">{t('header.link_signin')}</Typography>
+                {t('header.link_signin')}
               </StyledLink>
             </Box>
           )}

@@ -107,9 +107,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
         title: values.title,
         description: values.description,
         price: values.price,
-
         surface: values.surface,
-
         nb_roommate: values.nb_roommate,
         nb_rooms: values.nb_rooms,
         postal_code: values.postal_code,
@@ -132,7 +130,9 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           })
           .catch((err) => {
             console.log(err);
-            setProblem(`${t('postForm.check_fiels')}`);
+            //    setProblem(`${t('postForm.check_fiels')}`);
+
+            setProblem(err.data.message);
           });
       } else {
         // ___________________________________ *** Edit post *** ____________________________________________
@@ -150,13 +150,10 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
             // TODO redirect after edit dosent work
           })
           .catch((err) => {
-            console.log(err);
-
-            setProblem(`${t('postForm.check_fiels')}`);
+            if (err.message) setProblem(err.message);
           });
       }
     } catch (error: any) {
-      console.log(error);
       console.error(error);
 
       reset();
@@ -172,7 +169,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     }
   };
 
-  // ---------------------------------***----------------------------------//
+  // ---------------------------------*** delete files ----------------------------------//
 
   const handleDrop = useCallback(
     (acceptedFiles: any) =>
@@ -205,6 +202,8 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     const filteredItems = values.images?.filter((_file) => _file !== file);
     setValue('images', filteredItems);
   };
+
+  // show message success after edit post
   useEffect(() => {
     if (successMessage) {
       setTimeout(() => {
@@ -212,9 +211,12 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           ? setSuccessMessage(`${t('dashboardAddPost.success_msg_edit')}`)
           : setSuccessMessage(`${t('dashboardAddPost.success_msg')}`);
         navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
-      }, 2000);
+      }, 100);
     }
   }, [successMessage]);
+
+  // set the values by default of the post
+
   if (isEdit) {
     const { data } = useGetPostQuery(id);
     console.log('get Post by id', data);
@@ -245,8 +247,8 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     <>
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3} alignItems={'center'} justifyContent={'space-between'} width={'90'}>
-          {addError && <Toast type={'error'} text={t(`signup.check_fields`)} />}
-          {editError && <Toast type={'error'} text={t(`signup.check_fields`)} />}
+          {addError && <Toast type={'error'} text={problem} />}
+          {editError && <Toast type={'error'} text={problem} />}
           {addSuccess && <Toast type={'success'} text={t('dashboardAddPost.success_msg')} />}
           {editSuccess && <Toast type={'success'} text={t('dashboardAddPost.success_msg_edit')} />}
 
