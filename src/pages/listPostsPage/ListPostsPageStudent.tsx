@@ -1,16 +1,32 @@
+// React
 import React, { useState } from 'react';
-import { Posts } from '../../features';
-import { BoxCenter } from '../../components';
-import { Filter } from './Filtre/Filtre';
-import { Container } from '@mui/material';
-import { COLORS } from '../../config/colors';
-import { GoToMap } from '../../features/GoToMap/GoToMap';
-import usePaginator from '../../hooks/usePaginator';
-import { useGetPostsQuery } from '../../redux/api/post/post.api';
-import { initialPostsPaginator } from '../../features/home/posts/posts.constants';
+import { useTranslation } from 'react-i18next';
+import 'react-toastify/dist/ReactToastify.css';
+// style
 import { BoxCenterFilter } from './ListPostsPageStudent.style';
+
+// mui
+import { Container } from '@mui/material';
+
+// features
+import { Posts, initialPostsPaginator, GoToMap } from '../../features';
+
+import { BoxCenter, Toast } from '../../components';
+
+// filtre
+import { Filter } from './Filtre/Filtre';
+
+// hooks
+import usePaginator from '../../hooks/usePaginator';
 import { useDebounce } from '../../hooks/useDebounce';
+// redux
+import { useGetPostsQuery } from '../../redux/api/post/post.api';
+import { IUser } from '../../redux/api/user/user.types';
+
+// utils
 import getFilterString from '../../utils/GetFormatFilter';
+import { getPersistData } from '../../utils';
+
 import { FilterFields } from './ListPostsPageStudent.type';
 
 export const ListPostsPageStudent = () => {
@@ -62,9 +78,20 @@ export const ListPostsPageStudent = () => {
     paginator,
     filter: filterString,
   });
+  const user: IUser = getPersistData('user', true);
+  const { t } = useTranslation();
   return (
     <BoxCenter>
       <Container>
+        {/*  ________________ notify student ______________________ */}
+
+        {user.role == 'OWNER' &&
+          true && ( // !user.university
+            <Toast type={'info'} text={t('listPostsMain.toast_info')} />
+          )}
+
+        {/*  ________________ render the posts filtered ______________________ */}
+
         <BoxCenterFilter>
           <Filter
             handleCityChange={handleCityChange}

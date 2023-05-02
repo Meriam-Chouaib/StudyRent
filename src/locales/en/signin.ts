@@ -1,6 +1,6 @@
 export const signin = {
   title: 'SIGN IN',
-
+  check_fields: 'Check your information!',
   // email
   email_label: 'Email',
   email_required: 'Email required',
