@@ -10,16 +10,12 @@ type LinkItemProps = {
 };
 
 export const LinkItem = ({ path, name, isActive }: LinkItemProps) => {
-  console.log(isActive);
-
   return (
     <StyledLink
       to={path}
-      color={`${isActive}? ${theme.palette.warning.main}:${theme.palette.primary.main}`}
+      color={isActive ? theme.palette.warning.main : theme.palette.primary.main}
     >
-      {/* <StyledLink to={path} color={`${isActive}? ${theme.palette.warning.main}:${theme.palette.primary.main}`}> */}
       <Txt_link>{name}</Txt_link>
     </StyledLink>
   );
 };
-// color={`${isActive}? ${theme.palette.warning.main}:${theme.palette.primary.main}`}

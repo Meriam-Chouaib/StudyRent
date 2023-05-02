@@ -8,7 +8,7 @@ import { useState } from 'react';
 export const ItemSideBar = ({ icon, txt, bgColor, path, isActive }: ItemSideBarProps) => {
   return (
     <>
-      <ItemStyled isActive={isActive ? true : false}>
+      <ItemStyled bgcolor={isActive ? theme.palette.primary.main : theme.palette.warning.main}>
         <>{icon}</>
         <LinkItem path={path} name={txt} isActive={isActive} />
       </ItemStyled>
