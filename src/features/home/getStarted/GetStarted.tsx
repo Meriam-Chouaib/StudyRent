@@ -14,16 +14,16 @@ export const GetStarted = () => {
   return (
     <>
       <BoxCenterGetStarted>
-        <BoxCenterStyled sx={{ width: '100%', textAlign: 'center' }}>
+        <BoxCenterStyled sx={{ width: '100%', textAlign: 'center', position: 'relative' }}>
           <Typography variant="h4">{t('home.started_text_1')}</Typography>
           <Typography variant="h4">{t('home.started_text_2')}</Typography>
           <ButtonHome>{t('home.started_btn')}</ButtonHome>
+          <CustomImageFlesh src={Flesh} alt={t('home') as string} />
         </BoxCenterStyled>
 
         <Box>
           <ImageStartedHome src={imageGetStarted} />
         </Box>
-        <CustomImageFlesh src={Flesh} alt={t('home') as string} />
       </BoxCenterGetStarted>
     </>
   );

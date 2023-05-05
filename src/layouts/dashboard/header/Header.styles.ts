@@ -10,8 +10,7 @@ export const BoxHeader = styled(Box)(() => ({
   justifyContent: 'end',
   display: 'flex',
   width: '100%',
-  [theme.breakpoints.down('md')]: {
-    width: '100%',
-    justifyContent: 'center',
-  },
+  //   [theme.breakpoints.down(935)]: {
+  //     marginLeft: '2rem',
+  //   },
 }));

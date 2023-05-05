@@ -1,5 +1,5 @@
 import { COLORS } from './../../../config/colors';
-import { AppBar, Box, styled } from '@mui/material';
+import { AppBar, Box, Stack, styled } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import theme from '../../../theme';
 
@@ -20,21 +20,25 @@ export const BoxDrawer = styled(Box)({
   position: 'fixed',
 
   display: 'none',
-  [theme.breakpoints.down(715)]: {
+  [theme.breakpoints.down(895)]: {
     display: 'block',
-  },
-  [theme.breakpoints.down('sm')]: {
-    display: 'block',
-    top: '3%',
+    top: '2%',
     right: '0%',
+  },
+});
+export const BoxDrawerDashboard = styled(Box)({
+  position: 'fixed',
+
+  display: 'none',
+  [theme.breakpoints.down(900)]: {
+    top: '0%',
+    left: '0%',
+    display: 'block',
   },
 });
 export const BoxDisplayWeb = styled(Box)({
   display: 'block',
-  [theme.breakpoints.down(715)]: {
-    display: 'none',
-  },
-  [theme.breakpoints.down('sm')]: {
+  [theme.breakpoints.down(895)]: {
     display: 'none',
   },
 });
@@ -86,11 +90,31 @@ export const BoxSelectItemStyled = styled(Box)({
   borderRadius: 'default',
   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
 });
-export const BoxStyled = styled(Box)({
+export const BoxStyled = styled(Stack)({
   [theme.breakpoints.down(715)]: {
-    width: '35%',
+    //    width: '35%',
     display: 'flex',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     alignItems: 'center',
+  },
+});
+// export const StackHeader = styled(Stack)({
+//   display: 'flex',
+//   direction: 'row',
+//   justifyContent: 'flex-end',
+//   alignItems: 'center',
+//   spacing: 4,
+//   width: '100%',
+//   paddingRight: '1rem',
+// });
+export const StackHeader = styled(Stack)({
+  justifyContent: 'center',
+  paddingRight: '1rem',
+  [theme.breakpoints.down(817)]: {
+    justifyContent: 'flex-end',
+    // paddingRight: '5rem',
+  },
+  [theme.breakpoints.down(600)]: {
+    paddingRight: '5rem',
   },
 });

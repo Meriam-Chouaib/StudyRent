@@ -9,6 +9,10 @@ export const BoxItemsSidebar = styled(Box)(() => ({
   top: '0',
   textAlign: 'center',
   padding: '8px 0px',
+  display: 'block',
+  [theme.breakpoints.down(900)]: {
+    display: 'none',
+  },
 }));
 export const BoxSidebar = styled(Box)(() => ({
   position: 'relative',
@@ -16,7 +20,7 @@ export const BoxSidebar = styled(Box)(() => ({
   backgroundColor: `${theme.palette.warning.main}`,
   width: '11rem',
   [theme.breakpoints.down('sm')]: {
-    width: '6rem',
+    // width: '6rem',
   },
 }));
 export const Txt_link = styled('h3')({
