@@ -23,12 +23,13 @@ import {
   useEditPostMutation,
   useGetPostQuery,
 } from '../../../redux/api/post/post.api';
-import { IPostRequest } from '../../../redux/api/post/post.types';
+import { FilePost, IPostRequest, PostState } from '../../../redux/api/post/post.types';
 import { IUser } from '../../../redux/api/user/user.types';
 import theme from '../../../theme';
 import { getPersistData } from '../../../utils';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PATHS } from '../../../config/paths';
+import { useSelector } from 'react-redux';
 
 // ----------------------------------------------------------------------
 interface AddPostProps {
@@ -47,6 +48,8 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
   const user: IUser = getPersistData('user', true);
 
   // -------------- get the post information----------
+  const post = useSelector((state: PostState) => state.post);
+  console.log('255555555', post);
 
   const [addPost, { isSuccess: addSuccess, error: addError }] = useAddPostMutation();
   const [editPost, { isSuccess: editSuccess, error: editError }] = useEditPostMutation();
@@ -107,9 +110,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
         title: values.title,
         description: values.description,
         price: values.price,
-
         surface: values.surface,
-
         nb_roommate: values.nb_roommate,
         nb_rooms: values.nb_rooms,
         postal_code: values.postal_code,

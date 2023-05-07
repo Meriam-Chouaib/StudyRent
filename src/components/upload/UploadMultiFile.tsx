@@ -3,10 +3,11 @@ import { useDropzone } from 'react-dropzone';
 import { Box } from '@mui/material';
 import { SxProps, styled } from '@mui/material/styles';
 //
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import BlockContent from './BlockContent';
 import MultiFilePreview from './MultiFilePreview';
 import RejectionFiles from './RejectionFiles';
+import { FilePost } from '../../redux/api/post/post.types';
 
 // ----------------------------------------------------------------------
 
@@ -25,8 +26,8 @@ const DropZoneStyle = styled('div')(({ theme }) => ({
 interface UploadMultiFileProps {
   error: boolean;
   showPreview: boolean;
-  files: [];
-  onDrop?: (files: File[]) => void;
+  files: FilePost[];
+  onDrop?: (files: FilePost[]) => void;
   onRemove: (file: File) => void;
   onRemoveAll: () => void;
   helperText: ReactNode;
@@ -48,12 +49,28 @@ export default function UploadMultiFile({
   isEdit,
   ...other
 }: UploadMultiFileProps) {
+  const [allFiles, setAllFiles] = useState<FilePost[]>(files);
+
+  console.log('4444444444444444444444 files', files);
+  // let allFiles: FilePost[] = [...files];
+  console.log('4444444444444444444444 allfiles', allFiles);
+
   const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
-    onDrop,
+    onDrop: (acceptedFiles: FilePost[]) => {
+      const filesWithFlags: FilePost[] = acceptedFiles.map((file) =>
+        Object.assign(file, { isNew: true }),
+      );
+      if (onDrop) onDrop(filesWithFlags);
+      setAllFiles((prevFiles) => [...prevFiles, ...filesWithFlags]);
+      // allFiles = [...allFiles, ...filesWithFlags];
+      console.log('4444444444444444444444 allfiles', allFiles);
+    },
   });
+  console.log(allFiles);
+
   useEffect(() => {
     const inputprops = getInputProps();
-    console.log('inputprops', inputprops);
+    console.log('inputpropsssssssssss', inputprops);
   }, [getInputProps]);
 
   return (
@@ -76,7 +93,7 @@ export default function UploadMultiFile({
       {fileRejections.length > 0 && <RejectionFiles fileRejections={fileRejections} />}
 
       <MultiFilePreview
-        files={files}
+        files={allFiles}
         showPreview={showPreview}
         onRemove={onRemove}
         onRemoveAll={onRemoveAll}
