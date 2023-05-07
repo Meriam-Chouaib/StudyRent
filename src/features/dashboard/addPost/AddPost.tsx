@@ -104,7 +104,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
 
       console.log(selectedImages);
       values?.images?.forEach((file: any) => {
-        data.append('files', file);
+        if (file.isNew) data.append('files', file);
       });
       const valuesWithoutImages = {
         title: values.title,
@@ -176,25 +176,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
   // ---------------------------------***----------------------------------//
 
   const handleDrop = useCallback(
-    (acceptedFiles: any) =>
-      setValue(
-        'images',
-        isEdit
-          ? [
-              ...getValues().images,
-              acceptedFiles.map((file: File) => {
-                Object.assign(file, {
-                  preview: URL.createObjectURL(file),
-                });
-              }),
-            ]
-          : acceptedFiles.map((file: File) =>
-              Object.assign(file, {
-                preview: URL.createObjectURL(file),
-              }),
-            ),
-      ),
-
+    (acceptedFiles: any) => setValue('images', acceptedFiles),
     [setValue],
   );
 

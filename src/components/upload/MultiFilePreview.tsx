@@ -54,12 +54,7 @@ export default function MultiFilePreview({
   console.log('2222222222222222222222', files);
 
   function getImageSrc(file: FilePost, preview: any): any {
-    if (file.isNew) {
-      return isString(file) ? `${STATIC_URL}/${file.name}` : preview;
-      //   return URL.createObjectURL(file);
-    } else {
-      return `${STATIC_URL}/${file.name}`;
-    }
+    return file.isNew ? URL.createObjectURL(file) : `${STATIC_URL}/${file.name}`;
   }
   return (
     <>

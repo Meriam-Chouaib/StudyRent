@@ -49,28 +49,28 @@ export default function UploadMultiFile({
   isEdit,
   ...other
 }: UploadMultiFileProps) {
-  const [allFiles, setAllFiles] = useState<FilePost[]>(files);
-
-  console.log('4444444444444444444444 files', files);
-  // let allFiles: FilePost[] = [...files];
-  console.log('4444444444444444444444 allfiles', allFiles);
+  const [allFiles, setAllFiles] = useState<FilePost[]>([]);
 
   const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
     onDrop: (acceptedFiles: FilePost[]) => {
-      const filesWithFlags: FilePost[] = acceptedFiles.map((file) =>
-        Object.assign(file, { isNew: true }),
-      );
-      if (onDrop) onDrop(filesWithFlags);
-      setAllFiles((prevFiles) => [...prevFiles, ...filesWithFlags]);
-      // allFiles = [...allFiles, ...filesWithFlags];
-      console.log('4444444444444444444444 allfiles', allFiles);
+      const filesWithFlags: FilePost[] = acceptedFiles.map((file) => {
+        return Object.assign(file, { isNew: true });
+      });
+
+      const allimages = filesWithFlags.concat(allFiles);
+      console.log('allimages', allimages);
+
+      if (onDrop) onDrop(allimages);
     },
   });
-  console.log(allFiles);
+
+  useEffect(() => {
+    setAllFiles(files);
+  }, [files]);
 
   useEffect(() => {
     const inputprops = getInputProps();
-    console.log('inputpropsssssssssss', inputprops);
+    // setAllFiles(files);
   }, [getInputProps]);
 
   return (
