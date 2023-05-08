@@ -22,6 +22,7 @@ export const PATHS = {
       ADD: 'posts/create',
       EDIT: 'posts/:id',
       POSTS_BY_OWNER: 'postsByOwner',
+      FILES: '/files',
     },
     CHAT: 'chat',
   },

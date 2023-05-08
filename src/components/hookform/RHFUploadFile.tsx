@@ -22,7 +22,6 @@ interface RHFUploadMultiFileProps {
 export function RHFUploadMultiFile({
   name,
   accept,
-  maxSize,
   onDrop,
   onRemove,
   onRemoveAll,
@@ -38,8 +37,7 @@ export function RHFUploadMultiFile({
       control={control}
       render={({ field, fieldState: { error } }) => {
         const checkError = !!error && field.value?.length === 0;
-        console.log('------------------ console.log(field.value);');
-        console.log(field.value);
+
         return (
           <UploadMultiFile
             showPreview={showPreview}

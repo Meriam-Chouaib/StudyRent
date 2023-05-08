@@ -58,7 +58,6 @@ export function decodeEditPost(response: SinglePostResponseData): PostResponse {
       fileReceived.isNew = false;
       return fileReceived;
     }),
-    // images: response.data.files as unknown as File[],
 
     // datePost: new Date(response.data.datePost),
     price: Number.parseInt(response.data.price),

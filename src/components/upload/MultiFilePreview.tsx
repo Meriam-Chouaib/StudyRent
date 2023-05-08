@@ -47,11 +47,9 @@ export default function MultiFilePreview({
   files,
   onRemove,
   onRemoveAll,
-  isEdit,
 }: MultiFilePreviewProps) {
   const hasFile = files && files.length > 0;
   const { t } = useTranslation();
-  console.log('2222222222222222222222', files);
 
   function getImageSrc(file: FilePost, preview: any): any {
     return file.isNew ? URL.createObjectURL(file) : `${STATIC_URL}/${file.name}`;

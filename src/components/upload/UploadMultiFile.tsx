@@ -43,7 +43,7 @@ export default function UploadMultiFile({
   onRemove,
   onRemoveAll,
   helperText,
-  accept,
+
   onDrop,
   sx,
   isEdit,
@@ -58,7 +58,6 @@ export default function UploadMultiFile({
       });
 
       const allimages = filesWithFlags.concat(allFiles);
-      console.log('allimages', allimages);
 
       if (onDrop) onDrop(allimages);
     },
@@ -70,7 +69,6 @@ export default function UploadMultiFile({
 
   useEffect(() => {
     const inputprops = getInputProps();
-    // setAllFiles(files);
   }, [getInputProps]);
 
   return (
