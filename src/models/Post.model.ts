@@ -1,3 +1,5 @@
+import { FilePost } from '../redux/api/post/post.types';
+
 export const PostModel = {
   fields: {
     title: {
@@ -83,7 +85,7 @@ export const PostModel = {
     price: 0,
 
     surface: 0,
-    images: [] as File[],
+    images: [] as FilePost[],
 
     city: '',
     state: '',

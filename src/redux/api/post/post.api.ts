@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { PATHS } from '../../../config/paths';
-import { authorizeWithToken, baseQueryConfig } from './../../baseQueryConfig ';
-
 import { decodAddPost, decodeEditPost, decodePost, decodePosts } from './decoder';
 import { Post, PostResponse, PostResponseData, SinglePostResponseData } from './post.types';
 import { BASE_URL } from '../../../config/config';
@@ -76,6 +74,12 @@ export const postApi = createApi({
       invalidatesTags: ['POSTS'],
       transformResponse: (response: SinglePostResponseData) => decodeEditPost(response),
     }),
+    deleteFiles: builder.mutation<void, number>({
+      query: (idPost: number) => ({
+        url: `${PATHS.DASHBOARD.POST.LIST}/${PATHS.DASHBOARD.POST.FILES}/${idPost}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 export const {
@@ -85,4 +89,5 @@ export const {
   useDeletePostMutation,
   useEditPostMutation,
   useGetPostQuery,
+  useDeleteFilesMutation,
 } = postApi;

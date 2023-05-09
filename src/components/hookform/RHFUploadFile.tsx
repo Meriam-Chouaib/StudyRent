@@ -22,7 +22,6 @@ interface RHFUploadMultiFileProps {
 export function RHFUploadMultiFile({
   name,
   accept,
-  maxSize,
   onDrop,
   onRemove,
   onRemoveAll,
