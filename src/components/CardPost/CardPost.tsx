@@ -71,7 +71,7 @@ export const CardPost = ({
       <CardPostStyled onMouseEnter={handleHover} onMouseLeave={handleMouseLeave}>
         {img ? (
           <>
-            <Box sx={{ position: 'relative' }}>
+            <Box>
               <CardMedia sx={{ height: 140 }} image={`${STATIC_URL}/${img}`} title="green iguana" />
               {isHovered && (
                 <BoxHoverEye>
