@@ -3,10 +3,11 @@ import { useDropzone } from 'react-dropzone';
 import { Box } from '@mui/material';
 import { SxProps, styled } from '@mui/material/styles';
 //
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import BlockContent from './BlockContent';
 import MultiFilePreview from './MultiFilePreview';
 import RejectionFiles from './RejectionFiles';
+import { FilePost } from '../../redux/api/post/post.types';
 
 // ----------------------------------------------------------------------
 
@@ -25,8 +26,8 @@ const DropZoneStyle = styled('div')(({ theme }) => ({
 interface UploadMultiFileProps {
   error: boolean;
   showPreview: boolean;
-  files: [];
-  onDrop?: (files: File[]) => void;
+  files: FilePost[];
+  onDrop?: (files: FilePost[]) => void;
   onRemove: (file: File) => void;
   onRemoveAll: () => void;
   helperText: ReactNode;
@@ -42,18 +43,32 @@ export default function UploadMultiFile({
   onRemove,
   onRemoveAll,
   helperText,
-  accept,
+
   onDrop,
   sx,
   isEdit,
   ...other
 }: UploadMultiFileProps) {
+  const [allFiles, setAllFiles] = useState<FilePost[]>([]);
+
   const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
-    onDrop,
+    onDrop: (acceptedFiles: FilePost[]) => {
+      const filesWithFlags: FilePost[] = acceptedFiles.map((file) => {
+        return Object.assign(file, { isNew: true });
+      });
+
+      const allimages = filesWithFlags.concat(allFiles);
+
+      if (onDrop) onDrop(allimages);
+    },
   });
+
+  useEffect(() => {
+    setAllFiles(files);
+  }, [files]);
+
   useEffect(() => {
     const inputprops = getInputProps();
-    console.log('inputprops', inputprops);
   }, [getInputProps]);
 
   return (
@@ -76,7 +91,7 @@ export default function UploadMultiFile({
       {fileRejections.length > 0 && <RejectionFiles fileRejections={fileRejections} />}
 
       <MultiFilePreview
-        files={files}
+        files={allFiles}
         showPreview={showPreview}
         onRemove={onRemove}
         onRemoveAll={onRemoveAll}

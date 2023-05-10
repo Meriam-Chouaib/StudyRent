@@ -1,16 +1,18 @@
-import { STATIC_URL } from '../../../config/config';
-import { Image, Post, PostResponse, PostResponseData, SinglePostResponseData } from './post.types';
+import { omitKey } from '../../../utils/omitKey';
+import {
+  FilePost,
+  Image,
+  Post,
+  PostResponse,
+  PostResponseData,
+  SinglePostResponseData,
+} from './post.types';
 
 export function decodePosts(result: PostResponseData): Post[] {
   const decoded: Post[] = result.data.map((res) => {
     const decodedPost: Post = {
       ...res,
-      //   images: res.files?.map((fileRes) => {
-      //     const decodedFileRes: Image = {
-      //       fileName: fileRes.filename,
-      //     };
-      //     return decodedFileRes;
-      //   }),
+
       images: res.files?.map((fileRes) => {
         return new File([], `${fileRes.filename}`);
       }),
@@ -22,29 +24,39 @@ export function decodePosts(result: PostResponseData): Post[] {
   });
   return decoded;
 }
+
+// ________________________ decod add post ____________________________________
 export function decodAddPost(response: PostResponse): PostResponse {
   return { ...response };
 }
 export function decodePost(response: SinglePostResponseData): Post {
-  const decodedPost: Post = {
+  const decodedPost = {
     ...response.data,
 
     images: response.data.files?.map((fileRes) => {
-      return new File([], `${fileRes.filename}`);
+      const fileReceived: FilePost = new File([], `${fileRes.filename}`);
+      fileReceived.isNew = false;
+      return fileReceived;
     }),
-
     // datePost: new Date(response.data.datePost),
     price: Number.parseInt(response.data.price),
     postal_code: Number.parseInt(response.data.postal_code),
   };
-  return decodedPost;
+  const postResponseOmitted = omitKey('files', decodedPost);
+
+  return postResponseOmitted;
 }
+
+// ________________________ decod edit post ____________________________________
+
 export function decodeEditPost(response: SinglePostResponseData): PostResponse {
   const decodedPost: Post = {
     ...response.data,
 
     images: response.data.files?.map((fileRes) => {
-      return new File([], `${fileRes.filename}`);
+      const fileReceived: FilePost = new File([], `${fileRes.filename}`);
+      fileReceived.isNew = false;
+      return fileReceived;
     }),
 
     // datePost: new Date(response.data.datePost),

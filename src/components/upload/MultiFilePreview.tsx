@@ -13,6 +13,7 @@ import { varFade } from '../animate/fade';
 import Image from '../image/Image';
 import { useTranslation } from 'react-i18next';
 import { STATIC_URL } from '../../config/config';
+import { FilePost } from '../../redux/api/post/post.types';
 
 // ----------------------------------------------------------------------
 
@@ -34,7 +35,7 @@ const getFileData = (file: any) => {
 // ----------------------------------------------------------------------
 
 interface MultiFilePreviewProps {
-  files: File[];
+  files: FilePost[];
   showPreview: boolean;
   onRemove: (file: File) => void;
   onRemoveAll: () => void;
@@ -46,16 +47,12 @@ export default function MultiFilePreview({
   files,
   onRemove,
   onRemoveAll,
-  isEdit,
 }: MultiFilePreviewProps) {
   const hasFile = files && files.length > 0;
   const { t } = useTranslation();
-  function getImageSrc(file: File, preview: any): any {
-    if (isEdit) {
-      return `${STATIC_URL}/${file.name}`;
-    } else {
-      return isString(file) ? `${STATIC_URL}/${file.name}` : preview;
-    }
+
+  function getImageSrc(file: FilePost, preview: any): any {
+    return file.isNew ? URL.createObjectURL(file) : `${STATIC_URL}/${file.name}`;
   }
   return (
     <>
@@ -64,7 +61,6 @@ export default function MultiFilePreview({
           {files &&
             files.map((file, index) => {
               const { key, name, size, preview } = getFileData(file);
-
               if (showPreview) {
                 return (
                   <ListItem
