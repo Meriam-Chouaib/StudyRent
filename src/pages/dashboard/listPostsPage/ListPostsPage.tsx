@@ -40,7 +40,10 @@ export const ListPostsPage = () => {
         />
       </Box> */}
       <BoxLeft>
-        <Link to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.ADD}`}>
+        <Link
+          to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.ADD}`}
+          style={{ textDecoration: 'none' }}
+        >
           <ButtonWithIcon
             icon={<AddCircleIcon style={{ width: '1.5rem', height: '1.5rem' }} />}
             txt={t('dashboardListPosts.btn_add')}

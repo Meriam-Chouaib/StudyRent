@@ -92,7 +92,9 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           })
           .catch((err) => {
             console.log(err);
-            setProblem(`${t('postForm.check_fiels')}`);
+            //    setProblem(`${t('postForm.check_fiels')}`);
+
+            setProblem(err.data.message);
           });
       } else {
         // ___________________________________ *** Edit post *** ____________________________________________
@@ -115,7 +117,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     }
   };
 
-  // ---------------------------------***----------------------------------//
+  // ---------------------------------*** delete files ----------------------------------//
 
   const handleDrop = useCallback(
     (acceptedFiles: any) => setValue('images', acceptedFiles),
@@ -133,6 +135,8 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     const filteredItems = values.images?.filter((_file) => _file !== file);
     setValue('images', filteredItems);
   };
+
+  // show message success after edit post
   useEffect(() => {
     if (successMessage) {
       setTimeout(() => {

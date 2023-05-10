@@ -49,13 +49,22 @@ export const SelectIcon = ({ onLogout, onProfile }: SelectIconProps) => {
   return (
     <Box sx={{ position: 'relative' }}>
       <ArrowDropDownIcon
-        sx={{ marginLeft: '0.8rem', fontSize: '1.8rem' }}
+        sx={{
+          marginLeft: '0.8rem',
+          fontSize: '1.8rem',
+        }}
         color={'primary'}
         onClick={handleOpen}
       />
 
       {open && (
-        <BoxSelectItemStyled>
+        <BoxSelectItemStyled
+          sx={{
+            '&hover': {
+              cursor: 'pointer',
+            },
+          }}
+        >
           <ItemSelect
             icon={<Person2Icon />}
             onClick={handleProfile}
