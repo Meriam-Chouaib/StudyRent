@@ -30,7 +30,7 @@ export default function FilterSlider({ label, interval, onChange }: FilterSlider
   };
 
   return (
-    <BoxSpaceBetweenCenter width={'auto'}>
+    <BoxSpaceBetweenCenter width={'50%'}>
       <Typography variant="h5">{label}</Typography>
       <Slider
         getAriaLabel={() => 'Minimum distance'}
