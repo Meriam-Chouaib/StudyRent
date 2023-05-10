@@ -19,4 +19,7 @@ export const LogoHeader = styled('img')({
   [theme.breakpoints.down('sm')]: {
     height: '2rem',
   },
+  [theme.breakpoints.down(454)]: {
+    display: 'none',
+  },
 });

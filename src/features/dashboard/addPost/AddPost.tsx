@@ -20,13 +20,12 @@ import { RHFUploadMultiFile } from '../../../components/hookform/RHFUploadFile';
 import { SelectField } from '../../../components/selectField/SelectField';
 import {
   useAddPostMutation,
+  useDeleteFilesMutation,
   useEditPostMutation,
   useGetPostQuery,
 } from '../../../redux/api/post/post.api';
 import { IPostRequest } from '../../../redux/api/post/post.types';
-import { IUser } from '../../../redux/api/user/user.types';
 import theme from '../../../theme';
-import { getPersistData } from '../../../utils';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PATHS } from '../../../config/paths';
 
@@ -41,67 +40,31 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
   const { id } = useParams();
   // states
   const [problem, setProblem] = useState('');
-  const [selectedImages, setSelectedImages] = useState<any>([]);
   const [successMessage, setSuccessMessage] = useState('');
-
-  const user: IUser = getPersistData('user', true);
-
-  // -------------- get the post information----------
-
   const [addPost, { isSuccess: addSuccess, error: addError }] = useAddPostMutation();
   const [editPost, { isSuccess: editSuccess, error: editError }] = useEditPostMutation();
-
+  const [deleteFiles] = useDeleteFilesMutation();
   const { t } = useTranslation();
+
   const methods = useForm<IPostRequest>({
     resolver: yupResolver(PostSchema),
     defaultValues,
   });
-
   const {
-    control,
     reset,
-    getValues,
-    setError,
     setValue,
     watch,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
-
   const values = watch();
 
-  const onSubmit = async ({
-    title,
-    description,
-    price,
-    surface,
-    images,
-    nb_roommate,
-    nb_rooms,
-    postal_code,
-    city,
-    state,
-  }: IPostRequest) => {
-    const dataPost = {
-      title,
-      description,
-      price,
-      surface,
-      images,
-      nb_roommate,
-      nb_rooms,
-      postal_code,
-      city,
-      state,
-      posterId: user.id,
-    };
-
+  const onSubmit = async () => {
     try {
       const data = new FormData();
 
-      console.log(selectedImages);
       values?.images?.forEach((file: any) => {
-        data.append('files', file);
+        if (file.isNew) data.append('files', file);
       });
       const valuesWithoutImages = {
         title: values.title,
@@ -111,12 +74,11 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
         nb_roommate: values.nb_roommate,
         nb_rooms: values.nb_rooms,
         postal_code: values.postal_code,
+        state: values.state,
         city: values.city,
       };
-      data.append('post', JSON.stringify(valuesWithoutImages));
 
-      console.log('filssssssssssssses999999999999', data.get('files'));
-      console.log('postssssssssssssssssss99999999999', data.get('post'));
+      data.append('post', JSON.stringify(valuesWithoutImages));
 
       // ___________________________________ *** Add post *** ____________________________________________
 
@@ -144,58 +106,29 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           .unwrap()
           .then((res) => {
             console.log('res', res);
-            setSuccessMessage(`${t('dashboardAddPost.success_msg')}`);
 
-            // TODO update files "keep all files and the delete files from edit dosent work the file always still"
-            // TODO redirect after edit dosent work
-          })
-          .catch((err) => {
-            if (err.message) setProblem(err.message);
+            setSuccessMessage(`${t('dashboardAddPost.success_msg')}`);
           });
       }
     } catch (error: any) {
       console.error(error);
-
       reset();
-      setError('title', { ...error, message: error.message });
-      setError('description', { ...error, message: error.message });
-      setError('price', { ...error, message: error.message });
-      setError('surface', { ...error, message: error.message });
-      setError('images', { ...error, message: error.message });
-      setError('nb_rooms', { ...error, message: error.message });
-      setError('postal_code', { ...error, message: error.message });
-      setError('city', { ...error, message: error.message });
-      setError('description', { ...error, message: error.message });
+      setProblem(error.message);
     }
   };
 
   // ---------------------------------*** delete files ----------------------------------//
 
   const handleDrop = useCallback(
-    (acceptedFiles: any) =>
-      setValue(
-        'images',
-        isEdit
-          ? [
-              ...getValues().images,
-              acceptedFiles.map((file: File) => {
-                Object.assign(file, {
-                  preview: URL.createObjectURL(file),
-                });
-              }),
-            ]
-          : acceptedFiles.map((file: File) =>
-              Object.assign(file, {
-                preview: URL.createObjectURL(file),
-              }),
-            ),
-      ),
-
+    (acceptedFiles: any) => setValue('images', acceptedFiles),
     [setValue],
   );
 
   const handleRemoveAll = () => {
-    setValue('images', []);
+    if (window.confirm(t('dashboardListPosts.delete_confirm') as string)) {
+      deleteFiles(Number(id));
+      setValue('images', []);
+    }
   };
 
   const handleRemove = (file: any) => {
@@ -215,8 +148,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     }
   }, [successMessage]);
 
-  // set the values by default of the post
-
+  // -------------- get the post information----------
   if (isEdit) {
     const { data } = useGetPostQuery(id);
     console.log('get Post by id', data);
@@ -247,8 +179,8 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     <>
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3} alignItems={'center'} justifyContent={'space-between'} width={'90'}>
-          {addError && <Toast type={'error'} text={problem} />}
-          {editError && <Toast type={'error'} text={problem} />}
+          {addError && <Toast type={'error'} text={t(`signup.check_fields`)} />}
+          {editError && problem && <Toast type={'error'} text={problem} />}
           {addSuccess && <Toast type={'success'} text={t('dashboardAddPost.success_msg')} />}
           {editSuccess && <Toast type={'success'} text={t('dashboardAddPost.success_msg_edit')} />}
 

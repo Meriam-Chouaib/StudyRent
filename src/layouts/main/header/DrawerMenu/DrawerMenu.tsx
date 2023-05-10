@@ -11,8 +11,12 @@ import { useTranslation } from 'react-i18next';
 import { AppBar, DrawerHeader, ListStyled } from './DrawerMenu.styles';
 import { useState } from 'react';
 import { Drawer } from '@mui/material';
-
-export const DrawerPart = () => {
+import { ItemsType } from './ItemsDrawer';
+interface DrawerPartProps {
+  Items: ItemsType;
+  isMain: boolean;
+}
+export const DrawerPart = ({ Items, isMain }: DrawerPartProps) => {
   const [open, setOpen] = useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -25,7 +29,11 @@ export const DrawerPart = () => {
 
   return (
     <>
-      <AppBar position="fixed" open={open}>
+      <AppBar
+        position="fixed"
+        sx={{ left: isMain ? 'auto' : 0, right: isMain ? 0 : 'auto', minHeight: 'auto' }}
+        open={open}
+      >
         <Toolbar sx={{ display: 'flex', justifyContent: 'center', minHeight: 'auto' }}>
           <IconButton
             color="inherit"
@@ -34,11 +42,11 @@ export const DrawerPart = () => {
             edge="start"
             sx={{ mr: 2, minHeight: 'auto', margin: 0, ...(open && { display: 'none' }) }}
           >
-            <MenuIcon color="primary" />
+            <MenuIcon color="primary" sx={{ fontSize: '2rem', minHeight: 'auto' }} />
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Drawer variant="persistent" anchor="right" open={open}>
+      <Drawer variant="persistent" anchor={isMain ? 'right' : 'left'} open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             <ChevronRightIcon />
@@ -46,10 +54,9 @@ export const DrawerPart = () => {
         </DrawerHeader>
         <Divider />
         <ListStyled sx={{ gap: 3 }}>
-          <LinkItem name={t('header.link_home')} path={PATHS.MAIN.HOME} />
-          <LinkItem name={t('header.link_about')} path={PATHS.ABOUT} />
-          <LinkItem name={t('header.link_posts')} path={PATHS.POSTS} />
-          <LinkItem name={t('header.link_contact')} path={PATHS.CONTACT} />
+          {Object.values(Items).map((item, index) => (
+            <LinkItem name={t(item.name)} path={item.path as string} key={index} />
+          ))}
         </ListStyled>
       </Drawer>
     </>

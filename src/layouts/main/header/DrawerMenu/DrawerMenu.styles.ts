@@ -9,7 +9,7 @@ export const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })<AppBarProps>(({ theme, open }) => ({
   backgroundColor: 'transparent',
-  top: '2%',
+  top: '3%',
   width: 'auto',
   boxShadow: 'none',
   transition: theme.transitions.create(['margin', 'width'], {

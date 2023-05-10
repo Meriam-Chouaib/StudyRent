@@ -93,3 +93,6 @@ export interface FileData {
   path: string;
   postId: number;
 }
+export interface FilePost extends File {
+  isNew?: boolean;
+}

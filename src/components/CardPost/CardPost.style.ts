@@ -15,6 +15,10 @@ export const CardPostStyled = styled(Card)(() => ({
     width: '14rem',
     height: '15rem',
   },
+  [theme.breakpoints.down(754)]: {
+    width: '12rem',
+    height: '15rem',
+  },
   [theme.breakpoints.down(620)]: {
     width: '12rem',
     height: '15rem',

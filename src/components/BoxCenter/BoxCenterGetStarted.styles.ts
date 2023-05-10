@@ -7,7 +7,6 @@ export const BoxCenterGetStarted = styled(Box)(() => ({
   padding: '8px',
   flexDirection: 'row',
   justifyContent: 'space-between',
-  position: 'relative',
 
   [theme.breakpoints.down('sm')]: {
     display: 'none',
