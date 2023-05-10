@@ -7,7 +7,7 @@ import Person2Icon from '@mui/icons-material/Person2';
 import { useTranslation } from 'react-i18next';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { ItemSelect } from './ItemSelect';
-import { BoxMenuSelect, BoxSelectItemStyled } from '../header.styles';
+import { BoxSelectItemStyled } from '../header.styles';
 import { PATHS } from '../../../../config/paths';
 import { useNavigate } from 'react-router-dom';
 import { getPersistData } from '../../../../utils';
@@ -47,7 +47,7 @@ export const SelectIcon = ({ onLogout, onProfile }: SelectIconProps) => {
   const { t } = useTranslation();
 
   return (
-    <BoxMenuSelect>
+    <Box sx={{ position: 'relative' }}>
       <ArrowDropDownIcon
         sx={{
           marginLeft: '0.8rem',
@@ -84,6 +84,6 @@ export const SelectIcon = ({ onLogout, onProfile }: SelectIconProps) => {
           />
         </BoxSelectItemStyled>
       )}
-    </BoxMenuSelect>
+    </Box>
   );
 };
