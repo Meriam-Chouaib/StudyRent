@@ -4,10 +4,12 @@ import { headerProps } from '../../main/header/header.types';
 import { UserLogged } from '../../main/header/UserLoggedIn/UserLogged';
 import { BoxHeader, HeaderDashboard } from './Header.styles';
 import { BoxDrawerDashboard } from '../../main/header/header.styles';
-import { ItemsDashboard } from '../../main/header/DrawerMenu/ItemsDrawer';
+import { ItemsDashboard, ItemsDashboardStudent } from '../../main/header/DrawerMenu/ItemsDrawer';
 import { DrawerPart } from '../../main/header/DrawerMenu/DrawerMenu';
+import { getPersistData } from '../../../utils';
 
 export default function Header({ username, status, img }: headerProps) {
+  const user = getPersistData('user', false);
   return (
     <>
       {/* <BoxHeader>
@@ -23,7 +25,10 @@ export default function Header({ username, status, img }: headerProps) {
         spacing={4}
       >
         <BoxDrawerDashboard>
-          <DrawerPart Items={ItemsDashboard} isMain={false} />
+          <DrawerPart
+            Items={user.role === 'STUDENT' ? ItemsDashboard : ItemsDashboardStudent}
+            isMain={false}
+          />
         </BoxDrawerDashboard>
         <TranslationStyled />
 

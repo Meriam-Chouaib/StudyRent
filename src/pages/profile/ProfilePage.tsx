@@ -14,11 +14,12 @@ import { SelectField } from '../../components/selectField/SelectField';
 import { UserModel } from '../../models/user.model';
 import { InputLabel } from '../../components/hookform/InputLabel';
 import { StackCenter } from '../../components/CustomStack/CustomStackStyled.styles';
+import { useTranslation } from 'react-i18next';
 
 export const ProfilePage = () => {
   const user = getPersistData('user', true);
   const { fields, defaultValues } = UserModel;
-
+  const { t } = useTranslation();
   const methods = useForm({});
   const {
     reset,
@@ -44,10 +45,12 @@ export const ProfilePage = () => {
       });
     }
   }, [user, reset]);
+  // TODO add input map to get localisation of university
+
   return (
     <Stack py={3}>
       <Typography variant="h4" sx={{ textAlign: 'initial' }}>
-        Modifier votre profile et vos informations
+        {t('dashboardProfile.txt_1')}
       </Typography>
 
       <StackCenter direction={'row'} spacing={1}>
@@ -77,7 +80,7 @@ export const ProfilePage = () => {
                     label={''}
                     placeholder={'t(fields.university.label)'}
                     name={fields.university.name}
-                    options={['Monastir', 'Sousse', 'Zaghouan', 'Mahdia', 'Hammemet']}
+                    options={['ISITCOM', 'ENIM', 'ENIZO', 'EPI']}
                   />
                 </InputLabel>
               )}
@@ -86,7 +89,7 @@ export const ProfilePage = () => {
                 colorBack={`${theme.palette.primary.main}`}
                 colorText={`${theme.palette.warning.main}`}
               >
-                {'confirm'}
+                {t('dashboardProfile.btn_confirm') as string}
               </CustomButton>
             </Stack>
           </FormProvider>
