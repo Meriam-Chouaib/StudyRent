@@ -23,6 +23,7 @@ import { ListPostsPageStudent } from '../pages/listPostsPage/ListPostsPageStuden
 import { getPersistData } from '../utils';
 import { IUser } from '../redux/api/user/user.types';
 import { ChatPage } from '../pages/dashboard/chatPage/ChatPage';
+import { ProfilePage } from '../pages/profile/ProfilePage';
 export default function Router() {
   const { t } = useTranslation();
   const user: IUser = getPersistData('user', true);
@@ -69,6 +70,18 @@ export default function Router() {
           element: <AddPostPage title={t('postForm.edit_post_title')} isEdit={true} />,
         },
         { path: PATHS.DASHBOARD.POST.LIST, element: <ListPostsPage /> },
+      ],
+    },
+    {
+      path: PATHS.DASHBOARD.ROOT,
+      element: (
+        <AuthGuard>
+          <DashboardLayout />
+        </AuthGuard>
+      ),
+      children: [
+        { path: PATHS.DASHBOARD.PROFILE, element: <ProfilePage /> },
+        { path: PATHS.DASHBOARD.FAVORIS, element: <ListPostsPageStudent /> },
         { path: PATHS.DASHBOARD.CHAT, element: <ChatPage /> },
       ],
     },

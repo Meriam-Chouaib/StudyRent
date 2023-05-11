@@ -1,10 +1,10 @@
 import { PATHS } from '../../../config/paths';
-// import { Icon } from '../../../components/Icon/Icon';
 import IconHome from '../../../assets/icons/ic_home';
 import IconChat from '../../../assets/icons/ic_chat';
+import IconFavoris from '../../../assets/icons/ic_heart';
 import IconProfile from '../../../assets/icons/ic_profile';
 
-export default function useGetIcons(activePath: string) {
+export default function useGetIconsStudent(activePath: string) {
   return [
     {
       txt: 'dashboardSidebar.chats',
@@ -14,14 +14,14 @@ export default function useGetIcons(activePath: string) {
       path: PATHS.DASHBOARD.CHAT,
     },
     {
-      txt: 'dashboardSidebar.posts',
+      txt: 'Favoris',
       icon: (
-        <IconHome
-          isActive={activePath === `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`}
+        <IconFavoris
+          isActive={activePath === `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.FAVORIS}`}
         />
       ),
       // icon: <Icon icon={Home} color="primary" isActive={false} />,
-      path: PATHS.DASHBOARD.POST.LIST,
+      path: PATHS.DASHBOARD.FAVORIS,
     },
     {
       txt: 'pofile',
