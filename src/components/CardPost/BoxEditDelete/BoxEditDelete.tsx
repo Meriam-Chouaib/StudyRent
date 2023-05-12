@@ -20,7 +20,13 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { COLORS } from '../../../config/colors';
 import { BoxIconLink } from '../../BoxIconLink/BoxIconLink';
 
-export const BoxEditDelete = ({ handleEdit, idPost, isPoster }: BoxEditDeleteProps) => {
+export const BoxEditDelete = ({
+  handleEdit,
+  idPost,
+  isPoster,
+  handleFavorite,
+  handleComment,
+}: BoxEditDeleteProps) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -65,20 +71,12 @@ export const BoxEditDelete = ({ handleEdit, idPost, isPoster }: BoxEditDeletePro
           </>
         ) : (
           <>
-            <BoxIconLink
-              handleSubmit={handleEdit}
-              color={`transparent`}
-              path={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}/${idPost}`}
-            >
+            <BoxIcon handleSubmit={handleComment} color={`transparent`}>
               <ChatBubbleOutlineIcon color={'primary'}></ChatBubbleOutlineIcon>
-            </BoxIconLink>
-            <BoxIconLink
-              handleSubmit={handleEdit}
-              color={`transparent`}
-              path={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}/${idPost}`}
-            >
+            </BoxIcon>
+            <BoxIcon handleSubmit={handleFavorite} color={`transparent`}>
               <FavoriteBorderIcon color={'primary'}></FavoriteBorderIcon>
-            </BoxIconLink>
+            </BoxIcon>
           </>
         )}
       </BoxEditDeleteStyled>

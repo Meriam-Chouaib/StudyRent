@@ -62,6 +62,12 @@ export const CardPost = ({
   const handleEdit = (id: number) => {
     console.log('edit post', id);
   };
+  const handleFavorite = (id: number) => {
+    console.log('add post', id, 'to favorite list');
+  };
+  const handleComment = (id: number) => {
+    console.log('add comment to post', id);
+  };
   const handleClose = () => {
     setIsModalOpen(false);
   };
@@ -91,6 +97,8 @@ export const CardPost = ({
             handleEdit={() => handleEdit(idPost)}
             idPost={idPost}
             isPoster={isPoster}
+            handleFavorite={() => handleFavorite(idPost)}
+            handleComment={() => handleComment(idPost)}
           />
 
           <CardContent>

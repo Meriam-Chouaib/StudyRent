@@ -28,8 +28,10 @@ import getFilterString from '../../utils/GetFormatFilter';
 import { getPersistData } from '../../utils';
 
 import { FilterFields } from './ListPostsPageStudent.type';
-
-export const ListPostsPageStudent = () => {
+interface ListPostsProps {
+  displayFilter?: boolean;
+}
+export const ListPostsPageStudent = ({ displayFilter }: ListPostsProps) => {
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
     ...initialPostsPaginator,
     rowsPerPage: 9,
@@ -92,14 +94,16 @@ export const ListPostsPageStudent = () => {
 
         {/*  ________________ render the posts filtered ______________________ */}
 
-        <BoxCenterFilter>
-          <Filter
-            handleCityChange={handleCityChange}
-            handleNbRoomsChange={handleNbRoomsChange}
-            handlePriceChange={handlePriceChange}
-            handleSurfaceChange={handleSurfaceChange}
-          />
-        </BoxCenterFilter>
+        {displayFilter && (
+          <BoxCenterFilter>
+            <Filter
+              handleCityChange={handleCityChange}
+              handleNbRoomsChange={handleNbRoomsChange}
+              handlePriceChange={handlePriceChange}
+              handleSurfaceChange={handleSurfaceChange}
+            />
+          </BoxCenterFilter>
+        )}
         <BoxCenter>
           <Posts
             page={1}

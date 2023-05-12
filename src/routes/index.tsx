@@ -81,7 +81,7 @@ export default function Router() {
       ),
       children: [
         { path: PATHS.DASHBOARD.PROFILE, element: <ProfilePage /> },
-        { path: PATHS.DASHBOARD.FAVORIS, element: <ListPostsPageStudent /> },
+        { path: PATHS.DASHBOARD.FAVORIS, element: <ListPostsPageStudent displayFilter={false} /> },
         { path: PATHS.DASHBOARD.CHAT, element: <ChatPage /> },
       ],
     },

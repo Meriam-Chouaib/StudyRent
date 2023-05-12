@@ -3,7 +3,7 @@ import { BoxIcon } from '../CardPost/BoxEditDelete/BoxIcon';
 interface BoxIconLinkProps {
   children: React.ReactNode;
   handleSubmit: () => void;
-  path: string;
+  path?: string;
   color: string;
 }
 export const BoxIconLink = ({ children, handleSubmit, path, color }: BoxIconLinkProps) => {
