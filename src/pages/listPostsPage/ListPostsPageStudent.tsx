@@ -20,7 +20,7 @@ import { Filter } from './Filtre/Filtre';
 import usePaginator from '../../hooks/usePaginator';
 import { useDebounce } from '../../hooks/useDebounce';
 // redux
-import { useGetPostsQuery } from '../../redux/api/post/post.api';
+import { useGetFavoriteListQuery, useGetPostsQuery } from '../../redux/api/post/post.api';
 import { IUser } from '../../redux/api/user/user.types';
 
 // utils
@@ -30,8 +30,9 @@ import { getPersistData } from '../../utils';
 import { FilterFields } from './ListPostsPageStudent.type';
 interface ListPostsProps {
   displayFilter?: boolean;
+  isFavorite?: boolean;
 }
-export const ListPostsPageStudent = ({ displayFilter }: ListPostsProps) => {
+export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsProps) => {
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
     ...initialPostsPaginator,
     rowsPerPage: 9,
@@ -80,6 +81,7 @@ export const ListPostsPageStudent = ({ displayFilter }: ListPostsProps) => {
     paginator,
     filter: filterString,
   });
+
   const user: IUser = getPersistData('user', true);
   const { t } = useTranslation();
   return (

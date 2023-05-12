@@ -24,6 +24,7 @@ import { getPersistData } from '../utils';
 import { IUser } from '../redux/api/user/user.types';
 import { ChatPage } from '../pages/dashboard/chatPage/ChatPage';
 import { ProfilePage } from '../pages/profile/ProfilePage';
+import { FavoritePage } from '../pages/dashboard/favoritePage/FavoritePage';
 export default function Router() {
   const { t } = useTranslation();
   const user: IUser = getPersistData('user', true);
@@ -81,7 +82,7 @@ export default function Router() {
       ),
       children: [
         { path: PATHS.DASHBOARD.PROFILE, element: <ProfilePage /> },
-        { path: PATHS.DASHBOARD.FAVORIS, element: <ListPostsPageStudent displayFilter={false} /> },
+        { path: PATHS.DASHBOARD.FAVORIS, element: <FavoritePage /> },
         { path: PATHS.DASHBOARD.CHAT, element: <ChatPage /> },
       ],
     },
@@ -92,7 +93,7 @@ export default function Router() {
       element: <MainLayout />,
       children: [
         { path: PATHS.MAIN.HOME, element: <HomePage /> },
-        { path: PATHS.POSTS, element: <ListPostsPageStudent /> },
+        { path: PATHS.POSTS, element: <ListPostsPageStudent displayFilter={true} /> },
         { path: PATHS.MAIN.ERROR.P_500, element: <Page500 /> },
         { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
         { path: PATHS.ALL, element: <Navigate to="/404" replace /> },

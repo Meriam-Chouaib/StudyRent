@@ -80,6 +80,14 @@ export const postApi = createApi({
         method: 'DELETE',
       }),
     }),
+    getFavoriteList: builder.query<Post[], { page: number; rowsPerPage: number; id: number }>({
+      query: ({ page, rowsPerPage, id }) => {
+        return `${PATHS.DASHBOARD.POST.FAVORIS}${id}/?page=${page}&rowsPerPage=${rowsPerPage}`;
+      },
+      transformResponse: (result: PostResponseData): Post[] => {
+        return decodePosts(result);
+      },
+    }),
   }),
 });
 export const {
@@ -90,4 +98,5 @@ export const {
   useEditPostMutation,
   useGetPostQuery,
   useDeleteFilesMutation,
+  useGetFavoriteListQuery,
 } = postApi;
