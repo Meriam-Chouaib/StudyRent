@@ -24,7 +24,9 @@ export const PATHS = {
       POSTS_BY_OWNER: 'postsByOwner',
       FILES: '/files',
     },
+    FAVORIS: 'favoris',
     CHAT: 'chat',
+    PROFILE: 'profile',
   },
   MAIN: {
     HOME: '',

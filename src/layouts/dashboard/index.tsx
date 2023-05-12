@@ -11,21 +11,20 @@ import { width } from '@mui/system';
 import { IUser } from '../../redux/api/user/user.types';
 import { NotFound } from '../../pages';
 import { PATHS } from '../../config/paths';
+import useGetIconsStudent from './sidebar/useGetIconStudent';
 
 const user = getPersistData('user', true);
 export function DashboardLayout() {
   const location = useLocation();
   const activePath = location.pathname;
   const icons = useGetIcons(activePath);
+  const iconsStudent = useGetIconsStudent(activePath);
   const Navigate = useNavigate();
-  //   if (user.role === 'STUDENT') {
-  //     Navigate(`/${PATHS.MAIN.ERROR.P_404}`);
-  //   }
   return (
     <>
       <Grid container sx={{ position: 'relative' }}>
         <Grid item xs={0} md={2}>
-          <SideBar items={icons} activePath={activePath} />
+          <SideBar items={user.role == 'STUDENT' ? iconsStudent : icons} activePath={activePath} />
         </Grid>
         <Grid item xs={11} md={10} p={2}>
           <Header img={imgProfile} status={user?.status} username={user?.username} />

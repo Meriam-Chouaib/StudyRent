@@ -9,6 +9,7 @@ import { dashboardListPosts } from './dashboardListPosts';
 import { dashboardSidebar } from './dashboardSidebar';
 import { dashboardAddPost } from './dashboardAddPost';
 import { listPostsMain } from './listPostsMain';
+import { dashboardProfile } from './dashboardProfile';
 
 export const en = {
   signin: signin,
@@ -22,4 +23,5 @@ export const en = {
   dashboardSidebar: dashboardSidebar,
   dashboardAddPost: dashboardAddPost,
   listPostsMain: listPostsMain,
+  dashboardProfile: dashboardProfile,
 };

@@ -37,8 +37,9 @@ export const SelectIcon = ({ onLogout, onProfile }: SelectIconProps) => {
   };
 
   const handleProfile = () => {
+    navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.PROFILE}`);
+
     handleClose();
-    onProfile();
   };
   const handleDashboard = () => {
     navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
