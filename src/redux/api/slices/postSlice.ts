@@ -83,6 +83,34 @@ export const postSlice = createSlice({
       .addMatcher(postApi.endpoints.editPost.matchRejected, (state, action) => {
         state.isLoading = false;
         state.error = action?.error?.message;
+      })
+      .addMatcher(postApi.endpoints.addPostToFavoriteList.matchPending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addMatcher(postApi.endpoints.addPostToFavoriteList.matchFulfilled, (state, action) => {
+        const response = action.payload;
+        const { post, message, status } = response;
+        state.post = post;
+        state.isLoading = false;
+        state.error = null;
+        state.isSuccess = true;
+      })
+      .addMatcher(postApi.endpoints.addPostToFavoriteList.matchRejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action?.error?.message;
+      })
+      .addMatcher(postApi.endpoints.deletePostFromFavorite.matchFulfilled, (state) => {
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addMatcher(postApi.endpoints.deletePostFromFavorite.matchPending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addMatcher(postApi.endpoints.deletePostFromFavorite.matchRejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action?.error?.message;
       });
   },
 });

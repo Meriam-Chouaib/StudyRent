@@ -88,6 +88,20 @@ export const postApi = createApi({
         return decodePosts(result);
       },
     }),
+    addPostToFavoriteList: builder.mutation<PostResponse, { userId: number; postId: number }>({
+      query: ({ userId, postId }) => ({
+        url: `${PATHS.DASHBOARD.POST.FAVORIS}${userId}/${postId}`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['POSTS'],
+      transformResponse: (response: PostResponse) => decodAddPost(response),
+    }),
+    deletePostFromFavorite: builder.mutation<void, { userId: number; postId: number }>({
+      query: ({ userId, postId }) => ({
+        url: `${PATHS.DASHBOARD.POST.FAVORIS}${userId}/${postId}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 export const {
@@ -99,4 +113,6 @@ export const {
   useGetPostQuery,
   useDeleteFilesMutation,
   useGetFavoriteListQuery,
+  useAddPostToFavoriteListMutation,
+  useDeletePostFromFavoriteMutation,
 } = postApi;

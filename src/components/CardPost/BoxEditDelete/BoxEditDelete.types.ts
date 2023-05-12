@@ -5,4 +5,5 @@ export interface BoxEditDeleteProps {
   handleComment: () => void;
   isPoster?: boolean;
   idPost: number;
+  isFavorite?: boolean;
 }
