@@ -7,7 +7,9 @@ interface InputLabelProp {
 export const InputLabel = ({ children, label }: InputLabelProp) => {
   return (
     <StackStyled direction={'row'} spacing={3}>
-      <Typography variant="h3">{label}</Typography>
+      <Typography variant="h3" sx={{ width: '8.5rem' }}>
+        {label}
+      </Typography>
       {children}
     </StackStyled>
   );

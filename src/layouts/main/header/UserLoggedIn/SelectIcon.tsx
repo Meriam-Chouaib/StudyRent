@@ -48,7 +48,14 @@ export const SelectIcon = ({ onLogout, onProfile }: SelectIconProps) => {
   const { t } = useTranslation();
 
   return (
-    <Box sx={{ position: 'relative' }}>
+    <Box
+      sx={{
+        position: 'relative',
+        '&:hover': {
+          cursor: 'pointer',
+        },
+      }}
+    >
       <ArrowDropDownIcon
         sx={{
           marginLeft: '0.8rem',
@@ -61,7 +68,7 @@ export const SelectIcon = ({ onLogout, onProfile }: SelectIconProps) => {
       {open && (
         <BoxSelectItemStyled
           sx={{
-            '&hover': {
+            '&:hover': {
               cursor: 'pointer',
             },
           }}
@@ -69,7 +76,7 @@ export const SelectIcon = ({ onLogout, onProfile }: SelectIconProps) => {
           <ItemSelect
             icon={<Person2Icon />}
             onClick={handleProfile}
-            txt={t('header.profile') as string}
+            txt={t('header.dashboard') as string}
           />
           {user.role != 'STUDENT' && (
             <ItemSelect

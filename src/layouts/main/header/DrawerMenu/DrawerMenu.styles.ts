@@ -4,14 +4,21 @@ import { styled } from '@mui/material/styles';
 const drawerWidth = 240;
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
+  isMain?: boolean;
 }
 export const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
+})<AppBarProps>(({ theme, open, isMain }) => ({
   backgroundColor: 'transparent',
-  top: '3%',
+  top: isMain ? '2%' : '0%',
   width: 'auto',
   boxShadow: 'none',
+  [theme.breakpoints.down('sm')]: {
+    top: isMain ? '1.5%' : '1.5%',
+  },
+  [theme.breakpoints.down(539)]: {
+    top: isMain ? '4%' : '3%',
+  },
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
