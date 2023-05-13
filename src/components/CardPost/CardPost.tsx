@@ -38,13 +38,13 @@ export const CardPost = ({
   img,
   isPoster,
   idPost,
-
+  isFavoritePage,
   PosterId,
   isHomePage,
 }: CardPostProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const [isFavorite, setIsFavorite] = useState<boolean>(isFavoritePage ? true : false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // translation
@@ -75,7 +75,7 @@ export const CardPost = ({
   const handleFavorite = async (id: number) => {
     setIsFavorite(!isFavorite);
 
-    isFavorite == true
+    isFavorite != true
       ? await addPostToFavoriteList({ userId: user.id, postId: id })
       : await deletePostFromFavorite({ userId: user.id, postId: id });
   };

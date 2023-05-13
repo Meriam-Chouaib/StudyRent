@@ -23,10 +23,7 @@ export const BoxEditDelete = ({
   handleComment,
   isFavorite,
 }: BoxEditDeleteProps) => {
-  console.log('isFavorite from box', isFavorite);
-
   const [open, setOpen] = React.useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };

@@ -48,6 +48,7 @@ export const FavoritePage = () => {
             dataPosts={data}
             isLoading={isLoading}
             onChangePage={onChangePage}
+            isFavoritePage={true}
           />
         </BoxCenter>
         <GoToMap />
