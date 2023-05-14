@@ -144,7 +144,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           ? setSuccessMessage(`${t('dashboardAddPost.success_msg_edit')}`)
           : setSuccessMessage(`${t('dashboardAddPost.success_msg')}`);
         navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
-      }, 100);
+      }, 800);
     }
   }, [successMessage]);
 
