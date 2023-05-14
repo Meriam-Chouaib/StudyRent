@@ -21,10 +21,15 @@ import { STATIC_URL } from '../../config/config';
 import { AddPost } from '../../features';
 
 // mutation
-import { useDeletePostMutation } from '../../redux/api/post/post.api';
+import {
+  useAddPostToFavoriteListMutation,
+  useDeletePostFromFavoriteMutation,
+  useDeletePostMutation,
+} from '../../redux/api/post/post.api';
 import { BoxModal } from '../BoxCenter/BoxModal.styles';
 // style
 import { BoxCenter } from '../BoxCenter/BoxCenter.styles';
+import { getPersistData } from '../../utils';
 
 export const CardPost = ({
   title,
@@ -33,11 +38,13 @@ export const CardPost = ({
   img,
   isPoster,
   idPost,
-
+  isFavoritePage,
   PosterId,
   isHomePage,
 }: CardPostProps) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  const [isFavorite, setIsFavorite] = useState<boolean>(isFavoritePage ? true : false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // translation
@@ -52,20 +59,32 @@ export const CardPost = ({
 
   // delete post
   const [deletePost] = useDeletePostMutation();
+  const [addPostToFavoriteList] = useAddPostToFavoriteListMutation();
+  const [deletePostFromFavorite] = useDeletePostFromFavoriteMutation();
   const handleDelete = (id: number) => {
     if (window.confirm(t('dashboardListPosts.delete_confirm') as string)) {
       deletePost(id);
     }
   };
+  const user = getPersistData('user', true);
 
   // edit post
   const handleEdit = (id: number) => {
     console.log('edit post', id);
   };
+  const handleFavorite = async (id: number) => {
+    setIsFavorite(!isFavorite);
+
+    isFavorite != true
+      ? await addPostToFavoriteList({ userId: user.id, postId: id })
+      : await deletePostFromFavorite({ userId: user.id, postId: id });
+  };
+  const handleComment = (id: number) => {
+    console.log('add comment to post', id);
+  };
   const handleClose = () => {
     setIsModalOpen(false);
   };
-
   return (
     <>
       <CardPostStyled onMouseEnter={handleHover} onMouseLeave={handleMouseLeave}>
@@ -91,6 +110,9 @@ export const CardPost = ({
             handleEdit={() => handleEdit(idPost)}
             idPost={idPost}
             isPoster={isPoster}
+            handleFavorite={() => handleFavorite(idPost)}
+            handleComment={() => handleComment(idPost)}
+            isFavorite={isFavorite}
           />
 
           <CardContent>

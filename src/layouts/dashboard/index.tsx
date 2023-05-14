@@ -22,7 +22,7 @@ export function DashboardLayout() {
   const Navigate = useNavigate();
   return (
     <>
-      <Grid container sx={{ position: 'relative' }}>
+      <Grid container sx={{ position: 'relative', justifyContent: 'center' }}>
         <Grid item xs={0} md={2}>
           <SideBar items={user.role == 'STUDENT' ? iconsStudent : icons} activePath={activePath} />
         </Grid>

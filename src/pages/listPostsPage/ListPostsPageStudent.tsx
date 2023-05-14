@@ -20,7 +20,7 @@ import { Filter } from './Filtre/Filtre';
 import usePaginator from '../../hooks/usePaginator';
 import { useDebounce } from '../../hooks/useDebounce';
 // redux
-import { useGetPostsQuery } from '../../redux/api/post/post.api';
+import { useGetFavoriteListQuery, useGetPostsQuery } from '../../redux/api/post/post.api';
 import { IUser } from '../../redux/api/user/user.types';
 
 // utils
@@ -28,8 +28,11 @@ import getFilterString from '../../utils/GetFormatFilter';
 import { getPersistData } from '../../utils';
 
 import { FilterFields } from './ListPostsPageStudent.type';
-
-export const ListPostsPageStudent = () => {
+interface ListPostsProps {
+  displayFilter?: boolean;
+  isFavorite?: boolean;
+}
+export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsProps) => {
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
     ...initialPostsPaginator,
     rowsPerPage: 9,
@@ -78,6 +81,7 @@ export const ListPostsPageStudent = () => {
     paginator,
     filter: filterString,
   });
+
   const user: IUser = getPersistData('user', true);
   const { t } = useTranslation();
   return (
@@ -92,14 +96,16 @@ export const ListPostsPageStudent = () => {
 
         {/*  ________________ render the posts filtered ______________________ */}
 
-        <BoxCenterFilter>
-          <Filter
-            handleCityChange={handleCityChange}
-            handleNbRoomsChange={handleNbRoomsChange}
-            handlePriceChange={handlePriceChange}
-            handleSurfaceChange={handleSurfaceChange}
-          />
-        </BoxCenterFilter>
+        {displayFilter && (
+          <BoxCenterFilter>
+            <Filter
+              handleCityChange={handleCityChange}
+              handleNbRoomsChange={handleNbRoomsChange}
+              handlePriceChange={handlePriceChange}
+              handleSurfaceChange={handleSurfaceChange}
+            />
+          </BoxCenterFilter>
+        )}
         <BoxCenter>
           <Posts
             page={1}

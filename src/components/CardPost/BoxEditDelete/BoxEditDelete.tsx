@@ -1,11 +1,7 @@
 import React from 'react';
 import IconDelete from '../../../assets/icons/ic_delete';
 import IconEdit from '../../../assets/icons/ic_edit';
-import {
-  useDeletePostMutation,
-  useGetPostQuery,
-  useGetPostsQuery,
-} from '../../../redux/api/post/post.api';
+import { useDeletePostMutation } from '../../../redux/api/post/post.api';
 import { BoxEditDeleteStyled } from './BoxEditDelete.styles';
 import { BoxEditDeleteProps } from './BoxEditDelete.types';
 import { BoxIcon } from './BoxIcon';
@@ -14,15 +10,20 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { PATHS } from '../../../config/paths';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { COLORS } from '../../../config/colors';
-import { BoxIconLink } from '../../BoxIconLink/BoxIconLink';
 
-export const BoxEditDelete = ({ handleEdit, idPost, isPoster }: BoxEditDeleteProps) => {
+export const BoxEditDelete = ({
+  handleEdit,
+  idPost,
+  isPoster,
+  handleFavorite,
+  handleComment,
+  isFavorite,
+}: BoxEditDeleteProps) => {
   const [open, setOpen] = React.useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -37,6 +38,7 @@ export const BoxEditDelete = ({ handleEdit, idPost, isPoster }: BoxEditDeletePro
     window.location.reload();
   };
   const { t } = useTranslation();
+
   return (
     <>
       <BoxEditDeleteStyled>
@@ -65,20 +67,16 @@ export const BoxEditDelete = ({ handleEdit, idPost, isPoster }: BoxEditDeletePro
           </>
         ) : (
           <>
-            <BoxIconLink
-              handleSubmit={handleEdit}
-              color={`transparent`}
-              path={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}/${idPost}`}
-            >
+            <BoxIcon handleSubmit={handleComment} color={`transparent`}>
               <ChatBubbleOutlineIcon color={'primary'}></ChatBubbleOutlineIcon>
-            </BoxIconLink>
-            <BoxIconLink
-              handleSubmit={handleEdit}
-              color={`transparent`}
-              path={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}/${idPost}`}
-            >
-              <FavoriteBorderIcon color={'primary'}></FavoriteBorderIcon>
-            </BoxIconLink>
+            </BoxIcon>
+            <BoxIcon handleSubmit={handleFavorite} color={`transparent`}>
+              {isFavorite ? (
+                <FavoriteIcon color={'primary'}></FavoriteIcon>
+              ) : (
+                <FavoriteBorderIcon color={'primary'}></FavoriteBorderIcon>
+              )}
+            </BoxIcon>
           </>
         )}
       </BoxEditDeleteStyled>
