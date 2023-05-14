@@ -13,6 +13,7 @@ export interface PostsProps {
   isDashboard?: boolean;
   dataPosts?: Post[];
   isLoading: boolean;
+  isFavoritePage?: boolean;
   onChangePage: (page: number) => void;
 }
 export interface Filter {

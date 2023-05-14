@@ -26,7 +26,6 @@ export const DrawerPart = ({ Items, isMain }: DrawerPartProps) => {
   };
   // trasnslation
   const { t } = useTranslation();
-  console.log(Items);
 
   return (
     <>
