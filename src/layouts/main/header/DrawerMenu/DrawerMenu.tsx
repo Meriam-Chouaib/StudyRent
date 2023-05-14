@@ -30,6 +30,7 @@ export const DrawerPart = ({ Items, isMain }: DrawerPartProps) => {
   return (
     <>
       <AppBar
+        isMain={isMain}
         position="fixed"
         sx={{ left: isMain ? 'auto' : 0, right: isMain ? 0 : 'auto', minHeight: 'auto' }}
         open={open}
@@ -40,7 +41,13 @@ export const DrawerPart = ({ Items, isMain }: DrawerPartProps) => {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{ mr: 2, minHeight: 'auto', margin: 0, ...(open && { display: 'none' }) }}
+            sx={{
+              mr: 2,
+              minHeight: 'auto',
+              padding: 0,
+              margin: 0,
+              ...(open && { display: 'none' }),
+            }}
           >
             <MenuIcon color="primary" sx={{ fontSize: '2rem', minHeight: 'auto' }} />
           </IconButton>

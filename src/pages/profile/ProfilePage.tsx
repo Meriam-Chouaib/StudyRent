@@ -5,8 +5,7 @@ import { useForm } from 'react-hook-form';
 import { RegisterModel } from '../../models/Register.model';
 import { useEffect } from 'react';
 import { BoxCenter, CustomButton } from '../../components';
-import { BoxStyled } from '../dashboard/addPostPage/AddPostPage.style';
-import { StackStyled } from './ProfilePage.style';
+import { BoxStyled, StackStyled } from './ProfilePage.style';
 import theme from '../../theme';
 import { ImgProfile } from './ProfilePage.style';
 import imgProfile from '../../assets/images/profile_icon.png';
@@ -66,14 +65,14 @@ export const ProfilePage = () => {
         <BoxStyled p={4} sx={{ boxShadow: 'none' }}>
           <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={3} alignItems={'center'} width={'90'}>
-              <InputLabel label={'Email'}>
+              <InputLabel label={t('dashboardProfile.email')}>
                 <TextField name={fields.email.name} type={'text'} label={''} />
               </InputLabel>
-              <InputLabel label={'Username'}>
+              <InputLabel label={t('dashboardProfile.username')}>
                 <TextField name={fields.username.name} type={'text'} label={''} />
               </InputLabel>
               {user.role == 'STUDENT' && (
-                <InputLabel label={'University'}>
+                <InputLabel label={t('dashboardProfile.university')}>
                   <SelectField
                     variant="standard"
                     id={'university'}

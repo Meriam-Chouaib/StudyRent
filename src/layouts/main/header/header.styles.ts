@@ -18,7 +18,7 @@ export const StyledLink = styled(RouterLink)`
 // Box
 export const BoxDrawer = styled(Box)({
   position: 'fixed',
-
+  top: '2%',
   display: 'none',
   [theme.breakpoints.down(895)]: {
     display: 'block',
