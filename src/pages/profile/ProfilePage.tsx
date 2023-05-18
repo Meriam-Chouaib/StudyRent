@@ -48,7 +48,7 @@ export const ProfilePage = () => {
 
   return (
     <Stack py={3}>
-      <Typography variant="h4" sx={{ textAlign: 'initial' }}>
+      <Typography variant="h4" sx={{ textAlign: 'initial', fontSize: '26px' }}>
         {t('dashboardProfile.txt_1')}
       </Typography>
 
@@ -69,6 +69,9 @@ export const ProfilePage = () => {
                 <TextField name={fields.email.name} type={'text'} label={''} />
               </InputLabel>
               <InputLabel label={t('dashboardProfile.username')}>
+                <TextField name={fields.username.name} type={'text'} label={''} />
+              </InputLabel>
+              <InputLabel label={t('dashboardProfile.phone')}>
                 <TextField name={fields.username.name} type={'text'} label={''} />
               </InputLabel>
               {user.role == 'STUDENT' && (

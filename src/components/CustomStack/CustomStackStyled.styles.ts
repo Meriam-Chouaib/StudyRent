@@ -5,7 +5,7 @@ export const CustomStackStyled = styled(Stack)(() => ({
 }));
 export const StackCenter = styled(Stack)(() => ({
   display: 'flex',
-  flexDirection: 'row',
+  flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
 

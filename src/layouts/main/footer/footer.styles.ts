@@ -32,3 +32,9 @@ export const BoxMenu = styled(Box)(() => ({
     flexDirection: 'column',
   },
 }));
+export const BoxFooter = styled(Box)(() => ({
+  backgroundColor: theme.palette.primary.main,
+  position: 'sticky',
+  width: '100%',
+  bottom: 0,
+}));

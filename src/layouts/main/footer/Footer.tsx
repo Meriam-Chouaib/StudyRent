@@ -18,12 +18,12 @@ import icon_google from '../../../assets/images/google-bleu-clair.svg';
 import decoFooter from '../../../assets/images/footer_deco_back.svg';
 import theme from '../../../theme';
 import { PATHS } from '../../../config/paths';
-import { BoxHistory, BoxMenu } from './footer.styles';
+import { BoxHistory, BoxMenu, BoxFooter } from './footer.styles';
 
 export default function Footer() {
   const { t } = useTranslation();
   return (
-    <Box sx={{ backgroundColor: `${theme.palette.primary.main}`, position: 'relative' }}>
+    <BoxFooter>
       <Container>
         <BoxCenterStyled>
           <LogoFooter />
@@ -50,6 +50,6 @@ export default function Footer() {
         </BoxCenterStyled>
       </Container>
       <CustomImageBottom src={decoFooter} />
-    </Box>
+    </BoxFooter>
   );
 }

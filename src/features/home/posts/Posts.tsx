@@ -36,6 +36,7 @@ export const Posts = ({
   const getDefaultImagePath = (images?: File[]) => {
     return images?.length ? `${images[0].name}` : '';
   };
+  console.log('5555', dataPosts);
 
   return (
     <>
@@ -68,7 +69,7 @@ export const Posts = ({
             </Link>
           )}
 
-          {withPagination && (
+          {withPagination && dataPosts?.length != 0 && (
             <BoxCenter paddingTop={3}>
               <Pagination count={10} color="primary" onChange={(_e, page) => onChangePage(page)} />
             </BoxCenter>

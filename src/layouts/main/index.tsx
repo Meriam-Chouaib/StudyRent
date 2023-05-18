@@ -1,7 +1,7 @@
 import Footer from './footer/Footer';
 import { Header } from './header/Header';
 // mui
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 // components
 import { CustomImageBackHeader } from '../../components';
 // images
@@ -23,7 +23,9 @@ export default function MainLayout() {
         <CustomImageBackHeader src={decoTopLeft} alt="" />
         <Header isLogged={user?.isLogged} username={user?.username} status={user?.status} />
         <Outlet />
-        <Footer />
+        <Grid zIndex={11}>
+          <Footer />
+        </Grid>
       </Box>
     </>
   );

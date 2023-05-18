@@ -179,7 +179,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     <>
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3} alignItems={'center'} justifyContent={'space-between'} width={'90'}>
-          {addError && <Toast type={'error'} text={t(`signup.check_fields`)} />}
+          {addError && <Toast type={'error'} text={t(problem)} />}
           {editError && problem && <Toast type={'error'} text={problem} />}
           {addSuccess && <Toast type={'success'} text={t('dashboardAddPost.success_msg')} />}
           {editSuccess && <Toast type={'success'} text={t('dashboardAddPost.success_msg_edit')} />}

@@ -101,6 +101,7 @@ export const postApi = createApi({
         url: `${PATHS.DASHBOARD.POST.FAVORIS}${userId}/${postId}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['POSTS'],
     }),
   }),
 });
