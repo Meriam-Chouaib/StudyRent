@@ -31,7 +31,7 @@ export function HomePage() {
           onChangePage={onChangePage}
         />
 
-        <Contact />
+        {data != undefined && <Contact localizations={data.localizations} />}
       </Container>
     </>
   );

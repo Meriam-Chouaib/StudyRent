@@ -4,11 +4,15 @@ import { BoxImageMap, CustomImageMap } from './Contact.style';
 import Maps from '../../../assets/images/plugin_easy_maps.png.webp';
 import { ContactForm } from './ContactForm';
 import { Map } from '../../map/Map';
-export function Contact() {
+import { Localization } from '../../../redux/api/post/post.types';
+interface ContactProps {
+  localizations: Localization[];
+}
+export function Contact({ localizations }: ContactProps) {
   return (
     <BoxCenter marginY={2}>
       {/* <CustomImageMap /> */}
-      <Map longitude={10.8252} latitude={35.7796} />
+      <Map localizations={localizations} />
     </BoxCenter>
   );
 }
