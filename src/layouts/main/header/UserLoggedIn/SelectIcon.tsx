@@ -12,7 +12,6 @@ import { PATHS } from '../../../../config/paths';
 import { useNavigate } from 'react-router-dom';
 import { getPersistData } from '../../../../utils';
 import { IUser } from '../../../../redux/api/user/user.types';
-const user: IUser = getPersistData('user', true);
 
 type SelectIconProps = {
   onLogout: () => void;
@@ -41,10 +40,7 @@ export const SelectIcon = ({ onLogout, onProfile }: SelectIconProps) => {
 
     handleClose();
   };
-  const handleDashboard = () => {
-    navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
-    handleClose();
-  };
+
   const { t } = useTranslation();
 
   return (
@@ -74,17 +70,11 @@ export const SelectIcon = ({ onLogout, onProfile }: SelectIconProps) => {
           }}
         >
           <ItemSelect
-            icon={<Person2Icon />}
+            icon={<DashboardIcon />}
             onClick={handleProfile}
             txt={t('header.dashboard') as string}
           />
-          {user.role != 'STUDENT' && (
-            <ItemSelect
-              icon={<DashboardIcon />}
-              onClick={handleDashboard}
-              txt={t('header.dashboard') as string}
-            />
-          )}
+
           <ItemSelect
             icon={<ExitToAppIcon />}
             onClick={handleLogout}
