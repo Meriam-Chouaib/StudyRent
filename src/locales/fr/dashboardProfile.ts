@@ -4,4 +4,5 @@ export const dashboardProfile = {
   email: 'Email',
   username: `Nom d'utilisateur`,
   university: 'Université',
+  phone: 'Phone',
 };

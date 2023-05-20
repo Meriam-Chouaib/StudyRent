@@ -31,7 +31,7 @@ export function DashboardLayout() {
 
           <Outlet />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} zIndex={11}>
           <Footer />
         </Grid>
       </Grid>

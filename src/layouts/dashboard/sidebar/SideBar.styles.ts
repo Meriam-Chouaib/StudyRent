@@ -15,8 +15,9 @@ export const BoxItemsSidebar = styled(Box)(() => ({
   },
 }));
 export const BoxSidebar = styled(Box)(() => ({
-  position: 'relative',
+  position: 'fixed',
   height: '100%',
+  zIndex: 0,
   backgroundColor: `${theme.palette.warning.main}`,
   width: '11rem',
   [theme.breakpoints.down('sm')]: {
