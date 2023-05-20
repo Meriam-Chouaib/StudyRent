@@ -59,7 +59,7 @@ export const ListPostsPage = () => {
         margin="2rem 0"
         withButton={false}
         withPagination={true}
-        dataPosts={data}
+        dataPosts={data?.posts}
         isHomePage={false}
         isLoading={isLoading}
         onChangePage={onChangePage}

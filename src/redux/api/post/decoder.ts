@@ -1,15 +1,17 @@
 import { omitKey } from '../../../utils/omitKey';
 import {
+  AllPostsLocalizations,
   FilePost,
   Image,
   Post,
   PostResponse,
   PostResponseData,
+  PostsLocalizations,
   SinglePostResponseData,
 } from './post.types';
 
-export function decodePosts(result: PostResponseData): Post[] {
-  const decoded: Post[] = result.data.map((res) => {
+export function decodePosts(result: PostResponseData): PostsLocalizations {
+  const posts: Post[] = result.data.posts.map((res) => {
     const decodedPost: Post = {
       ...res,
 
@@ -22,7 +24,8 @@ export function decodePosts(result: PostResponseData): Post[] {
     };
     return decodedPost;
   });
-  return decoded;
+  const dataToSend: PostsLocalizations = { posts: posts, localizations: result.data.localizations };
+  return dataToSend;
 }
 
 // ________________________ decod add post ____________________________________

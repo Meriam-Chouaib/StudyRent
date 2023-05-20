@@ -1,7 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { PATHS } from '../../../config/paths';
 import { decodAddPost, decodeEditPost, decodePost, decodePosts } from './decoder';
-import { Post, PostResponse, PostResponseData, SinglePostResponseData } from './post.types';
+import {
+  Post,
+  PostResponse,
+  PostResponseData,
+  PostsLocalizations,
+  SinglePostResponseData,
+} from './post.types';
 import { BASE_URL } from '../../../config/config';
 import { setTokenToHeaders } from '../../../utils/setTokenToHeaders';
 
@@ -25,7 +31,7 @@ export const postApi = createApi({
           url,
         };
       },
-      transformResponse: (result: PostResponseData): Post[] => {
+      transformResponse: (result: PostResponseData): PostsLocalizations => {
         return decodePosts(result);
       },
     }),
@@ -35,7 +41,7 @@ export const postApi = createApi({
           url: `${PATHS.POSTS}/${PATHS.DASHBOARD.POST.POSTS_BY_OWNER}?page=${params.page}&rowsPerPage=${params.rowsPerPage}&idOwner=${params.idUser}`,
         };
       },
-      transformResponse: (result: PostResponseData): Post[] => {
+      transformResponse: (result: PostResponseData): PostsLocalizations => {
         return decodePosts(result);
       },
     }),
@@ -80,11 +86,14 @@ export const postApi = createApi({
         method: 'DELETE',
       }),
     }),
-    getFavoriteList: builder.query<Post[], { page: number; rowsPerPage: number; id: number }>({
+    getFavoriteList: builder.query<
+      PostsLocalizations,
+      { page: number; rowsPerPage: number; id: number }
+    >({
       query: ({ page, rowsPerPage, id }) => {
         return `${PATHS.DASHBOARD.POST.FAVORIS}${id}/?page=${page}&rowsPerPage=${rowsPerPage}`;
       },
-      transformResponse: (result: PostResponseData): Post[] => {
+      transformResponse: (result: PostResponseData): PostsLocalizations => {
         return decodePosts(result);
       },
     }),
