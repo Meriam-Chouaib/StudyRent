@@ -14,6 +14,7 @@ import { initialPostsPaginator } from './posts.constants';
 import { LoaderBox } from '../../../components/Loader/LoaderBox';
 import { Link } from 'react-router-dom';
 import { PATHS } from '../../../config/paths';
+import { getDefaultImagePath } from '../../../utils/getDefaultImage';
 
 export const Posts = ({
   color,
@@ -33,9 +34,6 @@ export const Posts = ({
 
   const { t } = useTranslation();
 
-  const getDefaultImagePath = (images?: File[]) => {
-    return images?.length ? `${images[0].name}` : '';
-  };
   console.log('5555', dataPosts);
 
   return (
