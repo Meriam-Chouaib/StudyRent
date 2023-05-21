@@ -5,10 +5,11 @@ export const signin = {
   email_label: 'Email',
   email_required: 'Email required',
   email_invalid: 'Email invalid',
-
+  email_not_found: 'Email not found. Please make sure you have entered the correct email address.',
+  password_invalid_back: 'Invalid password. Please make sure you have entered the correct password',
   // password
   password_invalid: 'Password invalid',
-  password_label: 'Passwordff',
+  password_label: 'Password',
   password_required: 'Password required',
   password_forgot_label: 'Forgot your password?',
   password_invalid_length: 'Password must be at least 6 characters',
