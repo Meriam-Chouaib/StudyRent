@@ -3,9 +3,17 @@ import { PATHS } from '../../../config/paths';
 import IconHome from '../../../assets/icons/ic_home';
 import IconChat from '../../../assets/icons/ic_chat';
 import IconProfile from '../../../assets/icons/ic_profile';
-
+import IconFavoris from '../../../assets/icons/ic_heart';
+import { getPersistData } from '../../../utils';
+import { ReactNode } from 'react';
+export interface IconsProps {
+  txt: string;
+  icon: JSX.Element;
+  path: string;
+}
 export default function useGetIcons(activePath: string) {
-  return [
+  const user = getPersistData('user', true);
+  const icons: IconsProps[] = [
     {
       txt: 'dashboardSidebar.chats',
       icon: (
@@ -14,14 +22,13 @@ export default function useGetIcons(activePath: string) {
       path: PATHS.DASHBOARD.CHAT,
     },
     {
-      txt: 'dashboardSidebar.posts',
+      txt: 'Favoris',
       icon: (
-        <IconHome
-          isActive={activePath === `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`}
+        <IconFavoris
+          isActive={activePath === `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.FAVORIS}`}
         />
       ),
-      // icon: <Icon icon={Home} color="primary" isActive={false} />,
-      path: PATHS.DASHBOARD.POST.LIST,
+      path: PATHS.DASHBOARD.FAVORIS,
     },
     {
       txt: 'pofile',
@@ -30,8 +37,18 @@ export default function useGetIcons(activePath: string) {
           isActive={activePath === `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.PROFILE}`}
         />
       ),
-      // icon: <Icon icon={Home} color="primary" isActive={false} />,
       path: PATHS.DASHBOARD.PROFILE,
     },
   ];
+  if (user && user.role === 'OWNER')
+    icons.unshift({
+      txt: 'dashboardSidebar.posts',
+      icon: (
+        <IconHome
+          isActive={activePath === `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`}
+        />
+      ),
+      path: PATHS.DASHBOARD.POST.LIST,
+    });
+  return icons;
 }

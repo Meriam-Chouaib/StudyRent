@@ -30,7 +30,7 @@ export const FavoritePage = () => {
       <Container>
         {/*  ________________ notify student ______________________ */}
 
-        {user.role == 'OWNER' &&
+        {user.role == 'STUDENT' &&
           true && ( // !user.university
             <Toast type={'info'} text={t('listPostsMain.toast_info')} />
           )}

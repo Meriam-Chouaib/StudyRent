@@ -9,7 +9,8 @@ import { DrawerPart } from '../../main/header/DrawerMenu/DrawerMenu';
 import { getPersistData } from '../../../utils';
 
 export default function Header({ username, status, img }: headerProps) {
-  const user = getPersistData('user', false);
+  const user = getPersistData('user', true);
+
   return (
     <>
       {/* <BoxHeader>
@@ -26,7 +27,7 @@ export default function Header({ username, status, img }: headerProps) {
       >
         <BoxDrawerDashboard>
           <DrawerPart
-            Items={user.role === 'STUDENT' ? ItemsDashboard : ItemsDashboardStudent}
+            Items={user && user.role === 'OWNER' ? ItemsDashboard : ItemsDashboardStudent}
             isMain={false}
           />
         </BoxDrawerDashboard>
