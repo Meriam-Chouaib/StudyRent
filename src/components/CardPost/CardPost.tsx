@@ -105,15 +105,17 @@ export const CardPost = ({
           </BoxCenter>
         )}
         <>
-          <BoxEditDelete
-            handleDelete={() => handleDelete(idPost)}
-            handleEdit={() => handleEdit(idPost)}
-            idPost={idPost}
-            isPoster={isPoster}
-            handleFavorite={() => handleFavorite(idPost)}
-            handleComment={() => handleComment(idPost)}
-            isFavorite={isFavorite}
-          />
+          {user && (
+            <BoxEditDelete
+              handleDelete={() => handleDelete(idPost)}
+              handleEdit={() => handleEdit(idPost)}
+              idPost={idPost}
+              isPoster={isPoster}
+              handleFavorite={() => handleFavorite(idPost)}
+              handleComment={() => handleComment(idPost)}
+              isFavorite={isFavorite}
+            />
+          )}
 
           <CardContent>
             <Typography gutterBottom variant="subtitle1" component="div">
