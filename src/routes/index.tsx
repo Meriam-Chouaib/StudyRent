@@ -25,6 +25,7 @@ import { IUser } from '../redux/api/user/user.types';
 import { ChatPage } from '../pages/dashboard/chatPage/ChatPage';
 import { ProfilePage } from '../pages/profile/ProfilePage';
 import { FavoritePage } from '../pages/dashboard/favoritePage/FavoritePage';
+import { MapPostsPage } from '../pages/mapPostsPage/MapPostsPage';
 export default function Router() {
   const { t } = useTranslation();
   const user: IUser = getPersistData('user', true);
@@ -102,7 +103,10 @@ export default function Router() {
     {
       path: PATHS.ROOT,
       element: <MainLayout />,
-      children: [{ element: <HomePage />, index: true }],
+      children: [
+        { element: <HomePage />, index: true },
+        { path: `${PATHS.POSTS}/${PATHS.MAIN.MAP}`, element: <MapPostsPage /> },
+      ],
     },
     { path: PATHS.ALL, element: <Navigate to="/404" replace /> },
   ]);

@@ -4,6 +4,7 @@ export const PATHS = {
   ABOUT: 'about',
   CONTACT: 'contact',
   POSTS: 'posts',
+
   ALL: '*',
   AUTH: {
     ROOT: 'auth',
@@ -31,6 +32,8 @@ export const PATHS = {
   },
   MAIN: {
     HOME: '',
+    MAP: 'map',
+
     ERROR: {
       P_500: '500',
       P_404: '404',
