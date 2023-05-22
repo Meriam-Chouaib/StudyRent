@@ -58,17 +58,37 @@ export interface PostState {
 }
 
 // List posts response
-export interface PostResponseData {
-  status: number;
-  data: PostData[];
-  message: string;
-}
+
 export interface SinglePostResponseData {
   status: number;
   data: PostData;
   message: string;
 }
 
+// ________________________________ types of data sended to front_______________________
+
+// ________________________________ response get posts from back_______________________
+export interface PostLocalization {
+  post: PostData;
+  localization: Localization;
+}
+export interface PostResponseData {
+  status: number;
+  data: AllPostsLocalizations;
+  message: string;
+}
+export interface AllPostsLocalizations {
+  posts: PostData[];
+  localizations: Localization[];
+}
+export interface PostsLocalizations {
+  posts: Post[];
+  localizations: Localization[];
+}
+export interface Localization {
+  longitude: number;
+  latitude: number;
+}
 export interface PostData {
   id: number;
   datePost: Date;

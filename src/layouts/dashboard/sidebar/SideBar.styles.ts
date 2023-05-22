@@ -20,8 +20,8 @@ export const BoxSidebar = styled(Box)(() => ({
   zIndex: 0,
   backgroundColor: `${theme.palette.warning.main}`,
   width: '11rem',
-  [theme.breakpoints.down('sm')]: {
-    // width: '6rem',
+  [theme.breakpoints.down('md')]: {
+    position: 'relative',
   },
 }));
 export const Txt_link = styled('h3')({

@@ -26,12 +26,12 @@ export function HomePage() {
           margin="2rem 0"
           withButton={true}
           isHomePage={true}
-          dataPosts={data}
+          dataPosts={data?.posts}
           isLoading={isLoading}
           onChangePage={onChangePage}
         />
 
-        <Contact />
+        {data != undefined && <Contact localizations={data.localizations} posts={data.posts} />}
       </Container>
     </>
   );

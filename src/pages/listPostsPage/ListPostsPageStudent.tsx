@@ -115,7 +115,7 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
             margin="2rem 0 0 0"
             withButton={false}
             withPagination={true}
-            dataPosts={data}
+            dataPosts={data?.posts}
             isLoading={isLoading}
             onChangePage={onChangePage}
           />
