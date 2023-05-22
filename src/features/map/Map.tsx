@@ -19,19 +19,24 @@ const customIcon = L.icon(houseIconOptions);
 export interface MapProps {
   localizations: Localization[];
   posts: Post[];
+  height: string;
 }
 
-export const Map = ({ localizations, posts }: MapProps) => {
+export const Map = ({ localizations, posts, height }: MapProps) => {
   useEffect(() => {
-    Geocode.setApiKey('797cce99946243e887bf61f0b59f26cc');
+    Geocode.setApiKey(`${process.env.API_KEY_MAP}`);
   }, []);
 
   return (
     <>
       <MapContainer
-        center={[localizations[0].latitude, localizations[0].longitude]}
+        center={
+          localizations && localizations.length > 0
+            ? [localizations[0].latitude, localizations[0].longitude]
+            : undefined
+        }
         zoom={12}
-        style={{ height: '25rem', width: '100%', borderRadius: '3rem' }}
+        style={{ height: `${height}`, width: '100%', borderRadius: '3rem' }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {localizations.map((position, index) => (

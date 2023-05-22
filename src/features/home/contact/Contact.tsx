@@ -12,8 +12,7 @@ interface ContactProps {
 export function Contact({ localizations, posts }: ContactProps) {
   return (
     <BoxCenter marginY={2}>
-      {/* <CustomImageMap /> */}
-      <Map localizations={localizations} posts={posts} />
+      <Map localizations={localizations} posts={posts} height="25rem" />
     </BoxCenter>
   );
 }

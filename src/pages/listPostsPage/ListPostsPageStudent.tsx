@@ -89,7 +89,8 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
       <Container>
         {/*  ________________ notify student ______________________ */}
 
-        {user.role == 'OWNER' &&
+        {user &&
+          user.role == 'STUDENT' &&
           true && ( // !user.university
             <Toast type={'info'} text={t('listPostsMain.toast_info')} />
           )}
