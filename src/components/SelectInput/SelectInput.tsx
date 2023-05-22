@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import SvgIcon from '@mui/material/SvgIcon';
-import { Typography } from '@mui/material';
+import { SxProps, Typography } from '@mui/material';
 import { BoxSpaceBetweenCenter } from '../BoxCenter/BoxCenterSpaceBetween.styles';
 import FormControl from '@mui/material/FormControl';
 import { useState } from 'react';
@@ -27,7 +27,10 @@ export default function SelectTextFields({
   const [value, setValue] = useState('');
 
   return (
-    <BoxSpaceBetweenCenter width={label ? 'auto' : 'max-content'}>
+    <BoxSpaceBetweenCenter
+      // width={label ? 'auto' : 'max-content'}
+      sx={{ justifyContent: 'center', width: '100%' }}
+    >
       <FormControl variant="standard">
         <Typography variant="h5">{label}</Typography>
         <Select

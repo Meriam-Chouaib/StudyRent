@@ -3,7 +3,7 @@ import { getPersistData } from '../../utils';
 import { FormProvider, TextField } from '../../components/hookform';
 import { useForm } from 'react-hook-form';
 import { RegisterModel } from '../../models/Register.model';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BoxCenter, CustomButton } from '../../components';
 import { BoxStyled, StackStyled } from './ProfilePage.style';
 import theme from '../../theme';
@@ -14,8 +14,12 @@ import { UserModel } from '../../models/user.model';
 import { InputLabel } from '../../components/hookform/InputLabel';
 import { StackCenter } from '../../components/CustomStack/CustomStackStyled.styles';
 import { useTranslation } from 'react-i18next';
+import SelectTextFields from '../../components/SelectInput/SelectInput';
+import { tunisian_universities_data } from '../../features/home/posts/fakeData';
 
 export const ProfilePage = () => {
+  const [university, setUniversity] = useState<string>('');
+
   const user = getPersistData('user', true);
   const { fields, defaultValues } = UserModel;
   const { t } = useTranslation();
@@ -46,6 +50,9 @@ export const ProfilePage = () => {
   }, [user, reset]);
   // TODO add input map to get localisation of university
 
+  const handleUniversityChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setUniversity(event.target.value as string);
+  };
   return (
     <Stack py={3}>
       <Typography variant="h4" sx={{ textAlign: 'initial', fontSize: '26px' }}>
@@ -76,13 +83,13 @@ export const ProfilePage = () => {
               </InputLabel>
               {user.role == 'STUDENT' && (
                 <InputLabel label={t('dashboardProfile.university')}>
-                  <SelectField
-                    variant="standard"
-                    id={'university'}
-                    label={''}
-                    placeholder={'t(fields.university.label)'}
-                    name={fields.university.name}
-                    options={['ISITCOM', 'ENIM', 'ENIZO', 'EPI']}
+                  <SelectTextFields
+                    data={tunisian_universities_data}
+                    txt={
+                      user.university ? user.university : (t('select your university') as string)
+                    }
+                    // icon={<HomeIcon />}
+                    onChange={handleUniversityChange}
                   />
                 </InputLabel>
               )}
