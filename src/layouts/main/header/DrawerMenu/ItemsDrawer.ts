@@ -1,4 +1,5 @@
 import { PATHS } from '../../../../config/paths';
+import { userApi } from '../../../../redux/api/user/user.api';
 import { getPersistData } from '../../../../utils';
 interface Item {
   name: string;
@@ -15,10 +16,6 @@ export const ItemsMain = {
 };
 
 export const ItemsDashboard = {
-  posts: {
-    name: 'dashboardSidebar.posts',
-    path: `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST}`,
-  },
   chat: {
     name: 'dashboardSidebar.chats',
     path: `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.CHAT}`,
@@ -27,7 +24,16 @@ export const ItemsDashboard = {
     name: 'dashboardSidebar.profile',
     path: `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.PROFILE}`,
   },
+  favoris: {
+    name: 'dashboardSidebar.favoris',
+    path: `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.FAVORIS}`,
+  },
+  posts: {
+    name: 'dashboardSidebar.posts',
+    path: `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST}`,
+  },
 };
+
 export const ItemsDashboardStudent = {
   favoris: {
     name: 'dashboardSidebar.favoris',

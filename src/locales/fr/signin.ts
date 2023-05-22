@@ -6,11 +6,15 @@ export const signin = {
   password_label: 'Mot de passe',
   email_required: 'Email est obligatoire',
   email_invalid: 'Email invalide',
+  email_not_found:
+    'E-mail introuvable. Veuillez vous assurer que vous avez entré la bonne adresse e-mail.',
   password_forgot_label: 'Mot de passe oublié?',
   connect_with_txt: 'Ou connecter avec',
 
   connect_btn: 'CONNECTER',
   create_account_btn: 'CREER UN COMPTE',
+  password_invalid_back:
+    'Mot de passe incorrect. Veuillez vous assurer que vous avez saisi le bon mot de passe',
 
   password_invalid: 'Password invalid',
   password_invalid_length: 'Mot de pass minimum 6 caractéres',

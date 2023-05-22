@@ -4,10 +4,13 @@ import {
   FilePost,
   Image,
   Post,
+  PostLocalizationResponse,
   PostResponse,
   PostResponseData,
   PostsLocalizations,
+  SinglePostEditResponse,
   SinglePostResponseData,
+  SinglePostlocalization,
 } from './post.types';
 
 export function decodePosts(result: PostResponseData): PostsLocalizations {
@@ -32,41 +35,45 @@ export function decodePosts(result: PostResponseData): PostsLocalizations {
 export function decodAddPost(response: PostResponse): PostResponse {
   return { ...response };
 }
-export function decodePost(response: SinglePostResponseData): Post {
+export function decodePost(response: SinglePostEditResponse): SinglePostlocalization {
   const decodedPost = {
-    ...response.data,
+    ...response.data.post,
 
-    images: response.data.files?.map((fileRes) => {
+    images: response.data.post.files?.map((fileRes) => {
       const fileReceived: FilePost = new File([], `${fileRes.filename}`);
       fileReceived.isNew = false;
       return fileReceived;
     }),
     // datePost: new Date(response.data.datePost),
-    price: Number.parseInt(response.data.price),
-    postal_code: Number.parseInt(response.data.postal_code),
+    price: Number.parseInt(response.data.post.price),
+    postal_code: Number.parseInt(response.data.post.postal_code),
   };
   const postResponseOmitted = omitKey('files', decodedPost);
+  const dataToSend: SinglePostlocalization = {
+    post: postResponseOmitted,
+    localization: response.data.localization,
+  };
 
-  return postResponseOmitted;
+  return dataToSend;
 }
 
 // ________________________ decod edit post ____________________________________
 
-export function decodeEditPost(response: SinglePostResponseData): PostResponse {
+export function decodeEditPost(response: SinglePostEditResponse): PostResponse {
   const decodedPost: Post = {
-    ...response.data,
+    ...response.data.post,
 
-    images: response.data.files?.map((fileRes) => {
+    images: response.data.post.files?.map((fileRes) => {
       const fileReceived: FilePost = new File([], `${fileRes.filename}`);
       fileReceived.isNew = false;
       return fileReceived;
     }),
 
     // datePost: new Date(response.data.datePost),
-    price: Number.parseInt(response.data.price),
-    postal_code: Number.parseInt(response.data.postal_code),
-    surface: Number(response.data.surface),
-    nb_roommate: Number(response.data.nb_roommate),
+    price: Number.parseInt(response.data.post.price),
+    postal_code: Number.parseInt(response.data.post.postal_code),
+    surface: Number(response.data.post.surface),
+    nb_roommate: Number(response.data.post.nb_roommate),
   };
   const res: PostResponse = {
     post: decodedPost,

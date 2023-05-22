@@ -3,10 +3,13 @@ import { PATHS } from '../../../config/paths';
 import { decodAddPost, decodeEditPost, decodePost, decodePosts } from './decoder';
 import {
   Post,
+  PostLocalizationResponse,
   PostResponse,
   PostResponseData,
   PostsLocalizations,
+  SinglePostEditResponse,
   SinglePostResponseData,
+  SinglePostlocalization,
 } from './post.types';
 import { BASE_URL } from '../../../config/config';
 import { setTokenToHeaders } from '../../../utils/setTokenToHeaders';
@@ -51,7 +54,7 @@ export const postApi = createApi({
           url: `${PATHS.POSTS}/${id}`,
         };
       },
-      transformResponse: (result: SinglePostResponseData): Post => {
+      transformResponse: (result: SinglePostEditResponse): SinglePostlocalization => {
         return decodePost(result);
       },
     }),
@@ -78,7 +81,7 @@ export const postApi = createApi({
         body: post,
       }),
       invalidatesTags: ['POSTS'],
-      transformResponse: (response: SinglePostResponseData) => decodeEditPost(response),
+      transformResponse: (response: SinglePostEditResponse) => decodeEditPost(response),
     }),
     deleteFiles: builder.mutation<void, number>({
       query: (idPost: number) => ({

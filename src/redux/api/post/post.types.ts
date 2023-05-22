@@ -64,11 +64,19 @@ export interface SinglePostResponseData {
   data: PostData;
   message: string;
 }
-
+export interface SinglePostEditResponse {
+  status: number;
+  data: PostLocalizationResponse;
+  message: string;
+}
+export interface SinglePostlocalization {
+  post: Post;
+  localization: Localization;
+}
 // ________________________________ types of data sended to front_______________________
 
 // ________________________________ response get posts from back_______________________
-export interface PostLocalization {
+export interface PostLocalizationResponse {
   post: PostData;
   localization: Localization;
 }

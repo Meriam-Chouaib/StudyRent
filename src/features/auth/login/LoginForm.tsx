@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLoginMutation } from '../../../redux/api/auth/auth.api';
 // form
 import { useForm } from 'react-hook-form';
@@ -59,8 +59,7 @@ export default function LoginForm() {
         })
         .catch((err) => {
           console.log(err);
-          const msg = t('signin.bad_credentials');
-          setProblem(msg);
+          if (err) setProblem(err.data.message);
         });
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -80,7 +79,7 @@ export default function LoginForm() {
         alignItems={'center'}
         justifyContent={'space-between'}
       >
-        {error && <Toast type={'error'} text={t(`signin.check_fields`)} />}
+        {error && problem && <Toast type={'error'} text={t(`${problem}`)} />}
 
         <TextField name={fields.email.name} type={'text'} label={t(fields.email.label)} />
         <TextField

@@ -8,6 +8,7 @@ import { Typography } from '@mui/material';
 import { BoxSpaceBetweenCenter } from '../BoxCenter/BoxCenterSpaceBetween.styles';
 import FormControl from '@mui/material/FormControl';
 import { useState } from 'react';
+import theme from '../../theme';
 
 interface SelectTextFieldsProps {
   data: any;
@@ -32,7 +33,7 @@ export default function SelectTextFields({
         <Select
           sx={{ width: 'auto' }}
           defaultValue=""
-          disableUnderline={true} // Add this prop
+          disableUnderline={true}
           displayEmpty={true}
           onChange={onChange}
           renderValue={(value) => {
@@ -47,7 +48,11 @@ export default function SelectTextFields({
           }}
         >
           {data.map((option: any) => (
-            <MenuItem key={option.value} value={option.value}>
+            <MenuItem
+              key={option.value}
+              value={option.value}
+              sx={{ color: theme.palette.primary.dark }}
+            >
               {option.value}
             </MenuItem>
           ))}

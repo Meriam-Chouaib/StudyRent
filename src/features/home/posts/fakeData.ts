@@ -1,49 +1,3 @@
-import maison1 from '../../../assets/images/maison1.svg';
-import maison2 from '../../../assets/images/maison2.svg';
-export const fakeData = [
-  {
-    id: '1',
-    img: maison1,
-    title: 'Appartement a louer',
-    city: 'Sousse',
-    price: 200,
-  },
-  {
-    id: '1',
-    img: maison2,
-    title: 'Appartement a louer',
-    city: 'Sousse',
-    price: 4500,
-  },
-  {
-    id: '1',
-    img: maison1,
-    title: 'Appartement a louer',
-    city: 'Sousse',
-    price: 4500,
-  },
-  {
-    id: '1',
-    img: maison2,
-    title: 'Appartement a louer',
-    city: 'Sousse',
-    price: 4500,
-  },
-  {
-    id: '1',
-    img: maison1,
-    title: 'Appartement a louer',
-    city: 'Sousse',
-    price: 4500,
-  },
-  {
-    id: '1',
-    img: maison1,
-    title: 'Appartement a louer',
-    city: 'Sousse',
-    price: 4500,
-  },
-];
 export const nb_rooms_data = [
   {
     value: 1,
@@ -78,5 +32,85 @@ export const cities_data = [
   {
     value: 'sfax',
     label: 'sfax',
+  },
+  {
+    value: 'tunis',
+    label: 'Tunis',
+  },
+  {
+    value: 'ariana',
+    label: 'Ariana',
+  },
+  {
+    value: 'ben-arous',
+    label: 'Ben Arous',
+  },
+  {
+    value: 'nabeul',
+    label: 'Nabeul',
+  },
+  {
+    value: 'zaghouan',
+    label: 'Zaghouan',
+  },
+  {
+    value: 'bizerte',
+    label: 'Bizerte',
+  },
+  {
+    value: 'beja',
+    label: 'Beja',
+  },
+  {
+    value: 'jendouba',
+    label: 'Jendouba',
+  },
+  {
+    value: 'kairouan',
+    label: 'Kairouan',
+  },
+  {
+    value: 'kasserine',
+    label: 'Kasserine',
+  },
+  {
+    value: 'sidi-bouzid',
+    label: 'Sidi Bouzid',
+  },
+  {
+    value: 'gafsa',
+    label: 'Gafsa',
+  },
+  {
+    value: 'tozeur',
+    label: 'Tozeur',
+  },
+  {
+    value: 'kebili',
+    label: 'Kebili',
+  },
+  {
+    value: 'gabes',
+    label: 'Gabes',
+  },
+  {
+    value: 'medenine',
+    label: 'Medenine',
+  },
+  {
+    value: 'tataouine',
+    label: 'Tataouine',
+  },
+  {
+    value: 'kef',
+    label: 'Kef',
+  },
+  {
+    value: 'siliana',
+    label: 'Siliana',
+  },
+  {
+    value: 'manouba',
+    label: 'Manouba',
   },
 ];

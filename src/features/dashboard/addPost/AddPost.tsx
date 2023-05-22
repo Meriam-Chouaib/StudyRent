@@ -108,12 +108,21 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
             console.log('res', res);
 
             setSuccessMessage(`${t('dashboardAddPost.success_msg')}`);
+          })
+          .catch((err) => {
+            console.log(err);
+            if (err.data && err.data.message) {
+              setProblem(err.data.message);
+            } else {
+              // Set a generic error message
+              setProblem(`${t('dashboardAddPost.error_msg')}`);
+              console.log('error2', err);
+            }
           });
       }
     } catch (error: any) {
       console.error(error);
       reset();
-      setProblem(error.message);
     }
   };
 
@@ -157,16 +166,16 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
       if (data) {
         setTimeout(() => {
           reset({
-            title: data.title,
-            description: data.description,
-            price: data.price,
-            surface: data.surface,
-            nb_roommate: data.nb_roommate,
-            nb_rooms: data.nb_rooms,
-            city: data.city,
-            state: data.state,
-            postal_code: data.postal_code,
-            images: data.images,
+            title: data.post.title,
+            description: data.post.description,
+            price: Number(data.post.price),
+            surface: data.post.surface,
+            nb_roommate: data.post.nb_roommate,
+            nb_rooms: data.post.nb_rooms,
+            city: data.post.city,
+            state: data.post.state,
+            postal_code: Number(data.post.postal_code),
+            images: data.post.images,
           });
         }, 2000);
       }
