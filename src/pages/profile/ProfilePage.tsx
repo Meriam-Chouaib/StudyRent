@@ -67,7 +67,10 @@ export const ProfilePage = () => {
 
   return (
     <Stack py={3}>
-      <Typography variant="h4" sx={{ textAlign: 'initial', fontSize: '26px' }}>
+      <Typography
+        variant="h4"
+        sx={{ textAlign: 'initial', fontSize: '26px', paddingBottom: '1rem' }}
+      >
         {t('dashboardProfile.txt_1')}
       </Typography>
 
