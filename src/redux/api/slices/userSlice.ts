@@ -2,8 +2,13 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { authApi } from '../auth/auth.api';
 import { IUser, userState } from '../user/user.types';
 import { keccak256 } from 'js-sha3';
-import { persistData } from '../../../utils/localstorage/localStorage.utils';
+import {
+  getPersistData,
+  persistData,
+  updatePersistedData,
+} from '../../../utils/localstorage/localStorage.utils';
 import { clearLocalStorage } from '../../../utils/localstorage/clearLoalStorage';
+import { userApi } from '../user/user.api';
 
 const initialState: userState = {
   user: null,
@@ -74,6 +79,23 @@ export const userSlice = createSlice({
         state.isLoggedIn = false;
         state.token = '';
         clearLocalStorage();
+      })
+      .addMatcher(userApi.endpoints.updateUser.matchFulfilled, (state, action) => {
+        const response = action.payload;
+        if (response) {
+          console.log('after apdates from slice data', response);
+          updatePersistedData('user', response);
+          state.user = getPersistData('user', true);
+          console.log(state.user);
+        }
+
+        state.isLoading = false;
+      })
+      .addMatcher(userApi.endpoints.updateUser.matchPending, (state) => {
+        state.isLoading = true;
+      })
+      .addMatcher(userApi.endpoints.updateUser.matchRejected, (state) => {
+        state.isLoading = false;
       });
   },
 });

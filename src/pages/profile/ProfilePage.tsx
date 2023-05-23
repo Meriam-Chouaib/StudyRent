@@ -1,6 +1,8 @@
 import { Typography, Stack, Avatar, Box } from '@mui/material';
-import { getPersistData } from '../../utils';
+import { getPersistData, persistData, updatePersistedData } from '../../utils';
 import { FormProvider, TextField } from '../../components/hookform';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { useForm } from 'react-hook-form';
 import { RegisterModel } from '../../models/Register.model';
 import { useEffect } from 'react';
@@ -14,9 +16,15 @@ import { UserModel } from '../../models/user.model';
 import { InputLabel } from '../../components/hookform/InputLabel';
 import { StackCenter } from '../../components/CustomStack/CustomStackStyled.styles';
 import { useTranslation } from 'react-i18next';
+import SelectTextFields from '../../components/SelectInput/SelectInput';
+import { tunisian_universities_data } from '../../features/home/posts/fakeData';
+import { useUpdateUserMutation } from '../../redux/api/user/user.api';
+import { IUser } from '../../redux/api/user/user.types';
+import { RootState } from '../../redux/store';
 
 export const ProfilePage = () => {
   const user = getPersistData('user', true);
+
   const { fields, defaultValues } = UserModel;
   const { t } = useTranslation();
   const methods = useForm({});
@@ -27,24 +35,46 @@ export const ProfilePage = () => {
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
+  const values = watch();
+  const [updateUser, { data, isError, isLoading }] = useUpdateUserMutation();
+
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state: RootState) => state.userState.user);
+
   const onSubmit = async () => {
     console.log('test');
+    console.log('valuuuueeeeess', values);
+
+    try {
+      const userUpdated = await updateUser({ id: user.id, user: values as unknown as IUser });
+      if (userUpdated) {
+        updatePersistedData('user', userUpdated);
+
+        console.log('88888888888888888', userInfo);
+
+        // dispatch();
+      }
+
+      // persistData('user', userUpdated);
+    } catch (e) {
+      console.log(e);
+    }
   };
   useEffect(() => {
-    console.log(user);
+    console.log('user data', user);
 
     if (user) {
       setTimeout(() => {
         reset({
           email: user.email,
           username: user.username,
-          university: user.statut,
           image: user.image,
+          phone: user.phone || '',
+          university: user.university || '',
         });
       });
     }
-  }, [user, reset]);
-  // TODO add input map to get localisation of university
+  }, []);
 
   return (
     <Stack py={3}>
@@ -72,17 +102,19 @@ export const ProfilePage = () => {
                 <TextField name={fields.username.name} type={'text'} label={''} />
               </InputLabel>
               <InputLabel label={t('dashboardProfile.phone')}>
-                <TextField name={fields.username.name} type={'text'} label={''} />
+                <TextField name={fields.phone.name} type={'text'} label={''} />
               </InputLabel>
               {user.role == 'STUDENT' && (
                 <InputLabel label={t('dashboardProfile.university')}>
                   <SelectField
-                    variant="standard"
-                    id={'university'}
-                    label={''}
-                    placeholder={'t(fields.university.label)'}
+                    type={'text'}
+                    options={tunisian_universities_data}
+                    placeholder={user.university ? user.university : ''}
+                    // icon={<HomeIcon />}
+                    // onChange={handleUniversityChange}
                     name={fields.university.name}
-                    options={['ISITCOM', 'ENIM', 'ENIZO', 'EPI']}
+                    id={fields.university.name}
+                    label={t('dashboardProfile.university_placeholder') as string}
                   />
                 </InputLabel>
               )}

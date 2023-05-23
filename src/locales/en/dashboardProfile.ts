@@ -5,4 +5,5 @@ export const dashboardProfile = {
   username: `username`,
   university: 'university',
   phone: 'Phone',
+  university_placeholder: 'Select your university',
 };

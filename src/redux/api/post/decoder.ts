@@ -1,4 +1,6 @@
 import { omitKey } from '../../../utils/omitKey';
+import { UserResponse } from '../auth/auth.api.types';
+import { IUser } from '../user/user.types';
 import {
   AllPostsLocalizations,
   FilePost,
@@ -81,4 +83,8 @@ export function decodeEditPost(response: SinglePostEditResponse): PostResponse {
     status: response.status,
   };
   return res;
+}
+
+export function decodEditUser(response: UserResponse): UserResponse {
+  return { ...response };
 }

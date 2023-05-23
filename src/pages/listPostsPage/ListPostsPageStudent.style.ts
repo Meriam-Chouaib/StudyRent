@@ -20,3 +20,16 @@ export const GridCenter = styled(Grid)(() => ({
   [theme.breakpoints.down('md')]: {},
   [theme.breakpoints.down('sm')]: {},
 }));
+export const WarningMsg = styled(Box)(() => ({
+  position: 'absolute',
+  top: 0,
+  width: '100%',
+  backgroundColor: 'orange',
+  color: 'White',
+  fontSize: '16px',
+  display: 'flex',
+  padding: '5px 0',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
+}));

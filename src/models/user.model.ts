@@ -12,12 +12,7 @@ export const UserModel = {
       requiredErrorMessage: 'signup.username_required',
       invaliErrorMessage: 'signup.username_invalid',
     },
-    university: {
-      label: 'signup.university',
-      name: 'university',
-      requiredErrorMessage: 'signup.university_required',
-      invaliErrorMessage: 'signup.university_invalid',
-    },
+
     password: {
       label: 'signup.password_label',
       name: 'password',
@@ -30,6 +25,15 @@ export const UserModel = {
       name: 'role',
       requiredErrorMessage: 'signup.role_required',
     },
+    phone: {
+      label: 'dashboardProfile.phone',
+      name: 'phone',
+    },
+    university: {
+      label: 'dashboardProfile.university',
+      name: 'university',
+    },
+
     statut: {
       name: 'statut',
     },
@@ -39,7 +43,8 @@ export const UserModel = {
     password: '',
     username: '',
     university: '',
+    phone: '',
     role: '',
-    statut: 'OFFLINE',
+    statut: 'ONLINE',
   },
 };
