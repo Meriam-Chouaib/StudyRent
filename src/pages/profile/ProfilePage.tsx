@@ -1,10 +1,9 @@
-import { Typography, Stack, Avatar, Box } from '@mui/material';
-import { getPersistData, persistData, updatePersistedData } from '../../utils';
+import { Typography, Stack } from '@mui/material';
+import { getPersistData, updatePersistedData } from '../../utils';
 import { FormProvider, TextField } from '../../components/hookform';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { useForm } from 'react-hook-form';
-import { RegisterModel } from '../../models/Register.model';
 import { useEffect } from 'react';
 import { BoxCenter, CustomButton } from '../../components';
 import { BoxStyled, StackStyled } from './ProfilePage.style';
@@ -16,7 +15,6 @@ import { UserModel } from '../../models/user.model';
 import { InputLabel } from '../../components/hookform/InputLabel';
 import { StackCenter } from '../../components/CustomStack/CustomStackStyled.styles';
 import { useTranslation } from 'react-i18next';
-import SelectTextFields from '../../components/SelectInput/SelectInput';
 import { tunisian_universities_data } from '../../features/home/posts/fakeData';
 import { useUpdateUserMutation } from '../../redux/api/user/user.api';
 import { IUser } from '../../redux/api/user/user.types';
@@ -42,20 +40,11 @@ export const ProfilePage = () => {
   const userInfo = useSelector((state: RootState) => state.userState.user);
 
   const onSubmit = async () => {
-    console.log('test');
-    console.log('valuuuueeeeess', values);
-
     try {
       const userUpdated = await updateUser({ id: user.id, user: values as unknown as IUser });
       if (userUpdated) {
         updatePersistedData('user', userUpdated);
-
-        console.log('88888888888888888', userInfo);
-
-        // dispatch();
       }
-
-      // persistData('user', userUpdated);
     } catch (e) {
       console.log(e);
     }
@@ -110,11 +99,13 @@ export const ProfilePage = () => {
                     type={'text'}
                     options={tunisian_universities_data}
                     placeholder={user.university ? user.university : ''}
-                    // icon={<HomeIcon />}
-                    // onChange={handleUniversityChange}
                     name={fields.university.name}
                     id={fields.university.name}
-                    label={t('dashboardProfile.university_placeholder') as string}
+                    label={
+                      user.university
+                        ? user.university
+                        : (t('dashboardProfile.university_placeholder') as string)
+                    }
                   />
                 </InputLabel>
               )}
