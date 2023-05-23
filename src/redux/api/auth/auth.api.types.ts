@@ -35,3 +35,8 @@ export interface DecodedToken {
   iat: number;
   exp: number;
 }
+export interface UserResponse {
+  data: IUser;
+  status: number;
+  message: string;
+}

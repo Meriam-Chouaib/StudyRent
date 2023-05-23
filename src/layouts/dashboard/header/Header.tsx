@@ -7,9 +7,12 @@ import { BoxDrawerDashboard } from '../../main/header/header.styles';
 import { ItemsDashboard, ItemsDashboardStudent } from '../../main/header/DrawerMenu/ItemsDrawer';
 import { DrawerPart } from '../../main/header/DrawerMenu/DrawerMenu';
 import { getPersistData } from '../../../utils';
+import { RootState } from '../../../redux/store';
+import { useSelector } from 'react-redux';
 
 export default function Header({ username, status, img }: headerProps) {
-  const user = getPersistData('user', true);
+  // const user = getPersistData('user', true);
+  const user = useSelector((state: RootState) => state.userState.user);
 
   return (
     <>

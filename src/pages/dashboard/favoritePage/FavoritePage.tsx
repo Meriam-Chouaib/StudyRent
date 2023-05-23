@@ -30,10 +30,6 @@ export const FavoritePage = () => {
       <Container>
         {/*  ________________ notify student ______________________ */}
 
-        {user.role == 'STUDENT' &&
-          true && ( // !user.university
-            <Toast type={'info'} text={t('listPostsMain.toast_info')} />
-          )}
         {error && <Toast type="error" text={error as string} />}
 
         <BoxCenter>

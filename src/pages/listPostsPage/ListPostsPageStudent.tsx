@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 // style
-import { BoxCenterFilter } from './ListPostsPageStudent.style';
+import { BoxCenterFilter, WarningMsg } from './ListPostsPageStudent.style';
 
 // mui
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
+import { Warning } from '@mui/icons-material';
 
 // features
 import { Posts, initialPostsPaginator, GoToMap } from '../../features';
@@ -28,6 +29,8 @@ import getFilterString from '../../utils/GetFormatFilter';
 import { getPersistData } from '../../utils';
 
 import { FilterFields } from './ListPostsPageStudent.type';
+import { COLORS } from '../../config/colors';
+import theme from '../../theme';
 interface ListPostsProps {
   displayFilter?: boolean;
   isFavorite?: boolean;
@@ -86,14 +89,19 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
   const { t } = useTranslation();
   return (
     <BoxCenter>
+      {user &&
+        user.role == 'STUDENT' &&
+        true && ( // !user.university
+          <>
+            <WarningMsg>
+              <Warning style={{ color: `${theme.palette.primary.dark}` }} />
+
+              <Typography variant="h6"> {t('listPostsMain.toast_info')}</Typography>
+            </WarningMsg>
+          </>
+        )}
       <Container>
         {/*  ________________ notify student ______________________ */}
-
-        {user &&
-          user.role == 'STUDENT' &&
-          true && ( // !user.university
-            <Toast type={'info'} text={t('listPostsMain.toast_info')} />
-          )}
 
         {/*  ________________ render the posts filtered ______________________ */}
 

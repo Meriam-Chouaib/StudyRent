@@ -29,6 +29,7 @@ export const PATHS = {
     FAVORIS: 'favoris',
     CHAT: 'chat',
     PROFILE: 'profile',
+    USERS: 'users',
   },
   MAIN: {
     HOME: '',
