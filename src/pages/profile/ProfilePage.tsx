@@ -4,7 +4,7 @@ import { FormProvider, TextField } from '../../components/hookform';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BoxCenter, CustomButton } from '../../components';
 import { BoxStyled, StackStyled } from './ProfilePage.style';
 import theme from '../../theme';
@@ -21,6 +21,8 @@ import { IUser } from '../../redux/api/user/user.types';
 import { RootState } from '../../redux/store';
 
 export const ProfilePage = () => {
+  const [university, setUniversity] = useState<string>('');
+
   const user = getPersistData('user', true);
 
   const { fields, defaultValues } = UserModel;
@@ -65,6 +67,9 @@ export const ProfilePage = () => {
     }
   }, []);
 
+  const handleUniversityChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setUniversity(event.target.value as string);
+  };
   return (
     <Stack py={3}>
       <Typography
