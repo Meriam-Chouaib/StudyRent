@@ -22,7 +22,7 @@ export function HomePage() {
           page={1}
           rowsPerPage={6}
           color={COLORS.PRIMARY.DARK}
-          padding="4rem 5rem"
+          padding="2rem 0"
           margin="2rem 0"
           withButton={true}
           isHomePage={true}

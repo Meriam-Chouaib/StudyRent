@@ -41,8 +41,12 @@ export const Posts = ({
       {isLoading ? (
         <LoaderBox />
       ) : (
-        <CustomBoxPosts bgcolor={color} margin={margin} padding={padding}>
-          <BoxPosts>
+        <CustomBoxPosts
+          // bgcolor={color}
+          margin={margin}
+          padding={padding}
+        >
+          <BoxPosts isHomePage={isHomePage}>
             {dataPosts?.map((post: Post) => (
               <CardPost
                 title={post.title}
