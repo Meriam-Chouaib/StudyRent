@@ -31,6 +31,8 @@ import { getPersistData } from '../../utils';
 import { FilterFields } from './ListPostsPageStudent.type';
 import { COLORS } from '../../config/colors';
 import theme from '../../theme';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 interface ListPostsProps {
   displayFilter?: boolean;
   isFavorite?: boolean;
@@ -85,21 +87,20 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
     filter: filterString,
   });
 
-  const user: IUser = getPersistData('user', true);
+  const user = getPersistData('user', true);
+  const nbPages = data?.nbPages;
   const { t } = useTranslation();
   return (
     <BoxCenter>
-      {user &&
-        user.role == 'STUDENT' &&
-        true && ( // !user.university
-          <>
-            <WarningMsg>
-              <Warning style={{ color: `${theme.palette.primary.dark}` }} />
+      {user && user.role == 'STUDENT' && user.university === undefined && (
+        <>
+          <WarningMsg>
+            <Warning style={{ color: `${theme.palette.primary.dark}` }} />
 
-              <Typography variant="h6"> {t('listPostsMain.toast_info')}</Typography>
-            </WarningMsg>
-          </>
-        )}
+            <Typography variant="h6"> {t('listPostsMain.toast_info')}</Typography>
+          </WarningMsg>
+        </>
+      )}
       <Container>
         {/*  ________________ notify student ______________________ */}
 
@@ -117,6 +118,7 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
         )}
         <BoxCenter>
           <Posts
+            nbPages={nbPages}
             page={1}
             rowsPerPage={9}
             color={'transparent'}

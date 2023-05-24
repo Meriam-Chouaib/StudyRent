@@ -23,7 +23,7 @@ export const FavoritePage = () => {
     rowsPerPage: paginator.rowsPerPage,
     id: user.id ? user.id : 0,
   });
-
+  const nbPages = data?.nbPages;
   const { t } = useTranslation();
   return (
     <BoxCenter>
@@ -45,6 +45,7 @@ export const FavoritePage = () => {
             isLoading={isLoading}
             onChangePage={onChangePage}
             isFavoritePage={true}
+            nbPages={nbPages}
           />
         </BoxCenter>
         <GoToMap />
