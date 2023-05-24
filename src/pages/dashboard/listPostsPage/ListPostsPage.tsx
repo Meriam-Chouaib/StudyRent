@@ -2,15 +2,12 @@ import { useTranslation } from 'react-i18next';
 import { BoxLeft, ButtonWithIcon, CustomButton } from '../../../components';
 import { Posts } from '../../../features';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Box } from '@mui/material';
-import { SelectField } from '../../../components/selectField/SelectField';
 
 import { PATHS } from '../../../config/paths';
 import { Link } from 'react-router-dom';
 import { initialPostsPaginator } from '../../../features/home/posts/posts.constants';
 import usePaginator from '../../../hooks/usePaginator';
 import { useGetPostsByOwnerQuery } from '../../../redux/api/post/post.api';
-import { refreshPage } from '../../../utils/refreshPage';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,6 +21,8 @@ export const ListPostsPage = () => {
     rowsPerPage: 9,
   });
   const { isError, isLoading, data, error } = useGetPostsByOwnerQuery(paginator);
+  const nbPages = data?.nbPages;
+
   useEffect(() => {
     return () => {
       navigate(0);
@@ -64,6 +63,7 @@ export const ListPostsPage = () => {
         isHomePage={false}
         isLoading={isLoading}
         onChangePage={onChangePage}
+        nbPages={nbPages}
       />
     </>
   );

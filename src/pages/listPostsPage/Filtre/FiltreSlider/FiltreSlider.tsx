@@ -7,14 +7,15 @@ interface FilterSliderProps {
   label: string;
   interval: number[];
   onChange: (interval: number[], value: number | number[], activeThumb: number) => void;
+  step?: number;
 }
-function valuetext(value: number) {
-  return `${value}°C`;
-}
-const minDistance = 10;
+
 export default function FilterSlider({ label, interval, onChange }: FilterSliderProps) {
   const [value1, setValue1] = React.useState<number[]>(interval);
-
+  const minDistance = interval && interval[0] ? interval[0] : 50;
+  function valuetext(value: number) {
+    return `${value}°C`;
+  }
   const handleChange1 = (event: Event, newValue: number | number[], activeThumb: number) => {
     if (!Array.isArray(newValue)) {
       return;
@@ -30,7 +31,7 @@ export default function FilterSlider({ label, interval, onChange }: FilterSlider
   };
 
   return (
-    <BoxSpaceBetweenCenter width={'50%'}>
+    <BoxSpaceBetweenCenter width={'100%'}>
       <Typography variant="h5">{label}</Typography>
       <Slider
         getAriaLabel={() => 'Minimum distance'}
