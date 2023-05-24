@@ -20,6 +20,7 @@ export const ListPostsPage = () => {
   const { t } = useTranslation();
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
     ...initialPostsPaginator,
+
     rowsPerPage: 9,
   });
   const { isError, isLoading, data, error } = useGetPostsByOwnerQuery(paginator);

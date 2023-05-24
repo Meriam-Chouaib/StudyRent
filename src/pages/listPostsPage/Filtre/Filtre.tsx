@@ -29,7 +29,6 @@ export const Filter = ({
           <FilterSlider
             label={t('listPostsMain.price')}
             // TODO get the min price, max price from the back
-
             interval={[300, 10000]}
             onChange={handlePriceChange}
           />

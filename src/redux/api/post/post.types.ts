@@ -88,10 +88,12 @@ export interface PostResponseData {
 export interface AllPostsLocalizations {
   posts: PostData[];
   localizations: Localization[];
+  nbPages?: number;
 }
 export interface PostsLocalizations {
   posts: Post[];
   localizations: Localization[];
+  nbPages?: number;
 }
 export interface Localization {
   longitude: number;

@@ -4,7 +4,7 @@ import { CustomBoxPosts } from './Posts.styles';
 import { BoxCenter, BoxPosts, ButtonWithIcon, CardPost } from '../../../components';
 // mui
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
-import { Pagination } from '@mui/material';
+import { Pagination, PaginationItem } from '@mui/material';
 import usePaginator from '../../../hooks/usePaginator';
 import { useGetPostsByOwnerQuery, useGetPostsQuery } from '../../../redux/api/post/post.api';
 import { Post } from '../../../redux/api/post/post.types';
@@ -29,6 +29,7 @@ export const Posts = ({
   onChangePage,
   isDashboard,
   isFavoritePage,
+  nbPages,
 }: PostsProps) => {
   const user = getPersistData('user', true);
 
@@ -71,9 +72,13 @@ export const Posts = ({
             </Link>
           )}
 
-          {withPagination && dataPosts?.length != 0 && (
+          {withPagination && dataPosts?.length != 0 && dataPosts != undefined && (
             <BoxCenter paddingTop={3}>
-              <Pagination count={10} color="primary" onChange={(_e, page) => onChangePage(page)} />
+              <Pagination
+                count={nbPages ? nbPages + 1 : dataPosts.length / rowsPerPage + 1}
+                color="primary"
+                onChange={(_e, page) => onChangePage(page)}
+              />
             </BoxCenter>
           )}
         </CustomBoxPosts>

@@ -3,6 +3,7 @@ import { Post } from '../../../redux/api/post/post.types';
 export interface PostsProps {
   page: number;
   rowsPerPage: number;
+  nbPages?: number;
   filter?: Filter;
   color?: string;
   padding?: string;

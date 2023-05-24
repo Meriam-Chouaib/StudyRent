@@ -29,7 +29,11 @@ export function decodePosts(result: PostResponseData): PostsLocalizations {
     };
     return decodedPost;
   });
-  const dataToSend: PostsLocalizations = { posts: posts, localizations: result.data.localizations };
+  const dataToSend: PostsLocalizations = {
+    posts: posts,
+    localizations: result.data.localizations,
+    nbPages: result.data.nbPages,
+  };
   return dataToSend;
 }
 
