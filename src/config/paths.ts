@@ -12,6 +12,12 @@ export const PATHS = {
     SIGNUP: 'signup',
     LOGOUT: 'logout',
   },
+  FILTER: {
+    MAXPRICE: '/maxPrice',
+    MINPRICE: '/minPrice',
+    MAXSURFACE: '/maxSurface',
+    MINSURFACE: '/minSurface',
+  },
   DASHBOARD: {
     ROOT: 'dashboard',
     STUDENT: {

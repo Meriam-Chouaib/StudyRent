@@ -75,7 +75,7 @@ export const Posts = ({
           {withPagination && dataPosts?.length != 0 && dataPosts != undefined && (
             <BoxCenter paddingTop={3}>
               <Pagination
-                count={nbPages ? nbPages + 1 : dataPosts.length / rowsPerPage + 1}
+                count={nbPages ? nbPages : dataPosts.length / rowsPerPage}
                 color="primary"
                 onChange={(_e, page) => onChangePage(page)}
               />

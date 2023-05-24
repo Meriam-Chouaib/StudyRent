@@ -38,6 +38,23 @@ export const postApi = createApi({
         return decodePosts(result);
       },
     }),
+
+    // ________________________________get min and max price and surface______________________
+
+    getMaximalPostPrice: builder.query({
+      query: () => `${PATHS.POSTS}/${PATHS.FILTER.MAXPRICE}`,
+    }),
+    getMinimalPostPrice: builder.query({
+      query: () => `${PATHS.POSTS}/${PATHS.FILTER.MINPRICE}`,
+    }),
+    getMaximalPostSurface: builder.query({
+      query: () => `${PATHS.POSTS}/${PATHS.FILTER.MAXSURFACE}`,
+    }),
+    getMinimalPostSurface: builder.query({
+      query: () => `${PATHS.POSTS}/${PATHS.FILTER.MINSURFACE}`,
+    }),
+
+    // ____________________ get posts by owner_______________________
     getPostsByOwner: builder.query({
       query(params) {
         return {
@@ -119,6 +136,10 @@ export const postApi = createApi({
 });
 export const {
   useGetPostsQuery,
+  useGetMaximalPostPriceQuery,
+  useGetMaximalPostSurfaceQuery,
+  useGetMinimalPostPriceQuery,
+  useGetMinimalPostSurfaceQuery,
   useAddPostMutation,
   useGetPostsByOwnerQuery,
   useDeletePostMutation,

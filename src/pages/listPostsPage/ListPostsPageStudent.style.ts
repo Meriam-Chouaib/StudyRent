@@ -1,5 +1,5 @@
 import { width } from '@mui/system';
-import { Box, styled, Grid } from '@mui/material';
+import { Box, styled, Grid, Input } from '@mui/material';
 import theme from '../../theme';
 export const BoxCenterFilter = styled(Box)(() => ({
   display: 'flex',
@@ -32,4 +32,29 @@ export const WarningMsg = styled(Box)(() => ({
   flexDirection: 'row',
   justifyContent: 'center',
   alignItems: 'center',
+}));
+export const InpuFilter = styled('input')(() => ({
+  width: '3rem',
+  boxShadow: `1px 1px 7px 1px  ${theme.palette.grey[200]}`,
+  borderRadius: '2rem',
+  textAlign: 'center',
+}));
+export const BoxFilter = styled(Box)(() => ({
+  flex: 1,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  [theme.breakpoints.down('md')]: {
+    padding: '3rem 0px',
+    flexDirection: 'column',
+  },
+}));
+export const NoFilter = styled(Box)(() => ({
+  backgroundImage: `url(${require('../../assets/icons/filter.png')})`,
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'contain',
+  padding: '0rem 1rem 0rem',
+  height: '2rem',
+  width: '2rem',
 }));
