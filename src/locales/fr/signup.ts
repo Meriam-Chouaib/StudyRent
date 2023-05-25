@@ -15,6 +15,9 @@ export const signup = {
   password_invalid_length: 'Mot de pass minimum 6 caractéres',
   password_required: 'Mot de pass est obligatoire',
   password_confirm: 'Confirmer le mot de passe',
+  password_invalid_back:
+    'Le mot de passe doit contenir entre 6 et 30 caractères et inclure au moins une lettre et un chiffre.',
+  password_not_match: 'Les mots de passe ne correspondent pas',
 
   // role
   role_required: 'Le role est obligatoire',
