@@ -17,6 +17,7 @@ interface SelectTextFieldsProps {
   icon?: any;
   onChange?: (value: any) => void;
   defaultValue?: any;
+  value?: any;
 }
 export default function SelectTextFields({
   data,
@@ -24,16 +25,17 @@ export default function SelectTextFields({
   txt,
   icon,
   onChange,
+  defaultValue,
+  value,
 }: SelectTextFieldsProps) {
-  const [value, setValue] = useState('');
-
   return (
     <BoxSpaceBetweenCenter sx={{ justifyContent: 'center', width: '100%' }}>
       <FormControl variant="standard">
         <Typography variant="h5">{label}</Typography>
         <Select
           sx={{ width: 'auto' }}
-          defaultValue=""
+          defaultValue={defaultValue ? defaultValue : ''}
+          value={value}
           disableUnderline={true}
           displayEmpty={true}
           onChange={onChange}

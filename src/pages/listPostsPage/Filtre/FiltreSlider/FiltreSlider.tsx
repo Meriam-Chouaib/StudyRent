@@ -9,9 +9,16 @@ interface FilterSliderProps {
   interval: number[];
   onChange: (interval: number[], value?: number | number[], activeThumb?: number) => void;
   step?: number;
+  valueToAdd: number;
 }
 
-export default function FilterSlider({ label, interval, onChange }: FilterSliderProps) {
+export default function FilterSlider({
+  label,
+  interval,
+  onChange,
+  valueToAdd,
+  step,
+}: FilterSliderProps) {
   const [value1, setValue1] = React.useState<number[]>(interval);
   const minDistance = 10;
 
@@ -34,7 +41,7 @@ export default function FilterSlider({ label, interval, onChange }: FilterSlider
     onChange(value, newValue, activeThumb);
   };
   const valueLabelFormat = (value: number) => {
-    return `${value * 10}`;
+    return `${value * valueToAdd}`;
   };
   return (
     <BoxSpaceBetweenCenter width={'100%'}>

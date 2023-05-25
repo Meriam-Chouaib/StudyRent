@@ -1,7 +1,7 @@
 export interface FilterFields {
   city?: string;
   title?: string;
-  nb_rooms?: number;
+  nb_rooms?: number | string;
   price?: number[];
   surface?: number[];
 }

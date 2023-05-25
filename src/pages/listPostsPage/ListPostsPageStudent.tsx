@@ -56,6 +56,7 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
     price: [minPrice, maxPrice],
     city: '',
     title: '',
+    nb_rooms: '',
     surface: [minSurface, maxSurface],
   };
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
@@ -81,7 +82,7 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
   }
 
   function handleSurfaceChange(interval: number[]) {
-    setFilter({ ...filter, surface: interval });
+    setFilter({ ...filter, surface: [interval[0] * 2, interval[1] * 2] });
   }
 
   // ____________________________________ get the right format of the filter ___________________________
