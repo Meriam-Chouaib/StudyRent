@@ -19,7 +19,9 @@ export const signup = {
   password_forgot_label: 'Forgot your password?',
   password_invalid_length: 'Password must be at least 6 characters',
   password_confirm: 'Confirm pasword',
-
+  password_invalid_back:
+    'Password must be between 6 and 30 characters and contain at least one letter and one digit.',
+  password_not_match: 'Passwords do not match',
   // role
   role_required: 'role is required',
   role_label: 'Role',
