@@ -1,5 +1,5 @@
 // React
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 // style
@@ -29,91 +29,85 @@ import {
   useGetMinimalPostSurfaceQuery,
   useGetPostsQuery,
 } from '../../redux/api/post/post.api';
-import { IUser } from '../../redux/api/user/user.types';
 
 // utils
 import getFilterString from '../../utils/GetFormatFilter';
 import { getPersistData } from '../../utils';
 
 import { FilterFields } from './ListPostsPageStudent.type';
-import { COLORS } from '../../config/colors';
 import theme from '../../theme';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+
 interface ListPostsProps {
   displayFilter?: boolean;
   isFavorite?: boolean;
 }
+
 export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsProps) => {
-  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
-    ...initialPostsPaginator,
-    rowsPerPage: 9,
-  });
   const { data: dataMaxPrice, isLoading: loadingMaxPrice } = useGetMaximalPostPriceQuery({});
   const { data: dataMinPrice, isLoading: loadingMinPrice } = useGetMinimalPostPriceQuery({});
 
   const { data: dataMaxSurface, isLoading: loadingMaxSurface } = useGetMaximalPostSurfaceQuery({});
   const { data: dataMinSurface, isLoading: loadingMinSurface } = useGetMinimalPostSurfaceQuery({});
-  const [price, setPrice] = useState<number[]>([dataMinPrice?.data, dataMaxSurface?.data]);
-  const [city, setCity] = useState<string>('');
-  const [title, setTitle] = useState<string>('');
-  const [nb_rooms, setNbRooms] = useState<number>();
-  const [surface, setSurface] = useState<number[]>([dataMinSurface?.data, dataMaxSurface?.data]);
-  const [filter, setFilter] = useState<FilterFields>({
-    price,
-    city,
-    title,
-    nb_rooms,
-    surface,
+  const maxPrice = dataMaxPrice?.data;
+  const minPrice = dataMinPrice?.data;
+  const maxSurface = dataMaxSurface?.data;
+  const minSurface = dataMinSurface?.data;
+  const initialFilterState: FilterFields = {
+    price: [minPrice, maxPrice],
+    city: '',
+    title: '',
+    surface: [minSurface, maxSurface],
+  };
+  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
+    ...initialPostsPaginator,
+    rowsPerPage: 9,
   });
+
+  const [filter, setFilter] = useState<FilterFields>(initialFilterState);
 
   // ___________________________ handle change the values of filter ___________________________
 
   const handleCityChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setCity(event.target.value as string);
     setFilter({ ...filter, city: event.target.value as string });
   };
 
   const handleNbRoomsChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setNbRooms(event.target.value as number);
     setFilter({ ...filter, nb_rooms: event.target.value as number });
   };
 
   function handlePriceChange(interval: number[]) {
-    setPrice(interval);
-    setFilter({ ...filter, price: interval });
+    setFilter({ ...filter, price: [interval[0] * 10, interval[1] * 10] });
     console.log('filter in page student', filter);
   }
 
   function handleSurfaceChange(interval: number[]) {
-    setSurface(interval);
     setFilter({ ...filter, surface: interval });
   }
-  function handleResetFilter() {
-    const initialStateFilter: FilterFields = {
-      city: '',
-      nb_rooms: 2,
-      price: [],
-      surface: [],
-      title: '',
-    };
-    setFilter(initialStateFilter);
-    console.log('handleResetFilter', filter);
-  }
+
   // ____________________________________ get the right format of the filter ___________________________
 
   const filterString = useDebounce(getFilterString(filter), 1000);
+  function handleResetFilter() {
+    setFilter(initialFilterState);
+    console.log(filter);
+  }
 
   // ____________________________________ call the query to get my data filtred ___________________________
 
   const { data, isLoading, isError, error } = useGetPostsQuery({
     paginator,
-    filter: filterString,
+    filter: filterString.length !== 0 ? filterString : '',
   });
 
   const user = getPersistData('user', true);
   const nbPages = data?.nbPages;
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (data && data?.posts) {
+      console.log('filterString', filterString);
+    }
+  }, [filterString]);
   return (
     <BoxCenter>
       {user && user.role == 'STUDENT' && user.university === undefined && (
@@ -126,8 +120,6 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
         </>
       )}
       <Container>
-        {/*  ________________ notify student ______________________ */}
-
         {/*  ________________ render the posts filtered ______________________ */}
 
         {displayFilter && (

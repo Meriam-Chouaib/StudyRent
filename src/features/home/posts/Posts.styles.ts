@@ -12,8 +12,4 @@ export const CustomBoxPosts = styled(Box)(({ theme, padding }) => ({
   '&hover': {
     backgroundColor: COLORS.PRIMARY.MAIN,
   },
-  [theme.breakpoints.down('md')]: {
-    padding: '3rem 0',
-    margin: '3rem 0',
-  },
 }));

@@ -16,6 +16,7 @@ interface SelectTextFieldsProps {
   label?: string;
   icon?: any;
   onChange?: (value: any) => void;
+  defaultValue?: any;
 }
 export default function SelectTextFields({
   data,
@@ -27,10 +28,7 @@ export default function SelectTextFields({
   const [value, setValue] = useState('');
 
   return (
-    <BoxSpaceBetweenCenter
-      // width={label ? 'auto' : 'max-content'}
-      sx={{ justifyContent: 'center', width: '100%' }}
-    >
+    <BoxSpaceBetweenCenter sx={{ justifyContent: 'center', width: '100%' }}>
       <FormControl variant="standard">
         <Typography variant="h5">{label}</Typography>
         <Select
