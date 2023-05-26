@@ -2,7 +2,7 @@
 import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 import usePaginator from '../../../hooks/usePaginator';
-import { Container } from '@mui/material';
+import { Container, Box } from '@mui/material';
 import { BoxCenter, Toast } from '../../../components';
 import { initialPostsPaginator, Posts, GoToMap } from '../../../features';
 import { useGetFavoriteListQuery } from '../../../redux/api/post/post.api';
@@ -31,7 +31,21 @@ export const FavoritePage = () => {
         {/*  ________________ notify student ______________________ */}
 
         {error && <Toast type="error" text={error as string} />}
-
+        {data?.posts.length === 0 && (
+          <Box
+            sx={{
+              textAlign: 'center',
+              height: '100vh',
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}
+          >
+            <h1>Hello , {user.username} </h1>
+            <h1>Your favorite liste is empty</h1>
+          </Box>
+        )}
         <BoxCenter>
           <Posts
             page={1}
@@ -48,7 +62,7 @@ export const FavoritePage = () => {
             nbPages={nbPages}
           />
         </BoxCenter>
-        <GoToMap />
+        {data?.posts.length !== 0 && <GoToMap />}
       </Container>
     </BoxCenter>
   );

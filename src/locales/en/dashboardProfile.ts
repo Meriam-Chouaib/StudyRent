@@ -6,4 +6,5 @@ export const dashboardProfile = {
   university: 'university',
   phone: 'Phone',
   university_placeholder: 'Select your university',
+  updated_succuss: 'Updated succusfully!',
 };
