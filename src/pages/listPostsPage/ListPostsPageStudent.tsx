@@ -4,8 +4,11 @@ import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 // style
 import { BoxCenterFilter, WarningMsg } from './ListPostsPageStudent.style';
+import { BoxCenterFilter, WarningMsg } from './ListPostsPageStudent.style';
 
 // mui
+import { Container, Typography } from '@mui/material';
+import { Warning } from '@mui/icons-material';
 import { Container, Typography } from '@mui/material';
 import { Warning } from '@mui/icons-material';
 
