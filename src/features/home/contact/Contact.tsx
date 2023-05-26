@@ -12,7 +12,7 @@ interface ContactProps {
 export function Contact({ localizations, posts }: ContactProps) {
   return (
     <BoxCenter marginY={2}>
-      <Map localizations={localizations} posts={posts} height="25rem" />
+      {localizations && <Map localizations={localizations} posts={posts} height="25rem" />}
     </BoxCenter>
   );
 }

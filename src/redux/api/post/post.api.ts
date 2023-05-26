@@ -23,7 +23,7 @@ export const postApi = createApi({
     },
   }),
 
-  tagTypes: ['POSTS'],
+  tagTypes: ['Post', 'favoritePosts'],
   endpoints: (builder) => ({
     getPosts: builder.query({
       query(params) {
@@ -64,6 +64,7 @@ export const postApi = createApi({
       transformResponse: (result: PostResponseData): PostsLocalizations => {
         return decodePosts(result);
       },
+      providesTags: ['Post'],
     }),
     getPost: builder.query({
       query(id) {
@@ -81,15 +82,17 @@ export const postApi = createApi({
         method: 'POST',
         body: PostRequest,
       }),
-      invalidatesTags: ['POSTS'],
+      invalidatesTags: ['Post'],
+
       transformResponse: (response: PostResponse) => decodAddPost(response),
+      //  providesTags: (result, error, variables) => ['Post'], // Specify the tag(s) to provide
     }),
     deletePost: builder.mutation<void, number>({
       query: (id) => ({
         url: `${PATHS.POSTS}/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['POSTS'],
+      invalidatesTags: ['Post'],
     }),
     editPost: builder.mutation<PostResponse, { id: number; post: FormData }>({
       query: ({ id, post }) => ({
@@ -97,7 +100,7 @@ export const postApi = createApi({
         method: 'PATCH',
         body: post,
       }),
-      invalidatesTags: ['POSTS'],
+      invalidatesTags: ['Post'],
       transformResponse: (response: SinglePostEditResponse) => decodeEditPost(response),
     }),
     deleteFiles: builder.mutation<void, number>({
@@ -116,13 +119,14 @@ export const postApi = createApi({
       transformResponse: (result: PostResponseData): PostsLocalizations => {
         return decodePosts(result);
       },
+      providesTags: ['favoritePosts'],
     }),
     addPostToFavoriteList: builder.mutation<PostResponse, { userId: number; postId: number }>({
       query: ({ userId, postId }) => ({
         url: `${PATHS.DASHBOARD.POST.FAVORIS}${userId}/${postId}`,
         method: 'POST',
       }),
-      invalidatesTags: ['POSTS'],
+      invalidatesTags: ['favoritePosts'],
       transformResponse: (response: PostResponse) => decodAddPost(response),
     }),
     deletePostFromFavorite: builder.mutation<void, { userId: number; postId: number }>({
@@ -130,7 +134,7 @@ export const postApi = createApi({
         url: `${PATHS.DASHBOARD.POST.FAVORIS}${userId}/${postId}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['POSTS'],
+      invalidatesTags: ['favoritePosts'],
     }),
   }),
 });

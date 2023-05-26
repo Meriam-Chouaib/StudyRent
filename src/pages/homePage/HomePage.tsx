@@ -31,7 +31,9 @@ export function HomePage() {
           onChangePage={onChangePage}
         />
 
-        {data != undefined && <Contact localizations={data.localizations} posts={data.posts} />}
+        {data != undefined && data.localizations[0] !== null && (
+          <Contact localizations={data.localizations} posts={data.posts} />
+        )}
       </Container>
     </>
   );

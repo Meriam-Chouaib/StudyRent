@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import { BoxCenter, CustomButton } from '../../components';
+import { BoxCenter, CustomButton, Toast } from '../../components';
 import { BoxStyled, StackStyled } from './ProfilePage.style';
 import theme from '../../theme';
 import { ImgProfile } from './ProfilePage.style';
@@ -22,6 +22,8 @@ import { RootState } from '../../redux/store';
 
 export const ProfilePage = () => {
   const [university, setUniversity] = useState<string>('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [problem, setProblem] = useState('');
 
   const user = getPersistData('user', true);
 
@@ -43,14 +45,30 @@ export const ProfilePage = () => {
 
   const onSubmit = async () => {
     try {
-      const userUpdated = await updateUser({ id: user.id, user: values as unknown as IUser });
-      if (userUpdated) {
-        updatePersistedData('user', userUpdated);
-      }
+      const userUpdated = await updateUser({ id: user.id, user: values as unknown as IUser })
+        .then((res) => {
+          console.log('res', res);
+          updatePersistedData('user', userUpdated);
+
+          setSuccessMessage(`${t('dashboardProfile.updated_succuss')}`);
+        })
+        .catch((err) => {
+          console.log(err);
+          //    setProblem(`${t('postForm.check_fiels')}`);
+
+          // setProblem(err.data.message);
+        });
     } catch (e) {
       console.log(e);
     }
   };
+  useEffect(() => {
+    if (successMessage) {
+      setTimeout(() => {
+        setSuccessMessage(`${t('dashboardProfile.updated_succuss')}`);
+      }, 800);
+    }
+  }, [successMessage]);
   useEffect(() => {
     console.log('user data', user);
 
@@ -72,6 +90,8 @@ export const ProfilePage = () => {
   };
   return (
     <Stack py={3}>
+      {successMessage && <Toast type={'success'} text={successMessage} />}
+      {problem && <Toast type={'error'} text={problem} />}
       <Typography
         variant="h4"
         sx={{ textAlign: 'initial', fontSize: '26px', paddingBottom: '1rem' }}
