@@ -35,7 +35,6 @@ export const BoxEditDelete = ({
   const handleCloseAgree = () => {
     deletePost(idPost);
     setOpen(false);
-    window.location.reload();
   };
   const { t } = useTranslation();
 

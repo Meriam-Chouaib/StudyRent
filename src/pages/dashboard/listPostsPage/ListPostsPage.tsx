@@ -23,22 +23,8 @@ export const ListPostsPage = () => {
   const { isError, isLoading, data, error } = useGetPostsByOwnerQuery(paginator);
   const nbPages = data?.nbPages;
 
-  useEffect(() => {
-    return () => {
-      navigate(0);
-    };
-  }, []);
   return (
     <>
-      {/* <Box>
-        <SelectField
-          id={'filtre'}
-          label={t('dashboardListPosts.sort')}
-          placeholder={''}
-          name={'filtre'}
-          options={[t('dashboardListPosts.croissant'), t('dashboardListPosts.descending')]}
-        />
-      </Box> */}
       <BoxLeft>
         <Link
           to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.ADD}`}

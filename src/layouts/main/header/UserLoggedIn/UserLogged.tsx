@@ -11,12 +11,16 @@ import { useNavigate } from 'react-router-dom';
 import { PATHS } from '../../../../config/paths';
 import { COLORS } from '../../../../config/colors';
 import theme from '../../../../theme';
+import { useLogoutMutation } from '../../../../redux/api/auth/auth.api';
 
 export const UserLogged = ({ username, img, status }: UserLoggedProps) => {
   const navigate = useNavigate();
+  const [logout, { error }] = useLogoutMutation();
+
   const handleLogout = () => {
     clearLocalStorage();
-    window.location.reload();
+    logout();
+    navigate(`${PATHS.AUTH.ROOT}/${PATHS.AUTH.SINGNIN}`);
   };
 
   const handleProfile = () => {
