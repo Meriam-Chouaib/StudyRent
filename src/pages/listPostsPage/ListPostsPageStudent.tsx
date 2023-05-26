@@ -4,11 +4,8 @@ import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 // style
 import { BoxCenterFilter, WarningMsg } from './ListPostsPageStudent.style';
-import { BoxCenterFilter, WarningMsg } from './ListPostsPageStudent.style';
 
 // mui
-import { Container, Typography } from '@mui/material';
-import { Warning } from '@mui/icons-material';
 import { Container, Typography } from '@mui/material';
 import { Warning } from '@mui/icons-material';
 
@@ -44,7 +41,6 @@ interface ListPostsProps {
   displayFilter?: boolean;
   isFavorite?: boolean;
 }
-
 export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsProps) => {
   const { data: dataMaxPrice, isLoading: loadingMaxPrice } = useGetMaximalPostPriceQuery({});
   const { data: dataMinPrice, isLoading: loadingMinPrice } = useGetMinimalPostPriceQuery({});
@@ -56,6 +52,7 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
   const maxSurface = dataMaxSurface?.data;
   const minSurface = dataMinSurface?.data;
   const initialFilterState: FilterFields = {
+    // price: [minPrice, maxPrice],
     price: [minPrice, maxPrice],
     city: '',
     title: '',
@@ -124,6 +121,8 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
         </>
       )}
       <Container>
+        {/*  ________________ notify student ______________________ */}
+
         {/*  ________________ render the posts filtered ______________________ */}
 
         {displayFilter && (

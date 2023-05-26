@@ -2,9 +2,6 @@ import { Typography, Stack } from '@mui/material';
 import { getPersistData, updatePersistedData } from '../../utils';
 import { FormProvider, TextField } from '../../components/hookform';
 import { useSelector, useDispatch } from 'react-redux';
-
-import { useSelector, useDispatch } from 'react-redux';
-
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { BoxCenter, CustomButton, Toast } from '../../components';
@@ -21,9 +18,6 @@ import { tunisian_universities_data } from '../../features/home/posts/fakeData';
 import { useUpdateUserMutation } from '../../redux/api/user/user.api';
 import { IUser } from '../../redux/api/user/user.types';
 import { RootState } from '../../redux/store';
-import { useUpdateUserMutation } from '../../redux/api/user/user.api';
-import { IUser } from '../../redux/api/user/user.types';
-import { RootState } from '../../redux/store';
 
 export const ProfilePage = () => {
   const [university, setUniversity] = useState<string>('');
@@ -31,7 +25,6 @@ export const ProfilePage = () => {
   const [problem, setProblem] = useState('');
 
   const user = getPersistData('user', true);
-
 
   const { fields, defaultValues } = UserModel;
   const { t } = useTranslation();
@@ -43,12 +36,6 @@ export const ProfilePage = () => {
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
-  const values = watch();
-  const [updateUser, { data, isError, isLoading }] = useUpdateUserMutation();
-
-  const dispatch = useDispatch();
-  const userInfo = useSelector((state: RootState) => state.userState.user);
-
   const values = watch();
   const [updateUser, { data, isError, isLoading }] = useUpdateUserMutation();
 
@@ -83,7 +70,6 @@ export const ProfilePage = () => {
   }, [successMessage]);
   useEffect(() => {
     console.log('user data', user);
-    console.log('user data', user);
 
     if (user) {
       setTimeout(() => {
@@ -93,14 +79,14 @@ export const ProfilePage = () => {
           image: user.image,
           phone: user.phone || '',
           university: user.university || '',
-          phone: user.phone || '',
-          university: user.university || '',
         });
       });
     }
   }, []);
-  }, []);
 
+  const handleUniversityChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setUniversity(event.target.value as string);
+  };
   return (
     <Stack py={3}>
       {successMessage && <Toast type={'success'} text={successMessage} />}
@@ -132,7 +118,6 @@ export const ProfilePage = () => {
                 <TextField name={fields.username.name} type={'text'} label={''} />
               </InputLabel>
               <InputLabel label={t('dashboardProfile.phone')}>
-                <TextField name={fields.phone.name} type={'text'} label={''} />
                 <TextField name={fields.phone.name} type={'text'} label={''} />
               </InputLabel>
               {user.role == 'STUDENT' && (
