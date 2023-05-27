@@ -15,10 +15,10 @@ export const nb_rooms_data = [
     value: 4,
     label: '4',
   },
-  { value: '', label: '' },
+  { value: '', label: 'Get all ' },
 ];
 export const cities_data = [
-  { value: '', label: '' },
+  { value: '', label: 'All places' },
   {
     value: 'sousse',
     label: 'sousse',

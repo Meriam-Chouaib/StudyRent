@@ -28,17 +28,40 @@ export const postApi = createApi({
     getPosts: builder.query({
       query(params) {
         console.log(params);
-        let url = `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`;
+        let url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}`;
         if (params.filter !== '')
-          url = `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}&filter=${params.filter}`;
+          url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.paginator.filter}`;
         if (params.idStudent) {
-          url = `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}&filter=${params.filter}&idStudent=${params.idStudent}`;
+          url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.paginator.filter}&idStudent=${params.paginator.idStudent}`;
           console.log(params);
         }
         if (params.universityAddress) {
-          url = `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}&filter=${params.filter}&universityAddress=${params.universityAddress}`;
+          // const rowsPerPageNumber = Number(params.rowsPerPage);
+          url = `${PATHS.POSTS}?page=${Number(params.page)}&rowsPerPage=${
+            params.paginator.rowsPerPage
+          }&filter=${params.filter}&universityAddress=${params.universityAddress}`;
           console.log(params);
         }
+        return {
+          url,
+        };
+      },
+      transformResponse: (result: PostResponseData): PostsLocalizations => {
+        return decodePosts(result);
+      },
+    }),
+    getPostsHome: builder.query({
+      query(params) {
+        console.log(params);
+        let url = `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`;
+
+        if (params.universityAddress) {
+          url = `${PATHS.POSTS}?page=${Number(params.page)}&rowsPerPage=${
+            params.rowsPerPage
+          }&filter=${params.filter}&universityAddress=${params.universityAddress}`;
+          console.log(params);
+        }
+
         return {
           url,
         };
@@ -162,6 +185,7 @@ export const postApi = createApi({
 });
 export const {
   useGetPostsQuery,
+  useGetPostsHomeQuery,
   useGetMaximalPostPriceQuery,
   useGetMaximalPostSurfaceQuery,
   useGetMinimalPostPriceQuery,

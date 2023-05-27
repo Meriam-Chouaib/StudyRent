@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { BoxCenterFilter, WarningMsg } from './ListPostsPageStudent.style';
 
 // mui
+
 import { Container, Typography } from '@mui/material';
 import { Warning } from '@mui/icons-material';
 
@@ -36,6 +37,7 @@ import { getPersistData } from '../../utils';
 
 import { FilterFields } from './ListPostsPageStudent.type';
 import theme from '../../theme';
+import { splitAddress } from '../../utils/splitAddress';
 
 interface ListPostsProps {
   displayFilter?: boolean;
@@ -52,16 +54,19 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
   const maxSurface = dataMaxSurface?.data;
   const minSurface = dataMinSurface?.data;
   const initialFilterState: FilterFields = {
-    // price: [minPrice, maxPrice],
     price: [minPrice, maxPrice],
     city: '',
     title: '',
     nb_rooms: '',
     surface: [minSurface, maxSurface],
   };
+  const user = getPersistData('user', true);
+  const universityAddress = splitAddress(user.universityAddress);
+
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
     ...initialPostsPaginator,
     rowsPerPage: 9,
+    ...(user.universityAddress && { universityAddress: universityAddress[0] }),
   });
 
   const [filter, setFilter] = useState<FilterFields>(initialFilterState);
@@ -94,13 +99,17 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
   }
 
   // ____________________________________ call the query to get my data filtred ___________________________
+  console.log('paginator', paginator);
 
   const { data, isLoading, isError, error } = useGetPostsQuery({
+    // page: 1,
+    // ...initialPostsPaginator,
     paginator,
+    // rowsPerPage: 9,
+
     filter: filterString.length !== 0 ? filterString : '',
   });
 
-  const user = getPersistData('user', true);
   const nbPages = data?.nbPages;
   const { t } = useTranslation();
 

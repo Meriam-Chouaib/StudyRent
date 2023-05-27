@@ -90,7 +90,5 @@ export function decodeEditPost(response: SinglePostEditResponse): PostResponse {
 }
 
 export function decodEditUser(response: UserResponse): UserResponse {
-  console.log('responnse', response);
-
   return { ...response };
 }
