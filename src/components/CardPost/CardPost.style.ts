@@ -46,3 +46,10 @@ export const BoxItemCard = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
 }));
+export const IconCard = styled(Box)(() => ({
+  height: '30px',
+  width: '30px',
+  backgroundSize: 'contain',
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center',
+}));

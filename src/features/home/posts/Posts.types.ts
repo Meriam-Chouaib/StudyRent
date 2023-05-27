@@ -16,6 +16,7 @@ export interface PostsProps {
   isLoading: boolean;
   isFavoritePage?: boolean;
   onChangePage: (page: number) => void;
+  favoriteList?: Post[];
 }
 export interface Filter {
   arg: string;

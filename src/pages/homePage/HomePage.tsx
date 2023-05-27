@@ -5,12 +5,19 @@ import { Contact } from '../../features/home/contact/Contact';
 import { initialPostsPaginator } from '../../features/home/posts/posts.constants';
 import usePaginator from '../../hooks/usePaginator';
 import { useGetPostsQuery } from '../../redux/api/post/post.api';
+import { getPersistData } from '../../utils';
+import { splitAddress } from '../../utils/splitAddress';
 
 export function HomePage() {
+  const user = getPersistData('user', true);
+  const universityAddress = splitAddress(user.universityAddress);
+  console.log('universityAddress', universityAddress);
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
     ...initialPostsPaginator,
     rowsPerPage: 6,
+    universityAddress: universityAddress[0],
   });
+
   const { data, isLoading, isError, error } = useGetPostsQuery(paginator);
 
   return (

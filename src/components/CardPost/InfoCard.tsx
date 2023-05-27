@@ -8,7 +8,7 @@ export const InfoCard = ({ label, txt, children }: ItemProps) => {
       <BoxItemCard>
         <Typography variant="h5">{label}</Typography>
         {children}
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" sx={{ paddingLeft: '3rem' }}>
           {txt}
         </Typography>
       </BoxItemCard>

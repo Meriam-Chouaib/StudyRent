@@ -1,7 +1,10 @@
+// profile page//
+
 import { Typography, Stack } from '@mui/material';
 import { getPersistData, updatePersistedData } from '../../utils';
 import { FormProvider, TextField } from '../../components/hookform';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { BoxCenter, CustomButton, Toast } from '../../components';
@@ -39,7 +42,6 @@ export const ProfilePage = () => {
   const values = watch();
   const [updateUser, { data, isError, isLoading }] = useUpdateUserMutation();
 
-  const dispatch = useDispatch();
   const userInfo = useSelector((state: RootState) => state.userState.user);
 
   const onSubmit = async () => {
@@ -47,7 +49,6 @@ export const ProfilePage = () => {
       const userUpdated = await updateUser({ id: user.id, user: values as unknown as IUser })
         .then((res) => {
           console.log('res', res);
-          updatePersistedData('user', userUpdated);
 
           setSuccessMessage(`${t('dashboardProfile.updated_succuss')}`);
         })
@@ -57,6 +58,7 @@ export const ProfilePage = () => {
 
           // setProblem(err.data.message);
         });
+      updatePersistedData('user', userUpdated);
     } catch (e) {
       console.log(e);
     }
@@ -84,9 +86,6 @@ export const ProfilePage = () => {
     }
   }, []);
 
-  const handleUniversityChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setUniversity(event.target.value as string);
-  };
   return (
     <Stack py={3}>
       {successMessage && <Toast type={'success'} text={successMessage} />}
