@@ -63,12 +63,17 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
     surface: [minSurface, maxSurface],
   };
   const user = getPersistData('user', true);
-  const universityAddress = splitAddress(user.universityAddress);
+  let universityAddress: string[] = [];
 
+  if (user && user.universityAddress) {
+    universityAddress = splitAddress(user.universityAddress);
+  }
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
     ...initialPostsPaginator,
     rowsPerPage: 9,
-    ...(user.universityAddress && isWithAddress && { universityAddress: universityAddress[0] }),
+    ...(user &&
+      user.universityAddress &&
+      isWithAddress && { universityAddress: universityAddress[0] }),
   });
 
   const [filter, setFilter] = useState<FilterFields>(initialFilterState);
@@ -109,7 +114,9 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
       // ...initialPostsPaginator,
       paginator: {
         ...paginator,
-        ...(user.universityAddress && isWithAddress && { universityAddress: universityAddress[0] }),
+        ...(user &&
+          user.universityAddress &&
+          isWithAddress && { universityAddress: universityAddress[0] }),
       },
       // rowsPerPage: 9,
 
@@ -158,12 +165,14 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
       )}
       <Container>
         {/*  ________________ render the posts filtered ______________________ */}
-        <ButtonWithIcon
-          sx={{ backgroundColor: theme.palette.secondary.main }}
-          icon={<FilterListIcon />}
-          txt={isWithAddress ? 'Show all' : 'show the nearest posts'}
-          onClick={handleGetAll}
-        />
+        {user && user.university && (
+          <ButtonWithIcon
+            sx={{ backgroundColor: theme.palette.secondary.main }}
+            icon={<FilterListIcon />}
+            txt={isWithAddress ? 'Show all' : 'show the nearest posts'}
+            onClick={handleGetAll}
+          />
+        )}
         {displayFilter && (
           <BoxCenterFilter>
             <Filter
@@ -183,7 +192,7 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
             rowsPerPage={9}
             color={'transparent'}
             padding="0 2.4rem 0 2.4rem"
-            margin="2rem 0 0 0"
+            margin="0 0 0 0"
             withButton={false}
             withPagination={true}
             dataPosts={data?.posts}

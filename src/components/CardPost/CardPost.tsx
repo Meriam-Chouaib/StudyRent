@@ -121,7 +121,7 @@ export const CardPost = ({
             />
           )}
 
-          <CardContent>
+          <CardContent sx={{ padding: '0 0 1rem 1rem', width: '100%' }}>
             <Typography gutterBottom variant="subtitle1" component="div">
               {title}
             </Typography>

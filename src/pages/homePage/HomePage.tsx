@@ -18,8 +18,10 @@ import { useTranslation } from 'react-i18next';
 import { IUser } from '../../redux/api/user/user.types';
 export function HomePage() {
   const user: IUser = getPersistData('user', true);
-  const universityAddress = user.universityAddress ? splitAddress(user.universityAddress) : '';
-  console.log('universityAddress', universityAddress);
+  let universityAddress: string[] = [];
+  if (user && user.universityAddress) {
+    universityAddress = splitAddress(user.universityAddress);
+  }
   const [isWithAddress, setIsWithAddress] = useState<boolean>(false);
 
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
@@ -29,7 +31,7 @@ export function HomePage() {
   });
   const { data, isLoading, isError, error } = useGetPostsHomeQuery({
     ...paginator,
-    universityAddress: user.universityAddress && isWithAddress ? universityAddress[0] : '',
+    universityAddress: user && user.universityAddress && isWithAddress ? universityAddress[0] : '',
   });
   // ____________________________________________get all posts ____________________________________________
   const handleGetAll = () => {
@@ -47,7 +49,10 @@ export function HomePage() {
 
   useEffect(() => {
     if (isWithAddress) {
-      fetchPostsData({ ...paginator, universityAddress: universityAddress[0] });
+      fetchPostsData({
+        ...paginator,
+        universityAddress: universityAddress[0],
+      });
     }
   }, [isWithAddress, universityAddress]);
   const { t } = useTranslation();
@@ -55,10 +60,12 @@ export function HomePage() {
     <>
       <Container>
         <GetStarted />
-        <TypographyStyled variant="h3" onClick={handleGetAll}>
-          {isWithAddress ? t('home.show_all') : t('home.show_nearest')}
-          <FilterListIcon />
-        </TypographyStyled>
+        {user && user.universityAddress && (
+          <TypographyStyled variant="h3" onClick={handleGetAll}>
+            {isWithAddress ? t('home.show_all') : t('home.show_nearest')}
+            <FilterListIcon />
+          </TypographyStyled>
+        )}
 
         <Posts
           page={1}
