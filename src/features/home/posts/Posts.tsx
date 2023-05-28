@@ -35,7 +35,7 @@ export const Posts = ({
 
   const { t } = useTranslation();
 
-  console.log('5555', dataPosts);
+  console.log('Pots received', dataPosts);
 
   return (
     <>

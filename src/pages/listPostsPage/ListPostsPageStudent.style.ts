@@ -1,5 +1,5 @@
 import { width } from '@mui/system';
-import { Box, styled, Grid, Input } from '@mui/material';
+import { Box, styled, Grid, Input, Typography } from '@mui/material';
 import theme from '../../theme';
 export const BoxCenterFilter = styled(Box)(() => ({
   display: 'flex',
@@ -58,3 +58,9 @@ export const NoFilter = styled(Box)(() => ({
   height: '2rem',
   width: '2rem',
 }));
+export const LabelFilterValue = styled(Typography)`
+  border-radius: 2rem;
+  background-color: ${({ theme }) => theme.palette.warning.main};
+  width: auto;
+  padding: 3px 10px;
+`;

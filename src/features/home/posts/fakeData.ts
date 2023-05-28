@@ -15,8 +15,10 @@ export const nb_rooms_data = [
     value: 4,
     label: '4',
   },
+  { value: '', label: 'Get all ' },
 ];
 export const cities_data = [
+  { value: '', label: 'All places' },
   {
     value: 'sousse',
     label: 'sousse',
@@ -123,8 +125,7 @@ export const tunisian_universities_data = [
   'Université de Tunis',
   "Université d'Ariana",
   'Université de Ben Arous',
-  'Université de Nabeul',
-  'Université de Zaghouan',
+
   'Université de Bizerte',
   'Université de Beja',
   'Université de Jendouba',

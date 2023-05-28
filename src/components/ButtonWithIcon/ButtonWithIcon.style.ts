@@ -1,4 +1,4 @@
-import { Box, Button, styled } from '@mui/material';
+import { Box, Button, styled, Typography } from '@mui/material';
 import { FONT } from '../../config/font';
 import theme from '../../theme';
 export const BoxCenter = styled(Box)(() => ({
@@ -21,3 +21,12 @@ export const ButtonIconStyled = styled(Button)(() => ({
     backgroundColor: theme.palette.warning.light,
   },
 }));
+export const TypographyStyled = styled(Typography)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: underline;
+  &:hover {
+    cursor: pointer;
+  }
+`;

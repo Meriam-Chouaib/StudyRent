@@ -19,7 +19,7 @@ export function DashboardLayout() {
         <Grid item xs={0} md={2}>
           <SideBar items={icons} activePath={activePath} />
         </Grid>
-        <Grid item xs={11} md={10} p={2}>
+        <Grid item xs={11} md={10} p={2} minHeight={'100vh'}>
           <Header img={imgProfile} status={user?.status} username={user?.username} />
           <Outlet />
         </Grid>

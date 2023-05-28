@@ -4,7 +4,7 @@ export const PATHS = {
   ABOUT: 'about',
   CONTACT: 'contact',
   POSTS: 'posts',
-
+  NEAREST_POSTS: '/near/:id',
   ALL: '*',
   AUTH: {
     ROOT: 'auth',

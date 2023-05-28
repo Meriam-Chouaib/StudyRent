@@ -18,6 +18,7 @@ export const home = {
   message_label: 'Message',
   message_required: 'Message est obligatoire',
   message_invalid: 'Message est invalide',
-
+  show_all: 'Afficher toutes les annonces',
+  show_nearest: 'Afficher les plus proches annonces',
   btn_contact: 'Envoyer',
 };

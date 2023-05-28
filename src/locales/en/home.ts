@@ -19,4 +19,6 @@ export const home = {
   message_required: 'Message required',
   message_invalid: 'Message invalid',
   btn_contact: 'Send',
+  show_all: 'Show all posts',
+  show_nearest: 'show the nearest posts',
 };

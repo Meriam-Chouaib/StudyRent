@@ -6,6 +6,8 @@ export interface IUser {
   statut?: string;
   role: string;
   isLogged?: boolean;
+  university?: string;
+  universityAddress?: string;
 }
 export interface userState {
   user: IUser | null;

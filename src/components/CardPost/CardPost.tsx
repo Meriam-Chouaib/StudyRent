@@ -4,16 +4,16 @@ import { useTranslation } from 'react-i18next';
 
 // components
 import { BoxEditDelete } from './BoxEditDelete/BoxEditDelete';
-import { BoxHoverEye, CardPostStyled } from './CardPost.style';
+import { BoxHoverEye, CardPostStyled, IconCard } from './CardPost.style';
 import { CardPostProps } from './CardPost.type';
 import { InfoCard } from './InfoCard';
+import houseIcon from '../../assets/icons/home.png';
+import moneyIcon from '../../assets/icons/money.png';
 
 // mui
 import Modal from '@material-ui/core/Modal';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box, CardContent, CardMedia, Typography } from '@mui/material';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 import { ReactComponent as Not_found_img } from '../../assets/images/empty_item.svg';
 import { STATIC_URL } from '../../config/config';
@@ -30,6 +30,7 @@ import { BoxModal } from '../BoxCenter/BoxModal.styles';
 // style
 import { BoxCenter } from '../BoxCenter/BoxCenter.styles';
 import { getPersistData } from '../../utils';
+import { BoxIconLink } from '../BoxIconLink/BoxIconLink';
 
 export const CardPost = ({
   title,
@@ -40,12 +41,15 @@ export const CardPost = ({
   idPost,
   isFavoritePage,
   PosterId,
+  isFavoritePost,
   isHomePage,
 }: CardPostProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const [isFavorite, setIsFavorite] = useState<boolean>(isFavoritePage ? true : false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const moneyIconUrl = require('../../assets/icons/flous.png');
+  const locationIconUrl = require('../../assets/icons/home.png');
 
   // translation
   const { t } = useTranslation();
@@ -122,10 +126,14 @@ export const CardPost = ({
               {title}
             </Typography>
 
-            <InfoCard txt={city}> {<LocationOnIcon color={`primary`} />}</InfoCard>
+            <InfoCard txt={city}>
+              {/* {<LocationOnIcon color={`primary`} />}{' '} */}
+              <IconCard sx={{ backgroundImage: `url(${locationIconUrl})` }} />
+            </InfoCard>
 
             <InfoCard txt={price.toString() + 'DT'}>
-              {<AttachMoneyIcon color={`primary`} />}
+              {/* {<AttachMoneyIcon color={`primary`} />} */}
+              <IconCard sx={{ backgroundImage: `url(${moneyIconUrl})` }} />
             </InfoCard>
           </CardContent>
         </>

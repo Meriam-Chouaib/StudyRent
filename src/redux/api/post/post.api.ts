@@ -27,9 +27,15 @@ export const postApi = createApi({
   endpoints: (builder) => ({
     getPosts: builder.query({
       query(params) {
-        let url = `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`;
+        let url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}`;
         if (params.filter !== '')
           url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}`;
+        if (params.idStudent) {
+          url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}&idStudent=${params.paginator.idStudent}`;
+        }
+        if (params.paginator.universityAddress && params.paginator.universityAddress !== '') {
+          url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}&universityAddress=${params.paginator.universityAddress}`;
+        }
         return {
           url,
         };
@@ -38,6 +44,39 @@ export const postApi = createApi({
         return decodePosts(result);
       },
     }),
+    getPostsHome: builder.query({
+      query(params) {
+        console.log(params);
+        let url = `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`;
+
+        if (params.universityAddress) {
+          url = `${PATHS.POSTS}?page=${Number(params.page)}&rowsPerPage=${
+            params.rowsPerPage
+          }&filter=${params.filter}&universityAddress=${params.universityAddress}`;
+          console.log(params);
+        }
+
+        return {
+          url,
+        };
+      },
+      transformResponse: (result: PostResponseData): PostsLocalizations => {
+        return decodePosts(result);
+      },
+    }),
+    // getNearestPosts: builder.query({
+    //   query(params) {
+    //     let url = `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}/${params.id}`;
+    //     if (params.filter !== '')
+    //       url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}`;
+    //     return {
+    //       url,
+    //     };
+    //   },
+    //   transformResponse: (result: PostResponseData): PostsLocalizations => {
+    //     return decodePosts(result);
+    //   },
+    // }),
 
     // ________________________________get min and max price and surface______________________
 
@@ -140,6 +179,7 @@ export const postApi = createApi({
 });
 export const {
   useGetPostsQuery,
+  useGetPostsHomeQuery,
   useGetMaximalPostPriceQuery,
   useGetMaximalPostSurfaceQuery,
   useGetMinimalPostPriceQuery,
