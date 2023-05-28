@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import { COLORS } from '../../config/colors';
 import { GetStarted, Posts } from '../../features';
 import { Contact } from '../../features/home/contact/Contact';
@@ -9,39 +9,63 @@ import { getPersistData } from '../../utils';
 import { splitAddress } from '../../utils/splitAddress';
 import { ButtonWithIcon } from '../../components';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import { Paginator } from '../../common/common.interfaces';
+import FilterListIcon from '@material-ui/icons/FilterList';
+import theme from '../../theme';
+import { TypographyStyled } from '../../components/ButtonWithIcon/ButtonWithIcon.style';
+import { useTranslation } from 'react-i18next';
+import { IUser } from '../../redux/api/user/user.types';
 export function HomePage() {
-  const user = getPersistData('user', true);
-  const universityAddress = splitAddress(user.universityAddress);
+  const user: IUser = getPersistData('user', true);
+  const universityAddress = user.universityAddress ? splitAddress(user.universityAddress) : '';
   console.log('universityAddress', universityAddress);
   const [isWithAddress, setIsWithAddress] = useState<boolean>(false);
 
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
     ...initialPostsPaginator,
     rowsPerPage: 6,
-    universityAddress: universityAddress[0],
+    universityAddress: '',
   });
-
+  const { data, isLoading, isError, error } = useGetPostsHomeQuery({
+    ...paginator,
+    universityAddress: user.universityAddress && isWithAddress ? universityAddress[0] : '',
+  });
+  // ____________________________________________get all posts ____________________________________________
   const handleGetAll = () => {
-    setIsWithAddress(true);
+    setIsWithAddress(!isWithAddress);
+    console.log('tetetet');
   };
-  const { data, isLoading, isError, error } = useGetPostsHomeQuery(paginator);
+  const fetchPostsData = async (updatedPaginator: Paginator) => {
+    try {
+      const response = await useGetPostsHomeQuery(updatedPaginator);
+      console.log('resss', response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // ____________________________________________get nearest posts from university ____________________________________________
 
+  useEffect(() => {
+    if (isWithAddress) {
+      fetchPostsData({ ...paginator, universityAddress: universityAddress[0] });
+    }
+  }, [isWithAddress, universityAddress]);
+  const { t } = useTranslation();
   return (
     <>
       <Container>
         <GetStarted />
-        <ButtonWithIcon
-          icon={<KeyboardDoubleArrowRightIcon />}
-          txt={'Show all'}
-          onClick={handleGetAll}
-        />
+        <TypographyStyled variant="h3" onClick={handleGetAll}>
+          {isWithAddress ? t('home.show_all') : t('home.show_nearest')}
+          <FilterListIcon />
+        </TypographyStyled>
+
         <Posts
           page={1}
           rowsPerPage={6}
           color={COLORS.PRIMARY.DARK}
-          padding="2rem 0"
+          padding="0 0"
           margin="2rem 0"
           withButton={true}
           isHomePage={true}

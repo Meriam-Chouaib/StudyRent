@@ -27,20 +27,14 @@ export const postApi = createApi({
   endpoints: (builder) => ({
     getPosts: builder.query({
       query(params) {
-        console.log(params);
         let url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}`;
         if (params.filter !== '')
-          url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.paginator.filter}`;
+          url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}`;
         if (params.idStudent) {
-          url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.paginator.filter}&idStudent=${params.paginator.idStudent}`;
-          console.log(params);
+          url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}&idStudent=${params.paginator.idStudent}`;
         }
-        if (params.universityAddress) {
-          // const rowsPerPageNumber = Number(params.rowsPerPage);
-          url = `${PATHS.POSTS}?page=${Number(params.page)}&rowsPerPage=${
-            params.paginator.rowsPerPage
-          }&filter=${params.filter}&universityAddress=${params.universityAddress}`;
-          console.log(params);
+        if (params.paginator.universityAddress) {
+          url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}&universityAddress=${params.paginator.universityAddress}`;
         }
         return {
           url,

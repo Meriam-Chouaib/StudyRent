@@ -42,8 +42,6 @@ export const ProfilePage = () => {
   const values = watch();
   const [updateUser, { data, isError, isLoading }] = useUpdateUserMutation();
 
-  const userInfo = useSelector((state: RootState) => state.userState.user);
-
   const onSubmit = async () => {
     try {
       const userUpdated = await updateUser({ id: user.id, user: values as unknown as IUser })
