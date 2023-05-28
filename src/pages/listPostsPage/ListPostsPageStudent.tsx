@@ -6,14 +6,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { BoxCenterFilter, WarningMsg } from './ListPostsPageStudent.style';
 
 // mui
-
+import FilterListIcon from '@material-ui/icons/FilterList';
 import { Container, Typography } from '@mui/material';
 import { Warning } from '@mui/icons-material';
 
 // features
 import { Posts, initialPostsPaginator, GoToMap } from '../../features';
 
-import { BoxCenter, Toast } from '../../components';
+import { BoxCenter, ButtonWithIcon, Toast } from '../../components';
 
 // filtre
 import { Filter } from './Filtre/Filtre';
@@ -38,6 +38,7 @@ import { getPersistData } from '../../utils';
 import { FilterFields } from './ListPostsPageStudent.type';
 import theme from '../../theme';
 import { splitAddress } from '../../utils/splitAddress';
+import { Paginator } from '../../common/common.interfaces';
 
 interface ListPostsProps {
   displayFilter?: boolean;
@@ -46,6 +47,7 @@ interface ListPostsProps {
 export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsProps) => {
   const { data: dataMaxPrice, isLoading: loadingMaxPrice } = useGetMaximalPostPriceQuery({});
   const { data: dataMinPrice, isLoading: loadingMinPrice } = useGetMinimalPostPriceQuery({});
+  const [isWithAddress, setIsWithAddress] = useState<boolean>(false);
 
   const { data: dataMaxSurface, isLoading: loadingMaxSurface } = useGetMaximalPostSurfaceQuery({});
   const { data: dataMinSurface, isLoading: loadingMinSurface } = useGetMinimalPostSurfaceQuery({});
@@ -66,7 +68,7 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
     ...initialPostsPaginator,
     rowsPerPage: 9,
-    ...(user.universityAddress && { universityAddress: universityAddress[0] }),
+    ...(user.universityAddress && isWithAddress && { universityAddress: universityAddress[0] }),
   });
 
   const [filter, setFilter] = useState<FilterFields>(initialFilterState);
@@ -101,23 +103,48 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
   // ____________________________________ call the query to get my data filtred ___________________________
   console.log('paginator', paginator);
 
-  const { data, isLoading, isError, error } = useGetPostsQuery({
-    // page: 1,
-    // ...initialPostsPaginator,
-    paginator,
-    // rowsPerPage: 9,
+  const { data, isLoading, isError, error } = useGetPostsQuery(
+    {
+      // page: 1,
+      // ...initialPostsPaginator,
+      paginator: {
+        ...paginator,
+        ...(user.universityAddress && isWithAddress && { universityAddress: universityAddress[0] }),
+      },
+      // rowsPerPage: 9,
 
-    filter: filterString.length !== 0 ? filterString : '',
-  });
+      filter: filterString.length !== 0 ? filterString : '',
+    },
+    // { skip: !isWithAddress }, // Skip the initial query if isWithAddress is false
+  );
 
   const nbPages = data?.nbPages;
   const { t } = useTranslation();
+  const handleGetAll = () => {
+    setIsWithAddress(!isWithAddress);
+    console.log('isWithAddress', isWithAddress);
+  };
 
-  useEffect(() => {
-    if (data && data?.posts) {
-      console.log('filterString', filterString);
+  const fetchPostsData = async () => {
+    try {
+      const response = await useGetPostsQuery({
+        paginator: {
+          ...paginator,
+          universityAddress: user.universityAddress && isWithAddress ? universityAddress[0] : '',
+        },
+        filter: filterString.length !== 0 ? filterString : '',
+      });
+      console.log('resss', response);
+    } catch (error) {
+      console.log(error);
     }
-  }, [filterString]);
+  };
+  useEffect(() => {
+    if (isWithAddress) {
+      fetchPostsData();
+    }
+  }, [isWithAddress, universityAddress, filterString]);
+
   return (
     <BoxCenter>
       {user && user.role == 'STUDENT' && user.university === undefined && (
@@ -130,10 +157,13 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
         </>
       )}
       <Container>
-        {/*  ________________ notify student ______________________ */}
-
         {/*  ________________ render the posts filtered ______________________ */}
-
+        <ButtonWithIcon
+          sx={{ backgroundColor: theme.palette.secondary.main }}
+          icon={<FilterListIcon />}
+          txt={isWithAddress ? 'Show all' : 'show the nearest posts'}
+          onClick={handleGetAll}
+        />
         {displayFilter && (
           <BoxCenterFilter>
             <Filter

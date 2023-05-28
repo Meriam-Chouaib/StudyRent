@@ -33,7 +33,7 @@ export const postApi = createApi({
         if (params.idStudent) {
           url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}&idStudent=${params.paginator.idStudent}`;
         }
-        if (params.paginator.universityAddress) {
+        if (params.paginator.universityAddress && params.paginator.universityAddress !== '') {
           url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}&universityAddress=${params.paginator.universityAddress}`;
         }
         return {

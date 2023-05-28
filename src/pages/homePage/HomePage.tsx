@@ -39,7 +39,6 @@ export function HomePage() {
   const fetchPostsData = async (updatedPaginator: Paginator) => {
     try {
       const response = await useGetPostsHomeQuery(updatedPaginator);
-      console.log('resss', response);
     } catch (error) {
       console.log(error);
     }
