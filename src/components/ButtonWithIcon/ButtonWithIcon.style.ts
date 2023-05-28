@@ -21,12 +21,15 @@ export const ButtonIconStyled = styled(Button)(() => ({
     backgroundColor: theme.palette.warning.light,
   },
 }));
-export const TypographyStyled = styled(Typography)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: underline;
-  &:hover {
-    cursor: pointer;
-  }
-`;
+export const TypographyStyled = styled(Typography)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  textDecoration: 'underline',
+  '&:hover': {
+    cursor: 'pointer',
+  },
+  [theme.breakpoints.down('sm')]: {
+    paddingTop: '2rem',
+  },
+}));

@@ -116,7 +116,6 @@ export const ProfilePage = () => {
               </InputLabel>
               <InputLabel label={t('dashboardProfile.phone')}>
                 <TextField name={fields.phone.name} type={'text'} label={''} />
-                <TextField name={fields.phone.name} type={'text'} label={''} />
               </InputLabel>
               {user.role == 'STUDENT' && (
                 <InputLabel label={t('dashboardProfile.university')}>

@@ -62,7 +62,6 @@ export const FavoritePage = () => {
             nbPages={nbPages}
           />
         </BoxCenter>
-        {data?.posts.length !== 0 && <GoToMap />}
       </Container>
     </BoxCenter>
   );
