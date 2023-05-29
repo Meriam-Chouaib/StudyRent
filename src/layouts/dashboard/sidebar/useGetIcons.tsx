@@ -22,7 +22,7 @@ export default function useGetIcons(activePath: string) {
       path: PATHS.DASHBOARD.CHAT,
     },
     {
-      txt: 'Favoris',
+      txt: 'dashboardSidebar.favoris',
       icon: (
         <IconFavoris
           isActive={activePath === `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.FAVORIS}`}
@@ -31,7 +31,7 @@ export default function useGetIcons(activePath: string) {
       path: PATHS.DASHBOARD.FAVORIS,
     },
     {
-      txt: 'pofile',
+      txt: 'dashboardSidebar.profile',
       icon: (
         <IconProfile
           isActive={activePath === `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.PROFILE}`}
