@@ -6,6 +6,7 @@ import useGetIcons from './sidebar/useGetIcons';
 import Grid from '@mui/material/Grid';
 import { getPersistData } from '../../utils/localstorage/localStorage.utils';
 import imgProfile from '../../assets/images/imgProfile.jpg';
+import { Box } from '@mui/material';
 
 const user = getPersistData('user', true);
 export function DashboardLayout() {
@@ -21,7 +22,9 @@ export function DashboardLayout() {
         </Grid>
         <Grid item xs={11} md={10} p={2} minHeight={'100vh'}>
           <Header img={imgProfile} status={user?.status} username={user?.username} />
-          <Outlet />
+          <Box sx={{ minHeight: '100%' }}>
+            <Outlet />
+          </Box>
         </Grid>
         <Grid item xs={12} zIndex={11}>
           <Footer />

@@ -60,7 +60,7 @@ export function HomePage() {
     <>
       <Container>
         <GetStarted />
-        {user && user.universityAddress && (
+        {user && user.role === 'STUDENT' && user.universityAddress && (
           <TypographyStyled variant="h3" onClick={handleGetAll}>
             {isWithAddress ? t('home.show_all') : t('home.show_nearest')}
             <FilterListIcon />

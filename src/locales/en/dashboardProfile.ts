@@ -1,5 +1,5 @@
 export const dashboardProfile = {
-  txt_1: 'Edit your profile and information',
+  txt_1: 'Edit your profil and information',
   btn_confirm: 'Confirm',
   email: 'Email',
   username: `username`,
