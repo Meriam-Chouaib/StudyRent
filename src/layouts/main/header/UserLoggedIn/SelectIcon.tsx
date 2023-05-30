@@ -20,6 +20,7 @@ type SelectIconProps = {
 };
 
 export const SelectIcon = ({ onLogout, onProfile }: SelectIconProps) => {
+  const user = getPersistData('user', true);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const handleOpen = () => {
@@ -36,7 +37,11 @@ export const SelectIcon = ({ onLogout, onProfile }: SelectIconProps) => {
   };
 
   const handleProfile = () => {
-    navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.PROFILE}`);
+    user.role !== 'ADMIN'
+      ? navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.PROFILE}`)
+      : navigate(
+          `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.STUDENTS}`,
+        );
 
     handleClose();
   };

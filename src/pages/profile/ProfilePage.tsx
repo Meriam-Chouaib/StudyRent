@@ -18,16 +18,33 @@ import { InputLabel } from '../../components/hookform/InputLabel';
 import { StackCenter } from '../../components/CustomStack/CustomStackStyled.styles';
 import { useTranslation } from 'react-i18next';
 import { tunisian_universities_data } from '../../features/home/posts/fakeData';
-import { useUpdateUserMutation } from '../../redux/api/user/user.api';
+import { useGetUserByIdQuery, useUpdateUserMutation } from '../../redux/api/user/user.api';
 import { IUser } from '../../redux/api/user/user.types';
 import { RootState } from '../../redux/store';
+import { useParams } from 'react-router-dom';
+import { COLORS } from '../../config/colors';
 
-export const ProfilePage = () => {
+interface ProfilePageProps {
+  isAdmin?: boolean;
+}
+export const ProfilePage = ({ isAdmin }: ProfilePageProps) => {
   const [university, setUniversity] = useState<string>('');
   const [successMessage, setSuccessMessage] = useState('');
   const [problem, setProblem] = useState('');
+  const { id } = useParams();
+  console.log('paramsss', id);
+  const currentUser = getPersistData('user', true);
+  console.log('before', currentUser);
+  console.log('before currentUser role', currentUser.role);
 
-  const user = getPersistData('user', true);
+  const { data: userById } = useGetUserByIdQuery({ id: Number(id) });
+
+  const user = currentUser.role === 'ADMIN' ? userById : getPersistData('user', true);
+  //   if (isAdmin && id) {
+  //     const { data } = useGetUserByIdQuery({ id: Number(id) });
+
+  //     user = data;
+  //   }
 
   const { fields, defaultValues } = UserModel;
   const { t } = useTranslation();
@@ -47,6 +64,8 @@ export const ProfilePage = () => {
       const userUpdated = await updateUser({ id: user.id, user: values as unknown as IUser })
         .then((res) => {
           console.log('res', res);
+          console.log('after', currentUser);
+          console.log('after currentUser role', currentUser.role === 'ADMIN');
 
           setSuccessMessage(`${t('dashboardProfile.updated_succuss')}`);
         })
@@ -56,7 +75,9 @@ export const ProfilePage = () => {
 
           // setProblem(err.data.message);
         });
-      updatePersistedData('user', userUpdated);
+      if (currentUser.role !== 'ADMIN') {
+        updatePersistedData('user', userUpdated);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -88,24 +109,31 @@ export const ProfilePage = () => {
     <Stack py={3}>
       {successMessage && <Toast type={'success'} text={successMessage} />}
       {problem && <Toast type={'error'} text={problem} />}
-      <Typography
-        variant="h4"
-        sx={{ textAlign: 'initial', fontSize: '26px', paddingBottom: '1rem' }}
-      >
-        {t('dashboardProfile.txt_1')}
-      </Typography>
+      {!isAdmin && (
+        <Typography
+          variant="h4"
+          sx={{ textAlign: 'initial', fontSize: '26px', paddingBottom: '1rem' }}
+        >
+          {t('dashboardProfile.txt_1')}
+        </Typography>
+      )}
 
       <StackCenter direction={'row'} spacing={1}>
-        <Stack
-          sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-          direction={'column'}
-          spacing={1}
+        {!isAdmin && (
+          <Stack
+            sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+            direction={'column'}
+            spacing={1}
+          >
+            <ImgProfile height={30} src={imgProfile} alt={'ProfileImg'} />
+            <Typography variant="h3">{user.username}</Typography>
+            <Typography variant="body2">{user.email}</Typography>
+          </Stack>
+        )}
+        <BoxStyled
+          p={4}
+          sx={{ boxShadow: !isAdmin ? 'none' : `1px 1px 8px -2px ${COLORS.GREY[800]}` }}
         >
-          <ImgProfile height={30} src={imgProfile} alt={'ProfileImg'} />
-          <Typography variant="h3">{user.username}</Typography>
-          <Typography variant="body2">{user.email}</Typography>
-        </Stack>
-        <BoxStyled p={4} sx={{ boxShadow: 'none' }}>
           <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={3} alignItems={'center'} width={'90'}>
               <InputLabel label={t('dashboardProfile.email')}>
@@ -117,7 +145,7 @@ export const ProfilePage = () => {
               <InputLabel label={t('dashboardProfile.phone')}>
                 <TextField name={fields.phone.name} type={'text'} label={''} />
               </InputLabel>
-              {user.role == 'STUDENT' && (
+              {user && user.role === 'STUDENT' && (
                 <InputLabel label={t('dashboardProfile.university')}>
                   <SelectField
                     type={'text'}

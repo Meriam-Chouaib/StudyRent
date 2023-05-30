@@ -40,3 +40,9 @@ export interface UserResponse {
   status: number;
   message: string;
 }
+
+export interface UsersResponse {
+  data: IUser[];
+  status: number;
+  message: string;
+}

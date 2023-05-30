@@ -1,5 +1,5 @@
 import { omitKey } from '../../../utils/omitKey';
-import { UserResponse } from '../auth/auth.api.types';
+import { UserResponse, UsersResponse } from '../auth/auth.api.types';
 import { IUser } from '../user/user.types';
 import {
   AllPostsLocalizations,
@@ -91,4 +91,7 @@ export function decodeEditPost(response: SinglePostEditResponse): PostResponse {
 
 export function decodEditUser(response: UserResponse): UserResponse {
   return { ...response };
+}
+export function decodGetUsers(response: IUser[]): IUser[] {
+  return response;
 }

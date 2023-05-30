@@ -26,6 +26,9 @@ import { ChatPage } from '../pages/dashboard/chatPage/ChatPage';
 import { ProfilePage } from '../pages/profile/ProfilePage';
 import { FavoritePage } from '../pages/dashboard/favoritePage/FavoritePage';
 import { MapPostsPage } from '../pages/mapPostsPage/MapPostsPage';
+import { DashboardAdminPage } from '../pages/dashboardAdmin/DashboardAdminPage';
+import { DashboardAdminStudents } from '../pages/dashboardAdmin/DashboardAdminStudents/DashboardAdminStudents';
+import DashboardAdminOwners from '../pages/dashboardAdmin/DashboardAdminOwners/DashboardAdminOwners';
 export default function Router() {
   const { t } = useTranslation();
   const user: IUser = getPersistData('user', true);
@@ -85,6 +88,27 @@ export default function Router() {
         { path: PATHS.DASHBOARD.PROFILE, element: <ProfilePage /> },
         { path: PATHS.DASHBOARD.FAVORIS, element: <FavoritePage /> },
         { path: PATHS.DASHBOARD.CHAT, element: <ChatPage /> },
+
+        {
+          path: PATHS.DASHBOARD.ADMIN.ROOT,
+          element: (
+            <RoleBasedGuard accessibleRoles={['ADMIN']}>
+              <DashboardAdminPage />
+            </RoleBasedGuard>
+          ),
+          children: [
+            { path: PATHS.DASHBOARD.ADMIN.STUDENTS, element: <DashboardAdminStudents /> },
+            { path: PATHS.DASHBOARD.ADMIN.OWNERS, element: <DashboardAdminOwners /> },
+            { path: PATHS.DASHBOARD.ADMIN.POSTS, element: <ListPostsPage /> },
+            {
+              path: PATHS.DASHBOARD.ADMIN.EDIT_USER,
+              // EDIT_USER
+              element: <ProfilePage isAdmin={true} />,
+            },
+
+            // ListPostsPage
+          ],
+        },
       ],
     },
 
