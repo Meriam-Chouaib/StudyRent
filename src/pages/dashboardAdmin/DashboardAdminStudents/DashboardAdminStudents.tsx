@@ -54,27 +54,7 @@ export const DashboardAdminStudents = () => {
               ),
           )
         ) : (
-          <ItemDashboard
-            img={avatar}
-            txt_1={'email@gmail'}
-            txt_2={'Username'}
-            btns={
-              <BoxEditDelete
-                handleDelete={(): void => {
-                  console.log('delete');
-                }}
-                handleEdit={(): void => {
-                  console.log('edit');
-                }}
-                idPost={0}
-                bgColor="white"
-                isStudents={true}
-                idUser={5}
-              />
-            }
-            heightImg={'3rem'}
-            widthImg={'auto'}
-          />
+          <></>
         )}
       </Stack>
     </>

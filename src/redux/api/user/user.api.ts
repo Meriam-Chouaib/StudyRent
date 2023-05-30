@@ -15,7 +15,7 @@ export const userApi = createApi({
       setTokenToHeaders(headers);
     },
   }),
-  tagTypes: ['Users'],
+  tagTypes: ['USERS'],
   endpoints: (builder) => ({
     getMe: builder.query<IUser, null>({
       query() {
@@ -41,6 +41,7 @@ export const userApi = createApi({
         body: user,
       }),
       transformResponse: (response: UserResponse) => decodEditUser(response),
+      invalidatesTags: ['USERS'],
     }),
     getUserById: builder.query<UserResponse, { id: number }>({
       query: ({ id }) => ({
@@ -59,8 +60,21 @@ export const userApi = createApi({
       transformResponse: (result: IUser[]): IUser[] => {
         return decodGetUsers(result);
       },
+      providesTags: ['USERS'],
+    }),
+    deleteUser: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `${PATHS.USERS}/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['USERS'],
     }),
   }),
 });
-export const { useUpdateUserMutation, useGetMeQuery, useGetUserByIdQuery, useGetUsersQuery } =
-  userApi;
+export const {
+  useUpdateUserMutation,
+  useGetMeQuery,
+  useGetUserByIdQuery,
+  useGetUsersQuery,
+  useDeleteUserMutation,
+} = userApi;

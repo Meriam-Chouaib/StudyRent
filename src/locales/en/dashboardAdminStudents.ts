@@ -1,3 +1,3 @@
 export const dashboardAdminStudents = {
-  add_btn: 'Add student',
+  add_btn: 'Add',
 };

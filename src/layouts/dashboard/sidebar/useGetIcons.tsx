@@ -51,10 +51,10 @@ export default function useGetIcons(activePath: string) {
       ),
       path: PATHS.DASHBOARD.POST.LIST,
     });
-  if (user && user.role === 'ADMIN')
+  if (user && user.role === 'ADMIN') {
     icons.unshift(
       {
-        txt: 'students',
+        txt: 'dashboardSidebar.students',
         icon: (
           <IconUsers
             isActive={
@@ -66,7 +66,7 @@ export default function useGetIcons(activePath: string) {
         path: `${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.STUDENTS}`,
       },
       {
-        txt: 'Owners',
+        txt: 'dashboardSidebar.owners',
         icon: (
           <IconUsers
             isActive={
@@ -78,7 +78,7 @@ export default function useGetIcons(activePath: string) {
         path: `${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.OWNERS}`,
       },
       {
-        txt: 'Posts',
+        txt: 'dashboardSidebar.posts',
         icon: (
           <IconHome
             isActive={
@@ -90,5 +90,10 @@ export default function useGetIcons(activePath: string) {
         path: `${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.POST.LIST}`,
       },
     );
+    const profileIndex = icons.findIndex((item) => item.txt === 'dashboardSidebar.profile');
+    if (profileIndex !== -1) {
+      icons.splice(profileIndex, 1);
+    }
+  }
   return icons;
 }

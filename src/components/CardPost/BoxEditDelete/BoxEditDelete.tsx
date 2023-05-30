@@ -16,7 +16,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { COLORS } from '../../../config/colors';
 import { getPersistData } from '../../../utils';
 import theme from '../../../theme';
-import { useGetUserByIdQuery } from '../../../redux/api/user/user.api';
+import { useDeleteUserMutation, useGetUserByIdQuery } from '../../../redux/api/user/user.api';
 
 export const BoxEditDelete = ({
   handleEdit,
@@ -47,6 +47,7 @@ export const BoxEditDelete = ({
     setOpen(true);
   };
   const [deletePost] = useDeletePostMutation();
+  const [deleteUser] = useDeleteUserMutation();
 
   const handleClose = () => {
     setOpen(false);
@@ -54,6 +55,9 @@ export const BoxEditDelete = ({
   const handleCloseAgree = () => {
     if (isPosts) {
       deletePost(idPost);
+    }
+    if (isStudents && idUser) {
+      deleteUser(idUser);
     }
     setOpen(false);
   };

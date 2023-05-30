@@ -3,4 +3,6 @@ export const dashboardSidebar = {
   chats: 'Discussion',
   favoris: 'Favoris',
   profile: 'Profil',
+  owners: 'Propriétaires',
+  students: 'étudiants',
 };

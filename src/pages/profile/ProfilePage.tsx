@@ -22,6 +22,7 @@ import { useGetUserByIdQuery, useUpdateUserMutation } from '../../redux/api/user
 import { IUser } from '../../redux/api/user/user.types';
 import { RootState } from '../../redux/store';
 import { useParams } from 'react-router-dom';
+import { COLORS } from '../../config/colors';
 
 interface ProfilePageProps {
   isAdmin?: boolean;
@@ -32,12 +33,18 @@ export const ProfilePage = ({ isAdmin }: ProfilePageProps) => {
   const [problem, setProblem] = useState('');
   const { id } = useParams();
   console.log('paramsss', id);
-  let user = getPersistData('user', true);
-  if (isAdmin && id) {
-    const { data } = useGetUserByIdQuery({ id: Number(id) });
+  const currentUser = getPersistData('user', true);
+  console.log('before', currentUser);
+  console.log('before currentUser role', currentUser.role);
 
-    user = data;
-  }
+  const { data: userById } = useGetUserByIdQuery({ id: Number(id) });
+
+  const user = currentUser.role === 'ADMIN' ? userById : getPersistData('user', true);
+  //   if (isAdmin && id) {
+  //     const { data } = useGetUserByIdQuery({ id: Number(id) });
+
+  //     user = data;
+  //   }
 
   const { fields, defaultValues } = UserModel;
   const { t } = useTranslation();
@@ -57,6 +64,8 @@ export const ProfilePage = ({ isAdmin }: ProfilePageProps) => {
       const userUpdated = await updateUser({ id: user.id, user: values as unknown as IUser })
         .then((res) => {
           console.log('res', res);
+          console.log('after', currentUser);
+          console.log('after currentUser role', currentUser.role === 'ADMIN');
 
           setSuccessMessage(`${t('dashboardProfile.updated_succuss')}`);
         })
@@ -66,7 +75,9 @@ export const ProfilePage = ({ isAdmin }: ProfilePageProps) => {
 
           // setProblem(err.data.message);
         });
-      updatePersistedData('user', userUpdated);
+      if (currentUser.role !== 'ADMIN') {
+        updatePersistedData('user', userUpdated);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -119,7 +130,10 @@ export const ProfilePage = ({ isAdmin }: ProfilePageProps) => {
             <Typography variant="body2">{user.email}</Typography>
           </Stack>
         )}
-        <BoxStyled p={4} sx={{ boxShadow: 'none' }}>
+        <BoxStyled
+          p={4}
+          sx={{ boxShadow: !isAdmin ? 'none' : `1px 1px 8px -2px ${COLORS.GREY[800]}` }}
+        >
           <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={3} alignItems={'center'} width={'90'}>
               <InputLabel label={t('dashboardProfile.email')}>
@@ -131,7 +145,7 @@ export const ProfilePage = ({ isAdmin }: ProfilePageProps) => {
               <InputLabel label={t('dashboardProfile.phone')}>
                 <TextField name={fields.phone.name} type={'text'} label={''} />
               </InputLabel>
-              {user.role == 'STUDENT' && (
+              {user && user.role === 'STUDENT' && (
                 <InputLabel label={t('dashboardProfile.university')}>
                   <SelectField
                     type={'text'}
