@@ -20,6 +20,11 @@ export const PATHS = {
   },
   DASHBOARD: {
     ROOT: 'dashboard',
+    ADMIN: {
+      ROOT: 'admin',
+      STUDENTS: 'students',
+      OWNERS: 'owners',
+    },
     STUDENT: {
       LIST: 'students',
       ADD: 'students/create',

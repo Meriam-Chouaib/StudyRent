@@ -9,18 +9,15 @@ import { DrawerPart } from '../../main/header/DrawerMenu/DrawerMenu';
 import { getPersistData } from '../../../utils';
 import { RootState } from '../../../redux/store';
 import { useSelector } from 'react-redux';
+import SettingsIcon from '@material-ui/icons/Settings';
+import { PATHS } from '../../../config/paths';
+import { Link } from 'react-router-dom';
 
 export default function Header({ username, status, img }: headerProps) {
-  // const user = getPersistData('user', true);
-  const user = useSelector((state: RootState) => state.userState.user);
+  const user = getPersistData('user', true);
 
   return (
     <>
-      {/* <BoxHeader>
-        <TranslationStyled />
-
-        <UserLogged username={username} status={status} img={img} />
-      </BoxHeader> */}
       <Stack
         display={'flex'}
         direction={'row'}
@@ -34,6 +31,12 @@ export default function Header({ username, status, img }: headerProps) {
             isMain={false}
           />
         </BoxDrawerDashboard>
+        {user && user.role === 'ADMIN' && (
+          <Link to={PATHS.DASHBOARD.ADMIN.ROOT}>
+            <SettingsIcon color="primary" />
+          </Link>
+        )}
+
         <TranslationStyled />
 
         <UserLogged username={username} status={status} img={img} />

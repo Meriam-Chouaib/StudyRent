@@ -6,7 +6,9 @@ import useGetIcons from './sidebar/useGetIcons';
 import Grid from '@mui/material/Grid';
 import { getPersistData } from '../../utils/localstorage/localStorage.utils';
 import imgProfile from '../../assets/images/imgProfile.jpg';
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
+import { ButtonWithIcon } from '../../components';
+import PeopleIcon from '@material-ui/icons/People';
 
 const user = getPersistData('user', true);
 export function DashboardLayout() {

@@ -6,6 +6,7 @@ import IconProfile from '../../../assets/icons/ic_profile';
 import IconFavoris from '../../../assets/icons/ic_heart';
 import { getPersistData } from '../../../utils';
 import { ReactNode } from 'react';
+import IconUsers from '../../../assets/icons/ic_users';
 export interface IconsProps {
   txt: string;
   icon: JSX.Element;
@@ -50,5 +51,44 @@ export default function useGetIcons(activePath: string) {
       ),
       path: PATHS.DASHBOARD.POST.LIST,
     });
+  if (user && user.role === 'ADMIN')
+    icons.unshift(
+      {
+        txt: 'students',
+        icon: (
+          <IconUsers
+            isActive={
+              activePath ===
+              `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.STUDENTS}`
+            }
+          />
+        ),
+        path: `${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.STUDENTS}`,
+      },
+      {
+        txt: 'Owners',
+        icon: (
+          <IconUsers
+            isActive={
+              activePath ===
+              `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.OWNERS}`
+            }
+          />
+        ),
+        path: `${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.OWNERS}`,
+      },
+      {
+        txt: 'Posts',
+        icon: (
+          <IconHome
+            isActive={
+              activePath ===
+              `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.POST.LIST}`
+            }
+          />
+        ),
+        path: `${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.POST.LIST}`,
+      },
+    );
   return icons;
 }

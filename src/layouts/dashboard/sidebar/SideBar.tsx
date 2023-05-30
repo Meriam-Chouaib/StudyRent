@@ -14,10 +14,12 @@ import { PATHS } from '../../../config/paths';
 import { BoxDrawer, BoxDrawerDashboard } from '../../main/header/header.styles';
 import { DrawerPart } from '../../main/header/DrawerMenu/DrawerMenu';
 import { ItemsDashboard } from '../../main/header/DrawerMenu/ItemsDrawer';
+import { IUser } from '../../../redux/api/user/user.types';
 export default function SideBar({ items, activePath }: SideBarProps) {
   // const [isActive, setIsActive] = useState(false);
 
   const { t } = useTranslation();
+
   return (
     <>
       <BoxSidebar>
