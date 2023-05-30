@@ -3,6 +3,7 @@ export const PATHS = {
 
   ABOUT: 'about',
   CONTACT: 'contact',
+  USERS: 'users',
   POSTS: 'posts',
   NEAREST_POSTS: '/near/:id',
   ALL: '*',
@@ -24,6 +25,8 @@ export const PATHS = {
       ROOT: 'admin',
       STUDENTS: 'students',
       OWNERS: 'owners',
+      POSTS: 'posts',
+      EDIT_USER: 'students/:id',
     },
     STUDENT: {
       LIST: 'students',

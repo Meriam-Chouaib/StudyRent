@@ -118,6 +118,7 @@ export const CardPost = ({
               handleFavorite={() => handleFavorite(idPost)}
               handleComment={() => handleComment(idPost)}
               isFavorite={isFavorite}
+              isPosts={true}
             />
           )}
 

@@ -14,6 +14,9 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { COLORS } from '../../../config/colors';
+import { getPersistData } from '../../../utils';
+import theme from '../../../theme';
+import { useGetUserByIdQuery } from '../../../redux/api/user/user.api';
 
 export const BoxEditDelete = ({
   handleEdit,
@@ -22,8 +25,24 @@ export const BoxEditDelete = ({
   handleFavorite,
   handleComment,
   isFavorite,
+  bgColor,
+  isOwners,
+  isStudents,
+  isPosts,
+  idUser,
 }: BoxEditDeleteProps) => {
   const [open, setOpen] = React.useState(false);
+  // const { id } = useParams();
+  let userInfo = getPersistData('user', true);
+  if (idUser) {
+    const { data } = useGetUserByIdQuery({ id: idUser });
+    console.log('response get user by id', data);
+
+    userInfo = data;
+    console.log('userInfo', userInfo);
+  }
+
+  // const user = userInfo;
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -33,19 +52,30 @@ export const BoxEditDelete = ({
     setOpen(false);
   };
   const handleCloseAgree = () => {
-    deletePost(idPost);
+    if (isPosts) {
+      deletePost(idPost);
+    }
     setOpen(false);
   };
   const { t } = useTranslation();
-
+  const getPath = () => {
+    if (isPosts) {
+      return `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}/${idPost}`;
+    } else if (isStudents) {
+      return `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.STUDENTS}/${idUser}`;
+    } else if (isOwners) {
+      return '';
+    } else return '';
+  };
   return (
     <>
-      <BoxEditDeleteStyled>
-        {isPoster ? (
+      <BoxEditDeleteStyled backColor={bgColor ? bgColor : theme.palette.warning.main}>
+        {isPoster || idUser ? (
           <>
             <BoxIcon handleSubmit={handleEdit} color={`${COLORS.PRIMARY.MAIN}`}>
               <Link
-                to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}/${idPost}`}
+                // to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}/${idPost}`}
+                to={getPath()}
                 style={{ display: 'flex' }}
               >
                 <IconEdit isActive={false}></IconEdit>

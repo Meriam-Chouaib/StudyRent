@@ -88,7 +88,6 @@ export default function Router() {
         { path: PATHS.DASHBOARD.PROFILE, element: <ProfilePage /> },
         { path: PATHS.DASHBOARD.FAVORIS, element: <FavoritePage /> },
         { path: PATHS.DASHBOARD.CHAT, element: <ChatPage /> },
-        { path: PATHS.DASHBOARD.ADMIN.STUDENTS, element: <DashboardAdminStudents /> },
 
         {
           path: PATHS.DASHBOARD.ADMIN.ROOT,
@@ -100,6 +99,14 @@ export default function Router() {
           children: [
             { path: PATHS.DASHBOARD.ADMIN.STUDENTS, element: <DashboardAdminStudents /> },
             { path: PATHS.DASHBOARD.ADMIN.OWNERS, element: <DashboardAdminOwners /> },
+            { path: PATHS.DASHBOARD.ADMIN.POSTS, element: <ListPostsPage /> },
+            {
+              path: PATHS.DASHBOARD.ADMIN.EDIT_USER,
+              // EDIT_USER
+              element: <ProfilePage isAdmin={true} />,
+            },
+
+            // ListPostsPage
           ],
         },
       ],

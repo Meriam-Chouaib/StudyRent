@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { authorizeWithToken } from '../../baseQueryConfig ';
 import { IUser } from './user.types';
 import { PATHS } from '../../../config/paths';
-import { decodEditUser } from '../post/decoder';
-import { UserResponse } from '../auth/auth.api.types';
+import { decodEditUser, decodGetUsers, decodePosts } from '../post/decoder';
+import { UserResponse, UsersResponse } from '../auth/auth.api.types';
 import { BASE_URL } from '../../../config/config';
 import { setTokenToHeaders } from '../../../utils/setTokenToHeaders';
 
@@ -42,6 +42,25 @@ export const userApi = createApi({
       }),
       transformResponse: (response: UserResponse) => decodEditUser(response),
     }),
+    getUserById: builder.query<UserResponse, { id: number }>({
+      query: ({ id }) => ({
+        url: `${PATHS.DASHBOARD.USERS}/${id}`,
+        method: 'GET',
+      }),
+      transformResponse: (response: UserResponse) => decodEditUser(response),
+    }),
+    getUsers: builder.query({
+      query() {
+        const url = `${PATHS.USERS}`;
+        return {
+          url,
+        };
+      },
+      transformResponse: (result: IUser[]): IUser[] => {
+        return decodGetUsers(result);
+      },
+    }),
   }),
 });
-export const { useUpdateUserMutation, useGetMeQuery } = userApi;
+export const { useUpdateUserMutation, useGetMeQuery, useGetUserByIdQuery, useGetUsersQuery } =
+  userApi;

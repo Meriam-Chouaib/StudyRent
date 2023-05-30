@@ -10,6 +10,7 @@ import { dashboardSidebar } from './dashboardSidebar';
 import { dashboardAddPost } from './dashboardAddPost';
 import { listPostsMain } from './listPostsMain';
 import { dashboardProfile } from './dashboardProfile';
+import { dashboardAdminStudents } from './dashboardAdminStudents';
 export const fr = {
   signin: signin,
   signup: signup,
@@ -23,4 +24,5 @@ export const fr = {
   dashboardAddPost: dashboardAddPost,
   listPostsMain: listPostsMain,
   dashboardProfile: dashboardProfile,
+  dashboardAdminStudents: dashboardAdminStudents,
 };

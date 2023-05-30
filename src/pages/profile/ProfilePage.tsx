@@ -18,16 +18,26 @@ import { InputLabel } from '../../components/hookform/InputLabel';
 import { StackCenter } from '../../components/CustomStack/CustomStackStyled.styles';
 import { useTranslation } from 'react-i18next';
 import { tunisian_universities_data } from '../../features/home/posts/fakeData';
-import { useUpdateUserMutation } from '../../redux/api/user/user.api';
+import { useGetUserByIdQuery, useUpdateUserMutation } from '../../redux/api/user/user.api';
 import { IUser } from '../../redux/api/user/user.types';
 import { RootState } from '../../redux/store';
+import { useParams } from 'react-router-dom';
 
-export const ProfilePage = () => {
+interface ProfilePageProps {
+  isAdmin?: boolean;
+}
+export const ProfilePage = ({ isAdmin }: ProfilePageProps) => {
   const [university, setUniversity] = useState<string>('');
   const [successMessage, setSuccessMessage] = useState('');
   const [problem, setProblem] = useState('');
+  const { id } = useParams();
+  console.log('paramsss', id);
+  let user = getPersistData('user', true);
+  if (isAdmin && id) {
+    const { data } = useGetUserByIdQuery({ id: Number(id) });
 
-  const user = getPersistData('user', true);
+    user = data;
+  }
 
   const { fields, defaultValues } = UserModel;
   const { t } = useTranslation();
@@ -88,23 +98,27 @@ export const ProfilePage = () => {
     <Stack py={3}>
       {successMessage && <Toast type={'success'} text={successMessage} />}
       {problem && <Toast type={'error'} text={problem} />}
-      <Typography
-        variant="h4"
-        sx={{ textAlign: 'initial', fontSize: '26px', paddingBottom: '1rem' }}
-      >
-        {t('dashboardProfile.txt_1')}
-      </Typography>
+      {!isAdmin && (
+        <Typography
+          variant="h4"
+          sx={{ textAlign: 'initial', fontSize: '26px', paddingBottom: '1rem' }}
+        >
+          {t('dashboardProfile.txt_1')}
+        </Typography>
+      )}
 
       <StackCenter direction={'row'} spacing={1}>
-        <Stack
-          sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-          direction={'column'}
-          spacing={1}
-        >
-          <ImgProfile height={30} src={imgProfile} alt={'ProfileImg'} />
-          <Typography variant="h3">{user.username}</Typography>
-          <Typography variant="body2">{user.email}</Typography>
-        </Stack>
+        {!isAdmin && (
+          <Stack
+            sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+            direction={'column'}
+            spacing={1}
+          >
+            <ImgProfile height={30} src={imgProfile} alt={'ProfileImg'} />
+            <Typography variant="h3">{user.username}</Typography>
+            <Typography variant="body2">{user.email}</Typography>
+          </Stack>
+        )}
         <BoxStyled p={4} sx={{ boxShadow: 'none' }}>
           <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={3} alignItems={'center'} width={'90'}>
