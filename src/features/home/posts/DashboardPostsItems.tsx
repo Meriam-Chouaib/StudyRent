@@ -27,7 +27,7 @@ export const DashboardItems = ({
 DashboardItemsProps) => {
   const user = getPersistData('user', true);
   return (
-    <Stack sx={{ padding: '1.3rem 0px' }} spacing={2} direction="column">
+    <Stack sx={{ padding: '1.3rem 0px', width: '100%' }} spacing={2} direction="column">
       {dataPosts?.map((post: Post) => (
         <ItemDashboard
           key={post.id}

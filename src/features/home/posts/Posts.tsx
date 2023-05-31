@@ -45,7 +45,7 @@ export const Posts = ({
       ) : (
         <CustomBoxPosts margin={margin} padding={padding}>
           {isDashboard ? (
-            <DashboardItems dataPosts={dataPosts} heightImg={'120px'} widthImg={'120px'} />
+            <DashboardItems dataPosts={dataPosts} heightImg={'100px'} widthImg={'120px'} />
           ) : (
             <BoxPosts isHomePage={isHomePage}>
               {dataPosts?.map((post: Post) => (
