@@ -23,17 +23,32 @@ export const postApi = createApi({
     },
   }),
 
-  tagTypes: ['Post', 'favoritePosts'],
+  tagTypes: ['Post', 'favoritePosts', 'Posts'],
   endpoints: (builder) => ({
     getPosts: builder.query({
       query(params) {
-        let url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}`;
+        console.log('paramsssssssssssssssssssssss');
+        console.log(params.isAdminDashboard);
+
+        let url = params.isAdminDashboard
+          ? `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`
+          : `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}`;
+        console.log('url', url);
+
+        if (params.isAdminDashboard) {
+          url = `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`;
+          console.log('url', url);
+        }
         if (params.filter !== '')
           url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}`;
         if (params.idStudent) {
           url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}&idStudent=${params.paginator.idStudent}`;
         }
-        if (params.paginator.universityAddress && params.paginator.universityAddress !== '') {
+        if (
+          params.paginator &&
+          params.paginator.universityAddress &&
+          params.paginator.universityAddress !== ''
+        ) {
           url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}&universityAddress=${params.paginator.universityAddress}`;
         }
         return {
@@ -43,6 +58,7 @@ export const postApi = createApi({
       transformResponse: (result: PostResponseData): PostsLocalizations => {
         return decodePosts(result);
       },
+      providesTags: ['Posts'],
     }),
     getPostsHome: builder.query({
       query(params) {
@@ -121,17 +137,16 @@ export const postApi = createApi({
         method: 'POST',
         body: PostRequest,
       }),
-      invalidatesTags: ['Post'],
+      invalidatesTags: ['Post', 'Posts'],
 
       transformResponse: (response: PostResponse) => decodAddPost(response),
-      //  providesTags: (result, error, variables) => ['Post'], // Specify the tag(s) to provide
     }),
     deletePost: builder.mutation<void, number>({
       query: (id) => ({
         url: `${PATHS.POSTS}/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Post'],
+      invalidatesTags: ['Post', 'Posts'],
     }),
     editPost: builder.mutation<PostResponse, { id: number; post: FormData }>({
       query: ({ id, post }) => ({
@@ -139,7 +154,7 @@ export const postApi = createApi({
         method: 'PATCH',
         body: post,
       }),
-      invalidatesTags: ['Post'],
+      invalidatesTags: ['Post', 'Posts'],
       transformResponse: (response: SinglePostEditResponse) => decodeEditPost(response),
     }),
     deleteFiles: builder.mutation<void, number>({

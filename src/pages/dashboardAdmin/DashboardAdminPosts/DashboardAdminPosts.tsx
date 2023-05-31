@@ -7,20 +7,21 @@ import { PATHS } from '../../../config/paths';
 import { Link } from 'react-router-dom';
 import { initialPostsPaginator } from '../../../features/home/posts/posts.constants';
 import usePaginator from '../../../hooks/usePaginator';
-import { useGetPostsByOwnerQuery } from '../../../redux/api/post/post.api';
+import { useGetPostsByOwnerQuery, useGetPostsQuery } from '../../../redux/api/post/post.api';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Paginator } from '../../../common/common.interfaces';
 
-export const ListPostsPage = () => {
+export const DashboardAdminPosts = () => {
   const navigate = useNavigate();
 
   const { t } = useTranslation();
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
     ...initialPostsPaginator,
-
+    isAdminDashboard: true,
     rowsPerPage: 9,
   });
-  const { isError, isLoading, data, error } = useGetPostsByOwnerQuery(paginator);
+  const { data, isError, isLoading, error } = useGetPostsQuery({ ...paginator });
   const nbPages = data?.nbPages;
 
   return (
@@ -45,10 +46,10 @@ export const ListPostsPage = () => {
         withButton={false}
         withPagination={true}
         dataPosts={data?.posts}
-        isHomePage={false}
         isLoading={isLoading}
         onChangePage={onChangePage}
         nbPages={nbPages}
+        isDashboard={true}
       />
     </>
   );

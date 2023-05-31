@@ -28,6 +28,7 @@ import { IPostRequest } from '../../../redux/api/post/post.types';
 import theme from '../../../theme';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PATHS } from '../../../config/paths';
+import { getPersistData } from '../../../utils';
 
 // ----------------------------------------------------------------------
 interface AddPostProps {
@@ -45,7 +46,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
   const [editPost, { isSuccess: editSuccess, error: editError }] = useEditPostMutation();
   const [deleteFiles] = useDeleteFilesMutation();
   const { t } = useTranslation();
-
+  const user = getPersistData('user', true);
   const methods = useForm<IPostRequest>({
     resolver: yupResolver(PostSchema),
     defaultValues,
@@ -144,6 +145,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     const filteredItems = values.images?.filter((_file) => _file !== file);
     setValue('images', filteredItems);
   };
+  console.log('user role', user.role);
 
   // show message success after edit post
   useEffect(() => {
@@ -152,7 +154,12 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
         isEdit
           ? setSuccessMessage(`${t('dashboardAddPost.success_msg_edit')}`)
           : setSuccessMessage(`${t('dashboardAddPost.success_msg')}`);
-        navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
+
+        user.role === 'ADMIN'
+          ? navigate(
+              `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.POSTS}`,
+            )
+          : navigate(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`);
       }, 800);
     }
   }, [successMessage]);

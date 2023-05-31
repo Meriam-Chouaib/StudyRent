@@ -28,7 +28,7 @@ export const WarningMsg = styled(Box)(() => ({
   color: 'White',
   fontSize: '16px',
   display: 'flex',
-  padding: '5px 0',
+  padding: '0 0',
   flexDirection: 'row',
   justifyContent: 'center',
   alignItems: 'center',

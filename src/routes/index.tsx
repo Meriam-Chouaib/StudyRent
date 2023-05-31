@@ -29,6 +29,7 @@ import { MapPostsPage } from '../pages/mapPostsPage/MapPostsPage';
 import { DashboardAdminPage } from '../pages/dashboardAdmin/DashboardAdminPage';
 import { DashboardAdminStudents } from '../pages/dashboardAdmin/DashboardAdminStudents/DashboardAdminStudents';
 import DashboardAdminOwners from '../pages/dashboardAdmin/DashboardAdminOwners/DashboardAdminOwners';
+import { DashboardAdminPosts } from '../pages/dashboardAdmin/DashboardAdminPosts/DashboardAdminPosts';
 export default function Router() {
   const { t } = useTranslation();
   const user: IUser = getPersistData('user', true);
@@ -99,7 +100,7 @@ export default function Router() {
           children: [
             { path: PATHS.DASHBOARD.ADMIN.STUDENTS, element: <DashboardAdminStudents /> },
             { path: PATHS.DASHBOARD.ADMIN.OWNERS, element: <DashboardAdminOwners /> },
-            { path: PATHS.DASHBOARD.ADMIN.POSTS, element: <ListPostsPage /> },
+            { path: PATHS.DASHBOARD.ADMIN.POSTS, element: <DashboardAdminPosts /> },
             {
               path: PATHS.DASHBOARD.ADMIN.EDIT_USER,
               // EDIT_USER
