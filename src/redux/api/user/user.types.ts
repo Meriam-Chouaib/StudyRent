@@ -1,3 +1,5 @@
+import { Paginator } from '../../../common/common.interfaces';
+
 export interface IUser {
   id?: number;
   email: string;
@@ -16,3 +18,14 @@ export interface userState {
   error: string | null;
   token?: string | null;
 }
+export interface ResponseUsers {
+  users: IUser[];
+  nbPages: number;
+  nbUsers: number;
+  currentPage: number;
+}
+export const initialUsersPaginator: Paginator = {
+  page: 1,
+  rowsPerPage: 9,
+  search: '',
+};
