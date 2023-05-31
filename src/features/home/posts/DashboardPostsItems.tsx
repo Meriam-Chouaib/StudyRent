@@ -3,6 +3,7 @@ import { BoxEditDelete } from '../../../components/CardPost/BoxEditDelete/BoxEdi
 import { ItemDashboard } from '../../../components/ItemDashboard/ItemDashboard';
 import { Post } from '../../../redux/api/post/post.types';
 import { getDefaultImagePath } from '../../../utils/getDefaultImage';
+import { getPersistData } from '../../../utils';
 
 interface DashboardItemsProps {
   dataPosts?: Post[];
@@ -23,32 +24,36 @@ export const DashboardItems = ({
 //   img,
 //   txt_1,
 //   txt_2,
-DashboardItemsProps) => (
-  <Stack sx={{ padding: '1.3rem 0px' }} spacing={2} direction="column">
-    {dataPosts?.map((post: Post) => (
-      <ItemDashboard
-        key={post.id}
-        img={getDefaultImagePath(post.images)}
-        txt_1={post.title}
-        txt_2={post.description}
-        btns={
-          <BoxEditDelete
-            handleDelete={handleDelete}
-            handleEdit={handleEdit}
-            idPost={post.id}
-            bgColor="white"
-            isStudents={true}
-            idUser={post.posterId}
-            isPosts={true}
-          />
-        }
-        heightImg={heightImg}
-        widthImg={widthImg}
-        isPost={true}
-      />
-    ))}
-  </Stack>
-);
+DashboardItemsProps) => {
+  const user = getPersistData('user', true);
+  return (
+    <Stack sx={{ padding: '1.3rem 0px' }} spacing={2} direction="column">
+      {dataPosts?.map((post: Post) => (
+        <ItemDashboard
+          key={post.id}
+          img={getDefaultImagePath(post.images)}
+          txt_1={post.title}
+          txt_2={post.description}
+          btns={
+            <BoxEditDelete
+              handleDelete={handleDelete}
+              handleEdit={handleEdit}
+              idPost={post.id}
+              bgColor="white"
+              isStudents={true}
+              //    idUser={post.posterId}
+              isPosts={true}
+              isPoster={post.posterId === user.id}
+            />
+          }
+          heightImg={heightImg}
+          widthImg={widthImg}
+          isPost={true}
+        />
+      ))}
+    </Stack>
+  );
+};
 function handleDelete(): void {
   throw new Error('Function not implemented.');
 }

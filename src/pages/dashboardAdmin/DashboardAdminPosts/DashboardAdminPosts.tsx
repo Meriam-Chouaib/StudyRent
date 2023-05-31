@@ -23,9 +23,6 @@ export const DashboardAdminPosts = () => {
   });
   const { data, isError, isLoading, error } = useGetPostsQuery({ ...paginator });
   const nbPages = data?.nbPages;
-  console.log(data?.posts);
-
-  console.log('stop here!');
 
   return (
     <>

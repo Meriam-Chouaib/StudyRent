@@ -33,14 +33,14 @@ export const BoxEditDelete = ({
 }: BoxEditDeleteProps) => {
   const [open, setOpen] = React.useState(false);
   // const { id } = useParams();
-  let userInfo = getPersistData('user', true);
-  if (idUser) {
-    const { data } = useGetUserByIdQuery({ id: idUser });
-    console.log('response get user by id', data);
+  //   let userInfo = getPersistData('user', true);
+  //   if (idUser) {
+  //     const { data } = useGetUserByIdQuery({ id: idUser });
+  //     console.log('response get user by id', data);
 
-    userInfo = data;
-    console.log('userInfo', userInfo);
-  }
+  //     userInfo = data;
+  //     console.log('userInfo', userInfo);
+  //   }
 
   // const user = userInfo;
   const handleClickOpen = () => {
@@ -74,7 +74,7 @@ export const BoxEditDelete = ({
   return (
     <>
       <BoxEditDeleteStyled backColor={bgColor ? bgColor : theme.palette.warning.main}>
-        {isPoster || idUser ? (
+        {isPoster || idUser || isPosts ? (
           <>
             <BoxIcon handleSubmit={handleEdit} color={`${COLORS.PRIMARY.MAIN}`}>
               <Link
