@@ -25,6 +25,8 @@ export const DashboardAdminPosts = () => {
   const nbPages = data?.nbPages;
   console.log(data?.posts);
 
+  console.log('stop here!');
+
   return (
     <>
       <BoxLeft>

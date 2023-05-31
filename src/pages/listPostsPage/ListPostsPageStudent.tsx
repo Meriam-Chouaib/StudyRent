@@ -154,7 +154,7 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
 
   return (
     <BoxCenter>
-      {user && user.role == 'STUDENT' && user.university === undefined && (
+      {user && user.role == 'STUDENT' && user.university === null && (
         <>
           <WarningMsg>
             <Warning style={{ color: `${theme.palette.primary.dark}` }} />

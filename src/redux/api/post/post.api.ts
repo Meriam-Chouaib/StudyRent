@@ -23,7 +23,7 @@ export const postApi = createApi({
     },
   }),
 
-  tagTypes: ['Post', 'favoritePosts'],
+  tagTypes: ['Post', 'favoritePosts', 'Posts'],
   endpoints: (builder) => ({
     getPosts: builder.query({
       query(params) {
@@ -58,6 +58,7 @@ export const postApi = createApi({
       transformResponse: (result: PostResponseData): PostsLocalizations => {
         return decodePosts(result);
       },
+      providesTags: ['Posts'],
     }),
     getPostsHome: builder.query({
       query(params) {
@@ -136,17 +137,16 @@ export const postApi = createApi({
         method: 'POST',
         body: PostRequest,
       }),
-      invalidatesTags: ['Post'],
+      invalidatesTags: ['Post', 'Posts'],
 
       transformResponse: (response: PostResponse) => decodAddPost(response),
-      //  providesTags: (result, error, variables) => ['Post'], // Specify the tag(s) to provide
     }),
     deletePost: builder.mutation<void, number>({
       query: (id) => ({
         url: `${PATHS.POSTS}/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Post'],
+      invalidatesTags: ['Post', 'Posts'],
     }),
     editPost: builder.mutation<PostResponse, { id: number; post: FormData }>({
       query: ({ id, post }) => ({
@@ -154,7 +154,7 @@ export const postApi = createApi({
         method: 'PATCH',
         body: post,
       }),
-      invalidatesTags: ['Post'],
+      invalidatesTags: ['Post', 'Posts'],
       transformResponse: (response: SinglePostEditResponse) => decodeEditPost(response),
     }),
     deleteFiles: builder.mutation<void, number>({

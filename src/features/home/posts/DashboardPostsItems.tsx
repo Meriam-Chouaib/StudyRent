@@ -39,6 +39,7 @@ DashboardItemsProps) => (
             bgColor="white"
             isStudents={true}
             idUser={post.posterId}
+            isPosts={true}
           />
         }
         heightImg={heightImg}
