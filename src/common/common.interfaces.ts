@@ -6,4 +6,5 @@ export interface Paginator {
   idOwner?: number;
   universityAddress?: string;
   isAdminDashboard?: boolean;
+  search?: string;
 }

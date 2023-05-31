@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { authorizeWithToken } from '../../baseQueryConfig ';
-import { IUser } from './user.types';
+import { IUser, ResponseUsers } from './user.types';
 import { PATHS } from '../../../config/paths';
 import { decodEditUser, decodGetUsers, decodePosts } from '../post/decoder';
 import { UserResponse, UsersResponse } from '../auth/auth.api.types';
@@ -51,13 +51,22 @@ export const userApi = createApi({
       transformResponse: (response: UserResponse) => decodEditUser(response),
     }),
     getUsers: builder.query({
-      query() {
-        const url = `${PATHS.USERS}`;
+      query(params) {
+        console.log(params);
+        let url = `${PATHS.USERS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`;
+
+        if (params.search) {
+          url = `${PATHS.POSTS}?page=${Number(params.page)}&rowsPerPage=${
+            params.rowsPerPage
+          }&search=${params.search}`;
+          console.log(params);
+        }
+
         return {
           url,
         };
       },
-      transformResponse: (result: IUser[]): IUser[] => {
+      transformResponse: (result: ResponseUsers): ResponseUsers => {
         return decodGetUsers(result);
       },
       providesTags: ['USERS'],

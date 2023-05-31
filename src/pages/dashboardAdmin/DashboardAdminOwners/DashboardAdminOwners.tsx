@@ -1,19 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useTranslation } from 'react-i18next';
-import { ButtonWithIcon } from '../../../components';
+import { BoxCenter, ButtonWithIcon } from '../../../components';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-import { Box, Stack } from '@mui/material';
+import { Box, Pagination, Stack } from '@mui/material';
 import { ItemDashboard } from '../../../components/ItemDashboard/ItemDashboard';
 import { BoxEditDelete } from '../../../components/CardPost/BoxEditDelete/BoxEditDelete';
 import avatar from '../../../assets/images/avatar.png';
 import { useGetUsersQuery } from '../../../redux/api/user/user.api';
-import { IUser } from '../../../redux/api/user/user.types';
+import { IUser, initialUsersPaginator } from '../../../redux/api/user/user.types';
+import usePaginator from '../../../hooks/usePaginator';
 const DashboardAdminOwners = () => {
   const { t } = useTranslation();
+  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
+    ...initialUsersPaginator,
+  });
   let dataToDisplay: IUser[] = [];
-  const { data: users } = useGetUsersQuery({});
-  dataToDisplay = users ? users : [];
+  const { data } = useGetUsersQuery({ ...paginator });
+  dataToDisplay = data && data.users ? data.users : [];
   console.log('data to display', dataToDisplay);
 
   return (
@@ -56,6 +60,15 @@ const DashboardAdminOwners = () => {
           <></>
         )}
       </Stack>
+      {data?.nbUsers !== 0 && data?.users !== undefined && (
+        <BoxCenter paddingTop={3}>
+          <Pagination
+            count={data?.nbPages}
+            color="primary"
+            onChange={(_e, page) => onChangePage(page)}
+          />
+        </BoxCenter>
+      )}
     </>
   );
 };
