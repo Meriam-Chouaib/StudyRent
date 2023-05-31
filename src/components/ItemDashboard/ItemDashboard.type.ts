@@ -6,4 +6,5 @@ export interface ItemDashboardProps {
   heightImg: string;
   widthImg: string;
   altImg?: string;
+  isPost?: boolean;
 }

@@ -27,13 +27,28 @@ export const postApi = createApi({
   endpoints: (builder) => ({
     getPosts: builder.query({
       query(params) {
-        let url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}`;
+        console.log('paramsssssssssssssssssssssss');
+        console.log(params.isAdminDashboard);
+
+        let url = params.isAdminDashboard
+          ? `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`
+          : `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}`;
+        console.log('url', url);
+
+        if (params.isAdminDashboard) {
+          url = `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`;
+          console.log('url', url);
+        }
         if (params.filter !== '')
           url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}`;
         if (params.idStudent) {
           url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}&idStudent=${params.paginator.idStudent}`;
         }
-        if (params.paginator.universityAddress && params.paginator.universityAddress !== '') {
+        if (
+          params.paginator &&
+          params.paginator.universityAddress &&
+          params.paginator.universityAddress !== ''
+        ) {
           url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}&universityAddress=${params.paginator.universityAddress}`;
         }
         return {

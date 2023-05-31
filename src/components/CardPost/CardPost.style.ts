@@ -9,24 +9,24 @@ export const CardPostStyled = styled(Card)(() => ({
   width: '18rem',
   [theme.breakpoints.down(1100)]: {
     width: '15rem',
-    height: '15rem',
+    height: '18rem',
   },
   [theme.breakpoints.down(940)]: {
     width: '14rem',
-    height: '15rem',
+    // height: '15rem',
   },
   [theme.breakpoints.down(754)]: {
     width: '12rem',
-    height: '15rem',
+    // height: '15rem',
   },
-  [theme.breakpoints.down(620)]: {
-    width: '12rem',
-    height: '15rem',
+  [theme.breakpoints.down(695)]: {
+    width: '16rem',
+    // height: '15rem',
   },
 
   [theme.breakpoints.down('sm')]: {
-    width: '13rem',
-    height: '15rem',
+    width: '16rem',
+    // height: '15rem',
   },
 }));
 export const BoxHoverEye = styled(Box)(() => ({
