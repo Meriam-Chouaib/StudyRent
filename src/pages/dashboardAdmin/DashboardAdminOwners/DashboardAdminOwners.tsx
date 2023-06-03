@@ -56,7 +56,7 @@ const DashboardAdminOwners = () => {
                       }}
                       idPost={0}
                       bgColor="white"
-                      isStudents={true}
+                      isOwners={true}
                       idUser={Item.id}
                     />
                   }

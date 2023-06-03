@@ -103,9 +103,16 @@ export default function Router() {
             { path: PATHS.DASHBOARD.ADMIN.OWNERS, element: <DashboardAdminOwners /> },
             { path: PATHS.DASHBOARD.ADMIN.POSTS, element: <DashboardAdminPosts /> },
             {
-              path: PATHS.DASHBOARD.ADMIN.EDIT_USER,
+              path: PATHS.DASHBOARD.ADMIN.EDIT_STUDENT,
 
-              element: <ProfilePage isAdmin={true} />,
+              element: <ProfilePage isAdmin={true} backStudentsList={true} />,
+            },
+            {
+              path: PATHS.DASHBOARD.ADMIN.EDIT_OWNER,
+
+              element: (
+                <ProfilePage isAdmin={true} backOwnersList={true} backStudentsList={false} />
+              ),
             },
             {
               path: PATHS.DASHBOARD.ADMIN.ADD_STUDENT,

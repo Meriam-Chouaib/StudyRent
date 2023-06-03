@@ -56,7 +56,7 @@ export const BoxEditDelete = ({
     if (isPosts) {
       deletePost(idPost);
     }
-    if (isStudents && idUser) {
+    if ((isStudents || isOwners) && idUser) {
       deleteUser(idUser);
     }
     setOpen(false);
@@ -68,7 +68,7 @@ export const BoxEditDelete = ({
     } else if (isStudents) {
       return `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.STUDENTS}/${idUser}`;
     } else if (isOwners) {
-      return '';
+      return `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.OWNERS}/${idUser}`;
     } else return '';
   };
   return (
