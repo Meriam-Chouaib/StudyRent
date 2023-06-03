@@ -13,6 +13,7 @@ export interface CardPostProps extends CardProps {
   isDashboard?: boolean;
   isFavoritePage?: boolean;
   isFavoritePost?: boolean;
+  isPosts?: boolean;
 }
 export interface ItemProps {
   children?: React.ReactNode;

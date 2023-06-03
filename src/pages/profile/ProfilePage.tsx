@@ -1,21 +1,25 @@
-// profile page//
-
+// __________________________________mui_________________
 import { Typography, Stack } from '@mui/material';
+
+// __________________________________components_________________
+import { InputLabel } from '../../components/hookform/InputLabel';
+import { StackCenter } from '../../components/CustomStack/CustomStackStyled.styles';
+import { SelectField } from '../../components/selectField/SelectField';
+import { BoxCenter, CustomButton, Toast } from '../../components';
 import { getPersistData, updatePersistedData } from '../../utils';
 import { FormProvider, TextField } from '../../components/hookform';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import { BoxCenter, CustomButton, Toast } from '../../components';
+
 import { BoxStyled, StackStyled } from './ProfilePage.style';
 import theme from '../../theme';
 import { ImgProfile } from './ProfilePage.style';
 import imgProfile from '../../assets/images/profile_icon.png';
-import { SelectField } from '../../components/selectField/SelectField';
+
 import { UserModel } from '../../models/user.model';
-import { InputLabel } from '../../components/hookform/InputLabel';
-import { StackCenter } from '../../components/CustomStack/CustomStackStyled.styles';
+
 import { useTranslation } from 'react-i18next';
 import { tunisian_universities_data } from '../../features/home/posts/fakeData';
 import { useGetUserByIdQuery, useUpdateUserMutation } from '../../redux/api/user/user.api';
@@ -31,20 +35,17 @@ export const ProfilePage = ({ isAdmin }: ProfilePageProps) => {
   const [university, setUniversity] = useState<string>('');
   const [successMessage, setSuccessMessage] = useState('');
   const [problem, setProblem] = useState('');
-  const { id } = useParams();
-  console.log('paramsss', id);
   const currentUser = getPersistData('user', true);
-  console.log('before', currentUser);
-  console.log('before currentUser role', currentUser.role);
 
-  const { data: userById } = useGetUserByIdQuery({ id: Number(id) });
+  let userId: number = currentUser.id;
+  if (isAdmin) {
+    const { id } = useParams();
+    userId = Number(id);
+  }
 
-  const user = currentUser.role === 'ADMIN' ? userById : getPersistData('user', true);
-  //   if (isAdmin && id) {
-  //     const { data } = useGetUserByIdQuery({ id: Number(id) });
+  const { data: userById } = useGetUserByIdQuery({ id: Number(userId) });
 
-  //     user = data;
-  //   }
+  const user = currentUser.role === 'ADMIN' ? userById : currentUser;
 
   const { fields, defaultValues } = UserModel;
   const { t } = useTranslation();
@@ -63,8 +64,6 @@ export const ProfilePage = ({ isAdmin }: ProfilePageProps) => {
     try {
       const userUpdated = await updateUser({ id: user.id, user: values as unknown as IUser })
         .then((res) => {
-          console.log('res', res);
-          console.log('after', currentUser);
           console.log('after currentUser role', currentUser.role === 'ADMIN');
 
           setSuccessMessage(`${t('dashboardProfile.updated_succuss')}`);
@@ -90,8 +89,6 @@ export const ProfilePage = ({ isAdmin }: ProfilePageProps) => {
     }
   }, [successMessage]);
   useEffect(() => {
-    console.log('user data', user);
-
     if (user) {
       setTimeout(() => {
         reset({

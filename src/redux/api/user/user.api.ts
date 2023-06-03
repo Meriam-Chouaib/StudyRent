@@ -16,6 +16,9 @@ export const userApi = createApi({
     },
   }),
   tagTypes: ['USERS'],
+
+  // ______________________________________________________________ *** Get user ***___________________________________________________________
+
   endpoints: (builder) => ({
     getMe: builder.query<IUser, null>({
       query() {
@@ -34,6 +37,9 @@ export const userApi = createApi({
         }
       },
     }),
+
+    // ______________________________________________________________ *** Edit user ***___________________________________________________________
+
     updateUser: builder.mutation<UserResponse, { id: number; user: IUser }>({
       query: ({ id, user }) => ({
         url: `${PATHS.DASHBOARD.USERS}/${id}`,
@@ -43,6 +49,9 @@ export const userApi = createApi({
       transformResponse: (response: UserResponse) => decodEditUser(response),
       invalidatesTags: ['USERS'],
     }),
+
+    // ______________________________________________________________ *** Get user by id***___________________________________________________________
+
     getUserById: builder.query<UserResponse, { id: number }>({
       query: ({ id }) => ({
         url: `${PATHS.DASHBOARD.USERS}/${id}`,
@@ -50,6 +59,9 @@ export const userApi = createApi({
       }),
       transformResponse: (response: UserResponse) => decodEditUser(response),
     }),
+
+    // ______________________________________________________________ *** Get all users ***___________________________________________________________
+
     getUsers: builder.query({
       query(params) {
         console.log(params);
@@ -71,6 +83,9 @@ export const userApi = createApi({
       },
       providesTags: ['USERS'],
     }),
+
+    // ______________________________________________________________ *** Delete user ***___________________________________________________________
+
     deleteUser: builder.mutation<void, number>({
       query: (id) => ({
         url: `${PATHS.USERS}/${id}`,

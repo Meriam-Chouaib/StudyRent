@@ -50,6 +50,7 @@ export const DashboardAdminPosts = () => {
         onChangePage={onChangePage}
         nbPages={nbPages}
         isDashboard={true}
+        isPosts={true}
       />
     </>
   );

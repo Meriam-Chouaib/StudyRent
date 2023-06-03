@@ -31,6 +31,7 @@ export const Posts = ({
   isDashboard,
   isFavoritePage,
   nbPages,
+  isPosts,
 }: PostsProps) => {
   const user = getPersistData('user', true);
 
@@ -61,6 +62,7 @@ export const Posts = ({
                   PosterId={post.posterId}
                   isHomePage={isHomePage}
                   isFavoritePage={isFavoritePage}
+                  isPosts={isPosts}
                 />
               ))}
             </BoxPosts>
