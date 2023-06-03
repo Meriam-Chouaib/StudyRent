@@ -11,23 +11,34 @@ import { useGetUsersQuery } from '../../../redux/api/user/user.api';
 import { IUser, initialUsersPaginator } from '../../../redux/api/user/user.types';
 import { Paginator } from '../../../common/common.interfaces';
 import usePaginator from '../../../hooks/usePaginator';
+import { Link } from 'react-router-dom';
+import { PATHS } from '../../../config/paths';
 
 export const DashboardAdminStudents = () => {
   const { t } = useTranslation();
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
     ...initialUsersPaginator,
+    rowsPerPage: 6,
+    role: 'STUDENT',
   });
   let dataToDisplay: IUser[] = [];
   const { data } = useGetUsersQuery({ ...paginator });
   dataToDisplay = data && data.users ? data.users : [];
+
   console.log('data to display', dataToDisplay);
   return (
     <>
-      <ButtonWithIcon
-        icon={<AddCircleIcon style={{ width: '1.5rem', height: '1.5rem' }} />}
-        txt={t('dashboardAdminStudents.add_btn')}
-        justify="flex-start"
-      />
+      <Link
+        to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.ADD_STUDENT}`}
+        style={{ textDecoration: 'none' }}
+      >
+        <ButtonWithIcon
+          icon={<AddCircleIcon style={{ width: '1.5rem', height: '1.5rem' }} />}
+          txt={t('dashboardAdminStudents.add_btn')}
+          justify="flex-start"
+        />
+      </Link>
+
       <Stack sx={{ padding: '1.3rem 0px' }} spacing={2} direction="column">
         {dataToDisplay.length !== 0 ? (
           dataToDisplay?.map(
@@ -65,6 +76,7 @@ export const DashboardAdminStudents = () => {
         <BoxCenter paddingTop={3}>
           <Pagination
             count={data?.nbPages}
+            page={data?.currentPage}
             color="primary"
             onChange={(_e, page) => onChangePage(page)}
           />

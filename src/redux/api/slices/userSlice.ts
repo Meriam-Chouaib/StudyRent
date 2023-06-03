@@ -68,12 +68,15 @@ export const userSlice: any = createSlice({
       .addMatcher(authApi.endpoints.register.matchFulfilled, (state, action) => {
         const response = action.payload;
         const { data } = response;
-
-        state.user = data.user;
-        state.isLoggedIn = true;
-        state.token = data.token;
-        persistData('user', data.user);
-        persistData('token', data.token);
+        const user = getPersistData('user', true);
+        if (user && user.role === 'ADMIN') console.log('do nothin');
+        else {
+          state.user = data.user;
+          state.isLoggedIn = true;
+          state.token = data.token;
+          persistData('user', data.user);
+          persistData('token', data.token);
+        }
       })
       // ____________________________________________________ Logout user _____________________________________________________
 

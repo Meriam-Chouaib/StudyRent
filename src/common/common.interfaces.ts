@@ -7,4 +7,5 @@ export interface Paginator {
   universityAddress?: string;
   isAdminDashboard?: boolean;
   search?: string;
+  role?: string;
 }

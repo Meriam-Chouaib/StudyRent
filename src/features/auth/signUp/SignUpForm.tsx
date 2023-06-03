@@ -29,8 +29,12 @@ import { CONSTANTS } from '../../../config/constants';
 import theme from '../../../theme';
 
 // ----------------------------------------------------------------------
-
-export default function SignUpForm() {
+interface SignupFormProps {
+  isAdmin?: boolean;
+  backStudentList?: boolean;
+  backOwnersList?: boolean;
+}
+export default function SignUpForm({ isAdmin, backOwnersList, backStudentList }: SignupFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [problem, setProblem] = useState('');
@@ -72,25 +76,22 @@ export default function SignUpForm() {
           }
         }
       });
-    // } catch (error: any) {
-    //   if (error.status === 409) {
-    //     setProblem(error.data.message);
-    //   } else {
-    //     setProblem(error.data.data[0].message);
-    //   }
-    //   console.error(error);
-    //   reset();
-
-    //   // setProblem(error.data.message);
-    //   setError('email', { ...error, message: error.message });
-    //   setError('password', { ...error, message: error.message });
-    // }
   };
   useEffect(() => {
     if (successMessage && successMessage !== '') {
       setTimeout(() => {
         setSuccessMessage('');
-        navigate(PATHS.ROOT);
+        if (isAdmin)
+          if (backStudentList) {
+            navigate(
+              `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.STUDENTS}`,
+            );
+          } else if (backOwnersList)
+            navigate(
+              `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.OWNERS}`,
+            );
+          else navigate(PATHS.ROOT);
+        //       return `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.STUDENTS}/${idUser}`;
       }, 100);
     }
   }, [successMessage]);
