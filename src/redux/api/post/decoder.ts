@@ -69,20 +69,25 @@ export function decodePost(response: SinglePostEditResponse): SinglePostlocaliza
 
 export function decodeEditPost(response: SinglePostEditResponse): PostResponse {
   const decodedPost: Post = {
-    ...response.data.post,
-
+    id: response.data.post.id,
     images: response.data.post.files?.map((fileRes) => {
       const fileReceived: FilePost = new File([], `${fileRes.filename}`);
       fileReceived.isNew = false;
       return fileReceived;
     }),
-
-    // datePost: new Date(response.data.datePost),
     price: Number.parseInt(response.data.post.price),
     postal_code: Number.parseInt(response.data.post.postal_code),
     surface: Number(response.data.post.surface),
     nb_roommate: Number(response.data.post.nb_roommate),
+    title: response.data.post.title,
+    description: response.data.post.description,
+    likes: Number(response.data.post.likes),
+    nb_rooms: Number(response.data.post.nb_rooms),
+    city: response.data.post.city,
+    state: response.data.post.state,
+    isLocated: false,
   };
+
   const res: PostResponse = {
     post: decodedPost,
     message: response.message,
