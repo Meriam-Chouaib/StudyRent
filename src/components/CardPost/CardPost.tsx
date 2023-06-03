@@ -43,6 +43,7 @@ export const CardPost = ({
   PosterId,
   isFavoritePost,
   isHomePage,
+  isPosts,
 }: CardPostProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -118,7 +119,7 @@ export const CardPost = ({
               handleFavorite={() => handleFavorite(idPost)}
               handleComment={() => handleComment(idPost)}
               isFavorite={isFavorite}
-              isPosts={true}
+              isPosts={isPosts}
             />
           )}
 

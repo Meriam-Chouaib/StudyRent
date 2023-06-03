@@ -31,6 +31,7 @@ export const Posts = ({
   isDashboard,
   isFavoritePage,
   nbPages,
+  isPosts,
 }: PostsProps) => {
   const user = getPersistData('user', true);
 
