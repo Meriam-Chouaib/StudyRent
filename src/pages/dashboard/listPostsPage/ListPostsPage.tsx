@@ -49,6 +49,7 @@ export const ListPostsPage = () => {
         isLoading={isLoading}
         onChangePage={onChangePage}
         nbPages={nbPages}
+        isPosts={true}
       />
     </>
   );

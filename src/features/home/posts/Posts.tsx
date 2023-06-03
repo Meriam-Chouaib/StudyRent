@@ -62,6 +62,7 @@ export const Posts = ({
                   PosterId={post.posterId}
                   isHomePage={isHomePage}
                   isFavoritePage={isFavoritePage}
+                  isPosts={isPosts}
                 />
               ))}
             </BoxPosts>
