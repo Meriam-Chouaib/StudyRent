@@ -7,4 +7,5 @@ export const dashboardListPosts = {
   title_confirm: 'Confirmation de la suppression',
   confirm: 'Confirmer',
   cancel: 'Annuler',
+  back_list: 'Retour à la liste',
 };

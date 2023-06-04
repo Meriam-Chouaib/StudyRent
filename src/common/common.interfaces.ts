@@ -8,4 +8,5 @@ export interface Paginator {
   isAdminDashboard?: boolean;
   search?: string;
   role?: string;
+  isMapPage?: boolean;
 }

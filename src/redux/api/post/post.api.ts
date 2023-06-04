@@ -27,14 +27,13 @@ export const postApi = createApi({
   endpoints: (builder) => ({
     getPosts: builder.query({
       query(params) {
-        console.log('paramsssssssssssssssssssssss');
-        console.log(params.isAdminDashboard);
-
         let url = params.isAdminDashboard
           ? `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`
           : `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}`;
         console.log('url', url);
-
+        if (params.isMapPage) {
+          url = `posts?page=1&rowsPerPage=100`;
+        }
         if (params.isAdminDashboard) {
           url = `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`;
           console.log('url', url);
@@ -80,20 +79,6 @@ export const postApi = createApi({
         return decodePosts(result);
       },
     }),
-    // getNearestPosts: builder.query({
-    //   query(params) {
-    //     let url = `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}/${params.id}`;
-    //     if (params.filter !== '')
-    //       url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}`;
-    //     return {
-    //       url,
-    //     };
-    //   },
-    //   transformResponse: (result: PostResponseData): PostsLocalizations => {
-    //     return decodePosts(result);
-    //   },
-    // }),
-
     // ________________________________get min and max price and surface______________________
 
     getMaximalPostPrice: builder.query({
