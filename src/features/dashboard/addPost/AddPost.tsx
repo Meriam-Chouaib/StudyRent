@@ -29,6 +29,7 @@ import theme from '../../../theme';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PATHS } from '../../../config/paths';
 import { getPersistData } from '../../../utils';
+import { cities_data } from '../../home/posts/fakeData';
 
 // ----------------------------------------------------------------------
 interface AddPostProps {
@@ -144,7 +145,6 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
   };
   console.log('user role', user.role);
 
-  // show message success after edit post
   useEffect(() => {
     if (successMessage) {
       setTimeout(() => {
@@ -164,7 +164,6 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
   // -------------- get the post information----------
   if (isEdit) {
     const { data } = useGetPostQuery(id);
-    console.log('get Post by id', data);
 
     useEffect(() => {
       if (data) {
@@ -185,7 +184,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
       }
     }, [data, reset]);
   }
-
+  const cities_data_values = Object.values(cities_data).map((city) => city.value);
   // ---------------------------------***----------------------------------//
 
   return (
@@ -245,7 +244,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
               label={t(fields.city.label)}
               placeholder={t(fields.city.label)}
               name={fields.city.name}
-              options={['Monastir', 'Sousse', 'Zaghouan', 'Mahdia', 'Hammemet']}
+              options={cities_data_values}
             />
 
             <SelectField
@@ -254,7 +253,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
               label={t(fields.state.label)}
               placeholder={t(fields.state.label)}
               name={fields.state.name}
-              options={['Monastir', 'Sousse', 'Zaghouan', 'Mahdia', 'Hammemet']}
+              options={cities_data_values}
             />
           </BoxSpaceBetween>
           <TextField
