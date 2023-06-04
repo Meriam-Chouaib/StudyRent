@@ -6,4 +6,5 @@ export interface ButtonWithIconProps extends ButtonProps {
   bgColor?: string;
   onClick?: () => void;
   justify?: string;
+  margBottom?: string;
 }

@@ -10,10 +10,18 @@ import { useDebounce } from '../../hooks';
 import getFilterString from '../../utils/GetFormatFilter';
 import { Filter } from '../listPostsPage/Filtre/Filtre';
 import { BoxCenterFilter } from '../listPostsPage/ListPostsPageStudent.style';
+import { Link } from 'react-router-dom';
+import { ButtonWithIcon } from '../../components';
+import { PATHS } from '../../config/paths';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { useTranslation } from 'react-i18next';
+import { LoaderBox } from '../../components/Loader/LoaderBox';
+
 export const MapPostsPage = () => {
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
     ...initialPostsPaginator,
-    rowsPerPage: 9,
+    rowsPerPage: 100,
+    isMapPage: true,
   });
 
   // _____________________filter _______________________
@@ -51,8 +59,11 @@ export const MapPostsPage = () => {
     setFilter({ ...filter, surface: interval });
   }
   const filterString = useDebounce(getFilterString(filter), 1000);
-  const { data, isLoading, isError, error } = useGetPostsQuery({ paginator, filter: filterString });
-
+  const { data, isLoading, isError, error } = useGetPostsQuery({
+    paginator,
+    filter: filterString,
+  });
+  const { t } = useTranslation();
   return (
     <>
       <Container>
@@ -69,6 +80,13 @@ export const MapPostsPage = () => {
             <Map localizations={data.localizations} posts={data.posts} height="32rem" />
           )}
         </Stack>
+        <Link to={`/${PATHS.POSTS}`} style={{ textDecoration: 'none' }}>
+          <ButtonWithIcon
+            margBottom="3rem"
+            icon={<ArrowBackIcon />}
+            txt={t('dashboardListPosts.back_list') as string}
+          />
+        </Link>
       </Container>
     </>
   );
