@@ -21,4 +21,5 @@ export const signin = {
   connect_btn: 'CONNECT',
   create_account_btn: 'CREATE AN ACCOUNT',
   bad_credentials: 'Bad crendentials!',
+  btn_back: 'Go to home',
 };
