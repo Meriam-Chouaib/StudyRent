@@ -1,5 +1,5 @@
 import { StyledLogoTopRight } from './LogoTopRight.styles';
-import { BoxRightTopStyled } from '../../../components';
+import { BoxRightTopStyled, TranslationStyled } from '../../../components';
 import { ImageProps } from '../../image/ImageProps.types';
 export const LogoTopRight = ({ src, alt }: ImageProps) => {
   return (

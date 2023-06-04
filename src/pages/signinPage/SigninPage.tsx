@@ -2,10 +2,11 @@
 import { GridStyledCenter } from '../../features';
 import { LoginForm } from '../../features';
 // components
-import { CardStyled } from '../../components';
-import { Typography } from '@mui/material';
+import { BoxCenter, ButtonWithIcon, CardStyled } from '../../components';
+import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useLoginMutation } from '../../redux/api/auth/auth.api';
+import { Link } from 'react-router-dom';
+import { PATHS } from '../../config/paths';
 
 export function SigninPage() {
   const { t } = useTranslation();
@@ -15,7 +16,10 @@ export function SigninPage() {
         <CardStyled>
           <Typography variant={'h1'}>{t('signin.title')}</Typography>
           <LoginForm />
-          {/* <SocialMedia /> */}
+
+          <Link to={`${PATHS.ROOT}`}>
+            <Typography variant="h6">{t('signin.btn_back')}</Typography>
+          </Link>
         </CardStyled>
       </GridStyledCenter>
     </>

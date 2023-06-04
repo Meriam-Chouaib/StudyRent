@@ -25,4 +25,5 @@ export const signin = {
   username_invalid: 'Nom d"utilisateur est invalide',
 
   bad_credentials: 'Identifiants invalides!',
+  btn_back: "Allez à l'acceuil",
 };
