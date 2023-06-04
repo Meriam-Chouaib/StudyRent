@@ -106,18 +106,15 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
         })
           .unwrap()
           .then((res) => {
-            console.log('res', res);
-
             setSuccessMessage(`${t('dashboardAddPost.success_msg')}`);
           })
+
           .catch((err) => {
             console.log(err);
             if (err.data && err.data.message) {
               setProblem(err.data.message);
             } else {
-              // Set a generic error message
               setProblem(`${t('dashboardAddPost.error_msg')}`);
-              console.log('error2', err);
             }
           });
       }

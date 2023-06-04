@@ -27,6 +27,11 @@ export const PATHS = {
       OWNERS: 'owners',
       POSTS: 'posts',
       EDIT_USER: 'students/:id',
+      EDIT_STUDENT: 'students/:id',
+      EDIT_OWNER: 'owners/:id',
+      ADD_USER: 'add',
+      ADD_STUDENT: 'addStudent',
+      ADD_OWNER: 'addOwner',
     },
     STUDENT: {
       LIST: 'students',

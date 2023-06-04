@@ -10,10 +10,14 @@ import avatar from '../../../assets/images/avatar.png';
 import { useGetUsersQuery } from '../../../redux/api/user/user.api';
 import { IUser, initialUsersPaginator } from '../../../redux/api/user/user.types';
 import usePaginator from '../../../hooks/usePaginator';
+import { Link } from 'react-router-dom';
+import { PATHS } from '../../../config/paths';
 const DashboardAdminOwners = () => {
   const { t } = useTranslation();
   const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
     ...initialUsersPaginator,
+    rowsPerPage: 6,
+    role: 'OWNER',
   });
   let dataToDisplay: IUser[] = [];
   const { data } = useGetUsersQuery({ ...paginator });
@@ -22,11 +26,16 @@ const DashboardAdminOwners = () => {
 
   return (
     <>
-      <ButtonWithIcon
-        icon={<AddCircleIcon style={{ width: '1.5rem', height: '1.5rem' }} />}
-        txt={t('dashboardAdminStudents.add_btn')}
-        justify="flex-start"
-      />
+      <Link
+        to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.ADD_OWNER}`}
+        style={{ textDecoration: 'none' }}
+      >
+        <ButtonWithIcon
+          icon={<AddCircleIcon style={{ width: '1.5rem', height: '1.5rem' }} />}
+          txt={t('dashboardAdminStudents.add_btn')}
+          justify="flex-start"
+        />
+      </Link>
       <Stack sx={{ padding: '1.3rem 0px' }} spacing={2} direction="column">
         {dataToDisplay.length !== 0 ? (
           dataToDisplay?.map(
@@ -47,7 +56,7 @@ const DashboardAdminOwners = () => {
                       }}
                       idPost={0}
                       bgColor="white"
-                      isStudents={true}
+                      isOwners={true}
                       idUser={Item.id}
                     />
                   }

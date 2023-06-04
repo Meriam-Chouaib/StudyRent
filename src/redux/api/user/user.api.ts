@@ -20,6 +20,30 @@ export const userApi = createApi({
   // ______________________________________________________________ *** Get user ***___________________________________________________________
 
   endpoints: (builder) => ({
+    // ______________________________________________________________ *** Get all users ***___________________________________________________________
+
+    getUsers: builder.query({
+      query(params) {
+        console.log(params);
+        let url = `${PATHS.USERS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}&role=${params.role}`;
+
+        if (params.search) {
+          url = `${PATHS.POSTS}?page=${Number(params.page)}&rowsPerPage=${
+            params.rowsPerPage
+          }&search=${params.search}`;
+          console.log(params);
+        }
+
+        return {
+          url,
+        };
+      },
+      transformResponse: (result: ResponseUsers): ResponseUsers => {
+        return decodGetUsers(result);
+      },
+      providesTags: ['USERS'],
+    }),
+
     getMe: builder.query<IUser, null>({
       query() {
         // return an object representing the request to be made to the server.
@@ -58,30 +82,6 @@ export const userApi = createApi({
         method: 'GET',
       }),
       transformResponse: (response: UserResponse) => decodEditUser(response),
-    }),
-
-    // ______________________________________________________________ *** Get all users ***___________________________________________________________
-
-    getUsers: builder.query({
-      query(params) {
-        console.log(params);
-        let url = `${PATHS.USERS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`;
-
-        if (params.search) {
-          url = `${PATHS.POSTS}?page=${Number(params.page)}&rowsPerPage=${
-            params.rowsPerPage
-          }&search=${params.search}`;
-          console.log(params);
-        }
-
-        return {
-          url,
-        };
-      },
-      transformResponse: (result: ResponseUsers): ResponseUsers => {
-        return decodGetUsers(result);
-      },
-      providesTags: ['USERS'],
     }),
 
     // ______________________________________________________________ *** Delete user ***___________________________________________________________

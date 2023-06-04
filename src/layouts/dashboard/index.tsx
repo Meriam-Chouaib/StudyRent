@@ -10,11 +10,12 @@ import { Box, Stack } from '@mui/material';
 import { ButtonWithIcon } from '../../components';
 import PeopleIcon from '@material-ui/icons/People';
 
-const user = getPersistData('user', true);
 export function DashboardLayout() {
   const location = useLocation();
   const activePath = location.pathname;
   const icons = useGetIcons(activePath);
+
+  const user = getPersistData('user', true);
 
   return (
     <>
@@ -23,7 +24,7 @@ export function DashboardLayout() {
           <SideBar items={icons} activePath={activePath} />
         </Grid>
         <Grid item xs={11} md={10} p={2} minHeight={'100vh'}>
-          <Header img={imgProfile} status={user?.status} username={user?.username} />
+          <Header isLogged={user?.isLogged} username={user?.username} status={user?.status} />
           <Box sx={{ minHeight: '100%' }}>
             <Outlet />
           </Box>

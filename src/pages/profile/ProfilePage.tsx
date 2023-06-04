@@ -25,17 +25,21 @@ import { tunisian_universities_data } from '../../features/home/posts/fakeData';
 import { useGetUserByIdQuery, useUpdateUserMutation } from '../../redux/api/user/user.api';
 import { IUser } from '../../redux/api/user/user.types';
 import { RootState } from '../../redux/store';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { COLORS } from '../../config/colors';
+import { PATHS } from '../../config/paths';
 
 interface ProfilePageProps {
   isAdmin?: boolean;
+  backStudentsList?: boolean;
+  backOwnersList?: boolean;
 }
-export const ProfilePage = ({ isAdmin }: ProfilePageProps) => {
+export const ProfilePage = ({ isAdmin, backStudentsList, backOwnersList }: ProfilePageProps) => {
   const [university, setUniversity] = useState<string>('');
   const [successMessage, setSuccessMessage] = useState('');
   const [problem, setProblem] = useState('');
   const currentUser = getPersistData('user', true);
+  const navigate = useNavigate();
 
   let userId: number = currentUser.id;
   if (isAdmin) {
@@ -64,8 +68,6 @@ export const ProfilePage = ({ isAdmin }: ProfilePageProps) => {
     try {
       const userUpdated = await updateUser({ id: user.id, user: values as unknown as IUser })
         .then((res) => {
-          console.log('after currentUser role', currentUser.role === 'ADMIN');
-
           setSuccessMessage(`${t('dashboardProfile.updated_succuss')}`);
         })
         .catch((err) => {
@@ -85,6 +87,19 @@ export const ProfilePage = ({ isAdmin }: ProfilePageProps) => {
     if (successMessage) {
       setTimeout(() => {
         setSuccessMessage(`${t('dashboardProfile.updated_succuss')}`);
+        if (backStudentsList) {
+          console.log('backStudentsList', backStudentsList);
+
+          navigate(
+            `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.STUDENTS}`,
+          );
+        } else if (backOwnersList) {
+          console.log('backOwnersList', backOwnersList);
+
+          navigate(
+            `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.OWNERS}`,
+          );
+        }
       }, 800);
     }
   }, [successMessage]);

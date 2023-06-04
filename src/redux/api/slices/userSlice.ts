@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { authApi } from '../auth/auth.api';
 import { IUser, userState } from '../user/user.types';
@@ -17,17 +18,19 @@ const initialState: userState = {
   error: null,
   token: localStorage.getItem('token') || '',
 };
-// createSlice is used for managing local client-side state.
 
-export const userSlice = createSlice({
+export const userSlice: any = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    // ____________________________________________________ Login user _____________________________________________________
     login: (state, action: PayloadAction<IUser>) => {
       state.user = action.payload;
       state.isLoading = false;
       state.error = null;
     },
+    // ____________________________________________________ Logout user _____________________________________________________
+
     logout: () => {
       clearLocalStorage();
     },
@@ -48,6 +51,8 @@ export const userSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
+      // ____________________________________________________ Login user _____________________________________________________
+
       .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
         const response = action.payload;
         const { data } = response;
@@ -58,16 +63,23 @@ export const userSlice = createSlice({
         persistData('user', data.user);
         persistData('token', data.token);
       })
+      // ____________________________________________________ register user _____________________________________________________
+
       .addMatcher(authApi.endpoints.register.matchFulfilled, (state, action) => {
         const response = action.payload;
         const { data } = response;
-
-        state.user = data.user;
-        state.isLoggedIn = true;
-        state.token = data.token;
-        persistData('user', data.user);
-        persistData('token', data.token);
+        const user = getPersistData('user', true);
+        if (user && user.role === 'ADMIN') console.log('do nothin');
+        else {
+          state.user = data.user;
+          state.isLoggedIn = true;
+          state.token = data.token;
+          persistData('user', data.user);
+          persistData('token', data.token);
+        }
       })
+      // ____________________________________________________ Logout user _____________________________________________________
+
       .addMatcher(authApi.endpoints.logout.matchPending, (state) => {
         state.user = null;
         state.isLoggedIn = false;
@@ -80,13 +92,14 @@ export const userSlice = createSlice({
         state.token = '';
         clearLocalStorage();
       })
+      // ____________________________________________________ Update user _____________________________________________________
+
       .addMatcher(userApi.endpoints.updateUser.matchFulfilled, (state, action) => {
         const response = action.payload;
         if (response) {
-          console.log('after apdates from slice data', response);
-          updatePersistedData('user', response);
+          const user = getPersistData('user', true);
+          if (response.data.id === user.id) updatePersistedData('user', response);
           state.user = getPersistData('user', true);
-          console.log(state.user);
         }
 
         state.isLoading = false;
@@ -100,7 +113,6 @@ export const userSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export default userSlice.reducer;
 
 export const { logout } = userSlice.actions;

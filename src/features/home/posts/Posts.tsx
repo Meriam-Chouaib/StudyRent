@@ -37,8 +37,6 @@ export const Posts = ({
 
   const { t } = useTranslation();
 
-  console.log('Posts received', dataPosts);
-
   return (
     <>
       {isLoading ? (

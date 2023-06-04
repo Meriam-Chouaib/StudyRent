@@ -30,6 +30,7 @@ import { DashboardAdminPage } from '../pages/dashboardAdmin/DashboardAdminPage';
 import { DashboardAdminStudents } from '../pages/dashboardAdmin/DashboardAdminStudents/DashboardAdminStudents';
 import DashboardAdminOwners from '../pages/dashboardAdmin/DashboardAdminOwners/DashboardAdminOwners';
 import { DashboardAdminPosts } from '../pages/dashboardAdmin/DashboardAdminPosts/DashboardAdminPosts';
+import { AddUserPage } from '../pages/dashboardAdmin/DashboardAdminStudents/AddUserPage';
 export default function Router() {
   const { t } = useTranslation();
   const user: IUser = getPersistData('user', true);
@@ -102,9 +103,26 @@ export default function Router() {
             { path: PATHS.DASHBOARD.ADMIN.OWNERS, element: <DashboardAdminOwners /> },
             { path: PATHS.DASHBOARD.ADMIN.POSTS, element: <DashboardAdminPosts /> },
             {
-              path: PATHS.DASHBOARD.ADMIN.EDIT_USER,
-              // EDIT_USER
-              element: <ProfilePage isAdmin={true} />,
+              path: PATHS.DASHBOARD.ADMIN.EDIT_STUDENT,
+
+              element: <ProfilePage isAdmin={true} backStudentsList={true} />,
+            },
+            {
+              path: PATHS.DASHBOARD.ADMIN.EDIT_OWNER,
+
+              element: (
+                <ProfilePage isAdmin={true} backOwnersList={true} backStudentsList={false} />
+              ),
+            },
+            {
+              path: PATHS.DASHBOARD.ADMIN.ADD_STUDENT,
+
+              element: <AddUserPage backStudentList={true} />,
+            },
+            {
+              path: PATHS.DASHBOARD.ADMIN.ADD_OWNER,
+
+              element: <AddUserPage backOwnersList={true} />,
             },
 
             // ListPostsPage
