@@ -36,7 +36,16 @@ export default function SideBar({ items, activePath }: SideBarProps) {
                     txt={t(item.txt)}
                     key={item.txt}
                     path={item.path}
-                    isActive={activePath === `/${PATHS.DASHBOARD.ROOT}/${item.path}`}
+                    isActive={
+                      item.txt === 'dashboardSidebar.posts'
+                        ? activePath.includes(
+                            `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.POST.LIST}`,
+                          ) ||
+                          activePath.includes(
+                            `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`,
+                          )
+                        : activePath.includes(`/${PATHS.DASHBOARD.ROOT}/${item.path}`)
+                    }
                   />
                 </>
               ))}
