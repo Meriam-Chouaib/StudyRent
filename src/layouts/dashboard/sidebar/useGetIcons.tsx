@@ -18,7 +18,9 @@ export default function useGetIcons(activePath: string) {
     {
       txt: 'dashboardSidebar.chats',
       icon: (
-        <IconChat isActive={activePath === `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.CHAT}`} />
+        <IconChat
+          isActive={activePath.includes(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.CHAT}`)}
+        />
       ),
       path: PATHS.DASHBOARD.CHAT,
     },
@@ -26,7 +28,7 @@ export default function useGetIcons(activePath: string) {
       txt: 'dashboardSidebar.favoris',
       icon: (
         <IconFavoris
-          isActive={activePath === `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.FAVORIS}`}
+          isActive={activePath.includes(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.FAVORIS}`)}
         />
       ),
       path: PATHS.DASHBOARD.FAVORIS,
@@ -35,7 +37,7 @@ export default function useGetIcons(activePath: string) {
       txt: 'dashboardSidebar.profile',
       icon: (
         <IconProfile
-          isActive={activePath === `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.PROFILE}`}
+          isActive={activePath.includes(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.PROFILE}`)}
         />
       ),
       path: PATHS.DASHBOARD.PROFILE,
@@ -46,7 +48,7 @@ export default function useGetIcons(activePath: string) {
       txt: 'dashboardSidebar.posts',
       icon: (
         <IconHome
-          isActive={activePath === `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`}
+          isActive={activePath.includes(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`)}
         />
       ),
       path: PATHS.DASHBOARD.POST.LIST,
@@ -57,10 +59,9 @@ export default function useGetIcons(activePath: string) {
         txt: 'dashboardSidebar.students',
         icon: (
           <IconUsers
-            isActive={
-              activePath ===
-              `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.STUDENTS}`
-            }
+            isActive={activePath.includes(
+              `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.STUDENTS}`,
+            )}
           />
         ),
         path: `${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.STUDENTS}`,
@@ -69,10 +70,9 @@ export default function useGetIcons(activePath: string) {
         txt: 'dashboardSidebar.owners',
         icon: (
           <IconUsers
-            isActive={
-              activePath ===
-              `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.OWNERS}`
-            }
+            isActive={activePath.includes(
+              `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.OWNERS}`,
+            )}
           />
         ),
         path: `${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.OWNERS}`,
@@ -82,8 +82,9 @@ export default function useGetIcons(activePath: string) {
         icon: (
           <IconHome
             isActive={
-              activePath ===
-              `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.POST.LIST}`
+              activePath.includes(
+                `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.POST.LIST}`,
+              ) || activePath.includes(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}`)
             }
           />
         ),
