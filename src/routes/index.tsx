@@ -31,6 +31,7 @@ import { DashboardAdminStudents } from '../pages/dashboardAdmin/DashboardAdminSt
 import DashboardAdminOwners from '../pages/dashboardAdmin/DashboardAdminOwners/DashboardAdminOwners';
 import { DashboardAdminPosts } from '../pages/dashboardAdmin/DashboardAdminPosts/DashboardAdminPosts';
 import { AddUserPage } from '../pages/dashboardAdmin/DashboardAdminStudents/AddUserPage';
+import { DetailPostPage } from '../pages/DetailPostPage/DetailPostPage';
 export default function Router() {
   const { t } = useTranslation();
   const user: IUser = getPersistData('user', true);
@@ -148,6 +149,8 @@ export default function Router() {
       element: <MainLayout />,
       children: [
         { element: <HomePage />, index: true },
+        { path: PATHS.MAIN.DETAIL, element: <DetailPostPage /> },
+
         { path: `${PATHS.POSTS}/${PATHS.MAIN.MAP}`, element: <MapPostsPage /> },
       ],
     },

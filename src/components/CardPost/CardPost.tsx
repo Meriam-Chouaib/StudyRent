@@ -31,6 +31,8 @@ import { BoxModal } from '../BoxCenter/BoxModal.styles';
 import { BoxCenter } from '../BoxCenter/BoxCenter.styles';
 import { getPersistData } from '../../utils';
 import { BoxIconLink } from '../BoxIconLink/BoxIconLink';
+import { Link } from 'react-router-dom';
+import { PATHS } from '../../config/paths';
 
 export const CardPost = ({
   title,
@@ -99,7 +101,9 @@ export const CardPost = ({
               <CardMedia sx={{ height: 140 }} image={`${STATIC_URL}/${img}`} title="green iguana" />
               {isHovered && (
                 <BoxHoverEye>
-                  <VisibilityIcon color="primary" fontSize="large" />
+                  <Link to={`/${PATHS.POSTS}/${idPost}`}>
+                    <VisibilityIcon color="primary" fontSize="large" />
+                  </Link>
                 </BoxHoverEye>
               )}
             </Box>

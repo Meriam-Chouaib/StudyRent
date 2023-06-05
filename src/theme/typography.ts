@@ -14,7 +14,7 @@ export const typography: TypographyOptions = {
   },
   h2: {
     fontSize: '20px',
-    color: 'blue',
+    color: COLORS.PRIMARY.DARK,
     fontFamily: FONT,
   },
   h3: {
@@ -56,7 +56,7 @@ export const typography: TypographyOptions = {
     fontSize: '14px',
     fontWeight: '500',
     textAlign: 'start',
-    color: COLORS.WARNING.MAIN,
+    color: COLORS.PRIMARY.MAIN,
     letterSpacing: '2px',
   },
 };
