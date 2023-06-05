@@ -52,12 +52,17 @@ export const InfoPost = ({ data }: PostInfoProps) => {
         >
           <DateRangeIcon style={{ color: `${theme.palette.primary.main}` }} />
         </TextWithIcon>
-        <TextWithIcon value={data?.owner?.phone} label={t('detailPost.phone') as string}>
-          <PhoneIcon style={{ color: `${theme.palette.primary.main}` }} />
-        </TextWithIcon>
-        <TextWithIcon value={data?.owner?.username} label={t('detailPost.owner') as string}>
-          <AccountCircleIcon style={{ color: `${theme.palette.primary.main}` }} />
-        </TextWithIcon>
+        {data?.owner && (
+          <>
+            <TextWithIcon value={data?.owner?.phone} label={t('detailPost.phone') as string}>
+              <PhoneIcon style={{ color: `${theme.palette.primary.main}` }} />
+            </TextWithIcon>
+
+            <TextWithIcon value={data?.owner?.username} label={t('detailPost.owner') as string}>
+              <AccountCircleIcon style={{ color: `${theme.palette.primary.main}` }} />
+            </TextWithIcon>
+          </>
+        )}
       </StackPostInfo>
     </>
   );

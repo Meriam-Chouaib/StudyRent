@@ -49,7 +49,7 @@ export const ProfilePage = ({ isAdmin, backStudentsList, backOwnersList }: Profi
 
   const { data: userById } = useGetUserByIdQuery({ id: Number(userId) });
 
-  const user = currentUser.role === 'ADMIN' ? userById : currentUser;
+  const user = currentUser.role === 'ADMIN' ? userById?.user : currentUser;
 
   const { fields, defaultValues } = UserModel;
   const { t } = useTranslation();
@@ -72,9 +72,6 @@ export const ProfilePage = ({ isAdmin, backStudentsList, backOwnersList }: Profi
         })
         .catch((err) => {
           console.log(err);
-          //    setProblem(`${t('postForm.check_fiels')}`);
-
-          // setProblem(err.data.message);
         });
       if (currentUser.role !== 'ADMIN') {
         updatePersistedData('user', userUpdated);

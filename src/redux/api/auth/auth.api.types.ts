@@ -1,3 +1,4 @@
+import { Localization } from '../post/post.types';
 import { IUser } from '../user/user.types';
 
 export interface ILoginRequest {
@@ -40,7 +41,15 @@ export interface UserResponse {
   status: number;
   message: string;
 }
-
+export interface UserByIdResponse {
+  data: DataUser;
+  status: number;
+  message: string;
+}
+export interface DataUser {
+  user: IUser;
+  localizationUniversity?: Localization;
+}
 export interface UsersResponse {
   data: IUser[];
   status: number;
