@@ -26,12 +26,11 @@ export const MapSinglePost = ({ localizations, posts, height }: MapProps) => {
   useEffect(() => {
     Geocode.setApiKey(`${process.env.API_KEY_MAP}`);
   }, []);
-  console.log('localizationnnnnnns', localizations);
-  console.log('postssssssssssssss', posts);
-
+  console.log('localization from Map', localizations);
+  console.log('posts from Map', posts);
   return (
     <>
-      {localizations && posts && (
+      {localizations !== undefined && posts !== undefined && (
         <MapContainer
           center={localizations ? [localizations.latitude, localizations.longitude] : undefined}
           zoom={12}
@@ -40,7 +39,12 @@ export const MapSinglePost = ({ localizations, posts, height }: MapProps) => {
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <Marker position={[localizations.latitude, localizations.longitude]} icon={customIcon}>
             <Popup>
-              {posts && <Stack sx={{ width: '9rem' }}>{/* //<PostOnMap post={posts} /> */}</Stack>}
+              {posts && (
+                <Stack sx={{ width: '9rem' }}>
+                  <PostOnMap post={posts} />
+                  <p>{posts.description}</p>
+                </Stack>
+              )}
             </Popup>
           </Marker>
         </MapContainer>

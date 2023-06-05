@@ -1,4 +1,4 @@
-import { Box, styled } from '@mui/material';
+import { Box, styled, Stack } from '@mui/material';
 import theme from '../../theme';
 export const BoxImages = styled(Box)(() => ({
   display: 'flex',
@@ -9,4 +9,10 @@ export const BoxImages = styled(Box)(() => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+}));
+export const StackPostInfo = styled(Stack)(() => ({
+  width: '100%',
+  padding: '2rem 0',
+  alignItems: 'flex-start',
+  [theme.breakpoints.down(800)]: {},
 }));

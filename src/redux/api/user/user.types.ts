@@ -10,6 +10,10 @@ export interface IUser {
   isLogged?: boolean;
   university?: string;
   universityAddress?: string;
+  image?: string;
+  phone?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 export interface userState {
   user: IUser | null;

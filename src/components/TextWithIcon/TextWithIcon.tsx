@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
-import { BoxIcon } from '../CardPost/BoxEditDelete/BoxIcon';
-import { Box, Stack, Typography } from '@mui/material';
-import React from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { Stack, Typography } from '@mui/material';
 
 interface TextWithIconProps {
   children?: React.ReactNode;
@@ -11,7 +10,7 @@ interface TextWithIconProps {
 export const TextWithIcon = ({ children, label, value }: TextWithIconProps) => {
   return (
     <>
-      <Stack sx={{ display: 'flex', flexDirection: 'row' }} spacing={2} direction={'row'}>
+      <Stack sx={{ display: 'flex', flexDirection: 'row' }} spacing={3} direction={'row'}>
         {children}
 
         <Typography variant="h3">{label}</Typography>

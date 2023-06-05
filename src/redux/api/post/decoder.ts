@@ -44,6 +44,7 @@ export function decodAddPost(response: PostResponse): PostResponse {
   return { ...response };
 }
 export function decodePost(response: SinglePostEditResponse): SinglePostlocalization {
+  //  decod post to change files to images
   const decodedPost = {
     ...response.data.post,
 
@@ -57,9 +58,11 @@ export function decodePost(response: SinglePostEditResponse): SinglePostlocaliza
     postal_code: Number.parseInt(response.data.post.postal_code),
   };
   const postResponseOmitted = omitKey('files', decodedPost);
+
   const dataToSend: SinglePostlocalization = {
     post: postResponseOmitted,
     localization: response.data.localization,
+    owner: response.data.owner,
   };
 
   return dataToSend;

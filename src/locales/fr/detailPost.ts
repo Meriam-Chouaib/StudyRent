@@ -5,4 +5,6 @@ export const detailPost = {
   description: 'Description',
   title: 'Titre',
   city: 'ville',
+  phone: 'Le numéro de téléphone',
+  owner: 'Le propriétaire',
 };

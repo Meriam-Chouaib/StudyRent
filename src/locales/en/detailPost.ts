@@ -5,4 +5,6 @@ export const detailPost = {
   description: 'Description',
   title: 'Title',
   city: 'city',
+  phone: 'The phone number',
+  owner: 'The owner',
 };
