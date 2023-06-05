@@ -8,7 +8,7 @@ export const CustomImageBackHeader = styled('img')({
   left: '0',
   height: '24rem',
   width: '15rem',
-  [theme.breakpoints.down('sm')]: {
+  [theme.breakpoints.down(940)]: {
     height: '11rem',
     width: '7rem',
   },

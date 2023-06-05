@@ -1,5 +1,5 @@
 import { omitKey } from '../../../utils/omitKey';
-import { UserResponse, UsersResponse } from '../auth/auth.api.types';
+import { DataUser, UserByIdResponse, UserResponse, UsersResponse } from '../auth/auth.api.types';
 import { IUser, ResponseUsers } from '../user/user.types';
 import {
   AllPostsLocalizations,
@@ -44,6 +44,7 @@ export function decodAddPost(response: PostResponse): PostResponse {
   return { ...response };
 }
 export function decodePost(response: SinglePostEditResponse): SinglePostlocalization {
+  //  ____________decod post to change files to images_________________
   const decodedPost = {
     ...response.data.post,
 
@@ -57,9 +58,11 @@ export function decodePost(response: SinglePostEditResponse): SinglePostlocaliza
     postal_code: Number.parseInt(response.data.post.postal_code),
   };
   const postResponseOmitted = omitKey('files', decodedPost);
+
   const dataToSend: SinglePostlocalization = {
     post: postResponseOmitted,
     localization: response.data.localization,
+    owner: response.data.owner,
   };
 
   return dataToSend;
@@ -99,6 +102,10 @@ export function decodeEditPost(response: SinglePostEditResponse): PostResponse {
 export function decodEditUser(response: UserResponse): UserResponse {
   return { ...response };
 }
+export function decodUserById(response: DataUser): DataUser {
+  return { ...response };
+}
+
 export function decodGetUsers(response: ResponseUsers): ResponseUsers {
   return response;
 }

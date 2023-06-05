@@ -72,6 +72,7 @@ export interface SinglePostEditResponse {
 export interface SinglePostlocalization {
   post: Post;
   localization: Localization;
+  owner?: IUser;
 }
 // ________________________________ types of data sended to front_______________________
 
@@ -79,6 +80,7 @@ export interface SinglePostlocalization {
 export interface PostLocalizationResponse {
   post: PostData;
   localization: Localization;
+  owner: IUser;
 }
 export interface PostResponseData {
   status: number;

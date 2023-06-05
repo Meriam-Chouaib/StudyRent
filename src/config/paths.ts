@@ -53,7 +53,7 @@ export const PATHS = {
   MAIN: {
     HOME: '',
     MAP: 'map',
-
+    DETAIL: '/posts/:id',
     ERROR: {
       P_500: '500',
       P_404: '404',

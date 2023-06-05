@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { authorizeWithToken } from '../../baseQueryConfig ';
 import { IUser, ResponseUsers } from './user.types';
 import { PATHS } from '../../../config/paths';
-import { decodEditUser, decodGetUsers, decodePosts } from '../post/decoder';
-import { UserResponse, UsersResponse } from '../auth/auth.api.types';
+import { decodEditUser, decodGetUsers, decodUserById, decodePosts } from '../post/decoder';
+import { DataUser, UserByIdResponse, UserResponse, UsersResponse } from '../auth/auth.api.types';
 import { BASE_URL } from '../../../config/config';
 import { setTokenToHeaders } from '../../../utils/setTokenToHeaders';
 
@@ -76,12 +76,12 @@ export const userApi = createApi({
 
     // ______________________________________________________________ *** Get user by id***___________________________________________________________
 
-    getUserById: builder.query<UserResponse, { id: number }>({
+    getUserById: builder.query<DataUser, { id: number }>({
       query: ({ id }) => ({
         url: `${PATHS.DASHBOARD.USERS}/${id}`,
         method: 'GET',
       }),
-      transformResponse: (response: UserResponse) => decodEditUser(response),
+      transformResponse: (response: DataUser) => decodUserById(response),
     }),
 
     // ______________________________________________________________ *** Delete user ***___________________________________________________________

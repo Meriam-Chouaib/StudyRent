@@ -14,13 +14,13 @@ export const typography: TypographyOptions = {
   },
   h2: {
     fontSize: '20px',
-    color: 'blue',
+    color: COLORS.PRIMARY.DARK,
     fontFamily: FONT,
   },
   h3: {
     fontSize: '18px',
     fontWeight: '600',
-    // color: COLORS.PRIMARY.DARK,
+    color: COLORS.PRIMARY.DARK,
     fontFamily: FONT,
   },
   h4: { fontFamily: FONT, fontSize: '35px', letterSpacing: '2px' },
@@ -56,7 +56,7 @@ export const typography: TypographyOptions = {
     fontSize: '14px',
     fontWeight: '500',
     textAlign: 'start',
-    color: COLORS.WARNING.MAIN,
+    color: COLORS.PRIMARY.MAIN,
     letterSpacing: '2px',
   },
 };
