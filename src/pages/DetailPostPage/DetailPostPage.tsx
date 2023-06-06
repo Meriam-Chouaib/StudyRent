@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams } from 'react-router-dom';
-import { useGetPostQuery, useGetPostsByOwnerQuery } from '../../redux/api/post/post.api';
-import { Box, Container, Typography } from '@mui/material';
+import { useGetPostQuery } from '../../redux/api/post/post.api';
+import { Box, Container } from '@mui/material';
 
 import { StackCenter } from '../../components/CustomStack/CustomStackStyled.styles';
 
@@ -29,8 +29,6 @@ export const DetailPostPage = () => {
     <>
       <Container>
         <StackCenter>
-          <Typography variant="h1">{data?.post.title}</Typography>
-
           <Carousel images={data?.post.images} />
           <InfoPost data={data} />
           <Box paddingBottom={'1rem'} width={'100%'}>

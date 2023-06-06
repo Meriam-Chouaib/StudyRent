@@ -1,22 +1,28 @@
 import React from 'react';
-import IconDelete from '../../../assets/icons/ic_delete';
-import IconEdit from '../../../assets/icons/ic_edit';
-import { useDeletePostMutation } from '../../../redux/api/post/post.api';
-import { BoxEditDeleteStyled } from './BoxEditDelete.styles';
-import { BoxEditDeleteProps } from './BoxEditDelete.types';
-import { BoxIcon } from './BoxIcon';
-import { AlertDialogSlide } from './DeleteDialog';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { PATHS } from '../../../config/paths';
+// ___________________________________ mui _____________________________________
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
+// ___________________________ icons in assets ________________________________
+import IconDelete from '../../../assets/icons/ic_delete';
+import IconEdit from '../../../assets/icons/ic_edit';
+
+// ___________________________ redux apis ______________________________________
+import { useDeletePostMutation } from '../../../redux/api/post/post.api';
+import { useDeleteUserMutation } from '../../../redux/api/user/user.api';
+
+// ____________________________ styled Boxs ____________________________________
+import { BoxEditDeleteStyled } from './BoxEditDelete.styles';
+import { BoxEditDeleteProps } from './BoxEditDelete.types';
+import { BoxIcon } from './BoxIcon';
+import { AlertDialogSlide } from './DeleteDialog';
+// ____________________________ colors & paths ___________________________________________________
+import { PATHS } from '../../../config/paths';
 import { COLORS } from '../../../config/colors';
-import { getPersistData } from '../../../utils';
 import theme from '../../../theme';
-import { useDeleteUserMutation, useGetUserByIdQuery } from '../../../redux/api/user/user.api';
 
 export const BoxEditDelete = ({
   handleEdit,
@@ -32,17 +38,7 @@ export const BoxEditDelete = ({
   idUser,
 }: BoxEditDeleteProps) => {
   const [open, setOpen] = React.useState(false);
-  // const { id } = useParams();
-  //   let userInfo = getPersistData('user', true);
-  //   if (idUser) {
-  //     const { data } = useGetUserByIdQuery({ id: idUser });
-  //     console.log('response get user by id', data);
 
-  //     userInfo = data;
-  //     console.log('userInfo', userInfo);
-  //   }
-
-  // const user = userInfo;
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -62,6 +58,7 @@ export const BoxEditDelete = ({
     setOpen(false);
   };
   const { t } = useTranslation();
+  // _________________________get the path and test if students page, owners page or posts page_________________
   const getPath = () => {
     if (isPosts) {
       return `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}/${idPost}`;
@@ -77,11 +74,7 @@ export const BoxEditDelete = ({
         {isPoster || idUser || isPosts ? (
           <>
             <BoxIcon handleSubmit={handleEdit} color={`${COLORS.PRIMARY.MAIN}`}>
-              <Link
-                // to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}/${idPost}`}
-                to={getPath()}
-                style={{ display: 'flex' }}
-              >
+              <Link to={getPath()} style={{ display: 'flex' }}>
                 <IconEdit isActive={false}></IconEdit>
               </Link>
             </BoxIcon>

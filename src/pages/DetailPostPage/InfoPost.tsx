@@ -1,20 +1,24 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { Box, CardMedia, Typography } from '@mui/material';
+// ___________________________ mui _______________________________________
+import { Typography } from '@mui/material';
 import DateRangeIcon from '@material-ui/icons/DateRange';
-import { getImageSrc } from '../../utils/getDefaultImage';
-import { formatDate } from '../../utils/getFormatDate';
-import { SinglePostlocalization } from '../../redux/api/post/post.types';
-
-import { useTranslation } from 'react-i18next';
-import SingleBedIcon from '@material-ui/icons/SingleBed';
-import { TextWithIcon } from '../../components/TextWithIcon/TextWithIcon';
-import RoomIcon from '@material-ui/icons/Room';
-
-import { BoxImages, StackPostInfo } from './DetailPostPage.style';
 import PhoneIcon from '@mui/icons-material/Phone';
+import RoomIcon from '@material-ui/icons/Room';
+import SingleBedIcon from '@material-ui/icons/SingleBed';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import theme from '../../theme';
+
+// ___________________________ React ________________________________________
+import { useTranslation } from 'react-i18next';
+
+// ___________________________ Api ________________________________________
+import { SinglePostlocalization } from '../../redux/api/post/post.types';
+
+// ____________________________ format date ________________________
+import { formatDate } from '../../utils/getFormatDate';
+
+// ____________________________ Components ________________________
+import { TextWithIcon } from '../../components/TextWithIcon/TextWithIcon';
+import { StackPostInfo } from './DetailPostPage.style';
 
 interface PostInfoProps {
   data: SinglePostlocalization | undefined;
@@ -25,6 +29,8 @@ export const InfoPost = ({ data }: PostInfoProps) => {
   return (
     <>
       <StackPostInfo spacing={2} direction={'column'}>
+        <Typography variant="h3">{data?.post.title}</Typography>
+
         <Typography variant="h1">{t('detailPost.description') as string}</Typography>
         <Typography variant="body1"> {data?.post.description}</Typography>
         <TextWithIcon value={data?.post.nb_rooms} label={t('detailPost.nb_rooms') as string}>
