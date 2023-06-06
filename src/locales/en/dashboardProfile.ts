@@ -7,4 +7,6 @@ export const dashboardProfile = {
   phone: 'Phone',
   university_placeholder: 'Select your university',
   updated_succuss: 'Updated succusfully!',
+
+  invalid_phone: 'please enter a valid phone number',
 };

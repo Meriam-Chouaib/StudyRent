@@ -28,6 +28,8 @@ import { RootState } from '../../redux/store';
 import { useNavigate, useParams } from 'react-router-dom';
 import { COLORS } from '../../config/colors';
 import { PATHS } from '../../config/paths';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { ValidationUserSchema } from './ValidationUserSchema';
 
 interface ProfilePageProps {
   isAdmin?: boolean;
@@ -53,7 +55,11 @@ export const ProfilePage = ({ isAdmin, backStudentsList, backOwnersList }: Profi
 
   const { fields, defaultValues } = UserModel;
   const { t } = useTranslation();
-  const methods = useForm({});
+
+  const methods = useForm({
+    resolver: yupResolver(ValidationUserSchema),
+    defaultValues,
+  });
   const {
     reset,
     setValue,
