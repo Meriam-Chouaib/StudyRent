@@ -1,0 +1,9 @@
+[class^="number-slide"],
+[class*=" number-slide"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 300px;
+  max-height: 100vh;
+}

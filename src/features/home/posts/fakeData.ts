@@ -125,7 +125,8 @@ export const tunisian_universities_data = [
   'Université de Tunis',
   "Université d'Ariana",
   'Université de Ben Arous',
-
+  'Université de Nabeul',
+  'Université de Zaghouan',
   'Université de Bizerte',
   'Université de Beja',
   'Université de Jendouba',

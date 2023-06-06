@@ -28,6 +28,7 @@
         "i18next-browser-languagedetector": "^7.0.1",
         "js-sha3": "^0.8.0",
         "jsonwebtoken": "^9.0.0",
+        "keen-slider": "^6.8.5",
         "leaflet": "^1.9.4",
         "leaflet-geosearch": "^3.8.0",
         "leaflet-routing-machine": "^3.2.12",
