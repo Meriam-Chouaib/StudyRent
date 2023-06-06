@@ -98,7 +98,9 @@ export const userSlice: any = createSlice({
         const response = action.payload;
         if (response) {
           const user = getPersistData('user', true);
-          if (response.data.id === user.id) updatePersistedData('user', response);
+          if (response.id === user.id) {
+            updatePersistedData('user', response);
+          }
           state.user = getPersistData('user', true);
         }
 

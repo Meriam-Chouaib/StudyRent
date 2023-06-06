@@ -64,13 +64,13 @@ export const userApi = createApi({
 
     // ______________________________________________________________ *** Edit user ***___________________________________________________________
 
-    updateUser: builder.mutation<UserResponse, { id: number; user: IUser }>({
+    updateUser: builder.mutation<IUser, { id: number; user: IUser }>({
       query: ({ id, user }) => ({
         url: `${PATHS.DASHBOARD.USERS}/${id}`,
         method: 'PATCH',
         body: user,
       }),
-      transformResponse: (response: UserResponse) => decodEditUser(response),
+      transformResponse: (response: IUser) => decodEditUser(response),
       invalidatesTags: ['USERS'],
     }),
 
