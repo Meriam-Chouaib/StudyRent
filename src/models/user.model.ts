@@ -37,6 +37,9 @@ export const UserModel = {
     statut: {
       name: 'statut',
     },
+    image: {
+      name: 'image',
+    },
   },
   defaultValues: {
     email: '',
@@ -45,6 +48,7 @@ export const UserModel = {
     university: '',
     phone: '',
     role: '',
+    image: '',
     statut: 'ONLINE',
   },
 };

@@ -4,7 +4,8 @@ export const dashboardProfile = {
   email: 'Email',
   username: `Nom d'utilisateur`,
   university: 'Université',
-  phone: 'Phone',
-  university_placeholder: 'Select your university',
-  updated_succuss: 'Updated succusfully!',
+  phone: 'Téléphone',
+  university_placeholder: 'Choisissez votre université',
+  updated_succuss: 'la modification a été effectuée!',
+  invalid_phone: 'veuillez indiquez un numéro de téléphone valide!',
 };

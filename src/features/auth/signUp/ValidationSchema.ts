@@ -8,7 +8,7 @@ export const RegisterSchema = Yup.object().shape({
     .email(email.invaliErrorMessage)
     .required(fields.email.requiredErrorMessage),
   [username.name]: Yup.string()
-    .matches(/^[A-Za-z]+$/, fields.username.invaliErrorMessage)
+    .matches(/^[A-Za-z][A-Za-z0-9]*$/, fields.username.invaliErrorMessage)
     .required(fields.username.requiredErrorMessage),
   [password.name]: Yup.string()
     .min(6, fields.password.invaliErrorMessage)
