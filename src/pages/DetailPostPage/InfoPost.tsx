@@ -24,19 +24,6 @@ export const InfoPost = ({ data }: PostInfoProps) => {
 
   return (
     <>
-      <Typography variant="h1">{data?.post.title}</Typography>
-      <BoxImages>
-        {data?.post.images &&
-          data?.post.images.map((item: File) => (
-            <Box key={item.name}>
-              <CardMedia
-                sx={{ height: '120px', width: '20rem' }}
-                image={getImageSrc(item.name)}
-                title="green iguana"
-              />
-            </Box>
-          ))}
-      </BoxImages>
       <StackPostInfo spacing={2} direction={'column'}>
         <Typography variant="h1">{t('detailPost.description') as string}</Typography>
         <Typography variant="body1"> {data?.post.description}</Typography>
@@ -52,7 +39,7 @@ export const InfoPost = ({ data }: PostInfoProps) => {
         >
           <DateRangeIcon style={{ color: `${theme.palette.primary.main}` }} />
         </TextWithIcon>
-        {data?.owner && (
+        {data?.owner && data?.owner.role === 'OWNER' && (
           <>
             <TextWithIcon value={data?.owner?.phone} label={t('detailPost.phone') as string}>
               <PhoneIcon style={{ color: `${theme.palette.primary.main}` }} />
