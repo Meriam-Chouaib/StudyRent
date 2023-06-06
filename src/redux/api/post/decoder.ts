@@ -99,7 +99,7 @@ export function decodeEditPost(response: SinglePostEditResponse): PostResponse {
   return res;
 }
 
-export function decodEditUser(response: UserResponse): UserResponse {
+export function decodEditUser(response: IUser): IUser {
   return { ...response };
 }
 export function decodUserById(response: DataUser): DataUser {
