@@ -32,7 +32,7 @@ export const DetailPostPage = () => {
           <Carousel images={data?.post.images} />
           <InfoPost data={data} />
           <Box paddingBottom={'1rem'} width={'100%'}>
-            {data != undefined && data.localization && (
+            {data != undefined && data.localization && localizationUniversity && (
               <MapSinglePost
                 localizations={[data.localization, localizationUniversity]}
                 post={data.post}

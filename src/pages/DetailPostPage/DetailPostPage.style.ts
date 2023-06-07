@@ -14,6 +14,6 @@ export const StackPostInfo = styled(Stack)(() => ({
 }));
 export const ImgSlider = styled('img')(() => ({
   width: '100%',
-  height: '20rem',
+  height: '100%',
   objectFit: 'cover',
 }));

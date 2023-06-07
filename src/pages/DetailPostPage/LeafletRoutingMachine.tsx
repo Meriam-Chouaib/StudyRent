@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from 'react';
 // ______________________________________leaflet map ______________________________
 import L from 'leaflet';
@@ -44,8 +45,10 @@ const LeafletRoutingMachine = ({ positions }: LeafletRoutingMachineProps) => {
     const secondPositionMarker = L.marker([positions[1][0], positions[1][1]], { icon: userIcon });
     map.addLayer(firstPositionMarker);
     map.addLayer(secondPositionMarker);
-
-    const waypoints = [L.latLng(positions[0][0], positions[0][1])];
+    let waypoints: any = [];
+    if (positions) {
+      waypoints = [L.latLng(positions[0][0], positions[0][1])];
+    }
 
     // _________________________________ test if user add his university to add the marker for address university______________________
     if (user?.role === 'STUDENT' && user.universityAddress !== null) {
