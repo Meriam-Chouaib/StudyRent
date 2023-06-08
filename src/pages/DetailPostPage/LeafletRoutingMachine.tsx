@@ -44,7 +44,7 @@ const LeafletRoutingMachine = ({ positions }: LeafletRoutingMachineProps) => {
     });
     const secondPositionMarker = L.marker([positions[1][0], positions[1][1]], { icon: userIcon });
     map.addLayer(firstPositionMarker);
-    map.addLayer(secondPositionMarker);
+    if (user && user.role === 'STUDENT') map.addLayer(secondPositionMarker);
     let waypoints: any = [];
     if (positions) {
       waypoints = [L.latLng(positions[0][0], positions[0][1])];

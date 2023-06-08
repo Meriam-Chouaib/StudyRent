@@ -12,7 +12,7 @@ export const ItemsMain = {
   home: { name: 'header.link_home', path: PATHS.MAIN.HOME },
   about: { name: 'header.link_about', path: PATHS.ABOUT },
   posts: { name: 'header.link_posts', path: PATHS.POSTS },
-  contact: { name: 'header.link_contact', path: PATHS.CONTACT },
+  //   contact: { name: 'header.link_contact', path: PATHS.CONTACT },
 };
 
 export const ItemsDashboard = {
