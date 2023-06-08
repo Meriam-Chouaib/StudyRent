@@ -30,7 +30,9 @@ export default function Footer() {
           <BoxCenterSpaceBetween>
             <BoxHistory>
               <Typography variant="subtitle2">{t('footer.title_histoy')}</Typography>
-              <Typography variant="body1">{t('footer.txt_history')}</Typography>
+              <Typography variant="body1" color={theme.palette.warning.main}>
+                {t('footer.txt_history')}
+              </Typography>
             </BoxHistory>
             <Box>
               <BoxMenu>

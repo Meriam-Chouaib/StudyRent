@@ -15,13 +15,13 @@ export const DetailPostPage = () => {
   const { id } = useParams();
   const { data } = useGetPostQuery(id);
   const user = getPersistData('user', true);
-  const { data: userById } = useGetUserByIdQuery({ id: user.id });
+  const { data: userById } = useGetUserByIdQuery({ id: user && user.id });
 
   let localizationUniversity = {
     latitude: 35.825603,
     longitude: 10.608395,
   };
-  if (user.role === 'STUDENT')
+  if (user && user.role === 'STUDENT')
     if (userById?.localizationUniversity !== undefined)
       localizationUniversity = userById?.localizationUniversity;
 

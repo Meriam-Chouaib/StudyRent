@@ -81,7 +81,7 @@ export default function SignUpForm({ isAdmin, backOwnersList, backStudentList }:
     if (successMessage && successMessage !== '') {
       setTimeout(() => {
         setSuccessMessage('');
-        if (isAdmin)
+        if (isAdmin) {
           if (backStudentList) {
             navigate(
               `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.STUDENTS}`,
@@ -90,8 +90,7 @@ export default function SignUpForm({ isAdmin, backOwnersList, backStudentList }:
             navigate(
               `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.OWNERS}`,
             );
-          else navigate(PATHS.ROOT);
-        //       return `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.STUDENTS}/${idUser}`;
+        } else navigate('/');
       }, 100);
     }
   }, [successMessage]);
