@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // __________________________________mui_________________
 import { Typography, Stack } from '@mui/material';
 
@@ -106,17 +107,23 @@ export const ProfilePage = ({ isAdmin, backStudentsList, backOwnersList }: Profi
       }, 800);
     }
   }, [successMessage]);
+  let paramsEffect: any = [];
+  if (isAdmin) {
+    paramsEffect = [user, reset];
+  }
   useEffect(() => {
     if (user) {
-      reset({
-        email: user.email,
-        username: user.username,
-        image: user.image,
-        phone: user.phone || '',
-        university: user.university || '',
+      setTimeout(() => {
+        reset({
+          email: user.email || values.email,
+          username: user.username || values.username,
+          image: user.image || values.image,
+          phone: user.phone || values.phone,
+          university: user.university || values.university,
+        });
       });
     }
-  }, [user, reset]);
+  }, paramsEffect);
 
   const getPath = (
     backStudentsList: boolean | undefined,
