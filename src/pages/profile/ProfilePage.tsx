@@ -33,6 +33,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ValidationUserSchema } from './ValidationUserSchema';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { LoaderBox } from '../../components/Loader/LoaderBox';
+import { getPath } from '../../utils/getPath';
 
 interface ProfilePageProps {
   isAdmin?: boolean;
@@ -125,20 +126,6 @@ export const ProfilePage = ({ isAdmin, backStudentsList, backOwnersList }: Profi
     }
   }, paramsEffect);
 
-  const getPath = (
-    backStudentsList: boolean | undefined,
-    backOwnersList: boolean | undefined,
-  ): string => {
-    let path = `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/`;
-    if (backStudentsList) {
-      path += `${PATHS.DASHBOARD.ADMIN.STUDENTS}`;
-    }
-    if (backOwnersList) {
-      path += `${PATHS.DASHBOARD.ADMIN.OWNERS}`;
-    }
-
-    return path;
-  };
   return (
     <Stack py={3}>
       {successMessage && <Toast type={'success'} text={successMessage} />}
