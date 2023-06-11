@@ -8,7 +8,6 @@ import { IUser } from '../redux/api/user/user.types';
 const useCurrentRole = () => {
   // Logic here to get current user role
   const user: IUser = getPersistData('user', true);
-  console.log(user.role);
 
   return user.role;
 };

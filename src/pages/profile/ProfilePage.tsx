@@ -5,7 +5,7 @@ import { Typography, Stack } from '@mui/material';
 import { InputLabel } from '../../components/hookform/InputLabel';
 import { StackCenter } from '../../components/CustomStack/CustomStackStyled.styles';
 import { SelectField } from '../../components/selectField/SelectField';
-import { BoxCenter, CustomButton, Toast } from '../../components';
+import { BoxCenter, ButtonWithIcon, CustomButton, Toast } from '../../components';
 import { getPersistData, updatePersistedData } from '../../utils';
 import { FormProvider, TextField } from '../../components/hookform';
 import { useSelector, useDispatch } from 'react-redux';
@@ -25,11 +25,13 @@ import { tunisian_universities_data } from '../../features/home/posts/fakeData';
 import { useGetUserByIdQuery, useUpdateUserMutation } from '../../redux/api/user/user.api';
 import { IUser } from '../../redux/api/user/user.types';
 import { RootState } from '../../redux/store';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { COLORS } from '../../config/colors';
 import { PATHS } from '../../config/paths';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ValidationUserSchema } from './ValidationUserSchema';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { LoaderBox } from '../../components/Loader/LoaderBox';
 
 interface ProfilePageProps {
   isAdmin?: boolean;
@@ -68,6 +70,7 @@ export const ProfilePage = ({ isAdmin, backStudentsList, backOwnersList }: Profi
     formState: { isSubmitting },
   } = methods;
   const values = watch();
+
   const [updateUser, { data, isError, isLoading }] = useUpdateUserMutation();
 
   const onSubmit = async () => {
@@ -105,18 +108,30 @@ export const ProfilePage = ({ isAdmin, backStudentsList, backOwnersList }: Profi
   }, [successMessage]);
   useEffect(() => {
     if (user) {
-      setTimeout(() => {
-        reset({
-          email: user.email,
-          username: user.username,
-          image: user.image,
-          phone: user.phone || '',
-          university: user.university || '',
-        });
+      reset({
+        email: user.email,
+        username: user.username,
+        image: user.image,
+        phone: user.phone || '',
+        university: user.university || '',
       });
     }
-  }, []);
+  }, [user, reset]);
 
+  const getPath = (
+    backStudentsList: boolean | undefined,
+    backOwnersList: boolean | undefined,
+  ): string => {
+    let path = `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/`;
+    if (backStudentsList) {
+      path += `${PATHS.DASHBOARD.ADMIN.STUDENTS}`;
+    }
+    if (backOwnersList) {
+      path += `${PATHS.DASHBOARD.ADMIN.OWNERS}`;
+    }
+
+    return path;
+  };
   return (
     <Stack py={3}>
       {successMessage && <Toast type={'success'} text={successMessage} />}
@@ -148,30 +163,36 @@ export const ProfilePage = ({ isAdmin, backStudentsList, backOwnersList }: Profi
         >
           <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={3} alignItems={'center'} width={'90'}>
-              <InputLabel label={t('dashboardProfile.email')}>
-                <TextField name={fields.email.name} type={'text'} label={''} />
-              </InputLabel>
-              <InputLabel label={t('dashboardProfile.username')}>
-                <TextField name={fields.username.name} type={'text'} label={''} />
-              </InputLabel>
-              <InputLabel label={t('dashboardProfile.phone')}>
-                <TextField name={fields.phone.name} type={'text'} label={''} />
-              </InputLabel>
-              {user && user.role === 'STUDENT' && (
-                <InputLabel label={t('dashboardProfile.university')}>
-                  <SelectField
-                    type={'text'}
-                    options={tunisian_universities_data}
-                    placeholder={user.university ? user.university : ''}
-                    name={fields.university.name}
-                    id={fields.university.name}
-                    label={
-                      user.university
-                        ? user.university
-                        : (t('dashboardProfile.university_placeholder') as string)
-                    }
-                  />
-                </InputLabel>
+              {values.email === '' ? (
+                <LoaderBox />
+              ) : (
+                <>
+                  <InputLabel label={t('dashboardProfile.email')}>
+                    <TextField name={fields.email.name} type={'text'} label={''} />
+                  </InputLabel>
+                  <InputLabel label={t('dashboardProfile.username')}>
+                    <TextField name={fields.username.name} type={'text'} label={''} />
+                  </InputLabel>
+                  <InputLabel label={t('dashboardProfile.phone')}>
+                    <TextField name={fields.phone.name} type={'text'} label={''} />
+                  </InputLabel>
+                  {user && user.role === 'STUDENT' && (
+                    <InputLabel label={t('dashboardProfile.university')}>
+                      <SelectField
+                        type={'text'}
+                        options={tunisian_universities_data}
+                        placeholder={user.university ? user.university : ''}
+                        name={fields.university.name}
+                        id={fields.university.name}
+                        label={
+                          user.university
+                            ? user.university
+                            : (t('dashboardProfile.university_placeholder') as string)
+                        }
+                      />
+                    </InputLabel>
+                  )}
+                </>
               )}
               <CustomButton
                 isLoading={isSubmitting}
@@ -183,6 +204,15 @@ export const ProfilePage = ({ isAdmin, backStudentsList, backOwnersList }: Profi
             </Stack>
           </FormProvider>
         </BoxStyled>
+        {(backOwnersList || backStudentsList) && (
+          <Link to={getPath(backStudentsList, backOwnersList)} style={{ textDecoration: 'none' }}>
+            <ButtonWithIcon
+              margBottom="3rem"
+              icon={<ArrowBackIcon />}
+              txt={t('dashboardListPosts.back_list') as string}
+            />
+          </Link>
+        )}
       </StackCenter>
     </Stack>
   );

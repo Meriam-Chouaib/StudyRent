@@ -22,7 +22,6 @@ const DashboardAdminOwners = () => {
   let dataToDisplay: IUser[] = [];
   const { data } = useGetUsersQuery({ ...paginator });
   dataToDisplay = data && data.users ? data.users : [];
-  console.log('data to display', dataToDisplay);
 
   return (
     <>

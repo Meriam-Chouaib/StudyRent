@@ -25,7 +25,6 @@ export const DashboardAdminStudents = () => {
   const { data } = useGetUsersQuery({ ...paginator });
   dataToDisplay = data && data.users ? data.users : [];
 
-  console.log('data to display', dataToDisplay);
   return (
     <>
       <Link
@@ -51,12 +50,8 @@ export const DashboardAdminStudents = () => {
                   txt_2={Item.username ? Item.username : ''}
                   btns={
                     <BoxEditDelete
-                      handleDelete={(): void => {
-                        console.log('delete');
-                      }}
-                      handleEdit={(): void => {
-                        console.log('edit');
-                      }}
+                      handleDelete={(): void => {}}
+                      handleEdit={(): void => {}}
                       idPost={0}
                       bgColor="white"
                       isStudents={true}
