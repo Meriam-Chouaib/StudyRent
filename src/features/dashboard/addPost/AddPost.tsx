@@ -30,6 +30,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { PATHS } from '../../../config/paths';
 import { getPersistData } from '../../../utils';
 import { cities_data } from '../../home/posts/fakeData';
+import { LoaderBox } from '../../../components/Loader/LoaderBox';
 
 // ----------------------------------------------------------------------
 interface AddPostProps {
@@ -167,20 +168,18 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
 
     useEffect(() => {
       if (data) {
-        setTimeout(() => {
-          reset({
-            title: data.post.title,
-            description: data.post.description,
-            price: Number(data.post.price),
-            surface: data.post.surface,
-            nb_roommate: data.post.nb_roommate,
-            nb_rooms: data.post.nb_rooms,
-            city: data.post.city,
-            state: data.post.state,
-            postal_code: Number(data.post.postal_code),
-            images: data.post.images,
-          });
-        }, 2000);
+        reset({
+          title: data.post.title,
+          description: data.post.description,
+          price: Number(data.post.price),
+          surface: data.post.surface,
+          nb_roommate: data.post.nb_roommate,
+          nb_rooms: data.post.nb_rooms,
+          city: data.post.city,
+          state: data.post.state,
+          postal_code: Number(data.post.postal_code),
+          images: data.post.images,
+        });
       }
     }, [data, reset]);
   }
@@ -195,73 +194,77 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           {editError && problem && <Toast type={'error'} text={problem} />}
           {addSuccess && <Toast type={'success'} text={t('dashboardAddPost.success_msg')} />}
           {editSuccess && <Toast type={'success'} text={t('dashboardAddPost.success_msg_edit')} />}
+          {values.title === '' && isEdit ? (
+            <LoaderBox />
+          ) : (
+            <>
+              <TextField name={fields.title.name} type={'text'} label={t(fields.title.label)} />
+              <TextField
+                name={fields.description.name}
+                type={'text'}
+                label={t(fields.description.label)}
+              />
 
-          <TextField name={fields.title.name} type={'text'} label={t(fields.title.label)} />
-          <TextField
-            name={fields.description.name}
-            type={'text'}
-            label={t(fields.description.label)}
-          />
+              <TextField name={fields.price.name} type={'text'} label={t(fields.price.label)} />
+              <TextField name={fields.surface.name} type={'text'} label={t(fields.surface.label)} />
+              <RHFUploadMultiFile
+                name={fields.files.name}
+                showPreview={true}
+                accept="image/*"
+                maxSize={3145728645684684}
+                onDrop={handleDrop}
+                onRemove={handleRemove}
+                onRemoveAll={handleRemoveAll}
+                isEdit={isEdit}
+              />
+              <BoxSpaceBetween>
+                <SelectField
+                  id={'nb_roommate'}
+                  type={'text'}
+                  label={t(fields.nb_roommate.label)}
+                  placeholder={t(fields.nb_roommate.label)}
+                  name={fields.nb_roommate.name}
+                  options={[0, 1, 2, 3, 4]}
+                  error={true}
+                  aria-errormessage="errooor"
+                />
+                <SelectField
+                  fullWidth
+                  variant="standard"
+                  id={'nb_rooms'}
+                  label={t(fields.nb_rooms.label)}
+                  placeholder={t(fields.nb_rooms.label)}
+                  name={fields.nb_rooms.name}
+                  options={[0, 1, 2, 3, 4]}
+                />
+              </BoxSpaceBetween>
 
-          <TextField name={fields.price.name} type={'text'} label={t(fields.price.label)} />
-          <TextField name={fields.surface.name} type={'text'} label={t(fields.surface.label)} />
-          <RHFUploadMultiFile
-            name={fields.files.name}
-            showPreview={true}
-            accept="image/*"
-            maxSize={3145728645684684}
-            onDrop={handleDrop}
-            onRemove={handleRemove}
-            onRemoveAll={handleRemoveAll}
-            isEdit={isEdit}
-          />
-          <BoxSpaceBetween>
-            <SelectField
-              id={'nb_roommate'}
-              type={'text'}
-              label={t(fields.nb_roommate.label)}
-              placeholder={t(fields.nb_roommate.label)}
-              name={fields.nb_roommate.name}
-              options={[0, 1, 2, 3, 4]}
-              error={true}
-              aria-errormessage="errooor"
-            />
-            <SelectField
-              fullWidth
-              variant="standard"
-              id={'nb_rooms'}
-              label={t(fields.nb_rooms.label)}
-              placeholder={t(fields.nb_rooms.label)}
-              name={fields.nb_rooms.name}
-              options={[0, 1, 2, 3, 4]}
-            />
-          </BoxSpaceBetween>
+              <BoxSpaceBetween>
+                <SelectField
+                  variant="standard"
+                  id={'city'}
+                  label={t(fields.city.label)}
+                  placeholder={t(fields.city.label)}
+                  name={fields.city.name}
+                  options={cities_data_values}
+                />
 
-          <BoxSpaceBetween>
-            <SelectField
-              variant="standard"
-              id={'city'}
-              label={t(fields.city.label)}
-              placeholder={t(fields.city.label)}
-              name={fields.city.name}
-              options={cities_data_values}
-            />
-
-            <SelectField
-              variant="standard"
-              id={'state'}
-              label={t(fields.state.label)}
-              placeholder={t(fields.state.label)}
-              name={fields.state.name}
-              options={cities_data_values}
-            />
-          </BoxSpaceBetween>
-          <TextField
-            name={fields.postal_code.name}
-            type={'text'}
-            label={t(fields.postal_code.label)}
-          />
-
+                <SelectField
+                  variant="standard"
+                  id={'state'}
+                  label={t(fields.state.label)}
+                  placeholder={t(fields.state.label)}
+                  name={fields.state.name}
+                  options={cities_data_values}
+                />
+              </BoxSpaceBetween>
+              <TextField
+                name={fields.postal_code.name}
+                type={'text'}
+                label={t(fields.postal_code.label)}
+              />
+            </>
+          )}
           <CustomButton
             isLoading={isSubmitting}
             colorBack={`${theme.palette.primary.main}`}
