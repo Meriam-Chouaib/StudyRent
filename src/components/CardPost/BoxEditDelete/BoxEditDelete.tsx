@@ -60,7 +60,7 @@ export const BoxEditDelete = ({
   const { t } = useTranslation();
   // _________________________get the path and test if students page, owners page or posts page_________________
   const getPath = () => {
-    if (isPosts) {
+    if (isPosts || isPoster) {
       return `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.LIST}/${idPost}`;
     } else if (isStudents) {
       return `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.STUDENTS}/${idUser}`;
