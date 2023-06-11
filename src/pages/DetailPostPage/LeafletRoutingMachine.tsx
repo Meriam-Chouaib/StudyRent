@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from 'react';
+import { ElementType, useEffect } from 'react';
 // ______________________________________leaflet map ______________________________
 import L from 'leaflet';
 import 'leaflet-routing-machine';
@@ -56,7 +56,7 @@ const LeafletRoutingMachine = ({ positions }: LeafletRoutingMachineProps) => {
       }
     });
 
-    L.Routing.control({
+    const routingControl = L.Routing.control({
       waypoints,
       lineOptions: {
         styles: [{ color: 'blue', weight: 4, opacity: 0.7 }],
@@ -67,7 +67,22 @@ const LeafletRoutingMachine = ({ positions }: LeafletRoutingMachineProps) => {
       addWaypoints: false,
       fitSelectedRoutes: true,
       showAlternatives: true,
-    }).addTo(map);
+    });
+
+    routingControl.addTo(map);
+
+    const container = routingControl.getContainer();
+    const routeListContainer = container?.querySelector('.leaflet-routing-alternatives-container');
+
+    if (routeListContainer) {
+      if (routeListContainer) {
+        routeListContainer.setAttribute('style', 'display: none;');
+      }
+    }
+
+    return () => {
+      map.removeControl(routingControl);
+    };
   }, []);
   return null;
 };
