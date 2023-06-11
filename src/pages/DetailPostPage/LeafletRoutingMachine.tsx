@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from 'react';
+import { ElementType, useEffect } from 'react';
 // ______________________________________leaflet map ______________________________
 import L from 'leaflet';
 import 'leaflet-routing-machine';
@@ -21,7 +21,6 @@ const defaultIconUrl = defIcon;
 const userMarkerIconUrl = userIconMarker;
 
 const LeafletRoutingMachine = ({ positions }: LeafletRoutingMachineProps) => {
-  const user: IUser = getPersistData('user', true);
   const map = useMap();
 
   // ___________________________________ create icons __________________________
@@ -37,25 +36,27 @@ const LeafletRoutingMachine = ({ positions }: LeafletRoutingMachineProps) => {
     iconUrl: userMarkerIconUrl,
     iconSize: [40, 40],
   });
+
+  // __________________________________ create the way between two localizations _______________________
+  let waypoints: any = [];
+  waypoints = [L.latLng(positions[0][0], positions[0][1])];
+
   useEffect(() => {
     L.Marker.prototype.options.icon = DefaultIcon;
-    const firstPositionMarker = L.marker([positions[0][0], positions[0][1]], {
-      icon: houseIcon,
+
+    positions.forEach((item, index) => {
+      map.addLayer(
+        L.marker([item[0], item[1]], {
+          icon: index !== 1 ? houseIcon : userIcon,
+        }),
+      );
+      // ________________ test on the university ______________________
+      if (index === 1) {
+        waypoints.push(L.latLng(item[0], item[1]));
+      }
     });
-    const secondPositionMarker = L.marker([positions[1][0], positions[1][1]], { icon: userIcon });
-    map.addLayer(firstPositionMarker);
-    if (user && user.role === 'STUDENT') map.addLayer(secondPositionMarker);
-    let waypoints: any = [];
-    if (positions) {
-      waypoints = [L.latLng(positions[0][0], positions[0][1])];
-    }
 
-    // _________________________________ test if user add his university to add the marker for address university______________________
-    if (user?.role === 'STUDENT' && user.universityAddress !== null) {
-      waypoints.push(L.latLng(positions[1][0], positions[1][1]));
-    }
-
-    L.Routing.control({
+    const routingControl = L.Routing.control({
       waypoints,
       lineOptions: {
         styles: [{ color: 'blue', weight: 4, opacity: 0.7 }],
@@ -66,7 +67,22 @@ const LeafletRoutingMachine = ({ positions }: LeafletRoutingMachineProps) => {
       addWaypoints: false,
       fitSelectedRoutes: true,
       showAlternatives: true,
-    }).addTo(map);
+    });
+
+    routingControl.addTo(map);
+
+    const container = routingControl.getContainer();
+    const routeListContainer = container?.querySelector('.leaflet-routing-alternatives-container');
+
+    if (routeListContainer) {
+      if (routeListContainer) {
+        routeListContainer.setAttribute('style', 'display: none;');
+      }
+    }
+
+    return () => {
+      map.removeControl(routingControl);
+    };
   }, []);
   return null;
 };

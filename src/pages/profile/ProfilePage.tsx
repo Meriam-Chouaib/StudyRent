@@ -49,7 +49,7 @@ export const ProfilePage = ({ isAdmin, backStudentsList, backOwnersList }: Profi
     userId = Number(id);
   }
 
-  const { data: userById } = useGetUserByIdQuery({ id: Number(userId) });
+  const { data: userById, refetch } = useGetUserByIdQuery({ id: Number(userId) });
 
   const user = currentUser.role === 'ADMIN' ? userById?.user : currentUser;
 
@@ -75,6 +75,7 @@ export const ProfilePage = ({ isAdmin, backStudentsList, backOwnersList }: Profi
       const userUpdated = await updateUser({ id: user.id, user: values as unknown as IUser })
         .then((res) => {
           setSuccessMessage(`${t('dashboardProfile.updated_succuss')}`);
+          refetch();
         })
         .catch((err) => {
           console.log(err);
@@ -91,14 +92,10 @@ export const ProfilePage = ({ isAdmin, backStudentsList, backOwnersList }: Profi
       setTimeout(() => {
         setSuccessMessage(`${t('dashboardProfile.updated_succuss')}`);
         if (backStudentsList) {
-          console.log('backStudentsList', backStudentsList);
-
           navigate(
             `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.STUDENTS}`,
           );
         } else if (backOwnersList) {
-          console.log('backOwnersList', backOwnersList);
-
           navigate(
             `/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.OWNERS}`,
           );
