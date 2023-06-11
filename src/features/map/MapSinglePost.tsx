@@ -11,6 +11,7 @@ import { PostOnMap } from '../../components/PostOnMap/PostOnMap';
 import { Stack, Paper, Typography } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LeafletRoutingMachine from '../../pages/DetailPostPage/LeafletRoutingMachine';
+import { getPersistData } from '../../utils';
 
 const houseIconUrl = houseIcon;
 const userIconUrl = userIconMarker;
@@ -23,8 +24,6 @@ const userIconOptions = {
   iconSize: [40, 40] as PointExpression,
 };
 
-const customIcon = L.icon(houseIconOptions);
-const userIcon = L.icon(userIconOptions);
 export interface MapProps {
   post: Post;
   localizations: Localization[];
@@ -36,19 +35,22 @@ export const MapSinglePost = ({ post, localizations, height }: MapProps) => {
     Geocode.setApiKey(`${process.env.API_KEY_MAP}`);
   }, []);
 
-  const postPosition: LatLngExpression = [localizations[0].latitude, localizations[0].longitude];
-  const userPosition: LatLngExpression = [localizations[1].latitude, localizations[1].longitude];
+  const positionsToSend: L.LatLngTuple[] = [];
+
+  localizations.map((item) => {
+    positionsToSend.push([item.latitude, item.longitude]);
+  });
 
   return (
     <>
       <MapContainer
-        center={postPosition}
+        center={positionsToSend && positionsToSend[0] && positionsToSend[0]}
         zoom={10}
         style={{ height: `${height}`, width: '100%', borderRadius: '3rem' }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-        <LeafletRoutingMachine positions={[postPosition, userPosition]} />
+        <LeafletRoutingMachine positions={positionsToSend} />
       </MapContainer>
     </>
   );
