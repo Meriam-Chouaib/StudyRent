@@ -89,8 +89,7 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
   };
 
   function handlePriceChange(interval: number[]) {
-    setFilter({ ...filter, price: [interval[0] * 10, interval[1] * 10] });
-    console.log('filter in page student', filter);
+    setFilter({ ...filter, price: [interval[0] * 15, interval[1] * 15] });
   }
 
   function handleSurfaceChange(interval: number[]) {
@@ -102,28 +101,21 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
   const filterString = useDebounce(getFilterString(filter), 1000);
   function handleResetFilter() {
     setFilter(initialFilterState);
-    console.log(filter);
   }
 
   // ____________________________________ call the query to get my data filtred ___________________________
   console.log('paginator', paginator);
 
-  const { data, isLoading, isError, error } = useGetPostsQuery(
-    {
-      // page: 1,
-      // ...initialPostsPaginator,
-      paginator: {
-        ...paginator,
-        ...(user &&
-          user.universityAddress &&
-          isWithAddress && { universityAddress: universityAddress[0] }),
-      },
-      // rowsPerPage: 9,
-
-      filter: filterString.length !== 0 ? filterString : '',
+  const { data, isLoading, isError, error } = useGetPostsQuery({
+    paginator: {
+      ...paginator,
+      ...(user &&
+        user.universityAddress &&
+        isWithAddress && { universityAddress: universityAddress[0] }),
     },
-    // { skip: !isWithAddress }, // Skip the initial query if isWithAddress is false
-  );
+
+    filter: filterString.length !== 0 ? filterString : '',
+  });
 
   const nbPages = data?.nbPages;
   const { t } = useTranslation();

@@ -5,7 +5,7 @@ export function calculateBoundingBox(data: any) {
   let minLng = Number.MAX_VALUE;
   let maxLng = Number.MIN_VALUE;
 
-  data.forEach((item: any) => {
+  data.map((item: any) => {
     const { lat, lng } = item.localization;
 
     minLat = Math.min(minLat, lat);

@@ -44,7 +44,7 @@ const LeafletRoutingMachine = ({ positions }: LeafletRoutingMachineProps) => {
   useEffect(() => {
     L.Marker.prototype.options.icon = DefaultIcon;
 
-    positions.forEach((item, index) => {
+    positions.map((item, index) => {
       map.addLayer(
         L.marker([item[0], item[1]], {
           icon: index !== 1 ? houseIcon : userIcon,
