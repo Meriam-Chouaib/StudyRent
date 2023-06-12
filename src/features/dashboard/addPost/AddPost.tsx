@@ -66,7 +66,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
     try {
       const data = new FormData();
 
-      values?.images?.forEach((file: any) => {
+      values?.images?.map((file: any) => {
         if (file.isNew) data.append('files', file);
       });
       const valuesWithoutImages = {

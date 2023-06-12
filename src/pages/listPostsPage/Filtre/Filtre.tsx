@@ -55,7 +55,7 @@ export const Filter = ({
           <FilterSlider
             label={t('listPostsMain.price')}
             interval={[minPrice, maxPrice]}
-            valueToAdd={10}
+            valueToAdd={15}
             onChange={handlePriceChange}
             step={filter && filter.price ? (filter.price[1] - filter.price[0]) / 100 : 20}
           />

@@ -32,7 +32,7 @@ const DashboardAdminOwners = () => {
         <ButtonWithIcon
           icon={<AddCircleIcon style={{ width: '1.5rem', height: '1.5rem' }} />}
           txt={t('dashboardAdminStudents.add_btn')}
-          justify="flex-start"
+          justify="flex-end"
         />
       </Link>
       <Stack sx={{ padding: '1.3rem 0px' }} spacing={2} direction="column">
