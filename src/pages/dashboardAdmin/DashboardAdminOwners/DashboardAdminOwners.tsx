@@ -25,18 +25,6 @@ const DashboardAdminOwners = () => {
 
   return (
     <>
-<<<<<<< Updated upstream
-      <Link
-        to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.ADD_OWNER}`}
-        style={{ textDecoration: 'none' }}
-      >
-        <ButtonWithIcon
-          icon={<AddCircleIcon style={{ width: '1.5rem', height: '1.5rem' }} />}
-          txt={t('dashboardAdminStudents.add_btn')}
-          justify="flex-end"
-        />
-      </Link>
-=======
       <BoxLeft>
         <Link
           to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.ADD_OWNER}`}
@@ -49,7 +37,6 @@ const DashboardAdminOwners = () => {
           />
         </Link>
       </BoxLeft>
->>>>>>> Stashed changes
       <Stack sx={{ padding: '1.3rem 0px' }} spacing={2} direction="column">
         {dataToDisplay.length !== 0 ? (
           dataToDisplay?.map(
