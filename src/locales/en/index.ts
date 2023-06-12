@@ -1,3 +1,4 @@
+import { aboutUs } from './aboutUs';
 import { header } from './header';
 import { signup } from './signup';
 import { signin } from './signin';
@@ -28,4 +29,5 @@ export const en = {
   dashboardProfile: dashboardProfile,
   dashboardAdminStudents: dashboardAdminStudents,
   detailPost: detailPost,
+  aboutUs: aboutUs,
 };
