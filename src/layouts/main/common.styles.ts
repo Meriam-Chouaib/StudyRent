@@ -7,7 +7,9 @@ export const BackImagePink = styled('img')({
   right: '0',
   width: '4rem',
   top: '8%',
-  [theme.breakpoints.down('sm')]: {},
+  [theme.breakpoints.down('md')]: {
+    width: '2rem',
+  },
 });
 export const BackImagePinkLeft = styled('img')({
   position: 'absolute',
@@ -15,6 +17,8 @@ export const BackImagePinkLeft = styled('img')({
   width: '4rem',
 
   top: '69%',
-  zIndex: '1',
-  [theme.breakpoints.down('sm')]: {},
+  zIndex: '-1',
+  [theme.breakpoints.down('sm')]: {
+    width: '2rem',
+  },
 });

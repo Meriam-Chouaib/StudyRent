@@ -32,6 +32,7 @@ import DashboardAdminOwners from '../pages/dashboardAdmin/DashboardAdminOwners/D
 import { DashboardAdminPosts } from '../pages/dashboardAdmin/DashboardAdminPosts/DashboardAdminPosts';
 import { AddUserPage } from '../pages/dashboardAdmin/DashboardAdminStudents/AddUserPage';
 import { DetailPostPage } from '../pages/DetailPostPage/DetailPostPage';
+import { AboutUsPage } from '../pages/aboutUsPage/AboutUsPage';
 export default function Router() {
   const { t } = useTranslation();
   const user: IUser = getPersistData('user', true);
@@ -139,6 +140,7 @@ export default function Router() {
       children: [
         { path: PATHS.MAIN.HOME, element: <HomePage /> },
         { path: PATHS.POSTS, element: <ListPostsPageStudent displayFilter={true} /> },
+        { path: PATHS.ABOUT, element: <AboutUsPage /> },
         { path: PATHS.MAIN.ERROR.P_500, element: <Page500 /> },
         { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
         { path: PATHS.ALL, element: <Navigate to="/404" replace /> },

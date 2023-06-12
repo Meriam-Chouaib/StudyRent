@@ -12,6 +12,7 @@ import { listPostsMain } from './listPostsMain';
 import { dashboardProfile } from './dashboardProfile';
 import { dashboardAdminStudents } from './dashboardAdminStudents';
 import { detailPost } from './detailPost';
+import { aboutUs } from './aboutUs';
 export const fr = {
   signin: signin,
   signup: signup,
@@ -27,4 +28,5 @@ export const fr = {
   dashboardProfile: dashboardProfile,
   dashboardAdminStudents: dashboardAdminStudents,
   detailPost: detailPost,
+  aboutUs: aboutUs,
 };
