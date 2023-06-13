@@ -11,22 +11,42 @@ import { ButtonHome } from '../../../components/form/Button/ButtonHome.styles';
 import { CustomImageFlesh } from '../../../components/image/CustomImageFlesh.styles';
 import { BoxCenterGetStarted } from '../../../components/BoxCenter/BoxCenterGetStarted.styles';
 import { PATHS } from '../../../config/paths';
+import { varFade } from '../../../components/animate/fade';
+import { motion } from 'framer-motion';
+
 export const GetStarted = () => {
   const { t } = useTranslation();
+  const fadeAnimation = varFade();
+
   return (
     <>
       <BoxCenterGetStarted>
         <BoxCenterStyled sx={{ width: '100%', textAlign: 'center', position: 'relative' }}>
-          <Typography variant="h4">{t('home.started_text_1')}</Typography>
-          <Typography variant="h4">{t('home.started_text_2')}</Typography>
-          <Link to={`${PATHS.POSTS}`}>
-            <ButtonHome>{t('home.started_btn')}</ButtonHome>
-          </Link>
+          <motion.div
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={fadeAnimation.inLeft}
+          >
+            <Typography variant="h4">{t('home.started_text_1')}</Typography>
+            <Typography variant="h4">{t('home.started_text_2')}</Typography>
+            <Link to={`${PATHS.POSTS}`}>
+              <ButtonHome>{t('home.started_btn')}</ButtonHome>
+            </Link>
+          </motion.div>
+
           <CustomImageFlesh src={Flesh} alt={t('home') as string} />
         </BoxCenterStyled>
 
         <Box>
-          <ImageStartedHome src={imageGetStarted} />
+          <motion.div
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={fadeAnimation.inRight}
+          >
+            <ImageStartedHome src={imageGetStarted} />
+          </motion.div>
         </Box>
       </BoxCenterGetStarted>
     </>
