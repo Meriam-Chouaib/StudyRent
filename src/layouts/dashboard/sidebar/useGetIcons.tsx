@@ -1,20 +1,25 @@
+// _____________________________________ config ______________________________________
 import { PATHS } from '../../../config/paths';
-// import { Icon } from '../../../components/Icon/Icon';
+import { getPersistData } from '../../../utils';
+import { deleteKeys } from '../../../utils/deleteKeyIcons';
+
+// _____________________________________ assets ______________________________________
+
 import IconHome from '../../../assets/icons/ic_home';
 import IconChat from '../../../assets/icons/ic_chat';
 import IconProfile from '../../../assets/icons/ic_profile';
 import IconFavoris from '../../../assets/icons/ic_heart';
-import { getPersistData } from '../../../utils';
-import { ReactNode } from 'react';
 import IconUsers from '../../../assets/icons/ic_users';
+
 export interface IconsProps {
   txt: string;
   icon: JSX.Element;
   path: string;
 }
+
 export default function useGetIcons(activePath: string) {
   const user = getPersistData('user', true);
-  const icons: IconsProps[] = [
+  let icons: IconsProps[] = [
     {
       txt: 'dashboardSidebar.chats',
       icon: (
@@ -91,10 +96,14 @@ export default function useGetIcons(activePath: string) {
         path: `${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.POST.LIST}`,
       },
     );
-    const profileIndex = icons.findIndex((item) => item.txt === 'dashboardSidebar.profile');
-    if (profileIndex !== -1) {
-      icons.splice(profileIndex, 1);
-    }
+    icons = deleteKeys({
+      icons: icons,
+      keysToDelete: [
+        'dashboardSidebar.profile',
+        'dashboardSidebar.favoris',
+        'dashboardSidebar.chats',
+      ],
+    });
   }
   return icons;
 }
