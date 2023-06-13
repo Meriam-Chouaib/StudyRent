@@ -1,20 +1,35 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// _________________________________ React _______________________________
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { useGetPostQuery } from '../../redux/api/post/post.api';
+
+// _________________________________ Mui _______________________________
+import { Warning } from '@mui/icons-material';
 import { Box, Container, Typography } from '@mui/material';
 
+// _________________________________ components _______________________________
 import { StackCenter } from '../../components/CustomStack/CustomStackStyled.styles';
+import { Carousel } from '../../components/Carousel/Carousel';
 
+// _________________________________ Styles _______________________________
+
+import { WarningMsg } from '../listPostsPage/ListPostsPageStudent.style';
+import theme from '../../theme';
+import { ArrowSlider, BoxArrowLeft, BoxArrowRight } from './DetailPostPage.style';
+
+// _________________________________ features _______________________________
 import { MapSinglePost } from '../../features/map/MapSinglePost';
 import { InfoPost } from './InfoPost';
+
+// _________________________________ Redux _______________________________
+
 import { getPersistData } from '../../utils';
 import { useGetUserByIdQuery } from '../../redux/api/user/user.api';
-import { Carousel } from '../../components/Carousel/Carousel';
 import { Localization } from '../../redux/api/post/post.types';
-import { WarningMsg } from '../listPostsPage/ListPostsPageStudent.style';
-import { Warning } from '@mui/icons-material';
-import theme from '../../theme';
-import { useTranslation } from 'react-i18next';
+
+// _________________________________ assets _______________________________
+import ArrowLeft from '../../assets/images/left.png';
+import ArrowRight from '../../assets/images/rightt.png';
 
 export const DetailPostPage = () => {
   const { id } = useParams();
@@ -46,6 +61,13 @@ export const DetailPostPage = () => {
               </WarningMsg>
             </>
           )}
+
+          <BoxArrowLeft>
+            <ArrowSlider src={ArrowLeft} alt="Carousel Flesh" />
+          </BoxArrowLeft>
+          <BoxArrowRight>
+            <ArrowSlider src={ArrowRight} alt="Carousel Flesh" />
+          </BoxArrowRight>
           <Carousel images={data?.post.images} />
           <InfoPost data={data} />
           <Box paddingBottom={'1rem'} width={'100%'}>

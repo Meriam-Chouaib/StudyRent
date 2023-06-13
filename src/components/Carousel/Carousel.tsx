@@ -55,7 +55,7 @@ export const Carousel = ({ images }: CarouselProps) => {
 
   return (
     <>
-      <BoxImages ref={sliderRef} className="keen-slider" height={'20rem'}>
+      <BoxImages ref={sliderRef} className="keen-slider">
         {images?.map((item: File, index) => (
           <Box className={`keen-slider__slide number-slide${index}`} key={index} sx={{}}>
             <ImgSlider src={getImageSrc(item.name)} alt={item.name} key={index} />
