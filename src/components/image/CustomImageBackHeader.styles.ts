@@ -4,10 +4,10 @@ export const CustomImageBackHeader = styled('img')({
   Width: 80,
   zIndex: '0',
   position: 'absolute',
-  top: '0',
+  top: '-85px',
   left: '0',
-  height: '24rem',
-  width: '15rem',
+  height: '30rem',
+  width: '19rem',
   [theme.breakpoints.down(940)]: {
     height: '11rem',
     width: '7rem',

@@ -1,21 +1,27 @@
-import { Container, Typography } from '@mui/material';
+// _______________________________________React______________________________________________
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import usePaginator from '../../hooks/usePaginator';
+
+// _______________________________________Redux______________________________________________
+import { useGetPostsHomeQuery } from '../../redux/api/post/post.api';
+import { IUser } from '../../redux/api/user/user.types';
+// _______________________________________mui______________________________________________
+import FilterListIcon from '@material-ui/icons/FilterList';
+import { Container } from '@mui/material';
+
+// _______________________________________components______________________________________________
+import { TypographyStyled } from '../../components/ButtonWithIcon/ButtonWithIcon.style';
 import { COLORS } from '../../config/colors';
 import { GetStarted, Posts } from '../../features';
-import { Contact } from '../../features/home/contact/Contact';
+import { MapPosts } from '../../features/home/contact/Contact';
 import { initialPostsPaginator } from '../../features/home/posts/posts.constants';
-import usePaginator from '../../hooks/usePaginator';
-import { useGetPostsHomeQuery, useGetPostsQuery } from '../../redux/api/post/post.api';
+
+// _______________________________________utils______________________________________________
 import { getPersistData } from '../../utils';
 import { splitAddress } from '../../utils/splitAddress';
-import { ButtonWithIcon } from '../../components';
-import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
-import { useEffect, useState } from 'react';
 import { Paginator } from '../../common/common.interfaces';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import theme from '../../theme';
-import { TypographyStyled } from '../../components/ButtonWithIcon/ButtonWithIcon.style';
-import { useTranslation } from 'react-i18next';
-import { IUser } from '../../redux/api/user/user.types';
+
 export function HomePage() {
   const user: IUser = getPersistData('user', true);
   let universityAddress: string[] = [];
@@ -81,7 +87,7 @@ export function HomePage() {
         />
 
         {data != undefined && data.localizations[0] !== null && (
-          <Contact localizations={data.localizations} posts={data.posts} />
+          <MapPosts localizations={data.localizations} posts={data.posts} />
         )}
       </Container>
     </>
