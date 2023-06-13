@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useTranslation } from 'react-i18next';
-import { BoxCenter, ButtonWithIcon } from '../../../components';
+import { BoxCenter, BoxLeft, ButtonWithIcon } from '../../../components';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import { Box, Pagination, Stack } from '@mui/material';
@@ -25,16 +25,18 @@ const DashboardAdminOwners = () => {
 
   return (
     <>
-      <Link
-        to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.ADD_OWNER}`}
-        style={{ textDecoration: 'none' }}
-      >
-        <ButtonWithIcon
-          icon={<AddCircleIcon style={{ width: '1.5rem', height: '1.5rem' }} />}
-          txt={t('dashboardAdminStudents.add_btn')}
-          justify="flex-end"
-        />
-      </Link>
+      <BoxLeft>
+        <Link
+          to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.ADD_OWNER}`}
+          style={{ textDecoration: 'none' }}
+        >
+          <ButtonWithIcon
+            icon={<AddCircleIcon style={{ width: '1.5rem', height: '1.5rem' }} />}
+            txt={t('dashboardAdminStudents.add_btn')}
+            justify="flex-start"
+          />
+        </Link>
+      </BoxLeft>
       <Stack sx={{ padding: '1.3rem 0px' }} spacing={2} direction="column">
         {dataToDisplay.length !== 0 ? (
           dataToDisplay?.map(
