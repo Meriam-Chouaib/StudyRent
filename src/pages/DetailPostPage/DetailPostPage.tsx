@@ -30,6 +30,7 @@ import { Localization } from '../../redux/api/post/post.types';
 // _________________________________ assets _______________________________
 import ArrowLeft from '../../assets/images/left.png';
 import ArrowRight from '../../assets/images/rightt.png';
+import { LoaderBox } from '../../components/Loader/LoaderBox';
 
 export const DetailPostPage = () => {
   const { id } = useParams();
@@ -51,40 +52,44 @@ export const DetailPostPage = () => {
   return (
     <>
       <Container>
-        <StackCenter>
-          {user && user.role == 'STUDENT' && user.university === null && (
-            <>
-              <WarningMsg>
-                <Warning style={{ color: `${theme.palette.primary.dark}` }} />
+        {data === undefined ? (
+          <LoaderBox />
+        ) : (
+          <StackCenter>
+            {user && user.role == 'STUDENT' && user.university === null && (
+              <>
+                <WarningMsg>
+                  <Warning style={{ color: `${theme.palette.primary.dark}` }} />
 
-                <Typography variant="h6"> {t('listPostsMain.toast_info')}</Typography>
-              </WarningMsg>
-            </>
-          )}
-          {user && user.role == 'OWNER' && user.phone === null && (
-            <>
-              <WarningMsg>
-                <Warning style={{ color: `${theme.palette.primary.dark}` }} />
-
-                <Typography variant="h6"> {t('listPostsMain.toast_info_owner')}</Typography>
-              </WarningMsg>
-            </>
-          )}
-
-          <BoxArrowLeft>
-            <ArrowSlider src={ArrowLeft} alt="Carousel Flesh" />
-          </BoxArrowLeft>
-          <BoxArrowRight>
-            <ArrowSlider src={ArrowRight} alt="Carousel Flesh" />
-          </BoxArrowRight>
-          <Carousel images={data?.post.images} />
-          <InfoPost data={data} />
-          <Box paddingBottom={'1rem'} width={'100%'}>
-            {data != undefined && data.localization && localizaionsToSend && (
-              <MapSinglePost localizations={localizaionsToSend} post={data.post} height="20rem" />
+                  <Typography variant="h6"> {t('listPostsMain.toast_info')}</Typography>
+                </WarningMsg>
+              </>
             )}
-          </Box>
-        </StackCenter>
+            {user && user.role == 'OWNER' && user.phone === null && (
+              <>
+                <WarningMsg>
+                  <Warning style={{ color: `${theme.palette.primary.dark}` }} />
+
+                  <Typography variant="h6"> {t('listPostsMain.toast_info_owner')}</Typography>
+                </WarningMsg>
+              </>
+            )}
+
+            <BoxArrowLeft>
+              <ArrowSlider src={ArrowLeft} alt="Carousel Flesh" />
+            </BoxArrowLeft>
+            <BoxArrowRight>
+              <ArrowSlider src={ArrowRight} alt="Carousel Flesh" />
+            </BoxArrowRight>
+            <Carousel images={data?.post.images} />
+            <InfoPost data={data} />
+            <Box paddingBottom={'1rem'} width={'100%'}>
+              {data != undefined && data.localization && localizaionsToSend && (
+                <MapSinglePost localizations={localizaionsToSend} post={data.post} height="20rem" />
+              )}
+            </Box>
+          </StackCenter>
+        )}
       </Container>
     </>
   );

@@ -61,10 +61,10 @@ export const Filter = ({
           />
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <LabelFilterValue variant="h5">
-              {filter && filter.price && filter.price[0]}
+              {filter && filter.price && filter.price[0] && `${filter.price[0]} DT`}
             </LabelFilterValue>
             <LabelFilterValue variant="h5">
-              {filter && filter.price && filter.price[1]}
+              {filter && filter.price && filter.price[1] && `${filter.price[1]} DT`}
             </LabelFilterValue>
           </Box>
         </Grid>
@@ -98,10 +98,10 @@ export const Filter = ({
           />
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <LabelFilterValue variant="h5">
-              {filter && filter.surface && filter.surface[0]}
+              {filter && filter.surface && filter.surface[0] && `${filter.surface[0]} m²`}
             </LabelFilterValue>
             <LabelFilterValue variant="h5">
-              {filter && filter.surface && filter.surface[1]}
+              {filter && filter.surface && filter.surface[1] && `${filter.surface[1]} m²`}
             </LabelFilterValue>
           </Box>
         </Grid>
