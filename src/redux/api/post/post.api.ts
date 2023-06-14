@@ -2,13 +2,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { PATHS } from '../../../config/paths';
 import { decodAddPost, decodeEditPost, decodePost, decodePosts } from './decoder';
 import {
-  Post,
-  PostLocalizationResponse,
   PostResponse,
   PostResponseData,
   PostsLocalizations,
   SinglePostEditResponse,
-  SinglePostResponseData,
   SinglePostlocalization,
 } from './post.types';
 import { BASE_URL } from '../../../config/config';
@@ -30,13 +27,11 @@ export const postApi = createApi({
         let url = params.isAdminDashboard
           ? `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`
           : `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}`;
-        console.log('url', url);
         if (params.isMapPage) {
           url = `posts?page=1&rowsPerPage=100`;
         }
         if (params.isAdminDashboard) {
           url = `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`;
-          console.log('url', url);
         }
         if (params.filter !== '')
           url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}`;
@@ -61,14 +56,12 @@ export const postApi = createApi({
     }),
     getPostsHome: builder.query({
       query(params) {
-        console.log(params);
         let url = `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`;
 
         if (params.universityAddress) {
           url = `${PATHS.POSTS}?page=${Number(params.page)}&rowsPerPage=${
             params.rowsPerPage
           }&filter=${params.filter}&universityAddress=${params.universityAddress}`;
-          console.log(params);
         }
 
         return {
@@ -106,6 +99,8 @@ export const postApi = createApi({
       },
       providesTags: ['Post'],
     }),
+    // ________________________________ get post by id____________________________
+
     getPost: builder.query({
       query(id) {
         return {
@@ -116,6 +111,8 @@ export const postApi = createApi({
         return decodePost(result);
       },
     }),
+
+    // ________________________________ add Post ____________________________
     addPost: builder.mutation<PostResponse, FormData>({
       query: (PostRequest) => ({
         url: PATHS.DASHBOARD.POST.ADD,
@@ -126,6 +123,9 @@ export const postApi = createApi({
 
       transformResponse: (response: PostResponse) => decodAddPost(response),
     }),
+
+    // ________________________________ delete Post ____________________________
+
     deletePost: builder.mutation<void, number>({
       query: (id) => ({
         url: `${PATHS.POSTS}/${id}`,
@@ -133,6 +133,9 @@ export const postApi = createApi({
       }),
       invalidatesTags: ['Post', 'Posts'],
     }),
+
+    // ________________________________ edit Post ____________________________
+
     editPost: builder.mutation<PostResponse, { id: number; post: FormData }>({
       query: ({ id, post }) => ({
         url: `${PATHS.DASHBOARD.POST.LIST}/${id}`,
@@ -142,12 +145,18 @@ export const postApi = createApi({
       invalidatesTags: ['Post', 'Posts'],
       transformResponse: (response: SinglePostEditResponse) => decodeEditPost(response),
     }),
+
+    // ________________________________ delete files of Post to delete ____________________________
+
     deleteFiles: builder.mutation<void, number>({
       query: (idPost: number) => ({
         url: `${PATHS.DASHBOARD.POST.LIST}/${PATHS.DASHBOARD.POST.FILES}/${idPost}`,
         method: 'DELETE',
       }),
     }),
+
+    // ________________________________ get favorite List ____________________________
+
     getFavoriteList: builder.query<
       PostsLocalizations,
       { page: number; rowsPerPage: number; id: number }
@@ -160,6 +169,9 @@ export const postApi = createApi({
       },
       providesTags: ['favoritePosts'],
     }),
+
+    // ________________________________ add post to favorite List ____________________________
+
     addPostToFavoriteList: builder.mutation<PostResponse, { userId: number; postId: number }>({
       query: ({ userId, postId }) => ({
         url: `${PATHS.DASHBOARD.POST.FAVORIS}${userId}/${postId}`,
@@ -168,6 +180,9 @@ export const postApi = createApi({
       invalidatesTags: ['favoritePosts'],
       transformResponse: (response: PostResponse) => decodAddPost(response),
     }),
+
+    // ________________________________ delete post from favorite List ____________________________
+
     deletePostFromFavorite: builder.mutation<void, { userId: number; postId: number }>({
       query: ({ userId, postId }) => ({
         url: `${PATHS.DASHBOARD.POST.FAVORIS}${userId}/${postId}`,

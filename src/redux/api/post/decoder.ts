@@ -16,8 +16,6 @@ import {
 } from './post.types';
 
 export function decodePosts(result: PostResponseData): PostsLocalizations {
-  console.log('result', result);
-
   const posts: Post[] = result.data.posts.map((res) => {
     const decodedPost: Post = {
       ...res,
@@ -53,7 +51,6 @@ export function decodePost(response: SinglePostEditResponse): SinglePostlocaliza
       fileReceived.isNew = false;
       return fileReceived;
     }),
-    // datePost: new Date(response.data.datePost),
     price: Number.parseInt(response.data.post.price),
     postal_code: Number.parseInt(response.data.post.postal_code),
   };

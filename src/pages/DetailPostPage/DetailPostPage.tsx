@@ -61,6 +61,15 @@ export const DetailPostPage = () => {
               </WarningMsg>
             </>
           )}
+          {user && user.role == 'OWNER' && user.phone === null && (
+            <>
+              <WarningMsg>
+                <Warning style={{ color: `${theme.palette.primary.dark}` }} />
+
+                <Typography variant="h6"> {t('listPostsMain.toast_info_owner')}</Typography>
+              </WarningMsg>
+            </>
+          )}
 
           <BoxArrowLeft>
             <ArrowSlider src={ArrowLeft} alt="Carousel Flesh" />

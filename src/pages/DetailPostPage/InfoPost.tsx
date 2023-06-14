@@ -5,6 +5,8 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import RoomIcon from '@material-ui/icons/Room';
 import SingleBedIcon from '@material-ui/icons/SingleBed';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import EmailIcon from '@mui/icons-material/Email';
+
 import theme from '../../theme';
 
 // ___________________________ React ________________________________________
@@ -45,14 +47,16 @@ export const InfoPost = ({ data }: PostInfoProps) => {
         >
           <DateRangeIcon style={{ color: `${theme.palette.primary.main}` }} />
         </TextWithIcon>
-        {data?.owner && data?.owner.role === 'OWNER' && (
+        {data?.owner && data?.owner?.role === 'OWNER' && (
           <>
-            <TextWithIcon value={data?.owner?.phone} label={t('detailPost.phone') as string}>
-              <PhoneIcon style={{ color: `${theme.palette.primary.main}` }} />
-            </TextWithIcon>
+            {data?.owner.phone && (
+              <TextWithIcon value={data?.owner.phone} label={t('detailPost.phone') as string}>
+                <PhoneIcon style={{ color: `${theme.palette.primary.main}` }} />
+              </TextWithIcon>
+            )}
 
-            <TextWithIcon value={data?.owner?.username} label={t('detailPost.owner') as string}>
-              <AccountCircleIcon style={{ color: `${theme.palette.primary.main}` }} />
+            <TextWithIcon value={data?.owner.email} label={t('detailPost.owner') as string}>
+              <EmailIcon style={{ color: `${theme.palette.primary.main}` }} />
             </TextWithIcon>
           </>
         )}
