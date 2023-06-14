@@ -1,22 +1,29 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// ____________________________________________ React ____________________________________________
 import { useTranslation } from 'react-i18next';
-import { BoxCenter, BoxLeft, ButtonWithIcon } from '../../../components';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-
-import { Box, Pagination, Stack } from '@mui/material';
-import { ItemDashboard } from '../../../components/ItemDashboard/ItemDashboard';
-import { BoxEditDelete } from '../../../components/CardPost/BoxEditDelete/BoxEditDelete';
-import avatar from '../../../assets/images/avatar.png';
 import { useGetUsersQuery } from '../../../redux/api/user/user.api';
 import { IUser, initialUsersPaginator } from '../../../redux/api/user/user.types';
-import { Paginator } from '../../../common/common.interfaces';
 import usePaginator from '../../../hooks/usePaginator';
 import { Link } from 'react-router-dom';
+// ____________________________________________ components ____________________________________________
+import { ItemDashboard } from '../../../components/ItemDashboard/ItemDashboard';
+import { BoxEditDelete } from '../../../components/CardPost/BoxEditDelete/BoxEditDelete';
+import { BoxCenter, BoxLeft, ButtonWithIcon } from '../../../components';
+
+// ____________________________________________ mui ____________________________________________
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { Pagination, Stack } from '@mui/material';
+
+// ____________________________________________ images ____________________________________________
+import avatar from '../../../assets/images/avatar.png';
 import { PATHS } from '../../../config/paths';
+
+// ____________________________________________ animations ____________________________________________
+import { motion } from 'framer-motion';
+import { varFade } from '../../../components/animate/fade';
 
 export const DashboardAdminStudents = () => {
   const { t } = useTranslation();
-  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
+  const { paginator, onChangePage } = usePaginator({
     ...initialUsersPaginator,
     rowsPerPage: 6,
     role: 'STUDENT',
@@ -24,20 +31,23 @@ export const DashboardAdminStudents = () => {
   let dataToDisplay: IUser[] = [];
   const { data } = useGetUsersQuery({ ...paginator });
   dataToDisplay = data && data.users ? data.users : [];
+  const fadeAnimation = varFade();
 
   return (
     <>
       <BoxLeft>
-        <Link
-          to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.ADD_STUDENT}`}
-          style={{ textDecoration: 'none' }}
-        >
-          <ButtonWithIcon
-            icon={<AddCircleIcon style={{ width: '1.5rem', height: '1.5rem' }} />}
-            txt={t('dashboardAdminStudents.add_btn')}
-            justify="flex-start"
-          />
-        </Link>
+        <motion.div initial="initial" animate="animate" exit="exit" variants={fadeAnimation.inLeft}>
+          <Link
+            to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.ADD_STUDENT}`}
+            style={{ textDecoration: 'none' }}
+          >
+            <ButtonWithIcon
+              icon={<AddCircleIcon style={{ width: '1.5rem', height: '1.5rem' }} />}
+              txt={t('dashboardAdminStudents.add_btn')}
+              justify="flex-start"
+            />
+          </Link>
+        </motion.div>
       </BoxLeft>
       <Stack sx={{ padding: '1.3rem 0px' }} spacing={2} direction="column">
         {dataToDisplay.length !== 0 ? (
