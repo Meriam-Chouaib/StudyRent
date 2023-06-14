@@ -104,7 +104,6 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
   }
 
   // ____________________________________ call the query to get my data filtred ___________________________
-  console.log('paginator', paginator);
 
   const { data, isLoading, isError, error } = useGetPostsQuery({
     paginator: {
@@ -152,6 +151,15 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
             <Warning style={{ color: `${theme.palette.primary.dark}` }} />
 
             <Typography variant="h6"> {t('listPostsMain.toast_info')}</Typography>
+          </WarningMsg>
+        </>
+      )}
+      {user && user.role === 'OWNER' && user.phone === null && (
+        <>
+          <WarningMsg>
+            <Warning style={{ color: `${theme.palette.primary.dark}` }} />
+
+            <Typography variant="h6"> {t('listPostsMain.toast_info_owner')}</Typography>
           </WarningMsg>
         </>
       )}
