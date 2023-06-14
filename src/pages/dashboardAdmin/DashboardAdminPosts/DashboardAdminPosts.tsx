@@ -1,41 +1,49 @@
+// ____________________________________________ React ____________________________________________
+import usePaginator from '../../../hooks/usePaginator';
+import { useGetPostsQuery } from '../../../redux/api/post/post.api';
 import { useTranslation } from 'react-i18next';
-import { BoxLeft, ButtonWithIcon, CustomButton } from '../../../components';
+import { Link } from 'react-router-dom';
+
+// ____________________________________________ components ____________________________________________
+import { BoxLeft, ButtonWithIcon } from '../../../components';
+import { initialPostsPaginator } from '../../../features/home/posts/posts.constants';
 import { Posts } from '../../../features';
+
+// ____________________________________________ Mui ____________________________________________
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
+// ____________________________________________ config ____________________________________________
 import { PATHS } from '../../../config/paths';
-import { Link } from 'react-router-dom';
-import { initialPostsPaginator } from '../../../features/home/posts/posts.constants';
-import usePaginator from '../../../hooks/usePaginator';
-import { useGetPostsByOwnerQuery, useGetPostsQuery } from '../../../redux/api/post/post.api';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Paginator } from '../../../common/common.interfaces';
+
+// ____________________________________________ Animation ____________________________________________
+import { motion } from 'framer-motion';
+import { varFade } from '../../../components/animate/fade';
 
 export const DashboardAdminPosts = () => {
-  const navigate = useNavigate();
-
   const { t } = useTranslation();
-  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
+  const { paginator, onChangePage } = usePaginator({
     ...initialPostsPaginator,
     isAdminDashboard: true,
     rowsPerPage: 9,
   });
-  const { data, isError, isLoading, error } = useGetPostsQuery({ ...paginator });
+  const { data, isLoading } = useGetPostsQuery({ ...paginator });
   const nbPages = data?.nbPages;
+  const fadeAnimation = varFade();
 
   return (
     <>
       <BoxLeft>
-        <Link
-          to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.ADD}`}
-          style={{ textDecoration: 'none' }}
-        >
-          <ButtonWithIcon
-            icon={<AddCircleIcon style={{ width: '1.5rem', height: '1.5rem' }} />}
-            txt={t('dashboardListPosts.btn_add')}
-          />
-        </Link>
+        <motion.div initial="initial" animate="animate" exit="exit" variants={fadeAnimation.inLeft}>
+          <Link
+            to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.ADD}`}
+            style={{ textDecoration: 'none' }}
+          >
+            <ButtonWithIcon
+              icon={<AddCircleIcon style={{ width: '1.5rem', height: '1.5rem' }} />}
+              txt={t('dashboardListPosts.btn_add')}
+            />
+          </Link>
+        </motion.div>
       </BoxLeft>
       <Posts
         page={2}

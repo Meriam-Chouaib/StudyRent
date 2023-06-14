@@ -1,5 +1,4 @@
 export const footer = {
   title_histoy: 'Notre histoire',
-  txt_history:
-    'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant.',
+  txt_history: `Découvrez notre plateforme dédiée à la location de logements étudiants. Nous sommes là pour vous simplifier la recherche d'un logement qui correspond à vos besoins en tant qu'étudiant.`,
 };

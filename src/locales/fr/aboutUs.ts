@@ -1,6 +1,5 @@
 export const aboutUs = {
-  txt_1:
-    'Bienvenue sur notre plateforme StudyRent! Trouvez dès maintenant votre logement idéal pour une expérience étudiante inoubliable.',
+  txt_1: 'Trouvez dès maintenant votre logement idéal pour une expérience étudiante inoubliable.',
   btn_1: 'Commencez',
   txt_2: 'Notre mission',
 
