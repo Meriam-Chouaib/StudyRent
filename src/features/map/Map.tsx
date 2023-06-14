@@ -35,7 +35,7 @@ export const Map = ({ localizations, posts, height }: MapProps) => {
           ? [localizations[0].latitude, localizations[0].longitude]
           : undefined
       }
-      zoom={9}
+      zoom={7}
       style={{ height: height, width: '100%', borderRadius: '3rem' }}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

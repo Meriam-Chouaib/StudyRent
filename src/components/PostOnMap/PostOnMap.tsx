@@ -4,6 +4,8 @@ import { STATIC_URL } from '../../config/config';
 import { getDefaultImagePath } from '../../utils/getDefaultImage';
 import { ImgPost, StackInfoCard } from './PostOnMap.style';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { PATHS } from '../../config/paths';
 
 export interface PostOnMapProps {
   post: Post;
@@ -11,7 +13,7 @@ export interface PostOnMapProps {
 export const PostOnMap = ({ post }: PostOnMapProps) => {
   const { t } = useTranslation();
   return (
-    <>
+    <Link to={`/${PATHS.POSTS}/${post.id}`} style={{ textDecoration: 'none' }}>
       <ImgPost src={`${STATIC_URL}/${getDefaultImagePath(post.images)}`} />
       <Typography variant="h5" sx={{ textAlign: 'center', paddingTop: '8px' }}>
         {post.title}
@@ -33,6 +35,6 @@ export const PostOnMap = ({ post }: PostOnMapProps) => {
           S+ {post.nb_rooms}
         </Typography>
       </StackInfoCard>
-    </>
+    </Link>
   );
 };
