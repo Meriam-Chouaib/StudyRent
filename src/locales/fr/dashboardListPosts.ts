@@ -8,4 +8,7 @@ export const dashboardListPosts = {
   confirm: 'Confirmer',
   cancel: 'Annuler',
   back_list: 'Retour à la liste',
+  list_empty_favorite: 'Votre liste de favoris est vide. 😊',
+  list_empty_posts: `Votre liste d'annonces est vide. 😊`,
+  hello: 'Bonjour',
 };

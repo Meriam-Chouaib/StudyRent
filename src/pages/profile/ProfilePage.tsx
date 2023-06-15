@@ -157,7 +157,7 @@ export const ProfilePage = ({ isAdmin, backStudentsList, backOwnersList }: Profi
         >
           <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={3} alignItems={'center'} width={'90'}>
-              {values.email === '' ? (
+              {values.image === '' ? (
                 <LoaderBox />
               ) : (
                 <>

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { BoxLeft, ButtonWithIcon, CustomButton } from '../../../components';
+import { BoxEmptyList, BoxLeft, ButtonWithIcon, CustomButton } from '../../../components';
 import { Posts } from '../../../features';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
@@ -10,6 +10,8 @@ import usePaginator from '../../../hooks/usePaginator';
 import { useGetPostsByOwnerQuery } from '../../../redux/api/post/post.api';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Typography } from '@mui/material';
+import { getPersistData } from '../../../utils';
 
 export const ListPostsPage = () => {
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ export const ListPostsPage = () => {
   });
   const { isError, isLoading, data, error } = useGetPostsByOwnerQuery(paginator);
   const nbPages = data?.nbPages;
-
+  const user = getPersistData('user', true);
   return (
     <>
       <BoxLeft>
@@ -36,6 +38,14 @@ export const ListPostsPage = () => {
           />
         </Link>
       </BoxLeft>
+      {data?.posts.length === 0 && (
+        <BoxEmptyList>
+          <Typography variant="h1">
+            {t('dashboardListPosts.hello')} {user.username},
+          </Typography>
+          <Typography variant="h1">{t('dashboardListPosts.list_empty_posts')}</Typography>
+        </BoxEmptyList>
+      )}
       <Posts
         page={2}
         rowsPerPage={9}

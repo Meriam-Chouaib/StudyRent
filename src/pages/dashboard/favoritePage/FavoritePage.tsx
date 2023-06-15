@@ -2,8 +2,8 @@
 import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 import usePaginator from '../../../hooks/usePaginator';
-import { Container, Box } from '@mui/material';
-import { BoxCenter, Toast } from '../../../components';
+import { Container, Typography } from '@mui/material';
+import { BoxCenter, BoxEmptyList, Toast } from '../../../components';
 import { initialPostsPaginator, Posts, GoToMap } from '../../../features';
 import { useGetFavoriteListQuery } from '../../../redux/api/post/post.api';
 import { IUser } from '../../../redux/api/user/user.types';
@@ -32,19 +32,12 @@ export const FavoritePage = () => {
 
         {error && <Toast type="error" text={error as string} />}
         {data?.posts.length === 0 && (
-          <Box
-            sx={{
-              textAlign: 'center',
-              height: '100vh',
-              display: 'flex',
-              alignItems: 'center',
-              flexDirection: 'column',
-              justifyContent: 'center',
-            }}
-          >
-            <h1>Hello , {user.username} </h1>
-            <h1>Your favorite liste is empty</h1>
-          </Box>
+          <BoxEmptyList>
+            <Typography variant="h1">
+              {t('dashboardListPosts.hello')} {user.username},
+            </Typography>
+            <Typography variant="h1">{t('dashboardListPosts.list_empty_favorite')}</Typography>
+          </BoxEmptyList>
         )}
         <BoxCenter>
           <Posts
