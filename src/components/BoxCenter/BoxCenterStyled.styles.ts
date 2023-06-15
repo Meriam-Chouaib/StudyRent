@@ -5,3 +5,12 @@ export const BoxCenterStyled = styled(Box)(() => ({
   alignItems: 'center',
   padding: '10px 0px',
 }));
+
+export const BoxEmptyList = styled(Box)(() => ({
+  textAlign: 'center',
+  height: '100vh',
+  display: 'flex',
+  alignItems: 'center',
+  flexDirection: 'column',
+  justifyContent: 'center',
+}));

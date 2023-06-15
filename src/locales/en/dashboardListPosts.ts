@@ -8,4 +8,7 @@ export const dashboardListPosts = {
   confirm: 'Confirm',
   cancel: 'Cancel',
   back_list: 'Back to list',
+  list_empty_favorite: 'Your favorite list is empty. 😊',
+  list_empty_posts: `Your posts list is empty. 😊`,
+  hello: 'Hello',
 };
