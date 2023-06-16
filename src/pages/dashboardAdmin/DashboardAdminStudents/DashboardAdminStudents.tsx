@@ -11,7 +11,8 @@ import { BoxCenter, BoxLeft, ButtonWithIcon } from '../../../components';
 
 // ____________________________________________ mui ____________________________________________
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Pagination, Stack } from '@mui/material';
+import { InputAdornment, Pagination, Stack, TextField } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 // ____________________________________________ images ____________________________________________
 import avatar from '../../../assets/images/avatar.png';
@@ -20,21 +21,61 @@ import { PATHS } from '../../../config/paths';
 // ____________________________________________ animations ____________________________________________
 import { motion } from 'framer-motion';
 import { varFade } from '../../../components/animate/fade';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useDebounce } from '../../../hooks';
 
 export const DashboardAdminStudents = () => {
   const { t } = useTranslation();
+  const [search, setSearch] = useState('');
+  const searchString = useDebounce(search, 800);
+
   const { paginator, onChangePage } = usePaginator({
     ...initialUsersPaginator,
     rowsPerPage: 6,
     role: 'STUDENT',
+    search: searchString,
   });
+
+  const { data } = useGetUsersQuery({ ...paginator, search: searchString });
+
   let dataToDisplay: IUser[] = [];
-  const { data } = useGetUsersQuery({ ...paginator });
   dataToDisplay = data && data.users ? data.users : [];
   const fadeAnimation = varFade();
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
+  const fetchUsersData = async () => {
+    try {
+      const response = await useGetUsersQuery({
+        paginator: { ...paginator, search: searchString },
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    if (searchString) {
+      fetchUsersData();
+    }
+  }, [searchString]);
 
   return (
     <>
+      <TextField
+        type="text"
+        name="search"
+        label={'search'}
+        value={search}
+        onChange={handleChange}
+        sx={{ width: 'max-content' }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+      />
       <BoxLeft>
         <motion.div initial="initial" animate="animate" exit="exit" variants={fadeAnimation.inLeft}>
           <Link

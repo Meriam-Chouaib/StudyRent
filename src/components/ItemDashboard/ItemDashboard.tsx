@@ -21,7 +21,7 @@ export const ItemDashboard = ({
   return (
     <>
       <StackItemDashboard direction="row">
-        <Link to={`/${PATHS.POSTS}/${idPost}`} style={{ textDecoration: 'none' }}>
+        <Link to={isPost ? `/${PATHS.POSTS}/${idPost}` : ''} style={{ textDecoration: 'none' }}>
           <Img
             width={widthImg}
             height={heightImg}
@@ -29,10 +29,10 @@ export const ItemDashboard = ({
             alt={altImg ? altImg : ''}
           />
         </Link>
-        <Link to={`/${PATHS.POSTS}/${idPost}`} style={{ textDecoration: 'none' }}>
+        <Link to={isPost ? `/${PATHS.POSTS}/${idPost}` : ''} style={{ textDecoration: 'none' }}>
           <Typography variant="h3">{txt_1}</Typography>
         </Link>
-        <Link to={`/${PATHS.POSTS}/${idPost}`} style={{ textDecoration: 'none' }}>
+        <Link to={isPost ? `/${PATHS.POSTS}/${idPost}` : ''} style={{ textDecoration: 'none' }}>
           <Typography variant="h3">{txt_2}</Typography>
         </Link>
         {btns}

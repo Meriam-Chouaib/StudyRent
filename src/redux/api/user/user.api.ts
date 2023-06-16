@@ -28,7 +28,7 @@ export const userApi = createApi({
         let url = `${PATHS.USERS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}&role=${params.role}`;
 
         if (params.search) {
-          url = `${PATHS.POSTS}?page=${Number(params.page)}&rowsPerPage=${
+          url = `${PATHS.USERS}?page=${Number(params.page)}&rowsPerPage=${
             params.rowsPerPage
           }&search=${params.search}`;
           console.log(params);

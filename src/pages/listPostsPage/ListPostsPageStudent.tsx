@@ -132,7 +132,6 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
         },
         filter: filterString.length !== 0 ? filterString : '',
       });
-      console.log('resss', response);
     } catch (error) {
       console.log(error);
     }
