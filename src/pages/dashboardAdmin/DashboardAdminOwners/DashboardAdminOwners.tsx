@@ -7,8 +7,9 @@ import { useTranslation } from 'react-i18next';
 
 // ____________________________________________ mui ____________________________________________
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Pagination, Stack } from '@mui/material';
+import { InputAdornment, Pagination, Stack, TextField } from '@mui/material';
 import { PATHS } from '../../../config/paths';
+import SearchIcon from '@mui/icons-material/Search';
 
 // ____________________________________________ Images ____________________________________________
 import { varFade } from '../../../components/animate/fade';
@@ -22,21 +23,59 @@ import { BoxEditDelete } from '../../../components/CardPost/BoxEditDelete/BoxEdi
 
 // ____________________________________________ Animation ____________________________________________
 import { motion } from 'framer-motion';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useDebounce } from '../../../hooks';
 
 const DashboardAdminOwners = () => {
   const { t } = useTranslation();
+  const [search, setSearch] = useState('');
+  const searchString = useDebounce(search, 800);
+
   const { paginator, onChangePage } = usePaginator({
     ...initialUsersPaginator,
     rowsPerPage: 6,
     role: 'OWNER',
+    search: searchString,
   });
   let dataToDisplay: IUser[] = [];
-  const { data } = useGetUsersQuery({ ...paginator });
+  const { data } = useGetUsersQuery({ ...paginator, search: searchString });
   dataToDisplay = data && data.users ? data.users : [];
   const fadeAnimation = varFade();
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
+  const fetchUsersData = async () => {
+    try {
+      const response = await useGetUsersQuery({
+        paginator: { ...paginator, search: searchString },
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    if (searchString) {
+      fetchUsersData();
+    }
+  }, [searchString]);
 
   return (
     <>
+      <TextField
+        type="text"
+        name="search"
+        label={'search'}
+        value={search}
+        onChange={handleChange}
+        sx={{ width: 'max-content' }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+      />
       <BoxLeft>
         <motion.div initial="initial" animate="animate" exit="exit" variants={fadeAnimation.inLeft}>
           <Link
@@ -60,6 +99,7 @@ const DashboardAdminOwners = () => {
                   key={Item.id}
                   img={avatar}
                   txt_1={Item.email}
+                  isPost={false}
                   txt_2={Item.username ? Item.username : ''}
                   btns={
                     <BoxEditDelete

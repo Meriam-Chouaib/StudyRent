@@ -11,6 +11,7 @@ import { Posts } from '../../../features';
 
 // ____________________________________________ Mui ____________________________________________
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import SearchIcon from '@mui/icons-material/Search';
 
 // ____________________________________________ config ____________________________________________
 import { PATHS } from '../../../config/paths';
@@ -18,20 +19,60 @@ import { PATHS } from '../../../config/paths';
 // ____________________________________________ Animation ____________________________________________
 import { motion } from 'framer-motion';
 import { varFade } from '../../../components/animate/fade';
+import { useDebounce } from '../../../hooks';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { InputAdornment, TextField } from '@mui/material';
 
 export const DashboardAdminPosts = () => {
   const { t } = useTranslation();
+  const [search, setSearch] = useState('');
+  const searchString = useDebounce(search, 800);
   const { paginator, onChangePage } = usePaginator({
     ...initialPostsPaginator,
     isAdminDashboard: true,
     rowsPerPage: 9,
+    search: searchString,
   });
-  const { data, isLoading } = useGetPostsQuery({ ...paginator });
+  const { data, isLoading } = useGetPostsQuery({ ...paginator, search: searchString });
+
   const nbPages = data?.nbPages;
   const fadeAnimation = varFade();
 
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
+  const fetchPostsData = async () => {
+    try {
+      const response = await useGetPostsQuery({
+        paginator: { ...paginator, search: searchString },
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    if (searchString) {
+      fetchPostsData();
+    }
+  }, [searchString]);
+
   return (
     <>
+      <TextField
+        type="text"
+        name="search"
+        label={'search'}
+        value={search}
+        onChange={handleChange}
+        sx={{ width: 'max-content' }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+      />
       <BoxLeft>
         <motion.div initial="initial" animate="animate" exit="exit" variants={fadeAnimation.inLeft}>
           <Link

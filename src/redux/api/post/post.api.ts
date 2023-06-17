@@ -24,26 +24,29 @@ export const postApi = createApi({
   endpoints: (builder) => ({
     getPosts: builder.query({
       query(params) {
+        let search = '';
+        if (params.search) search = params.search;
         let url = params.isAdminDashboard
-          ? `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`
-          : `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}`;
+          ? `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}&search=${search}`
+          : `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&search=${search}`;
+
         if (params.isMapPage) {
           url = `posts?page=1&rowsPerPage=100`;
         }
         if (params.isAdminDashboard) {
-          url = `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}`;
+          url = `${PATHS.POSTS}?page=${params.page}&rowsPerPage=${params.rowsPerPage}&search=${search}`;
         }
         if (params.filter !== '')
-          url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}`;
+          url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&search=${search}&filter=${params.filter}`;
         if (params.idStudent) {
-          url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}&idStudent=${params.paginator.idStudent}`;
+          url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&search=${search}&filter=${params.filter}&idStudent=${params.paginator.idStudent}`;
         }
         if (
           params.paginator &&
           params.paginator.universityAddress &&
           params.paginator.universityAddress !== ''
         ) {
-          url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&filter=${params.filter}&universityAddress=${params.paginator.universityAddress}`;
+          url = `${PATHS.POSTS}?page=${params.paginator.page}&rowsPerPage=${params.paginator.rowsPerPage}&search=${search}&filter=${params.filter}&universityAddress=${params.paginator.universityAddress}`;
         }
         return {
           url,
