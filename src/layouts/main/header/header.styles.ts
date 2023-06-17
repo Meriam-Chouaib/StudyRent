@@ -7,12 +7,20 @@ export const AppBarStyled = styled(AppBar)(() => ({
   backgroundColor: 'white',
   boxShadow: 'none',
 }));
-export const StyledLink = styled(RouterLink)`
+export const StyledLink = styled(RouterLink)<{ isDashboardPath?: boolean }>`
   text-decoration: none;
   padding-inline: 9px;
   width: max-content;
   font-weight: 500;
   color: ${(props) => props.color};
+
+  ${(props) =>
+    !props.isDashboardPath &&
+    `
+  &:hover {
+    color: ${theme.palette.warning.main};
+  }
+`}
 `;
 
 // Box

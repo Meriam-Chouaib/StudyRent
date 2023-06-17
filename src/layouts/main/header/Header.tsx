@@ -1,19 +1,19 @@
+// ________________________________________ React ___________________________________________
+import { useNavigate, Link } from 'react-router-dom';
+
+// ________________________________________ styles ___________________________________________
 import {
   AppBarStyled,
   BoxDrawer,
   BoxDisplayWeb,
   StyledLink,
-  ImgProfile,
-  IconUserStatus,
   BoxStyled,
   StackHeader,
 } from './header.styles';
 import { headerProps } from './header.types';
 import { PATHS } from '../../../config/paths';
-import { DrawerPart } from './DrawerMenu/DrawerMenu';
-import imgProfile from '../../../assets/images/imgProfile.jpg';
 
-// components
+// ________________________________________ components ___________________________________________
 import {
   LogoHeader,
   ToolbarStyled,
@@ -21,27 +21,30 @@ import {
   BoxCenterSpaceBetween,
   BoxCenterStyled,
   LinkItem,
-  BoxCenter,
 } from '../../../components';
+import { DrawerPart } from './DrawerMenu/DrawerMenu';
+import { ItemsMain } from './DrawerMenu/ItemsDrawer';
+import { UserLogged } from './UserLoggedIn/UserLogged';
 
-// image
+// ________________________________________ Images ___________________________________________
 import logo from '../../../assets/images/logo-bleu-roi.svg';
-// Mui
-import { Box, Button, Container, Stack } from '@mui/material';
+import imgProfile from '../../../assets/images/imgProfile.jpg';
+
+// ________________________________________ Mui ___________________________________________
+import { Box, Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
-// translation
+// ________________________________________ Translation ___________________________________________
 import { useTranslation } from 'react-i18next';
-import { clearLocalStorage } from '../../../utils/localstorage/clearLoalStorage';
-import { UserLogged } from './UserLoggedIn/UserLogged';
-import { useNavigate, Link } from 'react-router-dom';
-import { ItemsMain } from './DrawerMenu/ItemsDrawer';
+
 export const Header = ({ isLogged, username, status }: headerProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const backToHome = () => {
     navigate(PATHS.ROOT);
   };
+  const activePath = location.pathname;
+
   return (
     <AppBarStyled position="static">
       <Container>
@@ -64,7 +67,13 @@ export const Header = ({ isLogged, username, status }: headerProps) => {
               <BoxCenterSpaceBetween>
                 <BoxCenterStyled sx={{ flexDirection: 'row' }}>
                   {Object.values(ItemsMain).map((item, index) => (
-                    <LinkItem name={t(item.name)} path={item.path} key={index} />
+                    <LinkItem
+                      isDashboardPath={false}
+                      name={t(item.name)}
+                      path={item.path}
+                      key={index}
+                      isActive={activePath.toString() === `/${item.path}`}
+                    />
                   ))}
                 </BoxCenterStyled>
               </BoxCenterSpaceBetween>
