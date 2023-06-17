@@ -9,6 +9,8 @@ import imgProfile from '../../assets/images/imgProfile.jpg';
 import { Box, Stack } from '@mui/material';
 import { ButtonWithIcon } from '../../components';
 import PeopleIcon from '@material-ui/icons/People';
+import Copyright from './footer/Copyright';
+import theme from '../../theme';
 
 export function DashboardLayout() {
   const location = useLocation();
@@ -30,7 +32,7 @@ export function DashboardLayout() {
           </Box>
         </Grid>
         <Grid item xs={12} zIndex={11}>
-          <Footer />
+          {user.role === 'ADMIN' ? <Copyright /> : <Footer />}
         </Grid>
       </Grid>
     </>
