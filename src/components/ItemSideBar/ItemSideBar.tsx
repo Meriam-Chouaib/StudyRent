@@ -10,7 +10,7 @@ export const ItemSideBar = ({ icon, txt, bgColor, path, isActive }: ItemSideBarP
     <>
       <ItemStyled bgcolor={isActive ? theme.palette.primary.main : theme.palette.warning.main}>
         <>{icon}</>
-        <LinkItem path={path} name={txt} isActive={isActive} />
+        <LinkItem path={path} name={txt} isActive={isActive} isDashboardPath={true} />
       </ItemStyled>
     </>
   );
