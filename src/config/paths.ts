@@ -30,8 +30,8 @@ export const PATHS = {
       EDIT_STUDENT: 'students/:id',
       EDIT_OWNER: 'owners/:id',
       ADD_USER: 'add',
-      ADD_STUDENT: 'addStudent',
-      ADD_OWNER: 'addOwner',
+      ADD_STUDENT: 'students/create',
+      ADD_OWNER: 'owners/create',
     },
     STUDENT: {
       LIST: 'students',
