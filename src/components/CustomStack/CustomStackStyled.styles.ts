@@ -13,6 +13,21 @@ export const StackCenter = styled(Stack)(() => ({
     flexDirection: 'column',
   },
 }));
+export const StackDashboard = styled(Stack)(() => ({
+  display: 'flex',
+  justifyContent: 'flex-start',
+
+  paddingTop: '1rem',
+  flexDirection: 'column',
+  alignItems: 'baseline',
+
+  [theme.breakpoints.down(997)]: {
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    paddingTop: '1rem',
+  },
+}));
 export const StackItemDashboard = styled(Stack)(() => ({
   display: 'flex',
   flexDirection: 'row',
