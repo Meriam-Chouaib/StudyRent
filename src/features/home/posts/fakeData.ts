@@ -47,14 +47,7 @@ export const cities_data = [
     value: 'ben-arous',
     label: 'Ben Arous',
   },
-  {
-    value: 'nabeul',
-    label: 'Nabeul',
-  },
-  {
-    value: 'zaghouan',
-    label: 'Zaghouan',
-  },
+
   {
     value: 'bizerte',
     label: 'Bizerte',
@@ -71,10 +64,7 @@ export const cities_data = [
     value: 'kairouan',
     label: 'Kairouan',
   },
-  {
-    value: 'kasserine',
-    label: 'Kasserine',
-  },
+
   {
     value: 'sidi-bouzid',
     label: 'Sidi Bouzid',
@@ -125,13 +115,12 @@ export const tunisian_universities_data = [
   'Université de Tunis',
   "Université d'Ariana",
   'Université de Ben Arous',
-  'Université de Nabeul',
-  'Université de Zaghouan',
+
   'Université de Bizerte',
   'Université de Beja',
   'Université de Jendouba',
   'Université de Kairouan',
-  'Université de Kasserine',
+
   'Université de Sidi Bouzid',
   'Université de Gafsa',
   'Université de Tozeur',

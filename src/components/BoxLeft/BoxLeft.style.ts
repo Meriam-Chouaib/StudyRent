@@ -6,5 +6,6 @@ export const BoxLeft = styled(Box)(() => ({
   justifyContent: 'flex-start',
   [theme.breakpoints.down(997)]: {
     justifyContent: 'center',
+    paddingTop: '1rem',
   },
 }));
