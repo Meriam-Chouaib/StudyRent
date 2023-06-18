@@ -10,7 +10,7 @@ import {
 import { Map } from '../../features/map/Map';
 import { Stack } from '@mui/material';
 import { Container } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FilterFields } from '../listPostsPage/ListPostsPageStudent.type';
 import { useDebounce } from '../../hooks';
 import getFilterString from '../../utils/GetFormatFilter';
@@ -24,25 +24,6 @@ import { useTranslation } from 'react-i18next';
 import { LoaderBox } from '../../components/Loader/LoaderBox';
 
 export const MapPostsPage = () => {
-  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
-    ...initialPostsPaginator,
-    rowsPerPage: 100,
-    isMapPage: true,
-  });
-
-  // _____________________filter _______________________
-  const [price, setPrice] = useState<number[]>([400, 12000]);
-  const [city, setCity] = useState<string>('');
-  const [title, setTitle] = useState<string>('');
-  const [nb_rooms, setNbRooms] = useState<number>();
-  const [surface, setSurface] = useState<number[]>([100, 12000]);
-  const [filter, setFilter] = useState<FilterFields>({
-    price,
-    city,
-    title,
-    nb_rooms,
-    surface,
-  });
   const { data: dataMaxPrice, isLoading: loadingMaxPrice } = useGetMaximalPostPriceQuery({});
   const { data: dataMinPrice, isLoading: loadingMinPrice } = useGetMinimalPostPriceQuery({});
 
@@ -52,7 +33,6 @@ export const MapPostsPage = () => {
   const minPrice = dataMinPrice?.data;
   const maxSurface = dataMaxSurface?.data;
   const minSurface = dataMinSurface?.data;
-
   const initialFilterState: FilterFields = {
     price: [minPrice, maxPrice],
     city: '',
@@ -60,34 +40,57 @@ export const MapPostsPage = () => {
     nb_rooms: '',
     surface: [minSurface, maxSurface],
   };
+  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
+    ...initialPostsPaginator,
+    rowsPerPage: 100,
+    isMapPage: true,
+  });
+
+  // _____________________filter _______________________
+
+  const [filter, setFilter] = useState<FilterFields>(initialFilterState);
+
   // ___________________________ handle change the values of filter ___________________________
 
   const handleCityChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setCity(event.target.value as string);
     setFilter({ ...filter, city: event.target.value as string });
   };
 
   const handleNbRoomsChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setNbRooms(event.target.value as number);
     setFilter({ ...filter, nb_rooms: event.target.value as number });
   };
 
   function handlePriceChange(interval: number[]) {
     setFilter({ ...filter, price: [interval[0] * 15, interval[1] * 15] });
-    console.log('filter in page student', filter);
   }
 
   function handleSurfaceChange(interval: number[]) {
     setFilter({ ...filter, surface: [interval[0] * 2, interval[1] * 2] });
   }
   const filterString = useDebounce(getFilterString(filter), 1000);
-  const { data, isLoading, isError, error } = useGetPostsQuery({
-    paginator,
-    filter: filterString,
-  });
   function handleResetFilter() {
     setFilter(initialFilterState);
   }
+  const { data, isLoading, isError, error } = useGetPostsQuery({
+    paginator,
+    filter: filterString.length !== 0 ? filterString : '',
+  });
+
+  const fetchPostsData = async () => {
+    try {
+      const response = await useGetPostsQuery({
+        paginator: {
+          ...paginator,
+        },
+        filter: filterString.length !== 0 ? filterString : '',
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchPostsData();
+  }, [filterString]);
 
   const { t } = useTranslation();
   return (
@@ -100,6 +103,7 @@ export const MapPostsPage = () => {
             handlePriceChange={handlePriceChange}
             handleSurfaceChange={handleSurfaceChange}
             handleResetFilter={handleResetFilter}
+            filter={filter}
           />
         </BoxCenterFilter>
         <Stack paddingY={'2rem'}>
