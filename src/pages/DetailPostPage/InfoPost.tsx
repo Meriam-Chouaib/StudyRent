@@ -6,6 +6,7 @@ import RoomIcon from '@material-ui/icons/Room';
 import SingleBedIcon from '@material-ui/icons/SingleBed';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
+import HomeIcon from '@material-ui/icons/Home';
 
 import theme from '../../theme';
 
@@ -46,6 +47,9 @@ export const InfoPost = ({ data }: PostInfoProps) => {
           label={t('detailPost.date') as string}
         >
           <DateRangeIcon style={{ color: `${theme.palette.primary.main}` }} />
+        </TextWithIcon>
+        <TextWithIcon value={`${data?.post.surface} m²`} label={t('detailPost.surface') as string}>
+          <HomeIcon style={{ color: `${theme.palette.primary.main}` }} />
         </TextWithIcon>
         {data?.owner && data?.owner?.role === 'OWNER' && (
           <>

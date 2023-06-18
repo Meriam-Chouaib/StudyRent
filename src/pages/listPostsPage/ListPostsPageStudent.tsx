@@ -39,6 +39,8 @@ import { FilterFields } from './ListPostsPageStudent.type';
 import theme from '../../theme';
 import { splitAddress } from '../../utils/splitAddress';
 import { Paginator } from '../../common/common.interfaces';
+import { Link } from 'react-router-dom';
+import { PATHS } from '../../config/paths';
 
 interface ListPostsProps {
   displayFilter?: boolean;
@@ -145,13 +147,13 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
   return (
     <BoxCenter>
       {user && user.role == 'STUDENT' && user.university === null && (
-        <>
+        <Link to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.PROFILE}`}>
           <WarningMsg>
             <Warning style={{ color: `${theme.palette.primary.dark}` }} />
 
             <Typography variant="h6"> {t('listPostsMain.toast_info')}</Typography>
           </WarningMsg>
-        </>
+        </Link>
       )}
       {user && user.role === 'OWNER' && user.phone === null && (
         <>
