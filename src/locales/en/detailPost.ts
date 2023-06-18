@@ -7,4 +7,5 @@ export const detailPost = {
   city: 'city',
   phone: 'The phone number',
   owner: 'The owner',
+  surface: 'Surface',
 };
