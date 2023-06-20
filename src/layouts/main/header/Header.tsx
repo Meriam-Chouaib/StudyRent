@@ -84,9 +84,12 @@ export const Header = ({ isLogged, username, status }: headerProps) => {
               </>
             ) : (
               <Box>
-                <StyledLink to={`${PATHS.AUTH.ROOT}/${PATHS.AUTH.SINGNIN}`}>
-                  <Typography variant="h3">{t('header.link_signin')}</Typography>
-                </StyledLink>
+                <LinkItem
+                  isDashboardPath={false}
+                  name={t('header.link_signin')}
+                  path={`${PATHS.AUTH.ROOT}/${PATHS.AUTH.SINGNIN}`}
+                  isActive={activePath.toString() === `${PATHS.AUTH.ROOT}/${PATHS.AUTH.SINGNIN}`}
+                />
               </Box>
             )}
             <BoxStyled spacing={4} direction={'row'}>

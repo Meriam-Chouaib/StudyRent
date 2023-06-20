@@ -22,6 +22,7 @@ import { varFade } from '../../../components/animate/fade';
 import { useDebounce } from '../../../hooks';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { InputAdornment, TextField } from '@mui/material';
+import { StackDashboard } from '../../../components/CustomStack/CustomStackStyled.styles';
 
 export const DashboardAdminPosts = () => {
   const { t } = useTranslation();
@@ -58,22 +59,23 @@ export const DashboardAdminPosts = () => {
 
   return (
     <>
-      <TextField
-        type="text"
-        name="search"
-        label={'search'}
-        value={search}
-        onChange={handleChange}
-        sx={{ width: 'max-content' }}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-        }}
-      />
-      <BoxLeft>
+      <StackDashboard style={{ paddingTop: '1rem' }}>
+        <TextField
+          type="text"
+          name="search"
+          label={'search'}
+          value={search}
+          onChange={handleChange}
+          sx={{ width: 'max-content' }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
+
         <motion.div initial="initial" animate="animate" exit="exit" variants={fadeAnimation.inLeft}>
           <Link
             to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.ADD}`}
@@ -85,7 +87,8 @@ export const DashboardAdminPosts = () => {
             />
           </Link>
         </motion.div>
-      </BoxLeft>
+      </StackDashboard>
+
       <Posts
         page={2}
         rowsPerPage={9}

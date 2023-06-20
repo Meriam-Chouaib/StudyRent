@@ -27,11 +27,6 @@ export default function Header({ username, status, img }: headerProps) {
         <BoxDrawerDashboard>
           <DrawerPart Items={getItemsDrawer() as ItemsType} isMain={false} />
         </BoxDrawerDashboard>
-        {user && user.role === 'ADMIN' && (
-          <Link to={PATHS.DASHBOARD.ADMIN.ROOT}>
-            <SettingsIcon color="primary" />
-          </Link>
-        )}
 
         <TranslationStyled />
 

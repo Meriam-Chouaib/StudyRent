@@ -170,7 +170,7 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
           <ButtonWithIcon
             sx={{ backgroundColor: theme.palette.secondary.main }}
             icon={<FilterListIcon />}
-            txt={isWithAddress ? 'Show all' : 'show the nearest posts'}
+            txt={isWithAddress ? t('home.show_all') : t('home.show_nearest')}
             onClick={handleGetAll}
           />
         )}

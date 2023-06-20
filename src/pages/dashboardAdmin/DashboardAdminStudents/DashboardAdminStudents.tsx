@@ -23,6 +23,7 @@ import { motion } from 'framer-motion';
 import { varFade } from '../../../components/animate/fade';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useDebounce } from '../../../hooks';
+import { StackDashboard } from '../../../components/CustomStack/CustomStackStyled.styles';
 
 export const DashboardAdminStudents = () => {
   const { t } = useTranslation();
@@ -61,22 +62,23 @@ export const DashboardAdminStudents = () => {
 
   return (
     <>
-      <TextField
-        type="text"
-        name="search"
-        label={'search'}
-        value={search}
-        onChange={handleChange}
-        sx={{ width: 'max-content' }}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-        }}
-      />
-      <BoxLeft>
+      <StackDashboard style={{ paddingTop: '1rem' }}>
+        <TextField
+          type="text"
+          name="search"
+          label={'search'}
+          value={search}
+          onChange={handleChange}
+          sx={{ width: 'max-content' }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
+
         <motion.div initial="initial" animate="animate" exit="exit" variants={fadeAnimation.inLeft}>
           <Link
             to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.ADMIN.ROOT}/${PATHS.DASHBOARD.ADMIN.ADD_STUDENT}`}
@@ -89,7 +91,8 @@ export const DashboardAdminStudents = () => {
             />
           </Link>
         </motion.div>
-      </BoxLeft>
+      </StackDashboard>
+
       <Stack sx={{ padding: '1.3rem 0px' }} spacing={2} direction="column">
         {dataToDisplay.length !== 0 ? (
           dataToDisplay?.map(

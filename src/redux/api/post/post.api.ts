@@ -107,7 +107,7 @@ export const postApi = createApi({
     getPost: builder.query({
       query(id) {
         return {
-          url: `${PATHS.POSTS}/${PATHS.POST}/${id}`,
+          url: `${PATHS.POSTS}/${id}`,
         };
       },
       transformResponse: (result: SinglePostEditResponse): SinglePostlocalization => {

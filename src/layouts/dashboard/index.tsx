@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import { getPersistData } from '../../utils/localstorage/localStorage.utils';
 import imgProfile from '../../assets/images/imgProfile.jpg';
 import { Box, Stack } from '@mui/material';
-import { ButtonWithIcon } from '../../components';
+import { BoxOut, ButtonWithIcon } from '../../components';
 import PeopleIcon from '@material-ui/icons/People';
 import Copyright from './footer/Copyright';
 import theme from '../../theme';
@@ -27,9 +27,9 @@ export function DashboardLayout() {
         </Grid>
         <Grid item xs={11} md={10} p={2} minHeight={'100vh'}>
           <Header isLogged={user?.isLogged} username={user?.username} status={user?.status} />
-          <Box sx={{ minHeight: '100%' }}>
+          <BoxOut>
             <Outlet />
-          </Box>
+          </BoxOut>
         </Grid>
         <Grid item xs={12} zIndex={11}>
           {user.role === 'ADMIN' ? <Copyright /> : <Footer />}

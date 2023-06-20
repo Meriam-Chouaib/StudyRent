@@ -57,6 +57,9 @@ export const NoFilter = styled(Box)(() => ({
   padding: '0rem 1rem 0rem',
   height: '2rem',
   width: '2rem',
+  '&:hover': {
+    cursor: 'pointer',
+  },
 }));
 export const LabelFilterValue = styled(Typography)`
   border-radius: 2rem;
