@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useLoginMutation } from '../../../redux/api/auth/auth.api';
 // form
 import { useForm } from 'react-hook-form';
@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 // @mui
-import { IconButton, InputAdornment, Stack, Typography, Alert } from '@mui/material';
+import { IconButton, InputAdornment, Stack, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
@@ -19,7 +19,6 @@ import { LoginModel } from '../../../models/Login.model';
 import { LoginSchema } from './ValidationSchema';
 import { ILoginRequest } from '../../../redux/api/auth/auth.api.types';
 import { CONSTANTS } from '../../../config/constants';
-import { persistData } from '../../../utils/localstorage/localStorage.utils';
 import theme from '../../../theme';
 
 // ----------------------------------------------------------------------

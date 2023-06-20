@@ -6,15 +6,14 @@ import { Typography, Stack } from '@mui/material';
 import { InputLabel } from '../../components/hookform/InputLabel';
 import { StackCenter } from '../../components/CustomStack/CustomStackStyled.styles';
 import { SelectField } from '../../components/selectField/SelectField';
-import { BoxCenter, ButtonWithIcon, CustomButton, Toast } from '../../components';
+import { ButtonWithIcon, CustomButton, Toast } from '../../components';
 import { getPersistData, updatePersistedData } from '../../utils';
 import { FormProvider, TextField } from '../../components/hookform';
-import { useSelector, useDispatch } from 'react-redux';
 
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 
-import { BoxStyled, StackStyled } from './ProfilePage.style';
+import { BoxStyled } from './ProfilePage.style';
 import theme from '../../theme';
 import { ImgProfile } from './ProfilePage.style';
 import imgProfile from '../../assets/images/profile_icon.png';
@@ -25,7 +24,6 @@ import { useTranslation } from 'react-i18next';
 import { tunisian_universities_data } from '../../features/home/posts/fakeData';
 import { useGetUserByIdQuery, useUpdateUserMutation } from '../../redux/api/user/user.api';
 import { IUser } from '../../redux/api/user/user.types';
-import { RootState } from '../../redux/store';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { COLORS } from '../../config/colors';
 import { PATHS } from '../../config/paths';
@@ -41,7 +39,6 @@ interface ProfilePageProps {
   backOwnersList?: boolean;
 }
 export const ProfilePage = ({ isAdmin, backStudentsList, backOwnersList }: ProfilePageProps) => {
-  const [university, setUniversity] = useState<string>('');
   const [successMessage, setSuccessMessage] = useState('');
   const [problem, setProblem] = useState('');
   const currentUser = getPersistData('user', true);
@@ -66,19 +63,19 @@ export const ProfilePage = ({ isAdmin, backStudentsList, backOwnersList }: Profi
   });
   const {
     reset,
-    setValue,
+
     watch,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
   const values = watch();
 
-  const [updateUser, { data, isError, isLoading }] = useUpdateUserMutation();
+  const [updateUser] = useUpdateUserMutation();
 
   const onSubmit = async () => {
     try {
       const userUpdated = await updateUser({ id: user.id, user: values as unknown as IUser })
-        .then((res) => {
+        .then(() => {
           setSuccessMessage(`${t('dashboardProfile.updated_succuss')}`);
           refetch();
         })

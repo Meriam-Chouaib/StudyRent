@@ -17,7 +17,7 @@ import { varFade } from '../../../components/animate/fade';
 import avatar from '../../../assets/images/avatar.png';
 
 // ____________________________________________ Components ____________________________________________
-import { BoxCenter, BoxLeft, ButtonWithIcon } from '../../../components';
+import { BoxCenter, ButtonWithIcon } from '../../../components';
 import { ItemDashboard } from '../../../components/ItemDashboard/ItemDashboard';
 import { BoxEditDelete } from '../../../components/CardPost/BoxEditDelete/BoxEditDelete';
 
@@ -27,7 +27,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { useDebounce } from '../../../hooks';
 import { StackDashboard } from '../../../components/CustomStack/CustomStackStyled.styles';
 
-const DashboardAdminOwners = () => {
+export const DashboardAdminOwners = () => {
   const { t } = useTranslation();
   const [search, setSearch] = useState('');
   const searchString = useDebounce(search, 800);
@@ -138,5 +138,3 @@ const DashboardAdminOwners = () => {
     </>
   );
 };
-
-export default DashboardAdminOwners;

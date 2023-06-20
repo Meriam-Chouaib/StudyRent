@@ -1,4 +1,3 @@
-import { Typography } from '@mui/material';
 import { CustomImgLogo } from './LogoFooter.style';
 import logo from '../../../assets/images/logo-bleu-clair-footer.svg';
 import { BoxCenterStyled } from '../../BoxCenter/BoxCenterStyled.styles';

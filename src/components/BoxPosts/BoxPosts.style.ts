@@ -1,6 +1,6 @@
 import { Box, styled } from '@mui/material';
 import theme from '../../theme';
-export const BoxPostsSyled = styled(Box)((isHomePage) => ({
+export const BoxPostsSyled = styled(Box)(() => ({
   display: 'grid',
   gridTemplateColumns: '1fr 1fr 1fr',
   alignItems: 'center',

@@ -1,4 +1,4 @@
-import { SxProps, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { StackStyled } from '../../pages/profile/ProfilePage.style';
 interface InputLabelProp {
   children: React.ReactNode;

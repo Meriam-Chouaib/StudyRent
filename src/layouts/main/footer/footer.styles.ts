@@ -1,11 +1,5 @@
 import { Box, styled } from '@mui/material';
-import { COLORS } from '../../../config/colors';
-import { Link as RouterLink } from 'react-router-dom';
 import theme from '../../../theme';
-
-export default {
-  // styles go here
-};
 
 export const ImgMedia = styled('img')({
   height: '2rem',

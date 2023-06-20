@@ -1,16 +1,12 @@
-import { Navigate, Outlet, redirect, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Footer from '../main/footer/Footer';
 import Header from './header/Header';
 import SideBar from './sidebar/SideBar';
 import useGetIcons from './sidebar/useGetIcons';
 import Grid from '@mui/material/Grid';
 import { getPersistData } from '../../utils/localstorage/localStorage.utils';
-import imgProfile from '../../assets/images/imgProfile.jpg';
-import { Box, Stack } from '@mui/material';
-import { BoxOut, ButtonWithIcon } from '../../components';
-import PeopleIcon from '@material-ui/icons/People';
+import { BoxOut } from '../../components';
 import Copyright from './footer/Copyright';
-import theme from '../../theme';
 
 export function DashboardLayout() {
   const location = useLocation();

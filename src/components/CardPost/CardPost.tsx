@@ -7,18 +7,14 @@ import { BoxEditDelete } from './BoxEditDelete/BoxEditDelete';
 import { BoxHoverEye, CardPostStyled, IconCard } from './CardPost.style';
 import { CardPostProps } from './CardPost.type';
 import { InfoCard } from './InfoCard';
-import houseIcon from '../../assets/icons/home.png';
-import moneyIcon from '../../assets/icons/money.png';
 
 // mui
-import Modal from '@material-ui/core/Modal';
+
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box, CardContent, CardMedia, Typography } from '@mui/material';
 
 import { ReactComponent as Not_found_img } from '../../assets/images/empty_item.svg';
 import { STATIC_URL } from '../../config/config';
-// feature
-import { AddPost } from '../../features';
 
 // mutation
 import {
@@ -26,11 +22,10 @@ import {
   useDeletePostFromFavoriteMutation,
   useDeletePostMutation,
 } from '../../redux/api/post/post.api';
-import { BoxModal } from '../BoxCenter/BoxModal.styles';
+
 // style
 import { BoxCenter } from '../BoxCenter/BoxCenter.styles';
 import { getPersistData } from '../../utils';
-import { BoxIconLink } from '../BoxIconLink/BoxIconLink';
 import { Link } from 'react-router-dom';
 import { PATHS } from '../../config/paths';
 
@@ -42,15 +37,12 @@ export const CardPost = ({
   isPoster,
   idPost,
   isFavoritePage,
-  PosterId,
-  isFavoritePost,
-  isHomePage,
+
   isPosts,
 }: CardPostProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const [isFavorite, setIsFavorite] = useState<boolean>(isFavoritePage ? true : false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const moneyIconUrl = require('../../assets/icons/flous.png');
   const locationIconUrl = require('../../assets/icons/home.png');
 
@@ -89,9 +81,7 @@ export const CardPost = ({
   const handleComment = (id: number) => {
     console.log('add comment to post', id);
   };
-  const handleClose = () => {
-    setIsModalOpen(false);
-  };
+
   return (
     <>
       <CardPostStyled onMouseEnter={handleHover} onMouseLeave={handleMouseLeave}>

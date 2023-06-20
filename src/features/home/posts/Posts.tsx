@@ -3,22 +3,16 @@ import { CustomBoxPosts } from './Posts.styles';
 import { BoxCenter, BoxPosts, ButtonWithIcon, CardPost } from '../../../components';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { Pagination } from '@mui/material';
-import usePaginator from '../../../hooks/usePaginator';
-import { useGetPostsByOwnerQuery, useGetPostsQuery } from '../../../redux/api/post/post.api';
 import { Post } from '../../../redux/api/post/post.types';
 import { getPersistData } from '../../../utils';
 import { PostsProps } from './Posts.types';
-import { initialPostsPaginator } from './posts.constants';
 import { LoaderBox } from '../../../components/Loader/LoaderBox';
 import { Link } from 'react-router-dom';
 import { PATHS } from '../../../config/paths';
 import { getDefaultImagePath } from '../../../utils/getDefaultImage';
-import { ItemDashboard } from '../../../components/ItemDashboard/ItemDashboard';
-import { BoxEditDelete } from '../../../components/CardPost/BoxEditDelete/BoxEditDelete';
 import { DashboardItems } from './DashboardPostsItems';
 
 export const Posts = ({
-  color,
   padding,
   margin,
   withButton,

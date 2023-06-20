@@ -4,10 +4,9 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import SvgIcon from '@mui/material/SvgIcon';
-import { SxProps, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { BoxSpaceBetweenCenter } from '../BoxCenter/BoxCenterSpaceBetween.styles';
 import FormControl from '@mui/material/FormControl';
-import { useState } from 'react';
 import theme from '../../theme';
 
 interface SelectTextFieldsProps {
