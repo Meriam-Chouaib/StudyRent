@@ -5,6 +5,7 @@ export const PATHS = {
   CONTACT: 'contact',
   USERS: 'users',
   POSTS: 'posts',
+  POST: 'post',
   NEAREST_POSTS: '/near/:id',
   ALL: '*',
   AUTH: {
@@ -44,6 +45,7 @@ export const PATHS = {
       POSTS_BY_OWNER: 'postsByOwner',
       FILES: '/files',
       FAVORIS: 'posts/favoris/',
+      TOTAL: 'totalPosts',
     },
     FAVORIS: 'favoris',
     CHAT: 'chat',
