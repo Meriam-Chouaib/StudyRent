@@ -1,5 +1,4 @@
 import { PATHS } from '../../../../config/paths';
-import { userApi } from '../../../../redux/api/user/user.api';
 import { getPersistData } from '../../../../utils';
 interface Item {
   name: string;

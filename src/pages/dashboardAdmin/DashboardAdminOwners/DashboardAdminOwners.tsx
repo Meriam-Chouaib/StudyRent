@@ -47,7 +47,7 @@ export const DashboardAdminOwners = () => {
   };
   const fetchUsersData = async () => {
     try {
-      const response = await useGetUsersQuery({
+      await useGetUsersQuery({
         paginator: { ...paginator, search: searchString },
       });
     } catch (e) {

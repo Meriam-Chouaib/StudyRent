@@ -12,15 +12,8 @@ interface FilterSliderProps {
   valueToAdd: number;
 }
 
-export default function FilterSlider({
-  label,
-  interval,
-  onChange,
-  valueToAdd,
-  step,
-}: FilterSliderProps) {
+export default function FilterSlider({ label, interval, onChange, valueToAdd }: FilterSliderProps) {
   const [value1, setValue1] = React.useState<number[]>(interval);
-  const minDistance = 10;
 
   const [value, setValue] = useState<number[]>([0, 0]);
 

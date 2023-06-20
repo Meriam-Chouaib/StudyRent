@@ -1,10 +1,7 @@
 /* eslint-disable react/no-unknown-property */
-import { useTheme } from '@material-ui/core';
 import { COLORS } from '../../config/colors';
-import { CustomIconProps } from './ic_icon.types';
 
-export default function IconDelete({ isActive }: CustomIconProps) {
-  const { palette } = useTheme();
+export default function IconDelete() {
   return (
     <svg
       width="20px"

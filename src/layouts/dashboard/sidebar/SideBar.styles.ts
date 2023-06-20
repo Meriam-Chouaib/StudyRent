@@ -1,5 +1,3 @@
-import { Link as RouterLink } from 'react-router-dom';
-import { COLORS } from '../../../config/colors';
 import { Box, styled } from '@mui/material';
 import theme from '../../../theme';
 export const BoxItemsSidebar = styled(Box)(() => ({

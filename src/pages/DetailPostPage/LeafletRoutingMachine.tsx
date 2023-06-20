@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ElementType, useEffect } from 'react';
+import { useEffect } from 'react';
 // ______________________________________leaflet map ______________________________
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import { useMap } from 'react-leaflet';
-// _____________________________________ utils to get user _____________________________
-import { getPersistData } from '../../utils';
-import { IUser } from '../../redux/api/user/user.types';
+
 // _____________________________________ icons _______________________
 import defIcon from '../../assets/icons/icon_transparent_marker.png';
 import houseIcon from '../../assets/icons/home.png';

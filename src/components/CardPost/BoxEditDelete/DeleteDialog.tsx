@@ -48,7 +48,7 @@ export const AlertDialogSlide = ({
   return (
     <div>
       <Button onClick={handleClickOpen}>
-        <IconDelete isActive={false}></IconDelete>
+        <IconDelete></IconDelete>
       </Button>
 
       <Dialog

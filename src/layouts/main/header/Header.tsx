@@ -2,14 +2,7 @@
 import { useNavigate, Link } from 'react-router-dom';
 
 // ________________________________________ styles ___________________________________________
-import {
-  AppBarStyled,
-  BoxDrawer,
-  BoxDisplayWeb,
-  StyledLink,
-  BoxStyled,
-  StackHeader,
-} from './header.styles';
+import { AppBarStyled, BoxDrawer, BoxDisplayWeb, BoxStyled, StackHeader } from './header.styles';
 import { headerProps } from './header.types';
 import { PATHS } from '../../../config/paths';
 
@@ -32,7 +25,6 @@ import imgProfile from '../../../assets/images/imgProfile.jpg';
 
 // ________________________________________ Mui ___________________________________________
 import { Box, Container } from '@mui/material';
-import Typography from '@mui/material/Typography';
 
 // ________________________________________ Translation ___________________________________________
 import { useTranslation } from 'react-i18next';

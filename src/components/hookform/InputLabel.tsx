@@ -5,7 +5,7 @@ interface InputLabelProp {
   label: string;
   sx?: string;
 }
-export const InputLabel = ({ children, label, sx }: InputLabelProp) => {
+export const InputLabel = ({ children, label }: InputLabelProp) => {
   return (
     <StackStyled direction={'row'} spacing={3} sx={{ justifyContent: 'space-between' }}>
       <Typography variant="h3" sx={{ width: '8.5rem' }}>

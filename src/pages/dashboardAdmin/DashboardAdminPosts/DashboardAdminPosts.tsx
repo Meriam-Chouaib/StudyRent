@@ -44,7 +44,7 @@ export const DashboardAdminPosts = () => {
   };
   const fetchPostsData = async () => {
     try {
-      const response = await useGetPostsQuery({
+      await useGetPostsQuery({
         paginator: { ...paginator, search: searchString },
       });
     } catch (e) {

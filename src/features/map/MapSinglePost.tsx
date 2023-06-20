@@ -2,14 +2,10 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useEffect } from 'react';
 import Geocode from 'react-geocode';
-import L, { PointExpression } from 'leaflet';
-import houseIcon from '../../assets/icons/home.png';
-import userIconMarker from '../../assets/icons/user_marker_icon.png';
+import L from 'leaflet';
+
 import { Localization, Post } from '../../redux/api/post/post.types';
 import LeafletRoutingMachine from '../../pages/DetailPostPage/LeafletRoutingMachine';
-
-const houseIconUrl = houseIcon;
-const userIconUrl = userIconMarker;
 
 export interface MapProps {
   post: Post;
@@ -17,7 +13,7 @@ export interface MapProps {
   height: string;
 }
 
-export const MapSinglePost = ({ post, localizations, height }: MapProps) => {
+export const MapSinglePost = ({ localizations, height }: MapProps) => {
   useEffect(() => {
     Geocode.setApiKey(`${process.env.API_KEY_MAP}`);
   }, []);
