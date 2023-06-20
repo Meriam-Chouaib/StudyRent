@@ -6,4 +6,5 @@ export const dashboardAddPost = {
   remove: 'Supprimer tous',
   success_msg: 'Annonce ajouté avec succès!',
   success_msg_edit: 'Annonce modifié avec succés!',
+  error_msg: 'Vérifiez les données SVP!',
 };

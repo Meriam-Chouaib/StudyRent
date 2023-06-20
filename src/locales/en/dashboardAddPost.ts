@@ -6,4 +6,5 @@ export const dashboardAddPost = {
   remove: 'REMOVE ALL',
   success_msg: 'Post added successfully!',
   success_msg_edit: 'Post updated successfully!',
+  error_msg: 'Check your fields please!',
 };
