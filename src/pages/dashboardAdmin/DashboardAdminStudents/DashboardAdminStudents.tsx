@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 // ____________________________________________ components ____________________________________________
 import { ItemDashboard } from '../../../components/ItemDashboard/ItemDashboard';
 import { BoxEditDelete } from '../../../components/CardPost/BoxEditDelete/BoxEditDelete';
-import { BoxCenter, BoxLeft, ButtonWithIcon } from '../../../components';
+import { BoxCenter, ButtonWithIcon } from '../../../components';
 
 // ____________________________________________ mui ____________________________________________
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -47,7 +47,7 @@ export const DashboardAdminStudents = () => {
   };
   const fetchUsersData = async () => {
     try {
-      const response = await useGetUsersQuery({
+      await useGetUsersQuery({
         paginator: { ...paginator, search: searchString },
       });
     } catch (e) {

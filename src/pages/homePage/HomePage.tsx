@@ -30,12 +30,12 @@ export function HomePage() {
   }
   const [isWithAddress, setIsWithAddress] = useState<boolean>(false);
 
-  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
+  const { paginator, onChangePage } = usePaginator({
     ...initialPostsPaginator,
     rowsPerPage: 6,
     universityAddress: '',
   });
-  const { data, isLoading, isError, error } = useGetPostsHomeQuery({
+  const { data, isLoading } = useGetPostsHomeQuery({
     ...paginator,
     universityAddress: user && user.universityAddress && isWithAddress ? universityAddress[0] : '',
   });
@@ -46,7 +46,7 @@ export function HomePage() {
   };
   const fetchPostsData = async (updatedPaginator: Paginator) => {
     try {
-      const response = await useGetPostsHomeQuery(updatedPaginator);
+      await useGetPostsHomeQuery(updatedPaginator);
     } catch (error) {
       console.log(error);
     }

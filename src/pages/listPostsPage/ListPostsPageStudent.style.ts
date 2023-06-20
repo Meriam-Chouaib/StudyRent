@@ -1,5 +1,4 @@
-import { width } from '@mui/system';
-import { Box, styled, Grid, Input, Typography } from '@mui/material';
+import { Box, styled, Grid, Typography } from '@mui/material';
 import theme from '../../theme';
 export const BoxCenterFilter = styled(Box)(() => ({
   display: 'flex',

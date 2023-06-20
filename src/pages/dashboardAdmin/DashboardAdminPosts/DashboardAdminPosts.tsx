@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 // ____________________________________________ components ____________________________________________
-import { BoxLeft, ButtonWithIcon } from '../../../components';
+import { ButtonWithIcon } from '../../../components';
 import { initialPostsPaginator } from '../../../features/home/posts/posts.constants';
 import { Posts } from '../../../features';
 

@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import usePaginator from '../../../hooks/usePaginator';
 import { Container, Typography } from '@mui/material';
 import { BoxCenter, BoxEmptyList, Toast } from '../../../components';
-import { initialPostsPaginator, Posts, GoToMap } from '../../../features';
+import { initialPostsPaginator, Posts } from '../../../features';
 import { useGetFavoriteListQuery } from '../../../redux/api/post/post.api';
 import { IUser } from '../../../redux/api/user/user.types';
 import { getPersistData } from '../../../utils';
