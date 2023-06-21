@@ -95,8 +95,6 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           })
           .catch((err) => {
             console.log(err);
-            //    setProblem(`${t('postForm.check_fiels')}`);
-
             setProblem(err.data.message);
           });
       } else {
@@ -107,7 +105,7 @@ export const AddPost = ({ btn_txt, isEdit }: AddPostProps) => {
           post: data,
         })
           .unwrap()
-          .then((res) => {
+          .then(() => {
             setSuccessMessage(`${t('dashboardAddPost.success_msg')}`);
           })
 

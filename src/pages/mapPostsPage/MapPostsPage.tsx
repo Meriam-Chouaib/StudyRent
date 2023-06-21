@@ -24,11 +24,11 @@ import { useTranslation } from 'react-i18next';
 import { LoaderBox } from '../../components/Loader/LoaderBox';
 
 export const MapPostsPage = () => {
-  const { data: dataMaxPrice, isLoading: loadingMaxPrice } = useGetMaximalPostPriceQuery({});
-  const { data: dataMinPrice, isLoading: loadingMinPrice } = useGetMinimalPostPriceQuery({});
+  const { data: dataMaxPrice } = useGetMaximalPostPriceQuery({});
+  const { data: dataMinPrice } = useGetMinimalPostPriceQuery({});
 
-  const { data: dataMaxSurface, isLoading: loadingMaxSurface } = useGetMaximalPostSurfaceQuery({});
-  const { data: dataMinSurface, isLoading: loadingMinSurface } = useGetMinimalPostSurfaceQuery({});
+  const { data: dataMaxSurface } = useGetMaximalPostSurfaceQuery({});
+  const { data: dataMinSurface } = useGetMinimalPostSurfaceQuery({});
   const maxPrice = dataMaxPrice?.data;
   const minPrice = dataMinPrice?.data;
   const maxSurface = dataMaxSurface?.data;
@@ -40,7 +40,7 @@ export const MapPostsPage = () => {
     nb_rooms: '',
     surface: [minSurface, maxSurface],
   };
-  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
+  const { paginator } = usePaginator({
     ...initialPostsPaginator,
     rowsPerPage: 100,
     isMapPage: true,
@@ -71,14 +71,14 @@ export const MapPostsPage = () => {
   function handleResetFilter() {
     setFilter(initialFilterState);
   }
-  const { data, isLoading, isError, error } = useGetPostsQuery({
+  const { data } = useGetPostsQuery({
     paginator,
     filter: filterString.length !== 0 ? filterString : '',
   });
 
   const fetchPostsData = async () => {
     try {
-      const response = await useGetPostsQuery({
+      await useGetPostsQuery({
         paginator: {
           ...paginator,
         },

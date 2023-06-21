@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 // @mui
-import { Alert, IconButton, InputAdornment, Stack, Typography } from '@mui/material';
+import { IconButton, InputAdornment, Stack, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { CustomButton, BoxCenter, Toast } from '../../../components';
@@ -25,7 +25,6 @@ import { RegisterModel } from '../../../models/Register.model';
 import { RegisterSchema } from './ValidationSchema';
 import { IRegisterRequest } from '../../../redux/api/auth/auth.api.types';
 import { SelectField } from '../../../components/selectField/SelectField';
-import { CONSTANTS } from '../../../config/constants';
 import theme from '../../../theme';
 
 // ----------------------------------------------------------------------
@@ -53,8 +52,6 @@ export default function SignUpForm({ isAdmin, backOwnersList, backStudentList }:
   const Roles: string[] = ['STUDENT', 'OWNER'];
 
   const {
-    reset,
-    setError,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
@@ -63,7 +60,7 @@ export default function SignUpForm({ isAdmin, backOwnersList, backStudentList }:
     // try {
     await register(data)
       .unwrap()
-      .then((res) => {
+      .then(() => {
         setSuccessMessage('register successfully');
         setShowToast(true);
       })

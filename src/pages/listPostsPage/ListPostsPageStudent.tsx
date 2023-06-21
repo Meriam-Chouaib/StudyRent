@@ -13,7 +13,7 @@ import { Warning } from '@mui/icons-material';
 // features
 import { Posts, initialPostsPaginator, GoToMap } from '../../features';
 
-import { BoxCenter, ButtonWithIcon, Toast } from '../../components';
+import { BoxCenter, ButtonWithIcon } from '../../components';
 
 // filtre
 import { Filter } from './Filtre/Filtre';
@@ -23,7 +23,6 @@ import usePaginator from '../../hooks/usePaginator';
 import { useDebounce } from '../../hooks/useDebounce';
 // redux
 import {
-  useGetFavoriteListQuery,
   useGetMaximalPostPriceQuery,
   useGetMaximalPostSurfaceQuery,
   useGetMinimalPostPriceQuery,
@@ -38,7 +37,6 @@ import { getPersistData } from '../../utils';
 import { FilterFields } from './ListPostsPageStudent.type';
 import theme from '../../theme';
 import { splitAddress } from '../../utils/splitAddress';
-import { Paginator } from '../../common/common.interfaces';
 import { Link } from 'react-router-dom';
 import { PATHS } from '../../config/paths';
 
@@ -46,13 +44,13 @@ interface ListPostsProps {
   displayFilter?: boolean;
   isFavorite?: boolean;
 }
-export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsProps) => {
-  const { data: dataMaxPrice, isLoading: loadingMaxPrice } = useGetMaximalPostPriceQuery({});
-  const { data: dataMinPrice, isLoading: loadingMinPrice } = useGetMinimalPostPriceQuery({});
+export const ListPostsPageStudent = ({ displayFilter }: ListPostsProps) => {
+  const { data: dataMaxPrice } = useGetMaximalPostPriceQuery({});
+  const { data: dataMinPrice } = useGetMinimalPostPriceQuery({});
   const [isWithAddress, setIsWithAddress] = useState<boolean>(false);
 
-  const { data: dataMaxSurface, isLoading: loadingMaxSurface } = useGetMaximalPostSurfaceQuery({});
-  const { data: dataMinSurface, isLoading: loadingMinSurface } = useGetMinimalPostSurfaceQuery({});
+  const { data: dataMaxSurface } = useGetMaximalPostSurfaceQuery({});
+  const { data: dataMinSurface } = useGetMinimalPostSurfaceQuery({});
   const maxPrice = dataMaxPrice?.data;
   const minPrice = dataMinPrice?.data;
   const maxSurface = dataMaxSurface?.data;
@@ -70,7 +68,7 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
   if (user && user.universityAddress) {
     universityAddress = splitAddress(user.universityAddress);
   }
-  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
+  const { paginator, onChangePage } = usePaginator({
     ...initialPostsPaginator,
     rowsPerPage: 9,
     ...(user &&
@@ -107,7 +105,7 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
 
   // ____________________________________ call the query to get my data filtred ___________________________
 
-  const { data, isLoading, isError, error } = useGetPostsQuery({
+  const { data, isLoading } = useGetPostsQuery({
     paginator: {
       ...paginator,
       ...(user &&
@@ -127,7 +125,7 @@ export const ListPostsPageStudent = ({ displayFilter, isFavorite }: ListPostsPro
 
   const fetchPostsData = async () => {
     try {
-      const response = await useGetPostsQuery({
+      await useGetPostsQuery({
         paginator: {
           ...paginator,
           universityAddress: user.universityAddress && isWithAddress ? universityAddress[0] : '',

@@ -2,8 +2,8 @@
 import { GridStyledCenter } from '../../features';
 import { LoginForm } from '../../features';
 // components
-import { BoxCenter, ButtonWithIcon, CardStyled } from '../../components';
-import { Box, Typography } from '@mui/material';
+import { CardStyled } from '../../components';
+import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { PATHS } from '../../config/paths';

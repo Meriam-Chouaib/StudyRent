@@ -4,7 +4,6 @@ import DateRangeIcon from '@material-ui/icons/DateRange';
 import PhoneIcon from '@mui/icons-material/Phone';
 import RoomIcon from '@material-ui/icons/Room';
 import SingleBedIcon from '@material-ui/icons/SingleBed';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
 import HomeIcon from '@material-ui/icons/Home';
 

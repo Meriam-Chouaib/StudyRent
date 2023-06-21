@@ -1,7 +1,6 @@
-import { CardMedia, Stack, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { ItemDashboardProps } from './ItemDashboard.type';
 import { Img } from './ItemDashboard.style';
-import theme from '../../theme';
 import { STATIC_URL } from '../../config/config';
 import { StackItemDashboard } from '../CustomStack/CustomStackStyled.styles';
 import { Link } from 'react-router-dom';

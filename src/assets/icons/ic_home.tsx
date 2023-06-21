@@ -1,10 +1,9 @@
 /* eslint-disable react/no-unknown-property */
-import { useTheme } from '@material-ui/core';
+
 import { COLORS } from '../../config/colors';
 import { CustomIconProps } from './ic_icon.types';
 
 export default function IconHome({ isActive }: CustomIconProps) {
-  const { palette } = useTheme();
   return (
     <svg
       fill={isActive ? COLORS.WARNING.MAIN : COLORS.PRIMARY.MAIN}

@@ -75,11 +75,11 @@ export const BoxEditDelete = ({
           <>
             <BoxIcon handleSubmit={handleEdit} color={`${COLORS.PRIMARY.MAIN}`}>
               <Link to={getPath()} style={{ display: 'flex' }}>
-                <IconEdit isActive={false}></IconEdit>
+                <IconEdit></IconEdit>
               </Link>
             </BoxIcon>
             <BoxIcon color={`${COLORS.PRIMARY.MAIN}`}>
-              <IconDelete isActive={false}></IconDelete>
+              <IconDelete></IconDelete>
               <AlertDialogSlide
                 idPost={idPost}
                 handleClickOpen={handleClickOpen}

@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { Box } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import Person2Icon from '@mui/icons-material/Person2';
 import { useTranslation } from 'react-i18next';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { ItemSelect } from './ItemSelect';
@@ -11,7 +9,6 @@ import { BoxSelectItemStyled } from '../header.styles';
 import { PATHS } from '../../../../config/paths';
 import { useNavigate } from 'react-router-dom';
 import { getPersistData } from '../../../../utils';
-import { IUser } from '../../../../redux/api/user/user.types';
 
 type SelectIconProps = {
   onLogout: () => void;
@@ -19,7 +16,7 @@ type SelectIconProps = {
   handleDashboard: () => void;
 };
 
-export const SelectIcon = ({ onLogout, onProfile }: SelectIconProps) => {
+export const SelectIcon = ({ onLogout }: SelectIconProps) => {
   const user = getPersistData('user', true);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();

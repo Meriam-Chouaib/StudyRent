@@ -1,10 +1,8 @@
 /* eslint-disable react/no-unknown-property */
-import { useTheme } from '@material-ui/core';
-import { COLORS } from '../../config/colors';
-import { CustomIconProps } from './ic_icon.types';
 
-export default function IconEdit({ isActive }: CustomIconProps) {
-  const { palette } = useTheme();
+import { COLORS } from '../../config/colors';
+
+export default function IconEdit() {
   return (
     <svg
       width="20px"

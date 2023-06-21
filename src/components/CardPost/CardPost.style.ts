@@ -1,5 +1,4 @@
-import { width } from '@mui/system';
-import { styled, Card, Box, Typography } from '@mui/material';
+import { styled, Card, Box } from '@mui/material';
 import { COLORS } from '../../config/colors';
 import theme from '../../theme';
 

@@ -1,9 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { authorizeWithToken } from '../../baseQueryConfig ';
 import { IUser, ResponseUsers } from './user.types';
 import { PATHS } from '../../../config/paths';
-import { decodEditUser, decodGetUsers, decodUserById, decodePosts } from '../post/decoder';
-import { DataUser, UserByIdResponse, UserResponse, UsersResponse } from '../auth/auth.api.types';
+import { decodEditUser, decodGetUsers, decodUserById } from '../post/decoder';
+import { DataUser } from '../auth/auth.api.types';
 import { BASE_URL } from '../../../config/config';
 import { setTokenToHeaders } from '../../../utils/setTokenToHeaders';
 
@@ -44,24 +43,6 @@ export const userApi = createApi({
       providesTags: ['USERS'],
     }),
 
-    getMe: builder.query<IUser, null>({
-      query() {
-        // return an object representing the request to be made to the server.
-        return {
-          url: 'user',
-          credentials: 'include',
-        };
-      },
-      transformResponse: (result: { data: { user: IUser } }) => result.data.user,
-      async onQueryStarted(args, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-        } catch (error) {
-          console.log(error);
-        }
-      },
-    }),
-
     // ______________________________________________________________ *** Edit user ***___________________________________________________________
 
     updateUser: builder.mutation<IUser, { id: number; user: IUser }>({
@@ -97,7 +78,6 @@ export const userApi = createApi({
 });
 export const {
   useUpdateUserMutation,
-  useGetMeQuery,
   useGetUserByIdQuery,
   useGetUsersQuery,
   useDeleteUserMutation,

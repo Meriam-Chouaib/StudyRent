@@ -1,4 +1,3 @@
-import { COLORS } from './../../../config/colors';
 import { AppBar, Box, Stack, styled } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import theme from '../../../theme';

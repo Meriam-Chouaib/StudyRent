@@ -1,5 +1,4 @@
 import { Box, Button, styled } from '@mui/material';
-import theme from '../../../theme';
 interface BoxEditDeleteStyledProps {
   backColor?: string;
 }
@@ -13,8 +12,7 @@ export const BoxEditDeleteStyled = styled(Box)<BoxEditDeleteStyledProps>`
     padding: '6px 0px',
   })}
 `;
-export const BoxIconStyled = styled(Box)((color) => ({
-  //  backgroundColor: theme.palette.primary.main,
+export const BoxIconStyled = styled(Box)(() => ({
   padding: '3px',
 
   marginRight: '1rem',

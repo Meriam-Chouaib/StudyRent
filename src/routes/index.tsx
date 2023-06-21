@@ -16,26 +16,24 @@ import {
   SigninPage,
   SignupPage,
   AddPostPage,
+  ListPostsPageStudent,
+  ListPostsPage,
+  ChatPage,
+  ProfilePage,
+  FavoritePage,
+  MapPostsPage,
+  DashboardAdminPage,
+  DashboardAdminStudents,
+  DashboardAdminOwners,
+  DashboardAdminPosts,
+  AddUserPage,
+  DetailPostPage,
+  AboutUsPage,
 } from '../pages';
-import { ListPostsPage } from '../pages/dashboard/listPostsPage/ListPostsPage';
 import { useTranslation } from 'react-i18next';
-import { ListPostsPageStudent } from '../pages/listPostsPage/ListPostsPageStudent';
-import { getPersistData } from '../utils';
-import { IUser } from '../redux/api/user/user.types';
-import { ChatPage } from '../pages/dashboard/chatPage/ChatPage';
-import { ProfilePage } from '../pages/profile/ProfilePage';
-import { FavoritePage } from '../pages/dashboard/favoritePage/FavoritePage';
-import { MapPostsPage } from '../pages/mapPostsPage/MapPostsPage';
-import { DashboardAdminPage } from '../pages/dashboardAdmin/DashboardAdminPage';
-import { DashboardAdminStudents } from '../pages/dashboardAdmin/DashboardAdminStudents/DashboardAdminStudents';
-import DashboardAdminOwners from '../pages/dashboardAdmin/DashboardAdminOwners/DashboardAdminOwners';
-import { DashboardAdminPosts } from '../pages/dashboardAdmin/DashboardAdminPosts/DashboardAdminPosts';
-import { AddUserPage } from '../pages/dashboardAdmin/DashboardAdminStudents/AddUserPage';
-import { DetailPostPage } from '../pages/DetailPostPage/DetailPostPage';
-import { AboutUsPage } from '../pages/aboutUsPage/AboutUsPage';
+
 export default function Router() {
   const { t } = useTranslation();
-  const user: IUser = getPersistData('user', true);
 
   return useRoutes([
     {

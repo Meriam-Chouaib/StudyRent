@@ -2,7 +2,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { authApi } from '../auth/auth.api';
 import { IUser, userState } from '../user/user.types';
-import { keccak256 } from 'js-sha3';
 import {
   getPersistData,
   persistData,

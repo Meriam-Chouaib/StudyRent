@@ -1,8 +1,7 @@
 import { Box, styled } from '@mui/material';
 import { COLORS } from '../../../config/colors';
-import theme from '../../../theme';
 
-export const CustomBoxPosts = styled(Box)(({ theme, padding }) => ({
+export const CustomBoxPosts = styled(Box)(({ padding }) => ({
   borderRadius: '3rem',
   justifyContent: 'center',
   display: 'flex',

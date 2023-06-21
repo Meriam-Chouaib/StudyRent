@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { BoxEmptyList, BoxLeft, ButtonWithIcon, CustomButton } from '../../../components';
+import { BoxEmptyList, BoxLeft, ButtonWithIcon } from '../../../components';
 import { Posts } from '../../../features';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
@@ -8,21 +8,17 @@ import { Link } from 'react-router-dom';
 import { initialPostsPaginator } from '../../../features/home/posts/posts.constants';
 import usePaginator from '../../../hooks/usePaginator';
 import { useGetPostsByOwnerQuery } from '../../../redux/api/post/post.api';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { getPersistData } from '../../../utils';
 
 export const ListPostsPage = () => {
-  const navigate = useNavigate();
-
   const { t } = useTranslation();
-  const { paginator, onChangePage, onChangeRowsPerPage } = usePaginator({
+  const { paginator, onChangePage } = usePaginator({
     ...initialPostsPaginator,
 
     rowsPerPage: 9,
   });
-  const { isError, isLoading, data, error } = useGetPostsByOwnerQuery(paginator);
+  const { isLoading, data } = useGetPostsByOwnerQuery(paginator);
   const nbPages = data?.nbPages;
   const user = getPersistData('user', true);
   return (

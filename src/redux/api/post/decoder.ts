@@ -1,17 +1,13 @@
 import { omitKey } from '../../../utils/omitKey';
-import { DataUser, UserByIdResponse, UserResponse, UsersResponse } from '../auth/auth.api.types';
+import { DataUser } from '../auth/auth.api.types';
 import { IUser, ResponseUsers } from '../user/user.types';
 import {
-  AllPostsLocalizations,
   FilePost,
-  Image,
   Post,
-  PostLocalizationResponse,
   PostResponse,
   PostResponseData,
   PostsLocalizations,
   SinglePostEditResponse,
-  SinglePostResponseData,
   SinglePostlocalization,
 } from './post.types';
 

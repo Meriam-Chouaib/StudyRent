@@ -1,5 +1,4 @@
 import { ReactNode, useEffect } from 'react';
-import { NotFound } from '../pages';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '../config/paths';
 import { getPersistData } from '../utils';
