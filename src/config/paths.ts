@@ -59,6 +59,7 @@ export const PATHS = {
     ERROR: {
       P_500: '500',
       P_404: '404',
+      P_403: '403',
     },
   },
   SOCIAL_MEDIA: {
