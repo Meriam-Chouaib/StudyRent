@@ -31,6 +31,7 @@ import {
   AboutUsPage,
 } from '../pages';
 import { useTranslation } from 'react-i18next';
+import { NotAuthorized } from '../pages/notAuthorizedPage/NotAuthorized';
 
 export default function Router() {
   const { t } = useTranslation();
@@ -141,7 +142,8 @@ export default function Router() {
         { path: PATHS.ABOUT, element: <AboutUsPage /> },
         { path: PATHS.MAIN.ERROR.P_500, element: <Page500 /> },
         { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
-        { path: PATHS.ALL, element: <Navigate to="/404" replace /> },
+        { path: PATHS.MAIN.ERROR.P_403, element: <NotAuthorized /> },
+        { path: PATHS.ALL, element: <Navigate to={`/${PATHS.MAIN.ERROR.P_404}`} replace /> },
       ],
     },
     {
@@ -154,6 +156,6 @@ export default function Router() {
         { path: `${PATHS.POSTS}/${PATHS.MAIN.MAP}`, element: <MapPostsPage /> },
       ],
     },
-    { path: PATHS.ALL, element: <Navigate to="/404" replace /> },
+    { path: PATHS.ALL, element: <Navigate to={`/${PATHS.MAIN.ERROR.P_404}`} replace /> },
   ]);
 }

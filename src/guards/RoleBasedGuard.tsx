@@ -22,11 +22,11 @@ export function RoleBasedGuard({ accessibleRoles, children }: RoleBasedGuardProp
 
   useEffect(() => {
     if (!accessibleRoles.includes(currentRole)) {
-      return navigate('/404');
+      return navigate(`/${PATHS.MAIN.ERROR.P_403}`);
     }
   }, []);
   if (!accessibleRoles.includes(currentRole)) {
-    navigate(`/${PATHS.MAIN.ERROR.P_404}`, { replace: true });
+    navigate(`/${PATHS.MAIN.ERROR.P_403}`, { replace: true });
   }
 
   return <>{accessibleRoles.includes(currentRole) && children}</>;
