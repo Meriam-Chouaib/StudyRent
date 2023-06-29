@@ -74,7 +74,7 @@ const LeafletRoutingMachine = ({ positions }: LeafletRoutingMachineProps) => {
 
     if (routeListContainer) {
       if (routeListContainer) {
-        routeListContainer.setAttribute('style', '');
+        routeListContainer.setAttribute('style', 'display:none');
       }
     }
 

@@ -21,15 +21,6 @@ export default function useGetIcons(activePath: string) {
   const user = getPersistData('user', true);
   let icons: IconsProps[] = [
     {
-      txt: 'dashboardSidebar.chats',
-      icon: (
-        <IconChat
-          isActive={activePath.includes(`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.CHAT}`)}
-        />
-      ),
-      path: PATHS.DASHBOARD.CHAT,
-    },
-    {
       txt: 'dashboardSidebar.favoris',
       icon: (
         <IconFavoris
