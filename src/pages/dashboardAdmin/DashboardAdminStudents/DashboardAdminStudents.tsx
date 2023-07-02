@@ -24,6 +24,7 @@ import { varFade } from '../../../components/animate/fade';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useDebounce } from '../../../hooks';
 import { StackDashboard } from '../../../components/CustomStack/CustomStackStyled.styles';
+import { UserItem } from '../../../components/UserItem/UserItem';
 
 export const DashboardAdminStudents = () => {
   const { t } = useTranslation();
@@ -103,16 +104,7 @@ export const DashboardAdminStudents = () => {
                   img={avatar}
                   txt_1={Item.email}
                   txt_2={Item.username ? Item.username : ''}
-                  btns={
-                    <BoxEditDelete
-                      handleDelete={(): void => {}}
-                      handleEdit={(): void => {}}
-                      idPost={0}
-                      bgColor="white"
-                      isStudents={true}
-                      idUser={Item.id}
-                    />
-                  }
+                  btns={<UserItem item={Item} />}
                   heightImg={'3rem'}
                   widthImg={'auto'}
                 />

@@ -1,27 +1,31 @@
+// ___________________________ React ______________________________
 import { useState } from 'react';
-import { useLoginMutation } from '../../../redux/api/auth/auth.api';
-// form
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
+
+// ___________________________ Redux ______________________________
+import { useLoginMutation } from '../../../redux/api/auth/auth.api';
+import { ILoginRequest } from '../../../redux/api/auth/auth.api.types';
+import { LoginModel } from '../../../models/Login.model';
+import { LoginSchema } from './ValidationSchema';
+
+// ___________________________ form ________________________________
 import { yupResolver } from '@hookform/resolvers/yup';
 
-// @mui
+// ____________________________ mui ________________________________
 import { IconButton, InputAdornment, Stack, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-// components
+// ____________________________ components __________________________
 import { FormProvider, TextField } from '../../../components/hookform';
 import { CustomButton, Toast } from '../../../components';
-import { PATHS } from '../../../config/paths';
-import { LoginModel } from '../../../models/Login.model';
-import { LoginSchema } from './ValidationSchema';
-import { ILoginRequest } from '../../../redux/api/auth/auth.api.types';
+
+// ---------------------------------- config ----------------------------
 import { CONSTANTS } from '../../../config/constants';
 import theme from '../../../theme';
-
-// ----------------------------------------------------------------------
+import { PATHS } from '../../../config/paths';
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -50,8 +54,6 @@ export default function LoginForm() {
       await login(data)
         .unwrap()
         .then((res) => {
-          console.log(res);
-
           if (res.status === CONSTANTS.OK) {
             navigate(PATHS.ROOT);
           }

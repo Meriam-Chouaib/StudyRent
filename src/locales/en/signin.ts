@@ -16,7 +16,7 @@ export const signin = {
 
   // link
   connect_with_txt: 'Or connect with',
-
+  user_blocked: 'You are temporarily blocked from admin.',
   // btns
   connect_btn: 'CONNECT',
   create_account_btn: 'CREATE AN ACCOUNT',
