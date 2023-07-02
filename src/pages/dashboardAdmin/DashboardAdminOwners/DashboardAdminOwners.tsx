@@ -19,13 +19,13 @@ import avatar from '../../../assets/images/avatar.png';
 // ____________________________________________ Components ____________________________________________
 import { BoxCenter, ButtonWithIcon } from '../../../components';
 import { ItemDashboard } from '../../../components/ItemDashboard/ItemDashboard';
-import { BoxEditDelete } from '../../../components/CardPost/BoxEditDelete/BoxEditDelete';
 
 // ____________________________________________ Animation ____________________________________________
 import { motion } from 'framer-motion';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useDebounce } from '../../../hooks';
 import { StackDashboard } from '../../../components/CustomStack/CustomStackStyled.styles';
+import { UserItem } from '../../../components/UserItem/UserItem';
 
 export const DashboardAdminOwners = () => {
   const { t } = useTranslation();
@@ -59,7 +59,6 @@ export const DashboardAdminOwners = () => {
       fetchUsersData();
     }
   }, [searchString]);
-
   return (
     <>
       <StackDashboard style={{ paddingTop: '1rem' }}>
@@ -103,20 +102,7 @@ export const DashboardAdminOwners = () => {
                   txt_1={Item.email}
                   isPost={false}
                   txt_2={Item.username ? Item.username : ''}
-                  btns={
-                    <BoxEditDelete
-                      handleDelete={(): void => {
-                        console.log('delete');
-                      }}
-                      handleEdit={(): void => {
-                        console.log('edit');
-                      }}
-                      idPost={0}
-                      bgColor="white"
-                      isOwners={true}
-                      idUser={Item.id}
-                    />
-                  }
+                  btns={<UserItem item={Item} />}
                   heightImg={'3rem'}
                   widthImg={'auto'}
                 />

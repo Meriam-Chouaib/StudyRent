@@ -75,18 +75,6 @@ export const DashboardAdminPosts = () => {
             ),
           }}
         />
-
-        <motion.div initial="initial" animate="animate" exit="exit" variants={fadeAnimation.inLeft}>
-          <Link
-            to={`/${PATHS.DASHBOARD.ROOT}/${PATHS.DASHBOARD.POST.ADD}`}
-            style={{ textDecoration: 'none' }}
-          >
-            <ButtonWithIcon
-              icon={<AddCircleIcon style={{ width: '1.5rem', height: '1.5rem' }} />}
-              txt={t('dashboardListPosts.btn_add')}
-            />
-          </Link>
-        </motion.div>
       </StackDashboard>
 
       <Posts

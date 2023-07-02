@@ -24,6 +24,8 @@ export const signin = {
   username_required: 'Nom d"utilisateur est obligatoire',
   username_invalid: 'Nom d"utilisateur est invalide',
 
+  user_blocked: "Vous êtes temporairement bloqué de la part d'administrateur.",
+
   bad_credentials: 'Identifiants invalides!',
   btn_back: "Allez à l'acceuil",
 };
