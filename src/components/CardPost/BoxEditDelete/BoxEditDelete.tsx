@@ -93,9 +93,6 @@ export const BoxEditDelete = ({
           </>
         ) : (
           <>
-            <BoxIcon handleSubmit={handleComment} color={`transparent`}>
-              <ChatBubbleOutlineIcon color={'primary'}></ChatBubbleOutlineIcon>
-            </BoxIcon>
             <BoxIcon handleSubmit={handleFavorite} color={`transparent`}>
               {isFavorite ? (
                 <FavoriteIcon color={'primary'}></FavoriteIcon>

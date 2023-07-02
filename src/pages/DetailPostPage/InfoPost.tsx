@@ -58,7 +58,7 @@ export const InfoPost = ({ data }: PostInfoProps) => {
               </TextWithIcon>
             )}
 
-            <TextWithIcon value={data?.owner.email} label={t('detailPost.owner') as string}>
+            <TextWithIcon value={data?.owner.email} label={'Email'}>
               <EmailIcon style={{ color: `${theme.palette.primary.main}` }} />
             </TextWithIcon>
           </>
